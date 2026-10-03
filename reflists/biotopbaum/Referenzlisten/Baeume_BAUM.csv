@@ -1,0 +1,361 @@
+listitemid;kurzname;langname;parentlistitemid;entityid
+484663;Quercus rubra;Rot-Eiche;0;3454
+484664;Castanea sativa;Esskastanie;0;1754
+484665;Tilia spec.;Linde (unbestimmt);0;4206
+484666;Tilia cordata;Winter-Linde;0;4204
+484667;Tilia platyphyllos;Sommer-Linde;0;4205
+484668;Aesculus hippocastanum;Rosskastanie;0;147308
+484669;Carpinus betulus;Hainbuche;0;1750
+484670;Betula pendula;Sand-Birke;0;1497
+484671;Acer platanoides;Spitz-Ahorn;0;147277
+484672;Acer pseudoplatanus;Berg-Ahorn;0;147278
+484673;Robinia pseudoacacia;Robinie;0;3527
+484674;Prunus avium;Süss-Kirsche;0;3396
+484675;Sorbus aucuparia;Gewöhnliche Eberesche;0;4031
+484676;Populus spec.;Pappel (unbestimmt);0;3323
+484677;Populus nigra;Schwarz-Pappel;0;3322
+484678;Salix caprea;Sal-Weide;0;3799
+484679;Salix alba (subsp. alba);Silber-Weide;0;166645
+484680;Pinus sylvestris;Wald-Kiefer;0;148375
+484681;Pseudotsuga menziesii;Douglasie;0;148398
+484682;Picea abies;Fichte;0;148356
+484683;Larix decidua (subsp. decidua);Lärche;0;165538
+484684;Abies spec.;Tanne (unbestimmt);0;147271
+484685;Abies alba;Tanne;0;147267
+484686;Abies concolor;Grau-Tanne;0;147268
+484687;Abies grandis;Küstentanne;0;147269
+484688;Abies nordmanniana;Nordmannstanne;0;163398
+484689;Abies procera;Edel-Tanne;0;147270
+484690;Acer spec.;Ahorn (unbestimmt);0;147281
+484691;Acer campestre;Feld-Ahorn;0;147273
+484692;Acer cappadocicum;Kolchischer Ahorn;0;168155
+484693;Acer ginnala;Amurahorn;0;163399
+484694;Acer monspessulanum;Französischer Massholder;0;147274
+484695;Acer negundo;Eschen-Ahorn;0;147275
+484696;Acer opalus;Schneeballblättriger Ahorn;0;147276
+484699;Acer saccharinum;Silber-Ahorn;0;147279
+484700;Acer saccharum;Echter Zucker-Ahorn;0;147280
+484702;Aesculus pavia;Echte Pavie;0;162051
+484703;Alnus spec.;Erle (unbestimmt);0;1258
+484704;Alnus cordata;Herzblättrige Erle;0;162052
+484705;Alnus glutinosa;Schwarz-Erle;0;1256
+484706;Alnus incana;Grau-Erle;0;1257
+484707;Alnus viridis;Grün-Erle;0;164060
+484708;Amelanchier spec.;Felsenbirne (unbestimmt);0;23384
+484709;Amelanchier alnifolia;Erlenblätriger Felsenbirne;0;15975
+484710;Amelanchier embergeri;Gewöhnliche Felsenbirne;0;167888
+484711;Amelanchier lamarckii;Kanadische Felsenbirne;0;1298
+484712;Amelanchier ovalis;Gemeine Felsenbirne;0;1299
+484713;Amelanchier ovalis subsp. embergeri;Embergers Felsenbirne;0;15976
+484714;Amelanchier spicata;Besen-Felsenbirne;0;168174
+484715;Betula spec.;Birke (unbestimmt);0;1501
+484716;Betula humilis;Strauch-Birke;0;1495
+484717;Betula nana;Zwerg-Birke;0;1496
+484718;Betula papyrifera;Papierbirke;0;163429
+484720;Betula pubescens;Moor-Birke;0;1498
+484721;Buxus sempervirens;Immergrüner Buchsbaum;0;1572
+484723;Carya ovata;Zottelborkige Hickory;0;2951
+484725;Cedrus atlantica;Atlas-Zeder;0;1760
+484726;Cedrus deodara;Himalaya-Zeder;0;1761
+484727;Cedrus libani;Libanon-Zeder;0;1762
+484728;Chamaecyparis lawsoniana;Lawssons Scheinzypresse;0;1819
+484729;Chamaecyparis spec.;Scheinzypresse (unbestimmt);0;1820
+484730;Cornus alba;Weisser Hartriegel;0;147366
+484731;Cornus mas;Kornelkirsche;0;147367
+484732;Cornus sanguinea s.l.;Blauroter Hartriegel;0;147368
+484733;Corylus avellana;Haselnuss;0;147385
+484734;Corylus avellana fo. atropurpurea;Rotblättriger Hasel;0;159209
+484735;Corylus colurna;Baumhasel;0;147386
+484736;Corylus maxima;Lambertshasel;0;162808
+484737;Crataegus spec.;Weissdorn (unbestimmt);0;1944
+484738;Crataegus arborescens;Baum-Weissdorn;0;162937
+484739;Crataegus calycina (C. laevigata x lindmanii);Weissdorn-Hybride;0;163577
+484740;Crataegus crus-galli;Hahnensporn-Weissdorn;0;163445
+484741;Crataegus laevigata;Zweigriffliger Weissdorn;0;1939
+484742;Crataegus lindmanii;Lindmanns Weissdorn;0;1942
+484743;Crataegus macrocarpa (C. laevigata x rhipidophylla);Grossfrüchtiger Weissdorn;0;1945
+484744;Crataegus media (C. laevigata x monogyna);Weissdorn-Hybride;0;163338
+484745;Crataegus monogyna;Eingriffliger Weissdorn;0;1940
+484746;Crataegus pedicellata;Scharlach-Weissdorn;0;162948
+484747;Crataegus rhipidophylla;Gekrümmter Weissdorn;0;1941
+484748;Crataegus rhipidophylla var. rhipidophylla;Langkelch-Weissdorn;0;1943
+484749;Crataegus subsphaericea (C. monogyna x rhipidophylla);Weissdorn-Hybride;0;163583
+484750;Cryptomeria japonica;Sicheltanne;0;1963
+484751;Davidia involucrata;Taschentuchbaum ;0;8091
+484752;Fraxinus spec.;Esche (unbestimmt);0;147582
+484754;Fagus sylvatica fo. purpurea;Blutbuche;0;147522
+484755;Fraxinus excelsior;Esche;0;147579
+484756;Fraxinus ornus;Blumen-Esche;0;147580
+484757;Fraxinus pennsylvanica;Rot-Esche;0;147581
+484758;Ginkgo biloba;Gingkobaum;0;147698
+484759;Gleditsia triacanthos;Gleditschie;0;147703
+484760;Gymnocladus dioicus;Geweihbaum;0;147729
+484761;Hedera helix;Efeu;0;147734
+484762;Hippophae rhamnoides subsp. rhamnoides;Sanddorn;0;147835
+484763;Humulus lupulus;Hopfen;0;147850
+484764;Hydrangea macrophylla;Gartenhortensie;0;162063
+484765;Hydrangea petiolaris;Kletterhortensie;0;163172
+484766;Hydrangea spec.;Hortensie (unbestimmt);0;162064
+484767;Ilex aquifolium;Stechpalme;0;147882
+484768;Juglans nigra;Schwarznuss;0;147914
+484769;Juglans regia;Walnuss;0;147915
+484770;Juniperus chinensis;Chinesischer Wacholder;0;162065
+484771;Juniperus spec.;Wacholder (unbestimmt);0;162066
+484772;Juniperus communis;Wacholder;0;147946
+484773;Juniperus communis subsp. communis;Gewöhnlicher Heide-Wacholder;0;159216
+484774;Juniperus communis subsp. nana;Zwerg-Wacholder;0;17158
+484775;Juniperus sabina;Stink-Wacholder;0;147947
+484776;Juniperus virginiana;Virginischer Wacholder;0;162067
+484777;Kerria japonica;Kerrie;0;162068
+484778;Laburnum spec.;Goldregen (unbestimmt);0;23547
+484779;Laburnum anagyroides;Gemeiner Goldregen;0;147964
+484780;Larix spec.;Lärche (unbestimmt);0;147984
+484782;Larix kaempferi;Japanische Lärche;0;147983
+484783;Ligustrum spec.;Liguster (unbestimmt);0;172436
+484784;Ligustrum vulgare;Liguster;0;148047
+484785;Liquidambar styraciflua;Amerikanischer Amberbaum;0;7892
+484786;Liriodendron tulipifera;Tulpenbaum;0;2801
+484787;Lonicera spec.;Geissblatt (unbestimmt);0;2818
+484788;Lonicera alpigena (subsp. alpigena);Alpen-heckenkirsche;0;17220
+484789;Lonicera caerulea (subsp. caerulea);Blaue Heckenkirsche;0;17221
+484790;Lonicera caprifolium;Echte Heckenkirsche;0;2815
+484791;Lonicera henryi;Henrys Heckenkirsche;0;168773
+484792;Lonicera nigra;Schwarze Heckenkirsche;0;2816
+484793;Lonicera nitida;Immergrüne Strauch-Heckenkirsche;0;15074
+484794;Lonicera periclymenum;Wald-Geissblatt;0;2817
+484795;Lonicera pileata;Wintergrüne Heckenkirsche;0;162873
+484796;Lonicera tatarica;Tataren-Heckenkirsche;0;2819
+484797;Lonicera xylosteum;Rote Heckenkirsche;0;2820
+484798;Mahonia aquifolium;Mahonie;0;2862
+484799;Malus spec.;Apfelbaum (unbestimmt);0;2866
+484800;Malus domestica;Garten-Apfel;0;2865
+484801;Malus sylvestris agg.;Wild-Apfel Sa.;0;163184
+484802;Malus toringo;Toringo-Apfel;0;15075
+484803;Mespilus germanica;Mispel;0;148083
+484804;Metasequoia glyptostroboides;Wassertanne;0;148084
+484805;Morus alba;Maulbeerbaum;0;148114
+484806;Morus nigra;Schwarze Maulbeere;0;148115
+484807;Nothofagus antarctica;Antarktische Scheinbuche;0;148172
+484808;Nothofagus obliqua;Pellin-Scheinbuche;0;15641
+484809;Ostrya carpinifolia;Europäische Hopfenbuche;0;148273
+484810;Parrotia persica;Parrotie;0;162073
+484811;Parthenocissus inserta;Fünfblättriger Wilder Wein;0;159227
+484812;Parthenocissus spec.;Wilder Wein (unbestimmt);0;23613
+484813;Parthenocissus tricuspidata;Kletterwein;0;148300
+484814;Paulownia tomentosa;Kaiser-Paulownie;0;148305
+484815;Philadelphus spec.;Pfeifenstrauch (unbestimmt);0;162074
+484816;Philadelphus coronarius;Falscher Jasmin;0;148332
+484817;Picea spec.;Fichte (unbestimmt);0;148360
+484819;Picea glauca;Schimmel-Fichte;0;162790
+484820;Picea omorika;Serbische Fichte;0;148357
+484821;Picea orientalis;Sapindus-Fichte;0;161631
+484822;Picea pungens;Stech-Fichte;0;148358
+484823;Picea sitchensis;Sitka-Fichte;0;148359
+484824;Pinus spec.;Kiefer (unbestimmt);0;148373
+484825;Pinus cembra;Zirbel-Kiefer;0;159230
+484826;Pinus mugo agg.;Berg-Kiefer Sa.;0;148371
+484827;Pinus nigra;Österreichische Schwarz-Kiefer;0;148372
+484828;Pinus rotundata;Moorkiefer;0;17410
+484829;Pinus strobus;Weymouths-Kiefer;0;148374
+484831;Platanus spec.;Platane (unbestimmt);0;3248
+484832;Platanus occidentalis;Westliche Platane;0;8093
+484833;Platanus orientalis;Morgenländische Platane;0;3247
+484834;(doppelter Begriff)Platanus × hispanica;Ahornblättrige Platane;0;8092
+484836;Populus alba;Silber-Pappel;0;3320
+484837;Populus balsamifera agg.;Amerikanische Balsam-Pappel Sa.;0;3321
+484838;Populus canadensis (P. deltoides x nigra);Kanadische Pappel;0;3326
+484839;Populus canescens (P. alba x tremula);Grau-Pappel;0;3327
+484840;Populus deltoides;Rosenkranzpappel;0;163719
+484842;Populus nigra var. italica;Pyramiden-Pappel;0;162788
+484843;Populus nigra-Hybride;Schwarz-Pappel-Hybride;0;172396
+484844;Populus tremula;Zitter-Pappel;0;3324
+484845;Populus wilsonii;Wilson-Pappel;0;168388
+484846;Prunus spec.;Prunus (unbestimmt);0;148393
+484848;Prunus avium subsp. duracina;Knorpel-Kirsche ;0;17462
+484849;Prunus avium subsp. avium;Süsskirsche (Wildform);0;168678
+484850;Prunus avium subsp. juliana;Süss-Kirsche (Kulturform Herzkirsche);0;163016
+484851;Prunus cerasifera;Kirsch-Pflaume;0;3397
+484852;Prunus cerasus agg.;Sauerkirsche Sa.;0;3399
+484853;Prunus domestica;Pflaume;0;3400
+484854;Prunus domestica subsp. domestica;Zwetschge;0;3401
+484855;Prunus domestica subsp. insititia;Haferschlehe;0;3402
+484856;Prunus dulcis;Mandel;0;3403
+484857;Prunus fruticans;Süßschlehe;0;148396
+484858;Prunus fruticosa;Zwergkirsche;0;3404
+484859;Prunus laurocerasus;Lorbeerkirsche;0;148389
+484860;Prunus mahaleb;Felsenkirsche;0;148390
+484861;Prunus padus;Traubenkirsche;0;148391
+484862;Prunus persica;Pfirsichbaum;0;159228
+484863;Prunus serotina;Spätblühende Traubenkirsche;0;148392
+484864;Prunus spinosa agg.;Schlehe Sa.;0;148394
+484865;Prunus virginiana;Virginische Vogelkirsche;0;159232
+484867;Pterocarya fraxinifolia;Kaukasische Flügelnuss;0;3417
+484868;Pyrus spec.;Birnbaum (unbestimmt);0;3447
+484869;Pyrus communis agg.;Birnbaum Sammelart.;0;3445
+484870;Pyrus pyraster;Wild-Birne;0;3446
+484871;Quercus spec.;Eiche (unbestimmt);0;3455
+484872;Quercus calvescens (Q. petraea x pubescens);Flaumblättrige Bastard-Eiche;0;17489
+484873;Quercus cerris;Zerr-Eiche;0;3448
+484874;Quercus coccinea;Scharlach-Eiche;0;3449
+484875;Quercus ilex;Stein-Eiche;0;159234
+484876;Quercus palustris;Sumpf-Eiche;0;3450
+484877;Quercus petraea;Trauben-Eiche;0;3451
+484878;Quercus pubescens;Flaum-Eiche;0;3452
+484879;Quercus robur;Stiel-Eiche;0;3453
+484881;Rhamnus spec.;Kreuzdorn (unbestimmt);0;23643
+484882;Rhamnus cathartica;Echter Kreuzdorn;0;3502
+484883;Rhamnus frangula;Faulbaum;0;166340
+484884;Rhododendron spec.;Rhododendron (unbestimmt);0;3513
+484885;Rhus glabra;Scharlachsumach;0;15088
+484886;Rhus typhina;Essigbaum;0;3514
+484888;Salix spec.;Weide (unbestimmt);0;3813
+484889;Salix acutifolia;Spitzblättrige Weide;0;3791
+484891;Salix alpina;Myrten-Weide;0;3793
+484892;Salix appendiculata;Schlucht-Weide;0;3794
+484893;Salix appendiculata agg.;Schlucht-Weide Sa.;0;3795
+484894;Salix arbuscula agg.;Ruch-Weide (Sa.);0;168430
+484895;Salix aurita;Ohr-Weide;0;3796
+484896;Salix babylonica;Echte Trauerweide;0;3797
+484897;Salix bicolor;Zweifarbige Weide;0;3798
+484898;Salix caesia;Blaugräne Weide;0;17868
+484900;Salix cinerea;Asch-Weide Sa.;0;3801
+484901;Salix daphnoides;Reif-Weide;0;3802
+484902;Salix dasyclados (? S. caprea x cinerea x viminalis);Bandstock-Weide;0;3817
+484903;Salix eleagnos;Lavendel-Wiede;0;166656
+484904;Salix foetida;Ruch-Weide;0;171374
+484905;Salix fragilis s.str.;Bruch-Weide;0;3804
+484906;Salix glabra;Kahle Weide;0;17870
+484907;Salix hastata;Spiess-Weide;0;171422
+484908;Salix herbacea;Kraut-Weide;0;17871
+484909;Salix myrsinifolia;Schwarz-Weide;0;3806
+484910;Salix myrsinites agg.;West-Myrtenweide (Sa.);0;168432
+484911;Salix myrtilloides;Heidelbeer-Weide;0;3807
+484912;Salix pentandra;Lorbeer-Weide;0;3808
+484913;Salix purpurea;Purpur-Weide;0;3809
+484914;Salix purpurea x triandra;Weiden-Hybride;0;163262
+484915;Salix pyrifolia;Balsamweide;0;163196
+484916;Salix repens;Kriech-Weide;0;168046
+484917;Salix reticulata;Netz-Weide;0;171375
+484918;Salix retusa;Stumpfblättrige Weide;0;171421
+484919;Salix rosmarinifolia;Rosmarin-Weide;0;168705
+484920;Salix rubens (S. alba x fragilis);Hohe Weide;0;3819
+484921;Salix sachalinensis;Japanische Drachen-Weide;0;163197
+484922;Salix x sepulcralis nvar. chrysocoma;Weide-Gartenform;0;163706
+484923;Salix serpillifolia;Thymianblättrige Weide;0;17872
+484924;Salix starkeana;Bleiche Weide;0;3814
+484925;Salix triandra s.l.;Mandel-Weide;0;3815
+484926;Salix viminalis;Korb-Weide;0;3816
+484927;Salix waldsteiniana;Bäumchen-Weide;0;168433
+484928;Salix x alopecuroides (S. fragilis x S. triandra);Fuchsschwanz-Weide;0;159237
+484929;Salix x ambigua (S. aurita x S. repens);Bastard-Ohrweide;0;159238
+484930;Salix x capreola (S. aurita x S. caprea);Bastard-Ohr-Weide;0;163380
+484931;Salix x cuspidata (S. fragilis x S. pentandra);Weiden-Hybride;0;163750
+484932;Salix x dichroa (S. aurita x S. purpurea);Bastard-Ohr-Weide;0;163381
+484933;Salix x ehrhartiana (S. alba x S. pentandra);Weiden-Hybride;0;163378
+484934;Salix x erythroclados (S. alba x S. triandra);Weiden-Hybride;0;163749
+484935;Salix x erythroflexuosa;Lockenweide;0;163263
+484936;Salix x fruticosa (S. aurita x S. viminalis);Weiden-Hybride;0;163382
+484937;Salix x holosericea (S. cinerea x S. viminalis);Bastard-Grauweide;0;159239
+484938;Salix x margaretae (S. fragilis x purpurea);Weiden-Hybride;0;163261
+484939;Salix x meyeriana (S. fragilis x S. pentandra);Weiden-Hybride;0;163385
+484940;Salix mollissima (S. triandra x viminalis);Weiden-Hybride;0;163386
+484941;Salix multinervis (S. cinerea x aurita);Weiden-Bastard;0;3818
+484942;Salix x reichardtii (S. caprea x S. cinerea);Reihhardts Weide;0;163383
+484943;Salix x rubra (S. purpurea x S. viminalis);Blend-Weide;0;159240
+484944;Salix x sepulcralis (S. alba x babylonica);Weiden-Hybride;0;163377
+484945;Salix x smithiana (S. caprea x S. viminalis);Bastard-Salweide;0;159241
+484946;Salix x sordida (S. cinerea x S. purpurea);Weiden-Hybride;0;163384
+484947;Salix x stipularis (S. x dasyclados x S. viminalis);Marsch-Weide;0;163387
+484948;Salix x wimmeriana (S. purpurea x S. caprea);Weiden-Hybride;0;168706
+484949;Sambucus spec.;Holunder (unbestimmt);0;3831
+484950;Sambucus ebulus;Zwerg-Holunder;0;3828
+484951;Sambucus nigra;Schwarzer Holunder;0;3829
+484952;Sambucus racemosa;Trauben-Holunder;0;3830
+484953;Sequoiadendron giganteum;Mammutbaum;0;3946
+484954;Sequoia sempervirens;Küstenmammutbaum ;0;8089
+484955;Sorbaria sorbifolia;Fiederspiere;0;4028
+484956;Sorbus spec.;Vogelbeere (unbestimmt);0;4036
+484957;Sorbus acutiloba;Arnstädter Mehlbeere;0;17959
+484958;Sorbus adeana;Ades Mehlbeere;0;17961
+484959;Sorbus acutisecta;Spitzbuchtige Mehlbeere;0;17960
+484960;Sorbus algoviensis;Allgäuer Zwerg-Mehlbeere;0;17962
+484961;Sorbus aria;Mehlbeere;0;4029
+484963;Sorbus badensis;Badische Mehlbeere;0;17964
+484964;Sorbus chamaemespilus;Zwergmehlbeere;0;17965
+484965;Sorbus cochleariformis;Löffelförmige Mehlbeere;0;17966
+484966;Sorbus cordigastensis;Kordigast-Mehlbeere;0;17967
+484967;Sorbus danubialis;Donau-Mehlbeere;0;17968
+484968;Sorbus decipiens;Täuschende Mehlbeere;0;17969
+484969;Sorbus doerriana;Dörrs Mehlbeere;0;17970
+484970;Sorbus domestica;Speierling;0;4032
+484971;Sorbus eystettensis;Eichstätter Mehlbeere;0;17971
+484972;Sorbus fischeri;Fischers Mehlbeere;0;17972
+484973;Sorbus franconica;Fränkische Mehlbeere;0;17973
+484974;Sorbus gauckleri;Gaucklers Mehlbeere;0;17974
+484975;Sorbus graeca;Griechische Mehlbeere;0;17975
+484976;Sorbus haesitans;Thüngersheimer Mehlbeere;0;17976
+484977;Sorbus harziana;Harz Mehlbeere;0;17977
+484978;Sorbus heilingensis;Heilinger Mehlbeere;0;17978
+484979;Sorbus herbipolitana;Würzburger Mehlbeere;0;17979
+484980;Sorbus hohenesteri;Hohenesteers Mehlbeere;0;17980
+484981;Sorbus hoppeana;Hoppes Mehlbeere;0;17981
+484982;Sorbus hybrida agg.;Bastard-Eberesche Sa.;0;4033
+484983;Sorbus intermedia;Schwedische Mehlbeere;0;4034
+484984;Sorbus isenacensis;Eisenacher Mehlbeere;0;17982
+484985;Sorbus latifolia;Breitblättrige Mehlbeere;0;163209
+484986;Sorbus meierottii;Meierotts Mehlbeere;0;17983
+484987;Sorbus mergenthaleriana;Mergenthalers Mehlbeere;0;17984
+484988;Sorbus mougeotii;Berg-Mehlbeere;0;4035
+484989;Sorbus mougeotii agg.;Berg-Mehlbeere Sa.;0;168455
+484990;Sorbus multicrenata;Vielkerbige Mehlbeere;0;17985
+484991;Sorbus pannonica;Pannonische Mehlbeere;0;168456
+484992;Sorbus parumlobata;Schwachgelappte Mehlbeere;0;17986
+484993;Sorbus perlonga;Langblättrige Mehlbeere;0;17987
+484994;Sorbus pseudothuringiaca;Hersbrucker Mehlbeere;0;17988
+484995;Sorbus puellarum;Mädchen-Mehlbeere;0;17989
+484996;Sorbus pulchra;Gössweinsteiner Mehlbeere;0;17990
+484997;Sorbus ratisbonensis;Regensburger Mehlbeere;0;17991
+484998;Sorbus schnizleiniana;Schnizleins Mehlbeere;0;17992
+484999;Sorbus schuwerkiorum;Schuwerks Mehlbeere;0;17993
+485000;Sorbus schwarziana;Schwarz  Mehlbeere;0;17994
+485001;Sorbus torminalis;Elsbeere;0;4037
+485002;Sorbus x rotundifolia (S. torminalis x aria);Mehlbeere-Hybride;0;168150
+485003;Staphylea pinnata;Pimpernuss;0;4073
+485004;Syringa spec.;Flieder (unbestimmt);0;162084
+485005;Syringa persica;Persischer Flieder;0;4101
+485006;Syringa vulgaris;Gewöhnlicher Flieder;0;4100
+485007;Tamarix germanica;Tamariske;0;12823
+485008;Taxus baccata;Eibe;0;4153
+485009;Thuja spec.;Lebensbaum (unbestimmt);0;4195
+485010;Thuja occidentalis;Amerikanischer Lebensbaum;0;4192
+485011;Thuja orientalis;Morgenländischer Lebensbaum;0;4193
+485012;Thuja plicata;Riesen-Thuja;0;4194
+485015;Tilia cordifolia;Herzblättrige Sommer-Linde;0;12827
+485016;Tilia europaea;Kleinblättrige Linde;0;167155
+485018;Tilia tomentosa;Silberlinde;0;4207
+485019;Tilia x euchlora (T. cordata x T. dasystyla);Krim-Linde;0;4208
+485020;Tilia x vulgaris (T. cordata x T. platyphyllos);Holländische Linde;0;4209
+485021;Tsuga canadensis;Hemlocktanne;0;4262
+485022;Tsuga heterophylla;Westliche Hemlockstanne;0;162793
+485023;Ulmus spec.;Ulme (unbestimmt);0;4276
+485024;Ulmus glabra;Berg-Ulme;0;4273
+485025;Ulmus laevis;Flatter-Ulme;0;4274
+485026;Ulmus minor;Feld-Ulme;0;4275
+485027;Ulmus x hollandica (U. minor x U. glabra);Bastard-Ulme;0;162792
+485028;Viburnum spec.;Schneeball (unbestimmt);0;4363
+485029;Viburnum lantana;Wolliger Schneeball;0;4361
+485030;Viburnum opulus;Gemeiner Schneeball;0;4362
+485031;Viburnum rhytidophyllum;Runzelblättriger Schneeball;0;162897
+485032;Viscum spec.;Mistel (unbestimmt);0;23706
+485033;Viscum abietis;Tannen-Mistel;0;18403
+485034;Viscum album;Laubholz-Mistel;0;4421
+485035;Viscum laxum;Kiefern-Mistel;0;175006
+485036;Vitis sylvestris;Wein-Rebe;0;4424
+485037;Vitis vinifera;Wein-Rebe;0;4423
+485038;Weigela floribunda;Reichblütige Weigelie;0;4428
+485039;Weigela florida;Liebliche Weigelie;0;4429
+485040;Wisteria sinensis;Blauregen;0;162085
+485041;Fagus sylvatica;Rotbuche;0;147521
+503562;nicht bestimmbar;nicht bestimmbar;0;168943
+571451;sonstiges Nadelholz, unbestimmt;sonstiges Nadelholz, unbestimmt;0;167766
+571452;sonstiges Laubholz, unbestimmt;sonstiges Laubholz, unbestimmt;0;167768

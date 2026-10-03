@@ -1,0 +1,35 @@
+Formular Biotopbaumkartierung2016a;Tabelle.Name;Attribute.Name;Referenzliste.Name;DataType;Kardinalität;Referenzliste:
+;;;;;;
+;;;;;;Kurz_Langname
+Akkumulation/Wuchsverband;LINFOS2;Aufnahmetyp;Chance7_Aufnahmetyp.csv;integer;1zu1;kurzname
+Allgemeine Bemerkungen;LINFOS;Bemerkung;;Memo text;1zu1;
+Baumart;Pflanzenliste;Pflanzenart;Baeume_BAUM.csv;integer;1zu1;kurzname/langname
+Baumhöhe in m;LangBreitHoch;Hoehe;;zahl;1zu1;
+Baumhöhlen Anzahl;Versteck;Bemerkung;;text;1:N;
+Baumhöhlen-Typ;Versteck;Verstecke;Baumhoehlen.csv;integer;1:N;kurzname
+Baumnummer;LINFOS;OBJBEZ;;text;1zu1;
+Baumpilze;Vegetationsstrukturen;Baumpilze;Chance7_Baumpilze.csv;integer;1zu1;langname
+Bearbeitende Institution;adressrolle;adressrolle;Adressrolle.csv;integer;1:N;kurzname
+Bearbeiter(in);adressen;Adresse;;text;1:N;
+Besitzart;BESITZ;BESITZ;Besitz.csv;integer;1zu1;kurzname
+Besonnung;Oekoparameter;BeschattIst;Chance7_Beschattung.csv;integer;1zu1;langname
+Biotopbaum-Typ;STICHWORT;STICHWORTE;Chance7_Biotopbaum.csv;integer;1:N;langname
+Brusthöhendurchmesser;LangBreitHoch;Mittl_Durchmesser_txt;;text;1zu1;
+Datum;Termine;K_Termin;;date;1:N;
+Erläuterung zu Markierung;LINFOS;AZ;;text;1zu1;
+Förderung;Zeitzeugniss;Bemerkung;;text;1zu1;
+Markierung;LINFOS;OEFS_GebName;;text;1zu1;
+Objektkennung;LINFOS;KENNUNG;;text;1zu1;
+PROJEKT_ID;PRJ_ID;PROJEKT_ID;;text;1:N;
+Position;Vegetationsstrukturen;VegStruk;Chance7_Position.csv;integer;1zu1;langname
+Sonderstrukturen;PopuZustand_Pflanz;Pop_Zustand;BAUM_Sonderstrukturen.csv;integer;1:N;langname
+Sonderstrukturen - Bemerkung;PopuZustand_Pflanz;Bemerkung;;text;1:N;
+Standort;LandschLage;LandschLage;landschLage_BAUM.csv;integer;1zu1;kurzname
+Terminart;Termine;Terminart;Termin.csv;integer;1:N;kurzname
+Verkehrssicherungspflicht;MASSN;MassnHb;Verkehrssicherung_BAUM.csv;integer;1zu1;kurzname
+Vitalität;Zusatzcodes;Vitalitaet;Zusatz_Vitalitaet_BAUM.csv;integer;1zu1;kurzname
+X;LINFOS;OBJBESCHR;;Memotext;1zu1;
+X;LangBreitHoch;Laenge_txt;;text;1zu1;
+X;LangBreitHoch;Messkriterium;LangBreitHoch.csv;integer;1zu1;kurzname
+X;LangBreitHoch;Mittl_Durchmesser;;zahl;1zu1;
+Zersetzungsgrad;Zusatzcodes;Zersetzungsgrad;Chance7_Zersetzung.csv;integer;1zu1;langname

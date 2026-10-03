@@ -1,0 +1,20 @@
+entityid;term;parentid;listitemid
+10;unbestimmt;0;10
+20;adult;0;20
+30;Eier;0;30
+40;Exuvien;0;40
+50;juvenil;0;50
+60;Köcher;0;60
+70;Königin;0;70
+80;Laich;0;80
+90;Larve;0;90
+100;Puppe;0;100
+110;Imago;0;110
+120;subadult;0;120
+130;Pullus / nicht-flügge;0;130
+140;1. KJ / diesjährig;0;140
+150;2. KJ / vorjährig;0;150
+160;3. KJ;0;160
+170;4. KJ;0;170
+180;5. KJ;0;180
+190;immatur;0;190

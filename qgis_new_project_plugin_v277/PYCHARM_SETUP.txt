@@ -1,0 +1,11 @@
+# PyCharm – QGIS Stubs
+# Füge folgende Pfade in PyCharm unter
+# Settings → Project → Python Interpreter → Show All → (Icon) →
+# Interpreter Paths hinzu:
+#
+#   C:/OSGeo4W/apps/qgis-ltr/python
+#   C:/OSGeo4W/apps/qgis-ltr/python/plugins
+#   C:/OSGeo4W/apps/Python312/Lib/site-packages
+#
+# Und setze das Python Interpreter auf:
+#   C:/OSGeo4W/apps/Python312/python.exe

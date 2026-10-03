@@ -1,0 +1,87 @@
+listitemid;kurzname;langname;parentlistitemid;entityid
+172800;ULB;Untere Landschaftsbehörde;0;153116
+172801;Einrichtung;Einrichtung;0;153117
+172802;Projektträger;Projektträger;0;153118
+172803;Verwalter Planunterlagen;Verwalter Planunterlagen;0;153119
+172804;Unterhaltspflichtige(-r);Unterhaltspflichtige(-r);0;153120
+175866;Kartier-, Planungsbüro;Kartier-, Planungsbüro;0;154028
+175880;Besitzer / Eigentümer;Besitzer / Eigentümer;0;154029
+175881;ehrenamtliche Mitarbeit;ehrenamtliche Mitarbeit;0;154030
+175882;HLB;Höhere Landschaftsbehörde;0;154031
+175884;Pächter;Pächter;0;154033
+177928;OZ;ohne Zuordnung;0;144451
+182690;Betreuer(-in) / Biotopbetreuer(-in);Betreuer(-in) / Biotopbetreuer(-in);0;159189
+187002;Untere Jagdbehörde;Untere Jagdbehörde;0;160909
+188386;Planer-LP;Planer-Landschaftsplan;0;161785
+188387;Planer ökol. Beitrag;Planer ökol. Beitrag;0;161786
+200576;Geologischer Dienst NW;;0;171898
+201273;EU-Kommission;Kommission der Europäischen Gemeinschaft;0;172527
+201274;BMU;Bundesministerium für Umwelt, Naturschutz und Reaktorsicherheit;0;172528
+201275;Informant;Informant;0;172529
+218360;Kreisverwaltung;Kreisverwaltung;0;176475
+218361;NABU;Naturschutzbund Deutschland;0;176476
+218362;BUND;Bund für Umwelt- und Naturschutz Deutschland;0;176477
+218363;Nationalparkverwaltung;Nationalparkverwaltung;0;176478
+218364;Mitarbeiter(-in) des LANUV;Mitarbeiter(-in) des LANUV;0;176479
+218365;lokaler / regionaler Naturschutzverband;lokaler / regionaler Naturschutzverband;0;176480
+218366;Kommune / Gemeinde;Kommune / Gemeinde;0;176481
+228928;MKULNV;Ministerium für Umwelt und Naturschutz, Landwirtschaft und Verbraucherschutz;0;177032
+233197;Kreis, kreisfreie Stadt;Kreis, kreisfreie Stadt;0;144701
+233198;NRW-Stiftung;NRW-Stiftung;0;139185
+233199;Privater Träger;Privater Träger;0;2971
+233200;Forstamt / Landesbetrieb;Forstamt / Landesbetrieb;0;2972
+233201;Bundesforstamt;Bundesforstamt;0;2973
+233202;Bundesanstalt für Immobilienaufgaben;Bundesanstalt für Immobilienaufgaben;0;2974
+233203;Andere Bundeseinrichtung;Andere Bundeseinrichtung;0;2975
+233204;Sonstiger Träger;Sonstiger Träger;0;2976
+233213;Naturschutzverband;Naturschutzverband;0;2981
+243333;Universität;Universität;0;14437
+298139;Bürger(-in);Bürger(-in);0;25000
+365774;Verantwortliche Institution;Responsible Agency;0;6224
+552172;Biologische Station;Biologische Station;0;154027
+552173;BS HSK;Biologische Station Hochsauerlandkreis e.V.;552172;179242
+552174;BS UN;Biologische Station Unna - Dortmund e.V.;552172;179243
+552175;ABU;Arbeitsgemeinschaft Biologischer Umweltschutz (ABU) im Kreis Soest e.V.;552172;179244
+552176;BS SI;Biologische Station Siegen-Wittgenstein e.V.;552172;179245
+552177;BS EN;Biologische Station im Ennepe-Ruhr-Kreis;552172;179246
+552178;BS HA;Biologische Station Hagen e.V.;552172;179247
+552179;NZ MK;Naturschutzzentrum Märkischer Kreis e.V.;552172;179248
+552180;BS NE;Biologische Station im Rhein-Kreis Neuss e.V.;552172;179249
+552181;BS KW;Biologische Station im Kreis Wesel e.V.;552172;179250
+552182;BS KRICK;Biologische Station Krickenbecker Seen e.V.;552172;179251
+552183;BS WR;Biologische Station Westliches Ruhrgebiet e.V.;552172;179252
+552184;BS DME;Biologische Station Haus Bürgel, Stadt Düsseldorf, Kreis Mettmann e.V.;552172;179253
+552185;BS KLE / NZ;Naturschutzzentrum im Kreis Kleve e.V.;552172;179254
+552186;BS KLE / GELD;Naturschutzzentrum Gelderland e.V.;552172;179255
+552187;BS KLE / KRAN;NABU-Naturschutzstation Niederrhein e. V.;552172;179256
+552188;BS MW;Biologische Station Mittlere Wupper e.V.;552172;179257
+552189;BS OER;Biologische Station Östliches Ruhrgebiet e.V.;552172;179258
+552190;BS MI;Biologische Station Minden-Lübbecke e.V.;552172;179259
+552191;BS Senne ;Biologische Station Kreis Paderborn-Senne;552172;179260
+552192;BS GT-BI;Biologische Station Gütersloh-Bielefeld e.V.;552172;179261
+552193;BS HF;Biologische Station Ravensberg im Kreis Herford e.V.;552172;179262
+552194;BS HX;Landschaftsstation im Kreis Höxter e.V.;552172;179263
+552195;BS LIP;Biologische Station Lippe e.V.;552172;179264
+552196;BS SU;Biologische Station im Rhein-Sieg-Kreis e.V.;552172;179265
+552197;BS ACK;Biologische Station im Kreis Aachen e.V.;552172;179266
+552198;BS BN;Biologische Station Bonn - Rhein-Erft e.V.;552172;179267
+552199;BS DN;Biologische Station im Kreis Düren e.V.;552172;179268
+552200;BS EUS;Biologische Station im Kreis Euskirchen e.V.;552172;179269
+552201;BS GM;Biologische Station Oberberg e.V.;552172;179270
+552202;BS WILD;Naturschutzstation Haus Wildenrath e.V.;552172;179271
+552203;BS LEV;NABU Naturschutzstation Leverkusen-Köln;552172;179272
+552204;BS GL;Biologische Station Rhein-Berg;552172;179273
+552205;BS COE;Naturschutzzentrum Kreis Coesfeld;552172;179274
+552206;NABU MS;NABU-Naturschutzstation Münsterland;552172;179275
+552207;BS RE;Biologische Station Kreis Recklinghausen e.V.;552172;179276
+552208;BS MS-Riesel;Biologische Station Rieselfelder Münster e.V.;552172;179277
+552209;BS ST;Biologische Station Kreis Steinfurt e.V.;552172;179278
+552210;BS BOR;Biologische Station Zwillbrock e.V.;552172;179279
+552211;LIZ;Landschaftsinformationszentrum Wasser und Wald Möhnesee e.V.;552172;179280
+552212;BZ LÜDINGH;Biologisches Zentrum Lüdinghausen;552172;179281
+552213;UZ KR;Krefelder Umweltzentrum Hülser Bruch e.V.;552172;179282
+552214;NABU SOE;NABU Soest;552172;179283
+552215;BS EN / WIT;Naturschutzgruppe Witten - Biologische Station e.V.;552172;179284
+559300;DBU Naturerbe GmbH;DBU Naturerbe GmbH;0;179328
+579292;NABU AC;NABU-Naturschutzstation Aachen;552172;191594
+999001;Eigene BS;Eigene Biologische Station;552172;999001

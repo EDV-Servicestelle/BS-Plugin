@@ -1,0 +1,9 @@
+listitemid;kurzname;langname;parentlistitemid;entityid
+551103;Kartierung/ Beobachtung;Datum der Kartierung bzw. Beobachtung (auch bei Angaben aus Literatur);0;155140
+551104;Datenerfassung, Digitalisierung;Digitalisierung von Beobachtungs- bzw. Kartierungsergebnissen in GISPAD/OSIRIS ;0;155142
+551105;fachliche Korrektur;fachl. Prüfung (Geländetermin) MIT Korrektur, OHNE Neuanlage des Objekts;0;155143
+551106;fachliche Prüfung;fachl. Prüfung (Geländetermin) OHNE Korrekturen, OHNE Neuanlage des Objekts;0;161588
+559624;Kartierdatum von;"Beobachtungzeitraum / Erfassungszeitraum,  nur sinnvoll in Verbindung mit ""Kartierdatum bis""";0;163725
+559625;Kartierdatum bis;"Beobachtungzeitraum/ Erfassungszeitraum, nur sinnvoll in Verbindung mit ""Kartierdatum von""";0;163726
+559626;Kurzuntersuchung;Beobachtung/ Kartierung OHNE Korrekturen OHNE Neuanlage des Objekts;0;172400
+559627;Qualitätskontrolle;Datum der Prüfung durch eine Qualitätssicherungsinstanz;0;7772

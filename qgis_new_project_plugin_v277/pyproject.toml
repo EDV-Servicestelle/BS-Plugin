@@ -1,0 +1,19 @@
+[tool.pyright]
+pythonVersion = "3.12"
+pythonPlatform = "Windows"
+extraPaths = [
+    "C:/OSGeo4W/apps/qgis-ltr/python",
+    "C:/OSGeo4W/apps/qgis-ltr/python/plugins",
+    "C:/OSGeo4W/apps/Python312/Lib/site-packages",
+]
+ignore = ["**/__pycache__"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]  # Lange Zeilen tolerieren
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]

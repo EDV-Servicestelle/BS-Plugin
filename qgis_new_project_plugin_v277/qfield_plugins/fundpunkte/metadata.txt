@@ -1,0 +1,6 @@
+[general]
+name=NRW Fundpunkte Tiere Artsuche
+description=Schnellzugriff auf Tierarten nach Artengruppen sowie Suche nach deutschem und wissenschaftlichem Namen. Setzt Artname und Artengruppe automatisch im Formular.
+author=Biologische Station Kreis Wesel e.V. (blinn@bskw.de)
+version=1.86
+icon=icon.svg

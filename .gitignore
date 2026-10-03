@@ -1,0 +1,58 @@
+# ── Grosse Fachdaten: gehoeren NICHT in die Versionsverwaltung ──────────────
+# Git speichert jede Aenderung an einer Binaerdatei als vollstaendige neue
+# Kopie. Diese Dateien werden extern bereitgestellt bzw. als Release-Artefakt
+# verteilt, nicht committet.
+#
+# ACHTUNG: Hier keine Sammelregel "*.gpkg" mit anschliessenden
+# Ausnahmen ("!...") verwenden. Git wertet die zuletzt passende Regel aus,
+# eine Ausnahme hebt den Ausschluss damit wieder auf.
+qgis_plugin/data/Nutzung.gpkg
+qgis_plugin/data/biotopbaum/Grenzen1.gpkg
+
+# GeoPackages ausserhalb des Plugin-Datenordners (Arbeitskopien, Exporte)
+/*.gpkg
+/dist/*.gpkg
+Referenzen_*.gpkg
+*_ENTWURF.gpkg
+
+# ── Zugangsdaten und lokale Konfiguration ───────────────────────────────────
+# Niemals committen: Verbindungsparameter der Grundlagen-DB, QFieldCloud-Logins
+*.pgpass
+.pg_service.conf
+pg_service.conf
+*secret*
+*credential*
+*.env
+.env.*
+settings_local.*
+*_local.py
+*.ini
+!setup.cfg
+
+# ── Build-Ergebnisse ────────────────────────────────────────────────────────
+dist/
+build/
+*.zip
+!doc/**/*.zip
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── QGIS / Arbeitsdateien ───────────────────────────────────────────────────
+*.qgs~
+*.qgz~
+*.qgd
+*.gpkg-wal
+*.gpkg-shm
+*.log
+
+# ── Betriebssystem / Editor ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

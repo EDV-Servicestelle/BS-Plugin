@@ -1,0 +1,30 @@
+[general]
+name=NRW Naturschutz-Toolbox
+description=Werkzeuge für den Naturschutz in NRW: PostGIS-Datenbanksetup, Fachschalen-Wizard (PostGIS + GPKG), GBIF/Ornitho-Import, LOD-2 Gebäudemodell, ATKIS-Grundlagendaten, LiDAR-Analyse, Luftbild-COG, Hydroanalyse.
+version=2.7.7
+qgisMinimumVersion=3.28
+qgisMaximumVersion=4.99
+supportsQt6=True
+author=Biologische Station Kreis Wesel e.V.
+email=blinn@bskw.de
+homepage=https://www.bskw.de
+tracker=https://www.bskw.de
+repository=https://www.bskw.de
+tags=naturschutz,fauna,lidar,hydro,nrw,brutvogel,fundpunkte,biotopbaum,schutzgebiete,ffh
+experimental=False
+deprecated=False
+about=
+    Zehn integrierte Module für den Naturschutz in NRW:
+
+    1. PostGIS-Setup             – Automatischer DB-Aufbau aus lokalen GPKGs
+                                   inkl. Styles, Schemas und fachschalen_config
+    2. Fachschalen-Wizard        – QGIS-Projekte aus PostGIS oder GPKG
+                                   (Brutvogel, Fundpunkte Tiere, Biotopbaum)
+    3. QField-Export             – GPKG-Export + QFieldCloud-Upload
+    4. Fundpunkte – Altdaten     – TF-IDF + Levenshtein + k-NN Import
+    5. Fundpunkte – Zeitreihen   – Fundhäufigkeit über die Zeit
+    6. GBIF-Import               – Artvorkommen mit Bounding-Box-Filter
+    7. Ornitho.de-Import         – Basic+-JSON Vogelbeobachtungen
+    8. NRW Luftbild → COG        – DOP vom WCS als COG GeoTIFF
+    9. NRW LiDAR-Analyse         – LAZ, DTM, LOD-2 Gebäudemodell
+   10. NRW Grundlagendaten       – Schutzgebiete, FFH, ATKIS (OGC-API/WFS)

@@ -1,0 +1,26 @@
+BrutzeitcodeID = ID in ornitho.de;Brutzeitcode;Brutzeitcode-Status;Bedeutung;anzeigename
+0;[Null];;kein Code;[Null] - kein Code
+1;A0;Mögliches Brüten;Art zur Brutzeit festgestellt. [am 10.03.2012 deaktiviert];A0 - Art zur Brutzeit festgestellt. [am 10.03.2012 deaktiviert]
+2;A1;Mögliches Brüten;Art zur Brutzeit im möglichen Bruthabitat festgestellt.;A1 - Art zur Brutzeit im möglichen Bruthabitat festgestellt.
+3;A2;Mögliches Brüten;Singendes, trommelndes oder balzendes Männchen zur Brutzeit im möglichen Bruthabitat festgestellt.;A2 - Singendes, trommelndes oder balzendes Männchen zur Brutzeit im möglichen Bruthabitat festgestellt.
+4;B3;Wahrscheinliches Brüten;Paar zur Brutzeit in geeignetem Bruthabitat festgestellt.;B3 - Paar zur Brutzeit in geeignetem Bruthabitat festgestellt.
+5;B4;Wahrscheinliches Brüten;Revierverhalten (Gesang, Kämpfe mit Reviernachbarn etc.) an mind. 2 Tagen im Abstand von mind. 7 Tagen am selben Ort lässt ein dauerhaft besetztes Revier vermuten.;B4 - Revierverhalten (Gesang, Kämpfe mit Reviernachbarn etc.) an mind. 2 Tagen im Abstand von mind. 7 Tagen am selben Ort lässt ein dauerhaft besetztes Revier vermuten.
+6;B5;Wahrscheinliches Brüten;Balzverhalten (Männchen und Weibchen) festgestellt.;B5 - Balzverhalten (Männchen und Weibchen) festgestellt.
+7;B6;Wahrscheinliches Brüten;Altvogel sucht einen wahrscheinlichen Nestplatz auf.;B6 - Altvogel sucht einen wahrscheinlichen Nestplatz auf.
+8;B7;Wahrscheinliches Brüten;Warn- oder Angstrufe von Altvögeln oder anderes aufgeregtes Verhalten, das auf ein Nest oder Junge in der näheren Umgebung hindeutet.;B7 - Warn- oder Angstrufe von Altvögeln oder anderes aufgeregtes Verhalten, das auf ein Nest oder Junge in der näheren Umgebung hindeutet.
+9;B8;Wahrscheinliches Brüten;Brutfleck bei gefangenem Altvogel festgestellt.;B8 - Brutfleck bei gefangenem Altvogel festgestellt.
+10;B9;Wahrscheinliches Brüten;Nest- oder Höhlenbau, Anlage einer Nistmulde u.ä. beobachtet.;B9 - Nest- oder Höhlenbau, Anlage einer Nistmulde u.ä. beobachtet.
+11;C10;Sicheres Brüten;Ablenkungsverhalten oder Verleiten (Flügellahmstellen) beobachtet.;C10 - Ablenkungsverhalten oder Verleiten (Flügellahmstellen) beobachtet.
+12;C11a;Sicheres Brüten;Benutztes Nest aus der aktuellen Brutperiode gefunden.;C11a - Benutztes Nest aus der aktuellen Brutperiode gefunden.
+13;C12;Sicheres Brüten;Eben flügge Jungvögel (Nesthocker) oder Dunenjunge (Nestflüchter) festgestellt.;C12 - Eben flügge Jungvögel (Nesthocker) oder Dunenjunge (Nestflüchter) festgestellt.
+14;C13a;Sicheres Brüten;Altvögel verlassen oder suchen einen Nestplatz auf. Das Verhalten der Altvögel deutet auf ein besetztes Nest hin, das jedoch nicht eingesehen werden kann (hoch oder in Höhlen gelegene Nester).;C13a - Altvögel verlassen oder suchen einen Nestplatz auf. Das Verhalten der Altvögel deutet auf ein besetztes Nest hin, das jedoch nicht eingesehen werden kann (hoch oder in Höhlen gelegene Nester).
+15;C14a;Sicheres Brüten;Altvogel trägt Kotsack von Nestling weg.;C14a - Altvogel trägt Kotsack von Nestling weg.
+16;C14b;Sicheres Brüten;Altvogel mit Futter für die nicht-flüggen Jungen beobachtet.;C14b - Altvogel mit Futter für die nicht-flüggen Jungen beobachtet.
+17;C11b;Sicheres Brüten;Eischalen geschlüpfter Jungvögel aus der aktuellen Brutperiode gefunden.;C11b - Eischalen geschlüpfter Jungvögel aus der aktuellen Brutperiode gefunden.
+18;C13b;Sicheres Brüten;Nest mit brütendem Altvogel entdeckt.;C13b - Nest mit brütendem Altvogel entdeckt.
+19;C15;Sicheres Brüten;Nest mit Eiern entdeckt.;C15 - Nest mit Eiern entdeckt.
+20;C16;Sicheres Brüten;Junge im Nest gesehen oder gehört.;C16 - Junge im Nest gesehen oder gehört.
+30;A;Mögliches Brüten;Mögliches Brüten / Brutzeitfeststellung;A - Mögliches Brüten / Brutzeitfeststellung
+40;B;Wahrscheinliches Brüten;Wahrscheinliches Brüten / Brutverdacht;B - Wahrscheinliches Brüten / Brutverdacht
+50;C;Sicheres Brüten;Sicheres Brüten / Brutnachweis;C - Sicheres Brüten / Brutnachweis
+99;E99;;Art trotz Beobachtungsgängen nicht (mehr) festgestellt.;E99 - Art trotz Beobachtungsgängen nicht (mehr) festgestellt.

@@ -1,0 +1,17 @@
+listitemid;kurzname;langname;parentlistitemid;entityid
+485248;mit Pilzbefall (z.B. Konsolen);mit Pilzbefall (z.B. Konsolen);0;10011
+485249;mit Verletzungen, sich lösende Rinde;mit Verletzungen, sich lösende Rinde (mind. 50% des Baumes sollten betoffen sein);0;10012
+485250;ausgebrochene Zwiesel;ausgebrochene Zwiesel;0;10013
+485251;viel Totholz in Krone;viel Totholz in Krone ( > 25% Totholz);0;10016
+485252;Moos- Flechtenbewuchs;Moos- Flechtenbewuchs ( > 25% Stammbedeckung);0;10017
+485253;markante Wuchsform;markante Wuchsform (z.B. alter Hudebaum);0;10018
+485254;krank oder absterbend;krank oder absterbend;0;10019
+485255;mit Bartflechten;mit Bartflechten;0;10023
+485256;mit Epiphyten (Misteln);mit Epiphyten (Misteln);0;10024
+485257;mit Rissbildung;mit Rissbildung (z.B. durch Blitzschlag);0;10025
+485259;Wurzelteller;Wurzelteller;0;8094
+485260;Gefällte Stämme;Gefällte Stämme;0;171080
+485262;größere Stammschäden;größere Stammschäden (mind. DIN A3 Fläche);0;8110
+485263;fehlende, ausgebrochene Primärkrone;fehlende, ausgebrochene Primärkrone;0;8111
+485264;mehrteilig;mehrteilig (bei Totholz z.B. ein stehender und ein liegender);0;8112
+485489;Schling- und Kletterpflanzen;Schling- und Kletterpflanzen (> 25% Stammbedeckung);0;8154

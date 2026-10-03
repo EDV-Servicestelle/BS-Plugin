@@ -1,0 +1,20 @@
+# Zeilenenden normalisieren: Entwicklung findet unter Windows und Linux statt
+* text=auto eol=lf
+
+# Textformate ausdruecklich als Text behandeln, damit Diffs entstehen
+*.py    text diff=python
+*.qml   text
+*.sql   text
+*.csv   text
+*.md    text
+*.yml   text
+*.txt   text
+*.sh    text eol=lf
+
+# Binaerformate: kein Diff, keine Zeilenenden-Konvertierung
+*.gpkg  binary
+*.ods   binary
+*.xlsx  binary
+*.docx  binary
+*.png   binary
+*.svg   text

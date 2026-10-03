@@ -1,0 +1,42 @@
+entityid;term;parentid;listitemid
+0;keine Angabe (NULL);nan;900009
+6160;Spanner;163212;164283
+6434;Kleinschmetterlinge;163212;163994
+6509;Säugetiere;nan;163127
+6577;Schnabelfliegen;nan;164825
+6582;Schnecken, Muscheln;nan;164830
+6810;Tausendfüsser;nan;165833
+6815;Netzflügler;nan;163060
+6827;Libellen;nan;162960
+6909;Geradflügler;nan;158667
+6972;Steinfliegen;nan;165789
+7009;Urtiere, Schwaemme;nan;165838
+7014;Kranzfühler;nan;162911
+7016;Köcherfliegen;nan;708823
+8386;Zikaden;nan;234830
+102317;Amph-Reptilien;nan;158512
+102345;Spinnentiere;nan;165099
+102937;Voegel;nan;165844
+103191;Nesseltiere;nan;163055
+103195;Laufkäfer;nan;160553
+103814;Kurzflügler;nan;159617
+104749;Weitere Kaeferarten;nan;161165
+106212;Springschwaenze;nan;165787
+106214;Krebse;nan;162915
+106241;Zweiflügler;nan;166256
+106753;Eintagsfliegen;nan;158540
+106799;Fische-Rundmaeuler;nan;158605
+106860;Wanzen;nan;166104
+107020;Ameisen;158741;158742
+107041;Bienen;158741;158763
+107622;Gall- und Schlupfwespen;158741;159099
+107629;Pflanzenwespen;158741;159105
+107871;Tagfalter;163212;164691
+108001;Baeren, Spinner;163212;163213
+108183;Eulenfalter;163212;163498
+151911;Plattwürmer;nan;163077
+151912;Ringelwürmer;nan;163094
+151913;Schlammfliegen;nan;163196
+151914;Schlauchwürmer;nan;163200
+151916;Schnurwürmer;nan;165097
+151933;Weitere Stechimmen;158741;708822

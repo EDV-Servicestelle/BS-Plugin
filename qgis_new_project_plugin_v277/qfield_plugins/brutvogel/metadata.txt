@@ -1,0 +1,6 @@
+[general]
+name=NRW Brutvogel Artsuche
+description=Schnellzugriff auf Vogelarten nach Artengruppen sowie Suche nach deutschem Namen, wissenschaftlichem Namen und Kürzel. Aktiviert sich automatisch beim Öffnen des Brutvogel-Projekts.
+author=Biologische Station Kreis Wesel e.V. (blinn@bskw.de)
+version=1.86
+icon=icon.svg
