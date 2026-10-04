@@ -94,6 +94,32 @@ git push origin v2.7.8
 Das Release entsteht automatisch, mit stabiler Download-URL für die Stationen.
 Ohne Tag wird das Paket zwar gebaut, verfällt aber nach zwei Wochen.
 
+## Wo liegt das installierbare Plugin
+
+Das fertige Paket hängt an den Releases — **nicht** die automatisch erzeugten
+„Source code"-Archive verwenden, die enthalten das gesamte Repository und
+lassen sich nicht als QGIS-Erweiterung installieren.
+
+| Ort | Erzeugt von |
+| --- | --- |
+| GitLab → Deploy → Releases | der GitLab-Pipeline (Job `release`) |
+| GitHub → Releases | GitHub Actions (`.github/workflows/release.yml`) |
+
+Beide Seiten bauen mit demselben Skript (`tools/build_plugin_zip.py`) aus
+demselben Tag, erzeugen also dasselbe Paket.
+
+Installation in QGIS: Erweiterungen → Erweiterungen verwalten und installieren
+→ Aus ZIP installieren.
+
+## Hinweis zum GitHub-Spiegel
+
+GitHub ist ein **einseitiger Spiegel** des GitLab-Repositorys der
+EDV-Servicestelle. Gespiegelt wird nur `main` samt Tags.
+
+Pull Requests können dort nicht gemergt werden. Beiträge sind trotzdem
+willkommen — am besten als Issue oder als Patch; wir übernehmen sie ins
+GitLab, von wo sie zurück nach GitHub gespiegelt werden.
+
 ## Mitarbeit
 
 Vor dem ersten Commit einmalig einrichten:
