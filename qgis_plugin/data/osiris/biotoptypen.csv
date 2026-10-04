@@ -1,0 +1,2312 @@
+schluessel;bezeichnung;atom_id;mehrdeutig
+A;Wälder;136152;0
+AA;Buchenwälder;136153;0
+AA0;Buchenwald;136154;0
+AA1;Eichen-Buchenmischwald;136155;0
+AA2;Buchenmischwald mit heimischen Laubbaumarten;136156;0
+AA3;Buchenmischwald mit nicht heimischen Laubbaumarten;136157;0
+AA4;Buchenmischwald mit Nadelbaumarten;136158;0
+AA5;Buchenwald auf flachgründigen Kalkverwitterungsböden;136159;0
+AA6;Zahnwurz-Buchenwald;136160;0
+AA7;Buchenwald auf Schluchtwald- / Blockschuttstandort;136161;0
+AB;Eichenwälder;136162;0
+AB0;Eichenwald;136163;0
+AB1;Buchen-Eichenmischwald;136164;0
+AB10;Blockkrüppel-Eichenwald;174782;0
+AB2;Birken-Eichenmischwald;136165;0
+AB3;Eichenmischwald mit heimischen Laubbaumarten;136166;0
+AB4;Eichenmischwald mit nicht heimischen Laubbaumarten;136167;0
+AB5;Eichenmischwald mit Nadelbaumarten;136168;0
+AB6;Wärmeliebender Eichenwald;136169;0
+AB7;Eichen-Auenwald;136170;0
+AB8;Eichen-Schlucht- bzw. Hangschuttwald;136171;0
+AB9;Hainbuchen-Eichenmischwald;136172;0
+AC;Erlenwälder;136173;0
+AC0;Schwarzerlenwald;136174;0
+AC1;Schwarzerlenmischwald mit heimischen Laubbaumarten;136175;0
+AC2;Schwarzerlenmischwald mit nicht heimischen Laubbaumarten;136176;0
+AC3;Schwarzerlenmischwald mit Nadelbaumarten;136177;0
+AC4;Erlen-Bruchwald;136178;0
+AC5;Bachbegleitender Erlenwald;136179;0
+AC6;Erlen-Sumpfwald;174783;0
+AD;Birkenwälder;136180;0
+AD0;Birkenwald;136181;0
+AD1;Eichen-Birkenmischwald;136182;0
+AD1a;Birkenmischwald mit einheimischen Laubbaumarten;3000;0
+AD2;Birkenmischwald mit nicht heimischen Laubbaumarten;136183;0
+AD3;Birkenmischwald mit Nadelbaumarten;136184;0
+AD4;Birken-Bruchwald;136185;0
+AD5;Birken-Moorwald;136186;0
+AD6;Karpaten-Birken-Blockschuttwald;174784;0
+AD7;Birkenmischwald mit heimischen Laubbaumarten;168857;0
+AE;Weidenwälder;136187;0
+AE0;Weidenwald;136188;0
+AE1;Weidenmischwald mit heimischen Laubbaumarten;136189;0
+AE1a;Weidenmischwald mit einheimischen Laubbaumarten;3001;0
+AE2;Weiden-Auenwald;136190;0
+AE3;Weiden-Bruchwald;136191;0
+AE4;Weidensumpfwald;8376;0
+AE5;Weidenmischwald mit nicht heimischen Baumarten;168858;0
+AF;Pappelwälder;136192;0
+AF0;Hybrid-Pappelwald;136193;0
+AF1;Hybrid-Pappelmischwald mit heimischen Laubbaumarten;136194;0
+AF1a;Laubbaum-Pappelmischwald;3002;0
+AF1b;Nadelbaum-Pappelmischwald;3003;0
+AF2;Pappelwald auf Auenstandort;136195;0
+AF3;Pappelwald auf Bruchwaldstandort;136196;0
+AF4;Erlen-Pappelmischwald;155427;0
+AF5;Pappelwald auf Moorwaldstandort;174785;0
+AF6;Hybrid-Pappelmischwald mit nicht heimischen Baumarten;168859;0
+AG;Sonstige Laub(misch)wälder aus heimischen Laubbaumarten;136197;0
+AG0;Sonstiger Laubwald aus einer heimischen Laubbaumart;136198;0
+AG1;Sonstiger Laub(misch)wald mit mehreren heimischen Laubbaumarten;136199;0
+AG2;Sonstiger Laub(misch)wald einheimischer Arten (ohne dominante Art);174643;0
+AG3;Sonstiger Laub(misch)wald heimischer Arten mit Nadelbaumarten;3015;0
+AH;Sonstige Laub(misch)wälder nicht heimischer Laubbaumarten;136200;0
+AH0;Sonstiger Laubwald aus einer nicht heimischen Laubbaumart;136201;0
+AH1;Sonstiger Laub(misch)wald mit mehreren nicht heimischen Laubbaumarten;136202;0
+AH2;Sonstiger Laubmischwald gebietsfremder Arten (ohne dominante Art);174647;0
+AH3;Sonstiger Laub(misch)wald nicht heimischer Arten mit Nadelbaumarten;3014;0
+AH3a;Sonstiger Nadel-Laubmischwald gebietsfremder Laubbaumarten;3016;0
+AJ;Fichtenwälder;136203;0
+AJ0;Fichtenwald;136204;0
+AJ1;Fichtenmischwald mit heimischen Laubbaumarten;136205;0
+AJ1a;Buchen-Fichtenmischwald;3004;0
+AJ2;Fichtenmischwald mit nicht heimischen Laubbaumarten;136206;0
+AJ3;Fichtenmischwald mit weiteren Nadelbaumarten;136207;0
+AJ4;Laub-, Nadelbaum-Fichtenmischwald;140105;0
+AJ5;Fichtenwald auf Auenstandort;174787;0
+AJ6;Fichtenwald auf Bruch- oder Moorwaldstandort;174788;0
+AK;Kiefernwälder;136208;0
+AK0;Kiefernwald;136209;0
+AK1;Kiefernmischwald mit heimischen Laubbaumarten;136210;0
+AK1a;Eichen-Kiefernmischwald;3005;0
+AK2;Kiefernmischwald mit nicht heimischen Laubbaumarten;136211;0
+AK3;Kiefernmischwald mit weiteren Nadelbaumarten;136212;0
+AK4;Kiefern-Moorwald;136213;0
+AK5;Laub-, Nadelbaum-Kiefernmischwald;140106;0
+AL;Sonstige Nadel(misch)wälder;136214;0
+AL0;Sonstiger Nadel(misch)wald;139341;0
+AL1;Douglasienwald;161091;0
+AL2;Douglasienmischwald;3009;0
+AL3;Laub-Nadelmischwald (nicht Fi, Ki, Lae, Dou);3010;0
+AM;Eschenwälder;136215;0
+AM0;Eschenwald;136216;0
+AM1;Eschenmischwald mit heimischen Laubbaumarten;136217;0
+AM1a;Eschenmischwald mit einheimischen Laubbaumarten;3006;0
+AM1b;Eschenmischwald mit gebietsfremden Laubbaumarten;3007;0
+AM1c;Nadelbaum-Eschenmischwald;2944;0
+AM2;Bachbegleitender Eschenwald;136218;0
+AM3;Eschenwald auf Auenstandort;136219;0
+AM4;Eschen-Schlucht- bzw. Hangschuttwald;136220;0
+AM5;Eschen-Sumpfwald;174789;0
+AM6;Eschenmischwald mit nicht heimischen Laubbaumarten;168860;0
+AM7;Eschenmischwald mit Nadelbaumarten;168861;0
+AN;Robinienwälder;136221;0
+AN0;Robinienwald;136222;0
+AN1;Robinienmischwald;136223;0
+AO;Roteichenwälder;136224;0
+AO0;Roteichenwald;136225;0
+AO1;Roteichenmischwald;136226;0
+AP;Ulmenwälder;136227;0
+AP0;Ulmenwald;136228;0
+AP0a;Ulmenmischwald;3008;0
+AP1;Ulmenmischwald auf Auenstandort;136229;0
+AP2;Sommerlinden-Ulmen-Hangschuttwald;136230;0
+AQ;Hainbuchenwälder;136231;0
+AQ0;Hainbuchenwald;136232;0
+AQ1;Eichen-Hainbuchenmischwald;136233;0
+AQ1a;Hainbuchenmischwald;2940;0
+AQ2;Winterlinden-Hainbuchen-Hangschuttwald;136234;0
+AQ3;Eichen-Hainbuchenwald, trockene Standorte;174790;0
+AQ4;Hainbuchenmischwald mit heimischen Laubbaumarten;168862;0
+AQ5;Hainbuchenmischwald mit nicht heimischen Laubbaumarten;168863;0
+AQ6;Hainbuchenmischwald mit Nadelbaumarten;168902;0
+AR;Ahornwälder;136235;0
+AR0;Ahornwald;136236;0
+AR1;Ahornmischwald mit heimischen Laubbaumarten;136237;0
+AR2;Ahorn-Schlucht- bzw. Hangschuttwald;136238;0
+AR3;Lindenwald;3129;0
+AR4;Lindenmischwald;3130;0
+AR5;Felsenahornwald;8370;0
+AR6;Spitzahorn-Sommerlinden-Blockschuttwald;174786;0
+AR7;Ahornmischwald mit nicht heimischen Laubbaumarten;167462;0
+AR8;Ahornmischwald mit Nadelbaumarten;168864;0
+AS;Lärchenwälder;136239;0
+AS0;Lärchenwald;136240;0
+AS1;Lärchenmischwald;136241;0
+AT;Schlagfluren, Kalamitätenflächen;136242;0
+AT0;Schlagflur;136243;0
+AT1;Kahlschlagfläche;136244;0
+AT2;Windwurffläche;136245;0
+AT3;Polterplatz;161421;0
+AT4;Brandfläche;176813;0
+AT5;baumarme Waldfläche unbekannter Herkunft;176814;0
+AT6;Totholzwald (Insekten-, Pilzbefall, Zerfallsstadium);3012;0
+AU;Aufforstungen, Pionierwälder;136246;0
+AU0;Aufforstung, Pionierwald;136247;0
+AU1;Wald, Jungwuchs;136248;0
+AU2;Vorwald, Pionierwald;136249;0
+AV;Waldränder;136250;0
+AV0;Waldrand;139342;0
+AV1;Ausbreitungskorridor, Vernetzungsachse für Lebensgem. d. offenen, weiten Feucht- und Nassgrünlandes | Waldmantel;138569;1
+B;Kleingehölze;136251;0
+BA;flächige Kleingehölze;136252;0
+BA0;Feldgehölz;136253;0
+BA1;flächiges Kleingehölz mit vorwiegend heimischen Baumarten;136254;0
+BA2;flächiges Kleingehölz mit vorwiegend nicht heimischen Baumarten;136255;0
+BA3;Siedlungsgehölz;168870;0
+BA4;Verkehrsgehölz;168871;0
+BA5;Hofgehölz;168872;0
+BB;Gebüsche;136256;0
+BB0;Gebüsch, Strauchgruppe;136257;0
+BB1;Gebüschstreifen, Strauchreihe;136258;0
+BB10;Wärmeliebende Gebüsche;174791;0
+BB11;Gebüsche und Strauchgruppen mit vorwiegend heimischen Straucharten;168865;0
+BB12;Gebüsche und Strauchgruppen mit vorwiegend nicht heimischen Straucharten;168866;0
+BB2;Einzelstrauch;161108;0
+BB3;Stark verbuschte Grünlandbrache (Verbuschung > 50%);172390;0
+BB4;Weiden-Auengebüsch;174792;0
+BB5;Bruchgebüsch;174793;0
+BB6;Moorgebüsch;174794;0
+BB7;Felsengebüsch;174795;0
+BB8;Haselgebüsche auf Blockschutt;174796;0
+BB9;Gebüsche mittlerer Standorte;174797;0
+BD;linienförmige Gehölzbestände;136259;0
+BD0;Hecke;136260;0
+BD1;Wallhecke;136261;0
+BD1a;Strauch-Wallhecke;176565;0
+BD1b;Baum-Wallhecke;176566;0
+BD2;Strauchhecke, ebenerdig;136262;0
+BD3;Gehölzstreifen;136263;0
+BD4;Böschungshecke;136264;0
+BD5;Schnitthecke;144580;0
+BD6;Baumhecke, ebenerdig;174798;0
+BD7;Gebüschstreifen, Strauchreihe;168869;0
+BE;Ufergehölze;136265;0
+BE0;Ufergehölz;136266;0
+BE1;Weiden-Ufergehölz;136267;0
+BE2;Erlen-Ufergehölz;136268;0
+BE3;Pappel-Ufergehölz;161106;0
+BE4;Erlen-Eschen-Ufergehölz;161422;0
+BE5;Ufergehölz aus heimischen Laubbaumarten;168867;0
+BE6;Ufergehölz aus nicht heimischen Laubbaumarten;168868;0
+BF;Baumgruppen, Baumreihen;136269;0
+BF0;Baumgruppe, Baumreihe;136270;0
+BF1;Baumreihe;136271;0
+BF2;Baumgruppe;136272;0
+BF3;Einzelbaum;136273;0
+BF4;Obstbaum;160493;0
+BF5;Obstbaumgruppe, Streuobstbestand;160494;0
+BF6;Obstbaumreihe;174799;0
+BF7;Zwiesel, mehrstämmiger Baum;169292;0
+BG;Kopfbaumgruppen, Kopfbaumreihen;136274;0
+BG0;Kopfbaumgruppe, Kopfbaumreihe;136275;0
+BG1;Kopfbaumreihe;136276;0
+BG2;Kopfbaumgruppe;136277;0
+BG3;Kopfbaum;136278;0
+BH;Alleen;136279;0
+BH0;Allee;139343;0
+BH1;Kopfbaumallee;176567;0
+BH2;Obstbaumallee;7472;0
+BJ;Siedlungsgehölze;136280;0
+BJ0;Siedlungsgehölz;139344;0
+BJ1;Verkehrsgehölz;176568;0
+BJ2;Hofgehölz;15814;0
+BL;Tothölzer;136281;0
+BL0;Totholz;136282;0
+BL1;starkes Totholz, stehend;136283;0
+BL2;starkes Totholz, liegend;136284;0
+BL3;schwaches Totholz, stehend;136285;0
+BL4;schwaches Totholz, liegend;136286;0
+BM;Erstaufforstung;155429;0
+BM0;Erstaufforstung landwirtschaftlicher Flächen;155473;0
+BM1;Erstaufforstung landwirtschaftlicher Flächen überwiegend mit Nadelbäumen;155474;0
+BM2;Erstaufforstung landwirtschaftlicher Flächen überwiegend mit Laubbäumen;155475;0
+BM3;Erstaufforstung landwirtschaftlicher Flächen, Nadel- und Laubbäumen gemischt;155476;0
+C;Moore, Sümpfe;136287;0
+CA;Hochmoore, Übergangsmoore;136288;0
+CA0;Hochmoor, Übergangsmoor;136289;0
+CA1;Hochmoor- oder Torfmoosaspekt;136290;0
+CA2;Hochmoor-Feuchtheideaspekt;136291;0
+CA3;Übergangs-, Zwischenmoor, Quellmoor;136292;0
+CA4;Hoch-, Zwischenmoordegenerationsstadium;136293;0
+CA5;Moorregenerationsfläche ausserhalb von Torfstichen;155477;0
+CB;Torfstiche;136294;0
+CB0;Torfstich;136295;0
+CB1;Torfstich mit Moorregenerationsfläche;136296;0
+CC;Kleinseggenriede, Binsensümpfe;136297;0
+CC0;Kleinseggenried, Binsensumpf;136298;0
+CC1;Bodensaures Kleinseggenried;136299;0
+CC2;Kalk-Kleinseggenried;136300;0
+CC3;Bodensaurer Binsen- oder Waldsimsensumpf;136301;0
+CC4;Kalk-Binsensumpf;136302;0
+CD;Großseggenriede;136303;0
+CD0;Großseggenried;136304;0
+CD1;Rasen-Großseggenried;136305;0
+CD2;Bulten-Großseggenried;136306;0
+CF;Röhrichtbestaende;136307;0
+CF0;Röhrichtbestand;136308;0
+CF1;Röhrichtbestand niedrigwüchsiger Arten;136309;0
+CF2;Röhrichtbestand hochwüchsiger Arten;136310;0
+CF2a;Schilfröhricht;2338;0
+CF2b;Rohrkolbenröhricht;2339;0
+CF3;Schneidenröhricht;136311;0
+CF4;Bachröhricht;138594;0
+D;Heiden, Trockenrasen;136312;0
+DA;Trockene Heiden;136313;0
+DA0;Trockene Heide;136314;0
+DA1;Calluna- bzw. Sandheide;136315;0
+DA2;Degenerierte Calluna-Heide;136316;0
+DA3;Besenginster-Heide;136317;0
+DA4;Wacholder-Heide;136318;0
+DA5;Bergheide-Beerenstrauchheide;136319;0
+DA6;Lineare trockene Heideelemente, -säume;136320;0
+DB;Erica-Zwergstrauchheiden auf feuchten bis nassen Standorten, meist mit Beteiligung von Calluna und oder Vaccinium spp.;136321;0
+DB0;Feuchtheide;136322;0
+DB1;Zwergstrauch-Feuchtheide;136323;0
+DB2;Pfeifengras-Feuchtheide;136324;0
+DC;Silikattrockenrasen;136325;0
+DC0;Silikattrockenrasen;136326;0
+DC1;Sukkulentenreicher Silikattrockenrasen;136327;0
+DC2;Silbergrasflur;136328;0
+DC3;Straussgrasrasen;136329;0
+DC4;Rheinischer Glanzlieschgrasrasen;174800;0
+DC5;Vulkanit-Magerrasen;174837;0
+DD;Kalkhalbtrockenrasen;136330;0
+DD0;Kalkhalbtrockenrasen, Kalkmagerrasen;136331;0
+DD1;Enzian-Schillergrasrasen;136332;0
+DD2;Trespen-Halbtrockenrasen;136333;0
+DD3;Wacholder-Kalkhalbtrockenrasen;136334;0
+DD4;Kalktrockenrasen;174801;0
+DD5;Sandsteppenrasen;174802;0
+DD6;Subkontinentale Halbtrocken- und Steppenrasen;174803;0
+DE;Schwermetallrasen;136335;0
+DE0;Schwermetallrasen;139345;0
+DF;Borstgrasrasen;136336;0
+DF0;Borstgrasrasen;139346;0
+DF1;Horstige Süßgrasbestände;8159;0
+DG;Heide-Degenerationsstadium;10009;0
+DG0;degenerierte feuchte oder trockene Heide fast ohne Zwergstrauchbeteiligung;10010;0
+E;Grünland;136337;0
+EA;Fettwiesen;136338;0
+EA0;Fettwiese;136339;0
+EA1;Fettwiese, Flachlandausbildung (Glatthaferwiese);136340;0
+EA2;Fettwiese, Mittelgebirgsausbildung (Goldhaferwiese);136341;0
+EA3;Feldgras und Neueinsaaten;136342;0
+EA3a;Feldgras, Neueinsaat;2921;0
+EA3b;Kleegras, Neueinsaat;2922;0
+EA4;Salbei-Glatthafer-Wiese;174804;0
+EB;Fettweiden;136343;0
+EB0;Fettweide;136344;0
+EB0a;Fett-Mähweide;2927;0
+EB1;Fettweide, Neueinsaat;136345;0
+EB2;frische bis mässig trockene Mähweide;161103;0
+EC;Nass- und Feuchtgrünländer;136346;0
+EC0;Nass- und Feuchtgrünland;136347;0
+EC1;Nass- und Feuchtwiese;136348;0
+EC1a;Nasswiese;2348;0
+EC1b;Feuchtwiese;2349;0
+EC2;Nass- und Feuchtweide;136349;0
+EC2a;Nassweide;2350;0
+EC2b;Feuchtweide;2351;0
+EC3;Pfeifengraswiese;136350;0
+EC4;basenarme  Pfeifengraswiese;136351;0
+EC5;Flutrasen;136352;0
+EC6;Nass- und Feuchtmähweide;161104;0
+EC6a;nasse Mähweide;2352;0
+EC6b;feuchte Mähweide;2353;0
+EC7;Brenndolden-Stromtalwiese;174805;0
+EC8;Pfeifengras-Stromtalwiese;174806;0
+ED;Magergrünländer;136353;0
+ED0;Magergrünland;136354;0
+ED0a;arten- und vegetationsarmes  Magergrasland;2920;0
+ED1;Magerwiese;136355;0
+ED1a;magere Feuchtwiese;2354;0
+ED2;Magerweide;136356;0
+ED2a;magere Feuchtweide;2355;0
+ED3;magere Mähweide;161105;0
+ED3a;magere Feucht-Mähweide;2391;0
+ED4;Submontane Magerwiese;174807;0
+EE;Grünlandbrachen;136357;0
+EE0;Grünlandbrache;136358;0
+EE0a;Fettgrünlandbrache;2396;0
+EE1;Brachgefallene Fettwiese;136359;0
+EE2;Brachgefallene Fettweide;136360;0
+EE3;Nass- und Feuchtgrünlandbrache;136361;0
+EE3a;brachgefallenes Nassgrünland;2398;0
+EE3b;brachgefallenes Feuchtgrünland;2402;0
+EE4;Magergrünlandbrache;136362;0
+EE4a;brachgefallenes feuchtes Magergrünland;2919;0
+EE5;Gering bis mässig verbuschte Grünlandbrache;172391;0
+EF;Salzrasen;136363;0
+EF0;Salzrasen;139347;0
+F;Gewässer;136364;0
+FA;Seen;136365;0
+FA0;See;139348;0
+FB;Weiher;136366;0
+FB0;Weiher;139349;0
+FC;Altarme, Altwasser;136367;0
+FC0;Altarm, Altwasser;136368;0
+FC1;Altarm, angebunden;136369;0
+FC2;Altwasser, abgebunden;136370;0
+FC3;Altarm, angebunden, nicht durchströmt;136371;0
+FC4;Altarm, angebunden, durchströmt;136372;0
+FC5;Auenkolk, Woye;155478;0
+FD;stehende Kleingewässer;136373;0
+FD0;stehendes Kleingewässer;136374;0
+FD1;Tümpel (periodisch);136375;0
+FD2;Blänke;136376;0
+FD3;Lache, Pfütze, Wagenspur;136377;0
+FD4;Bombentrichter;155479;0
+FD5;Mardelle, Doline;174808;0
+FE;Heideweiher, Moorblänke;136378;0
+FE0;Heideweiher, Moorblänke;136379;0
+FE1;Heideweiher;136380;0
+FE2;Moorblänke, Moortümpel;136381;0
+FF;Teiche;136382;0
+FF0;Teich;136383;0
+FF1;Parkteich, Zierteich, Gartenteich;136384;0
+FF10;Freizeitteich;2998;0
+FF2;Fischteich;136385;0
+FF3;Mühlenteich, Gräfte;155480;0
+FF4;Löschteich;155481;0
+FF5;Naturschutzteich;155482;0
+FF6;Klärteich;160410;0
+FF7;Gräfte;160411;0
+FF8;Springbrunnen, Zierbecken;160412;0
+FF9;Dystropher Teich;174809;0
+FFH-Biotoptypen;FFH-Biotoptypen;136591;0
+FG;Abgrabungsgewässer;136386;0
+FG0;Abgrabungsgewässer;139350;0
+FG1;Abgrabungsgewässer über Lockergestein;160413;0
+FG1a;Abgrabungsgerwässer (Kies, Sand);3119;0
+FG1b;Abgrabungsgewässer (Ton);3064;0
+FG2;Abgrabungsgewässer über Festgestein;160414;0
+FG2a;Abgrabungsgewässer (Basalt);3065;0
+FG2b;Abgrabungsgewässer (Braunkohle);3066;0
+FG2c;Abgrabungsgewässer (Kalk);3067;0
+FH;Staugewässer;136387;0
+FH0;Staugewässer;136388;0
+FH1;Stausee, Talsperre, Vorbecken;136389;0
+FH2;Fluss-, Bachstau;136390;0
+FH3;Quellstau;136391;0
+FJ;Absetzbecken, Rieselfelder;136392;0
+FJ0;Absetz- und Klärbecken, Rieselfeld;139351;0
+FJ1;Absetz- und Klärbecken;160491;0
+FJ2;Rieselfeld;160492;0
+FJ3;Schlammweiher;174810;0
+FJ4;Trinkwasser-Filterbecken;15821;0
+FK;Quellen;136393;0
+FK0;Quelle, Quellbereich;136394;0
+FK1;Grundquelle, Tümpelquelle, Limnokrene;136395;0
+FK2;Sicker-, Sumpfquelle, Helokrene;136396;0
+FK3;Sturzquelle, Rheokrene;136397;0
+FK4;Tuff-, Sinterquelle;174811;0
+FK5;Mesotraphente Kalkquell-Staudenflur;175192;0
+FL;Wasserfälle, Stromschnellen, Bachschwinden;136398;0
+FL0;Wasserfall, Stromschnelle, Bachschwinde;136399;0
+FL1;Wasserfall;136400;0
+FL2;Stromschnelle;136401;0
+FL3;Bachschwinde;136402;0
+FM;Bäche;136403;0
+FM0;Bach;136404;0
+FM1;Bachoberlauf im Mittelgebirge;136405;0
+FM2;Bachmittellauf im Mittelgebirge;136406;0
+FM3;Bachunterlauf im Mittelgebirge;136407;0
+FM4;Quellbach;136408;0
+FM4a;Quellbach im Tiefland;3068;0
+FM4b;Quellbach im Mittelgebirge;3069;0
+FM5;Tieflandbach;136409;0
+FM6;Mittelgebirgsbach;174812;0
+FN;Gräben;171208;0
+FN0;Graben;136411;0
+FN1;Graben mit  Fließgewässervegetation;136412;0
+FN2;Graben mit Stillgewässervegetation;136413;0
+FN3;Graben mit extensiver Instandhaltung;136414;0
+FN4;Graben mit intensiver Instandhaltung;136415;0
+FN5;Graben überwiegend verbaut oder verrohrt;136416;0
+FN6;Beton-, Steinrinne;161435;0
+FO;Flüsse;136417;0
+FO0;Fluss;136418;0
+FO1;Mittelgebirgsfluss;136419;0
+FO2;Tieflandfluss;136420;0
+FP;Kanäle;136421;0
+FP0;Kanal;139352;0
+FR;Bergsenkungsgewässer;136422;0
+FR0;Bergsenkungsgewässer;139353;0
+FS;Sonstige technische Gewässer;136423;0
+FS0;Rückhaltebecken;139354;0
+FS1;Höhlengewässer;160522;0
+FS2;Polder (zur Retention);174813;0
+FT;Häfen;155483;0
+FT0;Hafen;155484;0
+FT0a;Hafenbecken;18414;0
+FT0b;Hafenanlagen;18416;0
+FT1;Industrie, Umschlaghafen;155485;0
+FT2;Sporthafen;155486;0
+G;Gesteinsbiotope;136424;0
+GA;Fels, Felswaende, -klippen;136425;0
+GA0;Fels, Felswand, -klippe;136426;0
+GA1;natürlicher Kalkfels;136427;0
+GA2;natürlicher Silikatfels;136428;0
+GA3;sekundärer Kalkfels;136429;0
+GA4;sekundärer Silikatfels;136430;0
+GA5;natürlicher Basaltfels;167498;0
+GB;Blockschutt- / Feinschutthalden;136431;0
+GB0;Blockschutt- / Feinschutthalde;136432;0
+GB1;natürliche Kalk-Blockschutt- / Feinschutthalde;136433;0
+GB2;natürliche Silikat-Blockschutt- / Feinschutthalde;136434;0
+GB3;sekundäre Kalk-Blockschutt- / Feinschutthalde;136435;0
+GB4;sekundäre Silikat-Blockschutt- / Feinschutthalde;136436;0
+GC;Steinbrüche;136437;0
+GC0;Steinbruch;136438;0
+GC1;Kalksteinbruch, Steinbruch auf basischen Ausgangsgestein;136439;0
+GC2;Silikatsteinbruch, Steinbruch auf silikatischem Ausgangsgestein;136440;0
+GC3;Basaltsteinbruch;136441;0
+GC4;Steinbruch, sonstiger magmatischer Gesteine;174814;0
+GD;Lockergesteinsabgrabungen;136442;0
+GD0;Lockergesteinsabgrabung;136443;0
+GD1;Sand-, Kiesabgrabung;136444;0
+GD2;Lehm-, Tonabgrabung;136445;0
+GE;Höhlen und Stollen;136446;0
+GE0;Höhlen und Stollen;137911;0
+GE1;Höhle;137912;0
+GE2;Stollen;137913;0
+GF;Vegetationsarme oder -freie Bereiche;136447;0
+GF0;Vegetationsarme oder -freie Bereiche;136448;0
+GF1;Vegetationsarme Kies- und Schotterflächen;136449;0
+GF2;Vegetationsarme Sandflächen;136450;0
+GF3;Vegetationsarme Löss- und Lehmflächen;136451;0
+GF4;Vegetationsarme Sand- und Kiesbänke;136452;0
+GF5;Vegetationsarme Schlammflächen;7729;0
+GF6;Vegetationsarme Aufschüttungsfläche;7730;0
+GG;Sand-, Lösswände;136453;0
+GG0;Sand-, Lösswand;136454;0
+GG1;Sandwand;136455;0
+GG2;Löss-, Lehmwand;136456;0
+GH;Steinriegel, Lesesteinhaufen;191752;0
+GH1;Steinriegel;191753;0
+GH2;Lesesteinhaufen;191754;0
+GX;Geotope;9362;0
+GX1;Abtragungsform;34291;0
+GX2;Aufschluss;34295;0
+GX3;Aufschüttungsform;34307;0
+GX4;Landschaftsform;34290;0
+GX5;Geologisches Sonderelement;34313;0
+H;Weitere anthropogen bedingte Biotope;136457;0
+HA;Äcker;136458;0
+HA0;Acker;136459;0
+HA2;Wildacker;136460;0
+HA3;Sand-, Silikatacker;136461;0
+HA3a;Sandacker;2931;0
+HA3b;Silikatacker, skelettreich;2932;0
+HA4;Kalkacker;136462;0
+HA4a;Kalkacker, skelettreich;7685;0
+HA5;Lössacker, lockerer Lehmacker;136463;0
+HA6;Schwerer Lehm-, Tonacker;136464;0
+HA7;Acker auf Torf oder Anmoor;136465;0
+HA8;Feldfutterbau;136466;0
+HA8a;Acker unter Folie;7686;0
+HA9;Weidenacker;174815;0
+HB;Ackerbrachen;136467;0
+HB0;junge Sukzessions-Ackerbrache;139355;0
+HB0a;Wildackerbrache;2930;0
+HB1;Einsaat-Ackerbrache;170964;0
+HB1a;Grasland auf Sukzessions-Ackerbrache;2415;0
+HB2;junge Sukzessions-Ackerbrache;2933;0
+HB3;staudenreiche Ackerbrache;2934;0
+HB4;junge Ackerbrache-Aufforstung;2935;0
+HC;Rain, Strassenränder;136468;0
+HC0;Rain, Strassenrand;136469;0
+HC1;Ackerrain;136470;0
+HC2;Grünlandrain;136471;0
+HC3;Strassenrand;136472;0
+HC4;Verkehrsrasenfläche;161436;0
+HD;Gleisanlagen;136473;0
+HD0;Gleisanlage, Bahnhof;136474;0
+HD1;Sammel-, Verschiebe-, Güterbahnhof;136475;0
+HD2;Personenbahnhof, Haltebahnhof;136476;0
+HD3;Bahnlinie;136477;0
+HD4;Bahndepot;160509;0
+HD5;Strassenbahnlinie;161437;0
+HD6;Strassenbahndepot;161438;0
+HD7;Zechenbahnanlage;161439;0
+HD8;Museumsbahnanlage;161440;0
+HD9;Brachfläche der Gleisanlagen, Bahngelände;136478;0
+HE;Deiche;136479;0
+HE0;Hochwasserdamm, Deich;136480;0
+HE1;Deich aus erdigem Material;136481;0
+HE2;Deich aus steinigem Material;136482;0
+HE3;Deich mit Intensivgrünland;174816;0
+HE4;Deich mit Extensivgrünland;174817;0
+HE5;Deich mit Halbtrockenrasen;174818;0
+HF;Halden, Aufschüttungen, Verfuellungen;136483;0
+HF0;Halde, Aufschüttung;136484;0
+HF1;Bergehalde;136485;0
+HF2;Deponie, Aufschüttung;136486;0
+HF3;Deponie, Verfüllung;136487;0
+HF4;Verfüllung;161441;0
+HG;Hohlwege;136488;0
+HG0;Hohlweg;136489;0
+HG1;Lösshohlweg;136490;0
+HG2;Sandhohlweg;136491;0
+HH;Böschungen;136494;0
+HH0;Böschung;136495;0
+HH1;Strassenböschung, Einschnitt;136496;0
+HH2;Strassenböschung, Damm;136497;0
+HH3;Bahnböschung, Einschnitt;136498;0
+HH4;Bahnböschung, Damm;136499;0
+HH5;Kanalböschung, Einschnitt;136500;0
+HH6;Kanalböschung, Damm;136501;0
+HH7;Fließgewässerprofilböschung;136502;0
+HH8;Fliessgewässerböschung, Uferrandstreifen;160510;0
+HH9;Stillgewässerböschung, Uferrandstreifen;160511;0
+HJ;Gärten, Baumschulen, forstähnliche Kulturen;136503;0
+HJ0;Garten, Baumschule;136504;0
+HJ1;Ziergarten;136505;0
+HJ2;Nutzgarten;136506;0
+HJ3;Bauerngarten;136507;0
+HJ4;Gartenbrache;136508;0
+HJ5;Gartenbaubetrieb;136509;0
+HJ6;Baumschule, Gärtnerei;136510;0
+HJ7;Weihnachtsbaumkultur;136511;0
+HJ8;Landwirtschaftliche Sondernutzung;161442;0
+HJ9;Energieholzkulturen;174819;0
+HK;Obstanlagen;136512;0
+HK0;Obstanlage;136513;0
+HK1;Streuobstgarten;136514;0
+HK2;Streuobstwiese;136515;0
+HK3;Streuobstweide;136516;0
+HK4;Erwerbsobstanlage;161443;0
+HK5;Streuobst auf Acker oder anderweitig offen gehaltenem Standort;174820;0
+HK6;Extensivobstanlage;176599;0
+HK7;Streuobstgartenbrache;174821;0
+HK8;Erwerbs- oder Extensivobstanlagenbrache;174822;0
+HK9;Streuobstbrache;136517;0
+HK9a;Streuobstgrünlandbrache;2923;0
+HL;Rebkulturen und Rebbrachen;136518;0
+HL0;Weinberg, Rebkulturfläche;136519;0
+HL1;Bewirtschafteter Weinberg, Rebkulturfläche;136520;0
+HL2;Trockenmauer der Weinberge, Rebkulturflächen;136521;0
+HL3;Rebkulturen in Steillage;174823;0
+HL4;Rebkulturen in ebener und schwach geneigter Lage;174824;0
+HL7;Rebkulturbrachen in Steillage;174825;0
+HL8;Rebkulturbrachen in ebener bis schwach geneigter Lage;174826;0
+HL9;Weinbergs-, Rebkulturbrache;136522;0
+HM;Park, Grünanlagen;136523;0
+HM0;Park, Grünanlage;136524;0
+HM1;Stadtpark, Schlosspark;136525;0
+HM10;Kübelpflanzung;160516;0
+HM11;Strauchpflanzung;160517;0
+HM12;Waldpark;161444;0
+HM2;Strukturarmer Stadtpark ohne alten Baumbestand;136526;0
+HM3;Strukturarme Grünanlage, Baumbestand nahezu fehlend;136527;0
+HM3a;Strukturreiche Grünanlage;161183;0
+HM4;Trittrasen, Rasenplatz, Parkrasen, Sportrasen;136528;0
+HM4a;Trittrasen;161445;0
+HM4b;Rasenplatz;161446;0
+HM4c;Parkrasen;161447;0
+HM5;Pflanzenbeet;160512;0
+HM6;höherwüchsige Grasfläche;160513;0
+HM7;Nutzrasen;160514;0
+HM8;staudenreiche Fläche;160515;0
+HM9;Brachfläche der Grünanlagen;136529;0
+HN;Gebäude, Mauerwerk, Ruinen;136530;0
+HN0;Gebäude, Mauerwerk, Ruine;136531;0
+HN1;Gebäude;136532;0
+HN2;Mauer, Trockenmauer;136533;0
+HN3;Ruine;136534;0
+HN4;Verfugte Mauer, Betonmauer;174827;0
+HO0;Tunnel;139356;0
+HR;Friedhöfe, Begräbnisstätten;136536;0
+HR0;Friedhof, Begräbnisstätte;136537;0
+HR1;Alter Friedhof, Parkfriedhof, mit altem Baumbestand;136538;0
+HR2;Junger Friedhof, Heckenfriedhof, Zierfriedhof;136539;0
+HR3;Waldfriedhof;136540;0
+HR9;Brachfläche der Friedhöfe;136541;0
+HS;Kleingartenanlagen, Grabeland;136542;0
+HS0;Kleingartenanlage;136543;0
+HS1;Intensiv genutzte, strukturarme Kleingartenanlage;136544;0
+HS2;Kleingartenanlage mit hoher struktureller Vielfalt;136545;0
+HS3;Grabeland;161448;0
+HS9;Brachfläche der Kleingartenanlagen;136546;0
+HT;Hofplätze, Lagerplätze;136547;0
+HT0;Hofplatz, Lagerplatz;136548;0
+HT1;Hofplatz mit hohem Versiegelungsgrad;136549;0
+HT2;Hofplatz mit geringem Versiegelungsgrad;136550;0
+HT3;Lagerplatz, unversiegelt;136551;0
+HT4;Lagerplatz, versiegelt;136552;0
+HT5;Lagerplatz;161449;0
+HU;Sport- und Erholungsanlagen;136553;0
+HU0;Sport- und Erholungsanlage;136554;0
+HU1;Sport- und Erholungsanlage mit hohem Versiegelungsgrad;136555;0
+HU2;Sport- und Erholungsanlage mit geringem Versiegelungsgrad;136556;0
+HU3;Sportrasen;161450;0
+HU9;Brachfläche der Sport- und Erholungsanlagen;136557;0
+HV;Plätze, Parkplätze;136558;0
+HV0;Grossparkplatz;136559;0
+HV1;Grossparkplatz mit hohem Versiegelungsgrad;136560;0
+HV2;Grossparkplatz mit geringem Versiegelungsgrad;136561;0
+HV3;Parkplatz;161451;0
+HV4;Öffentlicher Platz;161452;0
+HV5;Garagenhof;161453;0
+HV6;Marktplatz;161454;0
+HV7;Tiefgarage, Parkdeck;161784;0
+HW;Siedlungs-, Industrie- und Verkehrsbrachen;136562;0
+HW0;Siedlungs-, Industrie- und Verkehrsbrache;136563;0
+HW1;Brachfläche des Innenstadtbereichs;136564;0
+HW2;Brachfläche der Wohnbebauung;136565;0
+HW3;Brachfläche der Dorfgebiete;136566;0
+HW4;Industriebrachengelände;136567;0
+HW5;Brachfläche der Gewerbegebiete;136568;0
+HW6;Verkehrsbrache, ohne Brachen der Bahngelände;136569;0
+HW7;Brachfläche der technischen Ver- und Entsorgungsanlagen;136570;0
+HW8;Nicht genutzte Siedlungs-, Industrie- oder Verkehrsfläche;161455;0
+HX;Staudämme;136571;0
+HX0;Staudamm;136572;0
+HX1;Staudamm aus erdigem Material;136573;0
+HX2;Staudamm aus steinigem Material;136574;0
+HX3;Wehr;18581;0
+HZ;Bunker;174828;0
+HZ0;Bunker;174829;0
+HZ1;Bunker mit offenen Hohlräumen;174830;0
+HZ2;Bunker mit geschlossenen Hohlräumen;174831;0
+K;Säume bzw. linienf. Hochstaudenfluren;136575;0
+KA;Feuchte (nasse)  Säume bzw. linienf. Hochstaudenfluren;136576;0
+KA0;Feuchter (nasser) Saum bzw. linienf. Hochstaudenflur;136577;0
+KA0a;Magerer feuchter (nasser) Saum bzw. linienf. Hochstaudenflur;3051;0
+KA0b;feuchter (nasser) eutopher Saum bzw. linienf. Hochstaudenflur;3052;0
+KA1;Feuchter (nasser) Ruderalsaum bzw. linienf. Hochstaudenflur;136578;0
+KA2;Gewässerbegleitender feuchter Saum bzw. linienf. Hochstaudenflur;136579;0
+KA3;Feuchter Waldinnensaum bzw. linienf. Hochstaudenflur;136580;0
+KA4;Feuchter Waldsaum bzw. linienf. Hochstaudenflur;136581;0
+KA5;feuchter Neophytensaum;3053;0
+KB;Trockener Saum bzw. linienf. Hochstaudenflur;136582;0
+KB0;Trockener (frischer) Saum bzw. linienf. Hochstaudenflur;136583;0
+KB0a;Magerer trockener (frischer) Saum bzw. linienf. Hochstaudenflur;3054;0
+KB0b;trockener eutropher Saum bzw. linienf. Hochstaudenflur;3055;0
+KB1;Ruderalsaum bzw. linienf. Hochstaudenflur;136584;0
+KB2;Gewässerbegleitender trockener Saum bzw. Hochstaudenflur, linienförmig;136585;0
+KB3;Trockener Waldinnensaum bzw. Hochstaudenflur, linienförmig;136586;0
+KB4;Trockener Waldsaum bzw. Hochstaudenflur, linienförmig;136587;0
+KB5;Trockener (frischer) Neophytensaum;3056;0
+KC;Randstreifen, Saumstreifen;160518;0
+KC0;Randstreifen;160519;0
+KC1;Saumstreifen des Dauergrünlandes, Weidezaununterwuchs;160520;0
+KC1a;Fettgrünland-Saum;3057;0
+KC1b;Magergrünland-Saum;3058;0
+KC1c;Nass- und Feuchtgrünland-Saum;3059;0
+KC1d;Nassgrünland-Saum;3060;0
+KC1e;Magerer Feuchtgrünland-Saum;3061;0
+KC2;Ackerrandstreifen/ -schonstreifen;160521;0
+KC2a;Ackerrandstreifen (mit Nutzung);2404;0
+KC2b;Ackerschonstreifen (keine Nutzung);2928;0
+KC3;Blühstreifen;176840;0
+L;Annuellenflur bzw. flächenh. Hochstaudenflur;136588;0
+LA;Annuellenfluren;136589;0
+LA0;Feuchte Annuellenflur;139357;0
+LA1;Trockene Anuellenflur;139377;0
+LB;flächenhafte Hochstaudenfluren;155469;0
+LB0;Hochstaudenflur, flächenhaft;155470;0
+LB1;Feuchte Hochstaudenflur, flächenhaft;155471;0
+LB2;Trockene Hochstaudenflur, flächenhaft;155472;0
+LB3;Neophytenflur;144581;0
+LB3a;trockene Neophytenflur, flächenhaft;169164;0
+LB3b;feuchte Neophytenflur, flächenhaft;169240;0
+S;Siedlungsflächen;155487;0
+SA;Siedlungsflächen, Kerngebiete;155490;0
+SA0;Gemischte Bauflächen, Kerngebiete;155500;0
+SA1;Moderne Innenstadt;155501;0
+SA2;Altstadt;155502;0
+SA3;Dorfkern;155503;0
+SB;Wohnbauflächen;155491;0
+SB0;Gemischte Bauflächen, Wohnbaufläche;155504;0
+SB1;Block-, Zeilenwohnbebauung ein- bis mehrstöckig, Hochhäuser;155505;0
+SB1a;Blockbebauung;161456;0
+SB1b;Blockrandbebauung;161457;0
+SB1c;Zeilenbebauung, offene Blockrandbebauung;161458;0
+SB1d;Hochhaus-Wohnbebauung (freistehend);161459;0
+SB2;Einzel-, Doppel- und Reihenhausbebauung;155506;0
+SB2a;Einzel- und Doppelhausbebauung;161460;0
+SB2aa;Wohnhaus 1- 1,5stöckig;176857;0
+SB2ab;Wohnhaus 2- 3stöckig;176858;0
+SB2ac;Wohnhaus > 3stöckig;176859;0
+SB2b;Reihenhausbebauung;161461;0
+SB2ba;Reihenhausbebauung 1 - 1,5stöckig;176860;0
+SB2bb;Reihenhausbebauung 2 -3stöckig;176861;0
+SB2bc;Reihenhausbebauung > 3stöckig;176862;0
+SB3;Villen mit parkartigen Gärten;155507;0
+SB4;Dörfliche Siedlungsfläche;155508;0
+SB5;Landwirtschaftliche Hof- und Gebäudefläche;161462;0
+SB6;Wohnbaufläche im Dorf oder im ländlichen Bereich;161463;0
+SC;Siedlungsflächen, Gewerbegebiete;155492;0
+SC0;Gewerbe- und Industrie (Gebäude/Fläche);155509;0
+SC1;Fabrikanlage, Werksanlage;155510;0
+SC10;Gewerbefläche, Kleinbetrieb;161469;0
+SC11;Gewerbefläche, Grossbetrieb;161470;0
+SC12;Kaufmarkt;161471;0
+SC13;Frachtzentrum, Logistikzentrum;161472;0
+SC14;Gärtnerei, Gewächshaus;161473;0
+SC15;Tankstelle;161474;0
+SC16;Hochregallager;161475;0
+SC17;Industriefläche, Holzindustrie;161723;0
+SC18;Industriefläche, Nahrungs- und Genussmittelindustrie;161724;0
+SC19;Hotel, Gasthaus, Gaststätte;161725;0
+SC2;Gewerbe-, Lagergebäude;155511;0
+SC3;Ausstellungs-, Messegelände;155512;0
+SC4;Bergbaubetrieb;155513;0
+SC5;Industrie (Gebäude/Fläche);161464;0
+SC6;Industriefläche, metallbearbeitende Industrie;161465;0
+SC7;Industriefläche, chemische o. pharmazeutische Industrie;161466;0
+SC8;Industriefläche, kunststoffbearbeitende Industrie;161467;0
+SC9;Gewerbe (Gebäude/Fläche);161468;0
+SD;Öffentliche Gebäude;155493;0
+SD0;Siedlungsflächen, zivile o. militärische öffenliche Einrichtungen;155514;0
+SD1;Schule;155515;0
+SD10;Jugendherberge, Naturfreundehaus, Wanderheim;160368;0
+SD11;Seniorenheim, Pflegeheim, Behinderteneinrichtung;160369;0
+SD12;Verwaltungsgebäude, Gericht, Öffentliche Verwaltung;160370;0
+SD13;offenes Jugendtagesheim, Jugendtreff;160371;0
+SD14;Justizvollzugsanstalt, Gefängnis, Forensische Einrichtung;160372;0
+SD15;Theater, Oper, Konzerthalle;160373;0
+SD16;Museum, Ausstellungshalle;160374;0
+SD17;Stadtbücherei, grosse Bibliothek, großes Archiv;160375;0
+SD18;Messegelände;160376;0
+SD19;Kasernengelände;160377;0
+SD2;Kirche, Gebetshaus;155516;0
+SD20;Schiessplatz, Schiessanlage;160378;0
+SD21;Munitionsdepot;160379;0
+SD22;Radarstation, Raketenstation;160380;0
+SD23;Truppenübungsplatz;161726;0
+SD24;Stadthalle, Veranstaltungshalle;161727;0
+SD25;Wohlfahrtsverwaltung, Beratungsstelle;161728;0
+SD26;Bahnhofgebäude;161729;0
+SD27;Tierheim;161730;0
+SD28;Feuerwehr, Feuerwehrgelände;161731;0
+SD29;Polizei, Polizeigelände;161732;0
+SD3;Klinik, Krankenhaus;155517;0
+SD30;Post, Postgelände, Postfrachtbereich;161733;0
+SD31;TUEV-Gelände;161734;0
+SD32;Technisches Hilfswerk;161735;0
+SD33;Städtischer Bauhof, Gelände der Strassenbauverwaltung;161736;0
+SD34;Gemeindezentrum, Stadtteilzentrum, Begegnungsstätte;161780;0
+SD35;Wohnheim (Asylbewerber, Obdachlose, Andere);161781;0
+SD36;Sonstige öffentliche Einrichtung;161782;0
+SD37;Bürohaus;171021;0
+SD4;Schützenhalle, Bürgerhaus;155518;0
+SD5;Berufsschule, Kolleg, Volkshochschule;160363;0
+SD6;Bildungsstätte;160364;0
+SD7;Hochschule, Universität, Fachhochschule;160365;0
+SD8;Kindergarten, Kindertagesstätte;160366;0
+SD9;Kinderheim, Jugendwohnheim;160367;0
+SE;Ver- und Entsorgungsanlagen;155494;0
+SE0;sonstige Ver- und Entsorgungsanlage;155519;0
+SE1;Wasserwerk;155520;0
+SE10;Brunnen, Pumpstation;161092;0
+SE11;Rohrleitung, aufgeständert;161476;0
+SE12;Sendemast, Funkturm;161477;0
+SE13;Fernsehturm;161478;0
+SE14;Gasleitungstrasse;161479;0
+SE15;Wasserturm;161480;0
+SE16;Wasserhäuschen;161481;0
+SE17;Trafohäuschen;161482;0
+SE2;Kraftwerk, Heizwerk;155521;0
+SE2a;Blockheizkraftwerk;161483;0
+SE3;Umspannstation;155522;0
+SE4;Trafoturm;155523;0
+SE5;Windrad;155524;0
+SE6;Strommast, Metallgitter;155525;0
+SE6a;Strommasten, Beton;15819;0
+SE7;Strommast, Holz;155526;0
+SE8;Kläranlage;155527;0
+SE8a;Kleinkläranlage, Pflanzenkläranlage;14457;0
+SE9;Abfallbehandlungsanlage;155528;0
+SF;Sport- und Freizeitanlagen (wassergebunden);160296;0
+SF0;Sport- und Freizeitanlage (wassergebunden);160301;0
+SF1;Bade-/ Bootssteg;160302;0
+SF10;Tretbecken;160400;0
+SF2;Badestrand, Liegewiese am Wasser;160303;0
+SF3;Boots-/Schiffsanleger;160304;0
+SF4;Freibad;160305;0
+SF5;Modellbootanlage;160306;0
+SF6;Naturschwimmbad, Strandbad;160307;0
+SF7;Hallenbad;160308;0
+SF8;Wasserski-Anlage;160309;0
+SF9;Marina, Sportboothafen, Bootshaus;160381;0
+SG;Sport- und Freizeitanlagen (mit Tieren);160297;0
+SG0;Sport- und Freizeitanlage (mit Tieren);160310;0
+SG1;Hundedressurplatz;160311;0
+SG2;Hunderennbahn;160312;0
+SG3;Pferderennbahn;160313;0
+SG4;Reithalle;160314;0
+SG4a;Paddock, Reitplatz;2335;0
+SG5;Tierpark, Zoo, Tiergehege;160315;0
+SG6;Zoologischer Garten, Aquarium;160382;0
+SH;Sport- und Freizeitanlagen (mit Pflanzen);160298;0
+SH0;Sport- und Freizeitanlage (mit Pflanzen);160316;0
+SH1;Botanischer oder Schaugarten;160317;0
+SH2;Pflanzenschauhäuser;160383;0
+SJ;Sport- und Freizeitanlagen (Unterkunft);160299;0
+SJ0;Sport- und Freizeitanlage (Unterkunft);160318;0
+SJ1;Campingplatz;160319;0
+SJ2;Freizeit- und Ferienwohnungsanlage;160384;0
+SK;Sport- und Freizeitanlagen (Flugsport);160300;0
+SK0;Flugsport-Freizeitanlage;160320;0
+SK1;Ballonstartplatz;160321;0
+SK2;Drachenflugstartplatz;160322;0
+SK3;Modellflugplatz;160323;0
+SK4;Segelflugplatz;160324;0
+SK5;Winddrachenplatz;160385;0
+SL;Sport- und Freizeitanlagen (Ballsport);160325;0
+SL0;Ballsportplatz;160330;0
+SL1;Basketballplatz;160331;0
+SL2;Golfplatz;160332;0
+SL3;Minigolfplatz;160333;0
+SL4;Tennisplatz;160334;0
+SL5;Tennishalle, Squashhalle;160335;0
+SL6;Bolzplatz, Fussballfeld;160336;0
+SL6a;Bolzplatz;2336;0
+SL6b;Fussballplatz;2337;0
+SL7;(Beach-)Volleyballanlage;160337;0
+SL8;sonstiges Ballsportfeld, -halle;160401;0
+SM;Sport- und Freizeitanlagen (Lauf-, Kletter-, Radsport);160326;0
+SM0;Sport- und Freizeitanlage (Lauf-, Kletter-, Radsport);160338;0
+SM1;Laufbahn, Finnenbahn;160339;0
+SM2;Radbahn;160340;0
+SM3;Rollschuhbahn;160341;0
+SM4;Skater-Anlage;160342;0
+SM5;Mountainbike-Anlage, -strecke;160343;0
+SM6;Trimm-Dich-Anlage, -strecke;160344;0
+SM7;Kletterwand, Kletteranlage;160402;0
+SN;Sport- und Freizeitanlagen (Motorsport / Verkehrsübung);160327;0
+SN0;Sport- und Freizeitanlage (Motorsport / Verkehrsübung);160345;0
+SN1;Verkehrsübungsfläche;160346;0
+SN2;Motorsportbahn;160347;0
+SN3;Motocross-Anlage;160348;0
+SN4;Kart-Anlage;160403;0
+SO;Sport- und Freizeitanlagen (Wintersport);160328;0
+SO0;Sport- und Freizeitanlage (Wintersport);160349;0
+SO1;Sommer-, Winterrodelbahn;160350;0
+SO2;Skihang;160351;0
+SO3;Skihalle;160352;0
+SO4;Sprungschanze;160353;0
+SO5;Eissportanlage, -halle;160404;0
+SP;Sonstige Sport- und Freizeitanlagen;160329;0
+SP0;Sonstige Sport- und Freizeitanlage;160354;0
+SP1;Festwiese, Festplatz;160355;0
+SP10;Sportschiessanlage;161484;0
+SP11;Fitnesszentrum;161737;0
+SP12;Sauna, Wellnessanlage;161738;0
+SP2;Freilichtbühne;160356;0
+SP3;Spielplatz;160357;0
+SP4;Sportplatz, Sportplatzkomplex;160358;0
+SP5;Sportstadion;160359;0
+SP6;Turnhalle, Sporthalle;160360;0
+SP7;Veranstaltungshalle;160361;0
+SP8;Freizeitpark, Vergnügungspark;160362;0
+SP9;Grosskino, Autokino;160405;0
+V;Verkehrs- und Wirtschaftswege;155488;0
+VA;Verkehrsstrassen;155495;0
+VA0;Verkehrsstrassen;155529;0
+VA1;Autobahn;155530;0
+VA10;Busbahnhof, Busdepot;160501;0
+VA11;Brücke;19764;0
+VA12;Fussgängerbrücke;19765;0
+VA2;Bundes, Landes, Kreisstrasse;155531;0
+VA2a;Bundesstrasse;1935;0
+VA2b;Landesstrasse;2249;0
+VA2c;Kreisstrasse;2251;0
+VA3;Gemeindestrasse;155532;0
+VA4;Umgehungsstrasse;160495;0
+VA5;Haupt-, Durchgangsstrasse;160496;0
+VA6;Nebenstrasse;160497;0
+VA7;Wohn-, Erschliessungsstrasse;160498;0
+VA7a;Privat-Fahrweg;3128;0
+VA7b;Hof-, Schloss-, Gebäudezufahrt;14179;0
+VA8;Tempo-30-Strasse;160499;0
+VA9;Spielstrasse;160500;0
+VAC;Acker;163809;0
+VB;Wirtschaftswege;155496;0
+VB0;Wirtschaftsweg;155533;0
+VB0a;Werksstrasse;14178;0
+VB1;Feld-, Wirtschaftsweg, befestigt;136493;0
+VB2;Feld-, Wirtschaftsweg, unbefestigt;136492;0
+VB3;land-, forstwirtschaftlicher Weg;155534;0
+VB3a;Landwirtschaftsweg;3062;0
+VB3b;Waldwirtschaftsweg;3063;0
+VB4;Waldweg;155535;0
+VB5;Rad-, Fussweg;160502;0
+VB5a;Radweg;2252;0
+VB5b;Fussweg;2254;0
+VB6;Reitweg;160503;0
+VC;Flughäfen;160504;0
+VC0;Flughafen, Flugplatz;160505;0
+VC1;Grossflughafen;160506;0
+VC2;Regionalflughafen;160507;0
+VC3;Flugplatz;160508;0
+VC4;Hubschrauberlandeplatz;160525;0
+VC5;Militärflugplatz;161783;0
+VG;Grünland;139709;0
+VLW;Laubwald;139707;0
+VMW;Mischwald;15830;0
+VNW;Nadelwald;139708;0
+VW;Wald;139706;0
+W;Kleinstrukturen der freien Landschaft;155489;0
+WA;Kleinstrukturen;155497;0
+WA0;Kleinstrukturen;174832;0
+WA1;Felsnase, -rippe, Felsblock;155536;0
+WA10;Findling;3115;0
+WA11;Erdhaufen;14458;0
+WA2;Lesesteinwall, -haufen;155537;0
+WA3;Hochsitz;155538;0
+WA4;Wildfütterungsanlage;155539;0
+WA5;Futtermiete, Strohlager;155540;0
+WA5a;Futtermiete;161093;0
+WA5b;Strohlager;161094;0
+WA5c;Silagelager;161095;0
+WA6;Misthaufen;155541;0
+WA7;ausrangiertes Ackergerät;155542;0
+WA8;Bildstock, Wegkreuz;155543;0
+WA9;Sitzstände für Greife;155544;0
+WB;Scheunen, Schuppen, Abfälle;155498;0
+WB0;Scheune, Schuppen, Abfall;174833;0
+WB1;Feldscheune;155545;0
+WB10;Plakatwand;161102;0
+WB11;Schutz-, Grillhütte;174834;0
+WB12;Schuppen;1921;0
+WB2;Viehstall in Einzellage;155546;0
+WB3;Weideunterstand;155547;0
+WB4;Bienenhaus;161096;0
+WB5;Ferienhütte;161097;0
+WB6;Jagdhütte;161098;0
+WB7;Gartenabfälle;161099;0
+WB8;Bauschutt;161100;0
+WB9;Hausmüll;161101;0
+xA;Wälder;136592;0
+xAA;Buchenwälder;136593;0
+xAA0;Buchenwald;136594;0
+xAA1;Eichen-Buchenmischwald;136595;0
+xAA2;Buchenmischwald mit einheimischen Laubbaumarten;136596;0
+xAA3;Buchenmischwald mit gebietsfremden Laubbaumarten;136597;0
+xAA4;Nadelbaum-Buchenmischwald;136598;0
+xAA5;Orchideen-Buchenwald;136599;0
+xAA6;Zahnwurz-Buchenwald;136600;0
+xAA7;Buchenwald auf Schluchtwald- / Blockschuttstandort;136601;0
+xAB;Eichenwälder;136602;0
+xAB0;Eichenwald;136603;0
+xAB1;Buchen-Eichenmischwald;136604;0
+xAB2;Birken-Eichenmischwald;136605;0
+xAB3;Eichenmischwald mit einheimischden Laubbaumarten;136606;0
+xAB4;Eichenmischwald mit gebietsfremden Laubbaumarten;136607;0
+xAB5;Nadelbaum-Eichenmischwald;136608;0
+xAB6;Wärmeliebender Eichenwald;136609;0
+xAB7;Eichen-Auenwald;136610;0
+xAB8;Eichen-Schlucht- bzw. Hangschuttwald;136611;0
+xAB9;Hainbuchen-Eichenmischwald;136612;0
+xAC;Erlenwälder;136613;0
+xAC0;Erlenwald;136614;0
+xAC1;Erlenmischwald mit einheimischen Laubbaumarten;136615;0
+xAC2;Erlenmischwald mit gebietsfremden Laubbaumarten;136616;0
+xAC3;Nadelbaum-Erlenmischwald;136617;0
+xAC4;Erlen-Bruchwald;136618;0
+xAC5;Bachbegleitender Erlenwald;136619;0
+xAD;Birkenwälder;136620;0
+xAD0;Birkenwald;136621;0
+xAD1;Eichen-Birkenmischwald;136622;0
+xAD1a;Birkenmischwald mit einheimischen Laubbaumarten;3011;0
+xAD2;Birkenmischwald mit gebietsfremden Laubbaumarten;136623;0
+xAD3;Nadelbaum-Birkenmischwald;136624;0
+xAD4;Birken-Bruchwald;136625;0
+xAD5;Birken-Moorwald;136626;0
+xAD6;Karpaten-Birken-Blockschuttwald;174857;0
+xAE;Weidenwälder;136627;0
+xAE0;Weidenwald;136628;0
+xAE1;Weidenmischwald;136629;0
+xAE1a;Weidenmischwald mit einheimischen Laubbaumarten;3013;0
+xAE2;Weiden-Auenwald;136630;0
+xAE3;Weiden-Bruchwald;136631;0
+xAE4;Weidensumpfwald;8377;0
+xAF;Pappelwälder;136632;0
+xAF0;Pappelwald;136633;0
+xAF1;Pappelmischwald;136634;0
+xAF1a;Laubbaum-Pappelmischwald;3017;0
+xAF1b;Nadelbaum-Pappelmischwald;3018;0
+xAF2;Pappelwald auf Auenstandort;136635;0
+xAF3;Pappelwald auf Bruchwaldstandort;136636;0
+xAF4;Erlen-Pappelmischwald;155443;0
+xAG;Sonstige Laub(misch)wälder einheimischer Laubbaumarten;136637;0
+xAG0;Sonstiger Laubwald aus einer einheimischen Laubbaumart;136638;0
+xAG1;Sonstiger Laubmischwald einheimischer Arten (ein Art dominat);136639;0
+xAG2;Sonstiger Laubmischwald einheimischer Arten (ohne dominante Art);174644;0
+xAH;Sonstige Laub(misch)wälder gebietsfremder Laubbaumarten;136640;0
+xAH0;Sonstiger Laubwald aus einer gebietsfremden Laubbaumart;136641;0
+xAH1;Sonstiger Laubmischwald gebietsfremder Arten (eine Art dominant);136642;0
+xAH2;Sonstiger Laubmischwald gebietsfremder Arten (ohne dominante Art);174648;0
+xAJ;Fichtenwälder;136643;0
+xAJ0;Fichtenwald;136644;0
+xAJ1;Fichtenmischwald mit einheimischen Laubbaumarten;136645;0
+xAJ1a;Buchen-Fichtenmischwald;3019;0
+xAJ2;Fichtenmischwald mit gebietsfremden Laubbaumarten;136646;0
+xAJ3;Nadelbaum-Fichtenmischwald;136647;0
+xAJ4;Laub-, Nadelbaum-Fichtenmischwald;140107;0
+xAK;Kiefernwälder;136648;0
+xAK0;Kiefernwald;136649;0
+xAK1;Kiefernmischwald mit einheimischen Laubbaumarten;136650;0
+xAK1a;Eichen-Kiefernmischwald;3020;0
+xAK2;Kiefernmischwald mit gebietsfremden Laubbaumarten;136651;0
+xAK3;Nadelbaum-Kiefernmischwald;136652;0
+xAK4;Kiefern-Moorwald;136653;0
+xAK5;Laub-, Nadelbaum-Kiefernmischwald;140108;0
+xAL;Sonstige Wälder aus Nadelbaumarten;136654;0
+xAL0;Wald aus seltenen Nadelbaumarten;139359;0
+xAM;Eschenwälder;136655;0
+xAM0;Eschenwald;136656;0
+xAM1;Eschenmischwald;136657;0
+xAM1a;Eschenmischwald mit einheimischen Laubbaumarten;3021;0
+xAM1b;Eschenmischwald mit gebietsfremden Laubbaumarten;3022;0
+xAM1c;Nadelbaum-Eschenmischwald;2945;0
+xAM2;Bachbegleitender Eschenwald;136658;0
+xAM3;Eschenwald auf Auenstandort;136659;0
+xAM4;Eschen-Schlucht- bzw. Hangschuttwald;136660;0
+xAM5;Eschen-Sumpfwald;174859;0
+xAN;Robinienwälder;136661;0
+xAN0;Robinienwald;136662;0
+xAN1;Robinienmischwald;136663;0
+xAO;Roteichenwälder;136664;0
+xAO0;Roteichenwald;136665;0
+xAO1;Roteichenmischwald;136666;0
+xAP;Ulmenwälder;136667;0
+xAP0;Ulmenwald;136668;0
+xAP0a;Ulmenmischwald;3023;0
+xAP1;Ulmenmischwald auf Auenstandort;136669;0
+xAP2;Sommerlinden-Ulmen-Hangschuttwald;136670;0
+xAQ;Hainbuchenwälder;136671;0
+xAQ0;Hainbuchenwald;136672;0
+xAQ1;Eichen-Hainbuchenmischwald;136673;0
+xAQ1a;Hainbuchenmischwald;2941;0
+xAQ2;Winterlinden-Hainbuchen-Hangschuttwald;136674;0
+xAQ3;Eichen-Hainbuchenwald, trockene Standorte;174860;0
+xAR;Ahorn-/Lindenwälder;136675;0
+xAR0;Ahorn-/Lindenwald;136676;0
+xAR1;Ahornmischwald;136677;0
+xAR2;Ahorn-Schlucht- bzw. Hangschuttwald;136678;0
+xAR3;Lindenwald;3131;0
+xAR4;Lindenmischwald;3132;0
+xAR5;Felsenahornwald;8371;0
+xAR6;Spitzahorn-Sommerlinden-Blockschuttwald;174858;0
+xAR7;Ahornwald;167463;0
+xAS;Lärchenwälder;136679;0
+xAS0;Lärchenwald;136680;0
+xAS1;Lärchenmischwald;136681;0
+xAT;Schlagfluren, Kalamitätenflächen;136682;0
+xAT0;Schlagflur;136683;0
+xAT1;Kahlschlagfläche;136684;0
+xAT2;Windwurffläche;136685;0
+xAT4;Brandfläche;176815;0
+xAT5;Gehölzarme Waldfläche unbekannter Herkunft;176816;0
+xAT6;Totholzwald (Insekten-, Pilzbefall);2948;0
+xAU;Aufforstungen;136686;0
+xAU0;Aufforstung;136687;0
+xAU1;Wald, Jungwuchs;136688;0
+xAU2;Vorwald, Pionierwald;136689;0
+xAV;Waldränder;136690;0
+xAV0;Waldrand;139360;0
+xAV1;Waldmantel;155444;0
+xB;Kleingehölze;136691;0
+xBA;Feldgehölze;136692;0
+xBA0;Feldgehölz;136693;0
+xBA1;Feldgehölz aus einheimischen Baumarten;136694;0
+xBA2;Feldgehölz aus gebietsfremden Baumarten;136695;0
+xBB;Gebüsche;136696;0
+xBB0;Gebüsch, Strauchgruppe;136697;0
+xBB1;Gebüschstreifen, Strauchreihe;136698;0
+xBB10;Wärmeliebende Gebüsche;174861;0
+xBB3;stark verbuschte Grünlandbrache (Verbuschung > 50 %);706162;0
+xBB4;Weiden-Auengebüsch;174862;0
+xBB5;Bruchgebüsch;174863;0
+xBB6;Moorgebüsch;174864;0
+xBB7;Felsengebüsch;174865;0
+xBB8;Haselgebüsche auf Blockschutt;174866;0
+xBB9;Gebüsche mittlerer Standorte;174867;0
+xBD;Hecken;136699;0
+xBD0;Hecke;136700;0
+xBD1;Wallhecke;136701;0
+xBD2;Strauchhecke, ebenerdig;136702;0
+xBD3;Gehölzstreifen;136703;0
+xBD4;Böschungshecke;136704;0
+xBD5;Schnitthecke;144582;0
+xBE;Ufergehölze;136705;0
+xBE0;Ufergehölz;136706;0
+xBE1;Weiden-Ufergehölz;136707;0
+xBE2;Erlen-Ufergehölz;136708;0
+xBE4;Erlen-Eschen-Ufergehölz;167477;0
+xBF;Baumgruppen, Baumreihen;136709;0
+xBF0;Baumgruppe, Baumreihe;136710;0
+xBF1;Baumreihe;136711;0
+xBF2;Baumgruppe;136712;0
+xBF3;Einzelbaum;136713;0
+xBG;Kopfbaumgruppen, Kopfbaumreihen;136714;0
+xBG0;Kopfbaumgruppe, Kopfbaumreihe;136715;0
+xBG1;Kopfbaumreihe;136716;0
+xBG2;Kopfbaumgruppe;136717;0
+xBG3;Kopfbaum;136718;0
+xBH;Alleen;136719;0
+xBH0;Allee;139361;0
+xBJ;Siedlungsgehölze;136720;0
+xBJ0;Siedlungsgehölz;139362;0
+xBJ2;Hofgehölz;23785;0
+xBL;Tothölzer;136721;0
+xBL0;Totholz;136722;0
+xBL1;starkes Totholz, stehend;136723;0
+xBL2;starkes Totholz, liegend;136724;0
+xBL3;schwaches Totholz, stehend;136725;0
+xBL4;schwaches Totholz, liegend;136726;0
+xBM;Erstaufforstung;155445;0
+xBM0;Erstaufforstung landwirtschaftlicher Flächen;155446;0
+xBM1;Erstaufforstung landwirtschaftlicher Flächen mit Nadelbäumen;155447;0
+xBM2;Erstaufforstung landwirtschaftlicher Flächen mit Laubbäumen;155448;0
+xBM3;Erstaufforstung landwirtschaftlicher Flächen, Nadel- und Laubbäumen gemischt;155449;0
+xC;Moore, Sümpfe;136727;0
+xCA;Hochmoore, Übergangsmoore;136728;0
+xCA0;Hochmoor, Übergangsmoor;136729;0
+xCA1;Hochmoor-, Torfmoos- bzw. Binsenaspekt;136730;0
+xCA2;Hochmoor-Feuchtheideaspekt;136731;0
+xCA3;Übergangs-, Zwischenmoor, Quellmoor;136732;0
+xCA4;Hoch-, Zwischenmoordegenerationsstadium;136733;0
+xCA5;Moorregenerationsfläche ausserhalb von Torfstichen;155450;0
+xCB;Torfstiche;136734;0
+xCB0;Torfstich;136735;0
+xCB1;Torfstich mit Moorregenerationsfläche;136736;0
+xCC;Kleinseggenriede;136737;0
+xCC0;Kleinseggenried, Binsensumpf;136738;0
+xCC1;Bodensaures Kleinseggenried;136739;0
+xCC2;Kalk-Kleinseggenried;136740;0
+xCC3;Bodensaurer Binsensumpf;136741;0
+xCC4;Kalk-Binsensumpf;136742;0
+xCD;Großseggenriede;136743;0
+xCD0;Großseggenried;136744;0
+xCD1;Rasen-Großseggenried;136745;0
+xCD2;Bulten-Großseggenried;136746;0
+xCF;Röhrichtbestände;136747;0
+xCF0;Röhrichtbestand;136748;0
+xCF1;Röhrichtbestand niedrigwüchsiger Arten;136749;0
+xCF2;Röhrichtbestand hochwüchsiger Arten;136750;0
+xCF2a;Schilfröhricht;2340;0
+xCF2b;Rohrkolbenröhricht;2341;0
+xCF3;Schneidenröhricht;136751;0
+xCF4;Bachröhricht;138595;0
+xD;Heiden, Trockenrasen;136752;0
+xDA;Trockene Heiden;136753;0
+xDA0;Trockene Heide;136754;0
+xDA1;Calluna-Heide;136755;0
+xDA2;Degenerierte Calluna-Heide;136756;0
+xDA3;Besenginster-Heide;136757;0
+xDA4;Wacholder-Heide;136758;0
+xDA5;Bergheide-Beerenstrauchheide;136759;0
+xDA6;Lineare trockene Heideelemente, -säume;136760;0
+xDB;Feuchtheiden;136761;0
+xDB0;Feuchtheide;136762;0
+xDB1;Zwergstrauch-Feuchtheide;136763;0
+xDB2;Pfeifengras-Feuchtheide;136764;0
+xDC;Silikattrockenrasen;136765;0
+xDC0;Silikattrockenrasen;136766;0
+xDC1;Sukkulentenreicher Silikattrockenrasen;136767;0
+xDC2;Silbergrasflur;136768;0
+xDC3;Straussgrasrasen;136769;0
+xDC5;Vulkanit-Magerrasen;174868;0
+xDD;Kalkhalbtrockenrasen;136770;0
+xDD0;Kalkhalbtrockenrasen, Kalkmagerrasen;136771;0
+xDD1;Enzian-Schillergrasrasen;136772;0
+xDD2;Trespen-Halbtrockenrasen;136773;0
+xDD3;Wacholder-Kalkhalbtrockenrasen;136774;0
+xDD4;Kalktrockenrasen;706167;0
+xDD5;Sandsteppenrasen;706168;0
+xDD6;Subkont. Halbtrocken- und Steppenrasen;706169;0
+xDE;Schwermetallrasen;136775;0
+xDE0;Schwermetallrasen;139363;0
+xDF;Borstgrasrasen;136776;0
+xDF0;Borstgrasrasen;139364;0
+xE;Grünland;136777;0
+xEA;Fettwiesen;136778;0
+xEA0;Fettwiese;136779;0
+xEA1;Fettwiese, Flachlandausbildung (Glatthaferwiese);136780;0
+xEA2;Fettwiese, Mittelgebirgsausbildung (Goldhaferwiese);136781;0
+xEA3;Fettwiese, Neueinsaat;136782;0
+xEA4;Salbei-Glatthafer-Wiese;174869;0
+xEB;Fettweiden;136783;0
+xEB0;Fettweide;136784;0
+xEB0a;Fett-Mähweide;15308;0
+xEB1;Fettweide, Neueinsaat;136785;0
+xEB2;frische bis mässig trockene Mähweide;174778;0
+xEC;Nass- und Feuchtgrünländer;136786;0
+xEC0;Nass- und Feuchtgrünland;136787;0
+xEC1;Nass- und Feuchtwiese;136788;0
+xEC1a;Nasswiese;2424;0
+xEC1b;Feuchtwiese;2428;0
+xEC2;Nass- und Feuchtweide;136789;0
+xEC2a;Nassweide;2429;0
+xEC2b;Feuchtweide;2430;0
+xEC3;basenreiche Pfeifengraswiese;136790;0
+xEC4;basenarme  Pfeifengraswiese;136791;0
+xEC5;Flutrasen;136792;0
+xEC6;Nass- und Feuchtmähweide;174551;0
+xEC6a;nasse Mähweide;2448;0
+xEC6b;feuchte Mähweide;2449;0
+xED;Magergrünländer;136793;0
+xED0;Magergrünland;136794;0
+xED1;Magerwiese;136795;0
+xED1a;magere Feuchtwiese;2459;0
+xED2;Magerweide;136796;0
+xED2a;magere Feuchtweide;2469;0
+xED3;magere Mähweide;2477;0
+xED3a;magere Feucht-Mähweide;2472;0
+xED4;Submontane Magerwiese;174870;0
+xEE;Grünlandbrachen;136797;0
+xEE0;Grünlandbrache;136798;0
+xEE0a;brachgefallenes Fettgrünland;2486;0
+xEE1;Brachgefallene Fettwiese;136799;0
+xEE2;Brachgefallene Fettweide;136800;0
+xEE3;Brachgefallenes Nass- und Feuchtgrünland;136801;0
+xEE3a;brachgefallenes Nassgrünland;2491;0
+xEE3b;brachgefallenes Feuchtgrünland;2492;0
+xEE4;brachgefallenes Magergrünland;136802;0
+xEE4a;brachgefallenes feuchtes Magergrünland;2924;0
+xEF;Salzrasen;136803;0
+xEF0;Salzrasen;139365;0
+xF;Gewässer;136804;0
+xFA;Seen;136805;0
+xFA0;See;139366;0
+xFB;Weiher;136806;0
+xFB0;Weiher (stetig);139367;0
+xFC;Altarme, Altwasser;136807;0
+xFC0;Altarm, Altwasser;136808;0
+xFC1;Altarm (angebunden);136809;0
+xFC2;Altwasser (abgebunden);136810;0
+xFC3;Altarm (angebunden, nicht durchströmt);136811;0
+xFC4;Altarm (angebunden, durchströmt);136812;0
+xFC5;Auenkolk, Woye;155451;0
+xFD;stehende Kleingewässer;136813;0
+xFD0;stehendes Kleingewässer;136814;0
+xFD1;Tümpel (periodisch);136815;0
+xFD2;Blänke;136816;0
+xFD3;Lache, Wagenspur;136817;0
+xFD4;Bombentrichter;155452;0
+xFD5;Mardelle, Doline;174871;0
+xFE;Heideweiher, Moorblänke;136818;0
+xFE0;Heideweiher, Moorblänke;136819;0
+xFE1;Heideweiher;136820;0
+xFE2;Moorblänke, Moortümpel;136821;0
+xFF;Teiche;136822;0
+xFF0;Teich;136823;0
+xFF1;Parkteich, Zierteich, Gartenteich;136824;0
+xFF2;Fischteich;136825;0
+xFF3;Mühlenteich;155453;0
+xFF4;Löschteich;155454;0
+xFF5;Naturschutzteich;155455;0
+xFG;Abgrabungsgewässer;136826;0
+xFG0;Abgrabungsgewässer;139368;0
+xFG1;Abgrabungsgewässer (Lockergestein);176605;0
+xFG1a;Abgrabungsgerwässer (Kies, Sand);3120;0
+xFG1b;Abgrabungsgewässer (Ton);3070;0
+xFG2;Abgrabungsgewässer (Festgestein);176606;0
+xFG2a;Abgrabungsgewässer (Basalt);3071;0
+xFG2b;Abgrabungsgewässer (Braunkohle);3072;0
+xFG2c;Abgrabungsgewässer (Kalk);3073;0
+xFH;Staugewässer;136827;0
+xFH0;Staugewässer;136828;0
+xFH1;Stausee, Talsperre, Vorbecken;136829;0
+xFH2;Fluss-, Bachstau;136830;0
+xFH3;Quellstau;136831;0
+xFJ;Absetzbecken, Rieselfelder;136832;0
+xFJ0;Absetz- und Klärbecken, Rieselfeld;139369;0
+xFK;Quellen;136833;0
+xFK0;Quelle, Quellbereich;136834;0
+xFK1;Grundquelle, Tümpelquelle;136835;0
+xFK2;Sicker-, Sumpfquelle;136836;0
+xFK3;Sturzquelle;136837;0
+xFK4;Tuff-, Sinterquelle;174872;0
+xFL;Wasserfälle, Stromschnellen;136838;0
+xFL0;Wasserfall, Stromschnelle, Bachschwinde;136839;0
+xFL1;Wasserfall;136840;0
+xFL2;Stromschnelle;136841;0
+xFL3;Bachschwinde;136842;0
+xFM;Bäche;136843;0
+xFM0;Bach;136844;0
+xFM1;Bachoberlauf im Mittelgebirge;136845;0
+xFM2;Bachmittellauf im Mittelgebirge;136846;0
+xFM3;Bachunterlauf im Mittelgebirge;136847;0
+xFM4;Quellbach;136848;0
+xFM4a;Quellbach im Tiefland;3074;0
+xFM4b;Quellbach im Mittelgebirge;3075;0
+xFM5;Tieflandbach;136849;0
+xFM6;Mittelgebirgsbach;174873;0
+xFN;Gräben;136850;0
+xFN0;Graben;136851;0
+xFN1;Graben mit intakter Fliessgewässervegetation;136852;0
+xFN2;Graben mit intakter Stillgewässervegetation;136853;0
+xFN3;Graben mit extensiver Instandhaltung;136854;0
+xFN4;Graben mit intensiver Instandhaltung;136855;0
+xFN5;Graben überwiegend verbaut oder verrohrt;136856;0
+xFO;Flüsse;136857;0
+xFO0;Fluss;136858;0
+xFO1;Mittelgebirgsfluss;136859;0
+xFO2;Tieflandfluss;136860;0
+xFP;Kanäle;136861;0
+xFP0;Kanal;139370;0
+xFR;Bergsenkungsgewässer;136862;0
+xFR0;Bergsenkungsgewässer;139371;0
+xFS;Rückhaltebecken;136863;0
+xFS0;Rückhaltebecken;139372;0
+xG;Gesteinsbiotope;136864;0
+xGA;Fels, Felswände, -klippen;136865;0
+xGA0;Fels, Felswand, -klippe;136866;0
+xGA1;natürlicher Kalkfels;136867;0
+xGA2;natürlicher Silikatfels;136868;0
+xGA3;sekundärer Kalkfels;136869;0
+xGA4;sekundärer Silikatfels;136870;0
+xGB;Blockschutt- / Feinschutthalden;136871;0
+xGB0;Blockschutt- / Feinschutthalde;136872;0
+xGB1;natürliche Kalk-Blockschutt- / Feinschutthalde;136873;0
+xGB2;natürliche Silikat-Blockschutt- / Feinschutthalde;136874;0
+xGB3;sekundäre Kalk-Blockschutt- / Feinschutthalde;136875;0
+xGB4;sekundäre Silikat-Blockschutt- / Feinschutthalde;136876;0
+xGC;Steinbrüche;136877;0
+xGC0;Steinbruch;136878;0
+xGC1;Kalksteinbruch;136879;0
+xGC2;Silikatsteinbruch;136880;0
+xGC3;Basaltsteinbruch;136881;0
+xGD;Lockergesteinsabgrabungen;136882;0
+xGD0;Lockergesteinsabgrabung;136883;0
+xGD1;Sand-, Kiesabgrabung;136884;0
+xGD2;Lehm-, Tonabgrabung;136885;0
+xGE;Höhlen und Stollen;136886;0
+xGE0;Höhlen und Stollen;137914;0
+xGE1;Höhle;137915;0
+xGE2;Stollen;137916;0
+xGF;Vegetationsarme oder -freie Bereiche;136887;0
+xGF0;Vegetationsarme oder -freie Bereiche;136888;0
+xGF1;Vegetationsarme Kies- und Schotterflächen;136889;0
+xGF2;Vegetationsarme Sandflächen;136890;0
+xGF3;Vegetationsarme Löss- und Lehmflächen;136891;0
+xGF4;Vegetationsarme Sand- und Kiesbänke;136892;0
+xGG;Sand-, Lösswände;136893;0
+xGG0;Sand-, Lösswand;136894;0
+xGG1;Sandwand;136895;0
+xGG2;Löss-, Lehmwand;136896;0
+xH;Weitere anthropogen bedingte Biotope;136897;0
+xHA;Äcker;136898;0
+xHA0;Acker;136899;0
+xHC;Rain, Strassenränder;136908;0
+xHC3;Strassenrand;136912;0
+xHK;Obstanlagen;136952;0
+xHK0;Obstanlage;136953;0
+xHK2;Streuobstwiese;7881;0
+xHK3;Streuobstweide;136956;0
+xK;Säume bzw. linienf. Hochstaudenfluren;137015;0
+xKA;Feuchte (nasse)  Säume bzw. linienf. Hochstaudenfluren;137016;0
+xKA0;Feuchter (nasser) Saum bzw. linienf. Hochstaudenflur;137017;0
+xKA1;Feuchter (nasser) Ruderalsaum bzw. linienf. Hochstaudenflur;137018;0
+xKA2;Gewässerbegleitender feuchter Saum bzw. linienf. Hochstaudenflur;137019;0
+xKA3;Feuchter Waldinnensaum bzw. linienf. Hochstaudenflur;137020;0
+xKA4;Feuchter Waldaussensaum bzw. linienf. Hochstaudenflur;137021;0
+xKB;Trockener Saum bzw. linienf. Hochstaudenflur;137022;0
+xKB0;Trockener (frischer) Saum bzw. linienf. Hochstaudenflur;137023;0
+xKB1;Trockener (frischer) Ruderalsaum bzw. linienf. Hochstaudenflur;137024;0
+xKB2;Gewässerbegleitender trockener Saum bzw. Hochstaudenflur, linienförmig;137025;0
+xKB3;Trockener Waldinnensaum bzw. Hochstaudenflur, linienförmig;137026;0
+xKB4;Trockener Waldaussensaum bzw. Hochstaudenflur, linienförmig;137027;0
+xL;Annuellenflur bzw. flächenh. Hochstaudenflur;137028;0
+xLA;Annuellenfluren;137029;0
+xLA0;Feuchte Annuellenflur;139375;0
+xLA1;Trockene Anuellenflur;139378;0
+xLB;flächenhafte Hochstaudenfluren;155548;0
+xLB0;Hochstaudenflur, flächenhaft;155549;0
+xLB1;Feuchte Hochstaudenflur, flächenhaft;155550;0
+xLB2;Trockene Hochstaudenflur, flächenhaft;155551;0
+xLB3;Neophytenflur;144583;0
+yA;Wälder;137032;0
+yAA;Buchenwälder;137033;0
+yAA0;Buchenwald;137034;0
+yAA1;Eichen-Buchenmischwald;137035;0
+yAA2;Buchenmischwald mit einheimischen Laubbaumarten;137036;0
+yAA3;Buchenmischwald mit gebietsfremden Laubbaumarten;137037;0
+yAA4;Nadelbaum-Buchenmischwald;137038;0
+yAA5;Orchideen-Buchenwald;137039;0
+yAA6;Zahnwurz-Buchenwald;137040;0
+yAA7;Buchenwald auf Schluchtwald- / Blockschuttstandort;137041;0
+yAB;Eichenwälder;137042;0
+yAB0;Eichenwald;137043;0
+yAB1;Buchen-Eichenmischwald;137044;0
+yAB10;Blockkrüppel-Eichenwald;174875;0
+yAB2;Birken-Eichenmischwald;137045;0
+yAB3;Eichenmischwald mit einheimischden Laubbaumarten;137046;0
+yAB4;Eichenmischwald mit gebietsfremden Laubbaumarten;137047;0
+yAB5;Nadelbaum-Eichenmischwald;137048;0
+yAB6;Wärmeliebender Eichenwald;137049;0
+yAB7;Eichen-Auenwald;137050;0
+yAB8;Eichen-Schlucht- bzw. Hangschuttwald;137051;0
+yAB9;Hainbuchen-Eichenmischwald;137052;0
+yAC;Erlenwälder;137053;0
+yAC0;Erlenwald;137054;0
+yAC1;Erlenmischwald mit einheimischen Laubbaumarten;137055;0
+yAC2;Erlenmischwald mit gebietsfremden Laubbaumarten;137056;0
+yAC3;Nadelbaum-Erlenmischwald;137057;0
+yAC4;Erlen-Bruchwald;137058;0
+yAC5;Bachbegleitender Erlenwald;137059;0
+yAC6;Erlen-Sumpfwald;174876;0
+yAD;Birkenwälder;137060;0
+yAD0;Birkenwald;137061;0
+yAD1;Eichen-Birkenmischwald;137062;0
+yAD1a;Birkenmischwald mit einheimischen Laubbaumarten;3024;0
+yAD2;Birkenmischwald mit gebietsfremden Laubbaumarten;137063;0
+yAD3;Nadelbaum-Birkenmischwald;137064;0
+yAD4;Birken-Bruchwald;137065;0
+yAD5;Birken-Moorwald;137066;0
+yAD6;Karpaten-Birken-Blockschuttwald;174878;0
+yAE;Weidenwälder;137067;0
+yAE0;Weidenwald;137068;0
+yAE1;Weidenmischwald;137069;0
+yAE1a;Weidenmischwald mit einheimischen Laubbaumarten;3025;0
+yAE2;Weiden-Auenwald;137070;0
+yAE3;Weiden-Bruchwald;137071;0
+yAE4;Weidensumpfwald;8378;0
+yAF;Pappelwälder;137072;0
+yAF0;Pappelwald;137073;0
+yAF1;Pappelmischwald;137074;0
+yAF1a;Laubbaum-Pappelmischwald;3026;0
+yAF1b;Nadelbaum-Pappelmischwald;3027;0
+yAF2;Pappelwald auf Auenstandort;137075;0
+yAF3;Pappelwald auf Bruchwaldstandort;137076;0
+yAF4;Erlen-Pappelmischwald;155456;0
+yAG;Sonstige Laub(misch)wälder einheimischer Laubbaumarten;137077;0
+yAG0;Sonstiger Laubwald aus einer einheimischen Laubbaumart;137078;0
+yAG1;Sonstiger Laubmischwald einheimischer Arten (ein Art dominat);137079;0
+yAG2;Sonstiger Laubmischwald einheimischer Arten (ohne dominante Art);174645;0
+yAH;Sonstige Laub(misch)wälder gebietsfremder Laubbaumarten;137080;0
+yAH0;Sonstiger Laubwald aus einer gebietsfremden Laubbaumart;137081;0
+yAH1;Sonstiger Laubmischwald gebietsfremder Arten (eine Art dominant);137082;0
+yAH2;Sonstiger Laubmischwald gebietsfremder Arten (ohne dominante Art);174649;0
+yAJ;Fichtenwälder;137083;0
+yAJ0;Fichtenwald;137084;0
+yAJ1;Fichtenmischwald mit einheimischen Laubbaumarten;137085;0
+yAJ1a;Buchen-Fichtenmischwald;3028;0
+yAJ2;Fichtenmischwald mit gebietsfremden Laubbaumarten;137086;0
+yAJ3;Nadelbaum-Fichtenmischwald;137087;0
+yAJ4;Laub-, Nadelbaum-Fichtenmischwald;140109;0
+yAK;Kiefernwälder;137088;0
+yAK0;Kiefernwald;137089;0
+yAK1;Kiefernmischwald mit einheimischen Laubbaumarten;137090;0
+yAK1a;Eichen-Kiefernmischwald;3029;0
+yAK2;Kiefernmischwald mit gebietsfremden Laubbaumarten;137091;0
+yAK3;Nadelbaum-Kiefernmischwald;137092;0
+yAK4;Kiefern-Moorwald;137093;0
+yAK5;Laub-, Nadelbaum-Kiefernmischwald;140110;0
+yAL;Sonstige Wälder aus Nadelbaumarten;137094;0
+yAL0;Wald aus seltenen Nadelbaumarten;139379;0
+yAM;Eschenwälder;137095;0
+yAM0;Eschenwald;137096;0
+yAM1;Eschenmischwald;137097;0
+yAM1a;Eschenmischwald mit einheimischen Laubbaumarten;3030;0
+yAM1b;Eschenmischwald mit gebietsfremden Laubbaumarten;3031;0
+yAM1c;Nadelbaum-Eschenmischwald;2946;0
+yAM2;Bachbegleitender Eschenwald;137098;0
+yAM3;Eschenwald auf Auenstandort;137099;0
+yAM4;Eschen-Schlucht- bzw. Hangschuttwald;137100;0
+yAM5;Eschen-Sumpfwald;174880;0
+yAN;Robinienwälder;137101;0
+yAN0;Robinienwald;137102;0
+yAN1;Robinienmischwald;137103;0
+yAO;Roteichenwälder;137104;0
+yAO0;Roteichenwald;137105;0
+yAO1;Roteichenmischwald;137106;0
+yAP;Ulmenwälder;137107;0
+yAP0;Ulmenwald;137108;0
+yAP0a;Ulmenmischwald;3032;0
+yAP1;Ulmenmischwald auf Auenstandort;137109;0
+yAP2;Sommerlinden-Ulmen-Hangschuttwald;137110;0
+yAQ;Hainbuchenwälder;137111;0
+yAQ0;Hainbuchenwald;137112;0
+yAQ1;Eichen-Hainbuchenmischwald;137113;0
+yAQ1a;Hainbuchenmischwald;2942;0
+yAQ2;Winterlinden-Hainbuchen-Hangschuttwald;137114;0
+yAQ3;Eichen- Hainbuchenwald, trockene Standorte;174881;0
+yAR;Ahorn-/Lindenwälder;137115;0
+yAR0;Ahorn-/Lindenwald;137116;0
+yAR1;Ahornmischwald;137117;0
+yAR2;Ahorn-Schlucht- bzw. Hangschuttwald;137118;0
+yAR3;Lindenwald;3133;0
+yAR4;Lindenmischwald;3135;0
+yAR5;Felsenahornwald;8372;0
+yAR6;Spitzahorn-Sommerlinden-Blockschuttwald;174879;0
+yAR7;Ahornwald;167465;0
+yAS;Lärchenwälder;137119;0
+yAS0;Lärchenwald;137120;0
+yAS1;Lärchenmischwald;137121;0
+yAT;Schlagfluren, Kalamitätenflächen;137122;0
+yAT0;Schlagflur;137123;0
+yAT1;Kahlschlagfläche;137124;0
+yAT2;Windwurffläche;137125;0
+yAT4;Brandfläche;176817;0
+yAT5;Gehölzarme Waldfläche unbekannter Herkunft;176818;0
+yAT6;Totholzwald (Insekten-, Pilzbefall);2949;0
+yAU;Aufforstungen;137126;0
+yAU0;Aufforstung;137127;0
+yAU1;Wald, Jungwuchs;137128;0
+yAU2;Vorwald, Pionierwald;137129;0
+yAV;Waldränder;137130;0
+yAV0;Waldrand;139380;0
+yAV1;Waldmantel;155457;0
+yB;Kleingehölze;137131;0
+yBA;Feldgehölze;137132;0
+yBA0;Feldgehölz;137133;0
+yBA1;Feldgehölz aus einheimischen Baumarten;137134;0
+yBA2;Feldgehölz aus gebietsfremden Baumarten;137135;0
+yBB;Gebüsche;137136;0
+yBB0;Gebüsch, Strauchgruppe;137137;0
+yBB1;Gebüschstreifen, Strauchreihe;137138;0
+yBB10;Wärmeliebende Gebüsche;174882;0
+yBB4;Weiden-Auengebüsch;174883;0
+yBB5;Bruchgebüsch;174884;0
+yBB6;Moorgebüsch;174885;0
+yBB7;Felsengebüsch;174886;0
+yBB8;Haselgebüsche auf Blockschutt;174887;0
+yBB9;Gebüsche mittlerer Standorte;174888;0
+yBD;Hecken;137139;0
+yBD0;Hecke;137140;0
+yBD1;Wallhecke;137141;0
+yBD2;Strauchhecke, ebenerdig;137142;0
+yBD3;Gehölzstreifen;137143;0
+yBD4;Böschungshecke;137144;0
+yBD5;Schnitthecke;144584;0
+yBD6;Baumhecke, ebenerdig;174889;0
+yBE;Ufergehölze;137145;0
+yBE0;Ufergehölz;137146;0
+yBE1;Weiden-Ufergehölz;137147;0
+yBE2;Erlen-Ufergehölz;137148;0
+yBE4;Erlen-Eschen-Ufergehölz;176600;0
+yBF;Baumgruppen, Baumreihen;137149;0
+yBF0;Baumgruppe, Baumreihe;137150;0
+yBF1;Baumreihe;137151;0
+yBF2;Baumgruppe;137152;0
+yBF3;Einzelbaum;137153;0
+yBG;Kopfbaumgruppen, Kopfbaumreihen;137154;0
+yBG0;Kopfbaumgruppe, Kopfbaumreihe;137155;0
+yBG1;Kopfbaumreihe;137156;0
+yBG2;Kopfbaumgruppe;137157;0
+yBG3;Kopfbaum;137158;0
+yBH;Alleen;137159;0
+yBH0;Allee;139381;0
+yBJ;Siedlungsgehölze;137160;0
+yBJ0;Siedlungsgehölz;139382;0
+yBJ2;Hofgehölz;23786;0
+yBL;Tothölzer;137161;0
+yBL0;Totholz;137162;0
+yBL1;starkes Totholz, stehend;137163;0
+yBL2;starkes Totholz, liegend;137164;0
+yBL3;schwaches Totholz, stehend;137165;0
+yBL4;schwaches Totholz, liegend;137166;0
+yBM;Erstaufforstung;155458;0
+yBM0;Erstaufforstung landwirtschaftlicher Flächen;155459;0
+yBM1;Erstaufforstung landwirtschaftlicher Flächen mit Nadelbäumen;155460;0
+yBM2;Erstaufforstung landwirtschaftlicher Flächen mit Laubbäumen;155461;0
+yBM3;Erstaufforstung landwirtschaftlicher Flächen, Nadel- und Laubbäumen gemischt;155462;0
+yC;Moore, Sümpfe;137167;0
+yCA;Hochmoore, Übergangsmoore;137168;0
+yCA0;Hochmoor, Übergangsmoor;137169;0
+yCA1;Hochmoor-, Torfmoos- bzw. Binsenaspekt;137170;0
+yCA2;Hochmoor-Feuchtheideaspekt;137171;0
+yCA3;Übergangs-, Zwischenmoor, Quellmoor;137172;0
+yCA4;Hoch-, Zwischenmoordegenerationsstadium;137173;0
+yCA5;Moorregenerationsfläche ausserhalb von Torfstichen;155463;0
+yCB;Torfstiche;137174;0
+yCB0;Torfstich;137175;0
+yCB1;Torfstich mit Moorregenerationsfläche;137176;0
+yCC;Kleinseggenriede;137177;0
+yCC0;Kleinseggenried, Binsensumpf;137178;0
+yCC1;Bodensaures Kleinseggenried;137179;0
+yCC2;Kalk-Kleinseggenried;137180;0
+yCC3;Bodensaurer Binsensumpf;137181;0
+yCC4;Kalk-Binsensumpf;137182;0
+yCD;Großseggenriede;137183;0
+yCD0;Großseggenried;137184;0
+yCD1;Rasen-Großseggenried;137185;0
+yCD2;Bulten-Großseggenried;137186;0
+yCF;Röhrichtbestände;137187;0
+yCF0;Röhrichtbestand;137188;0
+yCF1;Röhrichtbestand niedrigwüchsiger Arten;137189;0
+yCF2;Röhrichtbestand hochwüchsiger Arten;137190;0
+yCF2a;Schilfröhricht;2342;0
+yCF2b;Rohrkolbenröhricht;2343;0
+yCF3;Schneidenröhricht;137191;0
+yCF4;Bachröhricht;138596;0
+yD;Heiden, Trockenrasen;137192;0
+yDA;Trockene Heiden;137193;0
+yDA0;Trockene Heide;137194;0
+yDA1;Calluna-Heide;137195;0
+yDA2;Degenerierte Calluna-Heide;137196;0
+yDA3;Besenginster-Heide;137197;0
+yDA4;Wacholder-Heide;137198;0
+yDA5;Bergheide-Beerenstrauchheide;137199;0
+yDA6;Lineare trockene Heideelemente, -säume;137200;0
+yDB;Feuchtheiden;137201;0
+yDB0;Feuchtheide;137202;0
+yDB1;Zwergstrauch-Feuchtheide;137203;0
+yDB2;Pfeifengras-Feuchtheide;137204;0
+yDC;Silikattrockenrasen;137205;0
+yDC0;Silikattrockenrasen;137206;0
+yDC1;Sukkulentenreicher Silikattrockenrasen;137207;0
+yDC2;Silbergrasflur;137208;0
+yDC3;Straussgrasrasen;137209;0
+yDC5;Vulkanit-Magerrasen;174890;0
+yDD;Kalkhalbtrockenrasen;137210;0
+yDD0;Kalkhalbtrockenrasen, Kalkmagerrasen;137211;0
+yDD1;Enzian-Schillergrasrasen;137212;0
+yDD2;Trespen-Halbtrockenrasen;137213;0
+yDD3;Wacholder-Kalkhalbtrockenrasen;137214;0
+yDE;Schwermetallrasen;137215;0
+yDE0;Schwermetallrasen;139383;0
+yDF;Borstgrasrasen;137216;0
+yDF0;Borstgrasrasen;139384;0
+yE;Grünland;137217;0
+yEA;Fettwiesen;137218;0
+yEA0;Fettwiese;137219;0
+yEA1;Fettwiese, Flachlandausbildung (Glatthaferwiese);137220;0
+yEA2;Fettwiese, Mittelgebirgsausbildung (Goldhaferwiese);137221;0
+yEA3;Fettwiese, Neueinsaat;137222;0
+yEB;Fettweiden;137223;0
+yEB0;Fettweide;137224;0
+yEB1;Fettweide, Neueinsaat;137225;0
+yEC;Nass- und Feuchtgrünländer;137226;0
+yEC0;Nass- und Feuchtgrünland;137227;0
+yEC1;Nass- und Feuchtwiese;137228;0
+yEC1a;Nasswiese;2503;0
+yEC1b;Feuchtwiese;2534;0
+yEC2;Nass- und Feuchtweide;137229;0
+yEC2a;Nassweide;2535;0
+yEC2b;Feuchtweide;2539;0
+yEC3;basenreiche Pfeifengraswiese;137230;0
+yEC4;basenarme  Pfeifengraswiese;137231;0
+yEC5;Flutrasen;137232;0
+yEC6;Nass- und Feuchtmähweide;174553;0
+yEC6a;nasse Mähweide;2556;0
+yEC6b;feuchte Mähweide;2585;0
+yED;Magergrünländer;137233;0
+yED0;Magergrünland;137234;0
+yED1;Magerwiese;137235;0
+yED1a;magere Feuchtwiese;2594;0
+yED2;Magerweide;137236;0
+yED2a;magere Feuchtweide;2595;0
+yED3;magere Mähweide;2588;0
+yED3a;magere Feucht-Mähweide;2605;0
+yEE;Grünlandbrachen;137237;0
+yEE0;Grünlandbrache;137238;0
+yEE0a;brachgefallenes Fettgrünland;2616;0
+yEE1;Brachgefallene Fettwiese;137239;0
+yEE2;Brachgefallene Fettweide;137240;0
+yEE3;Brachgefallenes Nass- und Feuchtgrünland;137241;0
+yEE3a;brachgefallenes Nassgrünland;2623;0
+yEE3b;brachgefallenes Feuchtgrünland;2627;0
+yEE4;brachgefallenes Magergrünland;137242;0
+yEE4a;brachgefallenes feuchtes Magergrünland;2925;0
+yEF;Salzrasen;137243;0
+yEF0;Salzrasen;139385;0
+yF;Gewässer;137244;0
+yFA;Seen;137245;0
+yFA0;See;139386;0
+yFB;Weiher;137246;0
+yFB0;Weiher (stetig);139387;0
+yFC;Altarme, Altwasser;137247;0
+yFC0;Altarm, Altwasser;137248;0
+yFC1;Altarm (angebunden);137249;0
+yFC2;Altwasser (abgebunden);137250;0
+yFC3;Altarm (angebunden, nicht durchströmt);137251;0
+yFC4;Altarm (angebunden, durchströmt);137252;0
+yFC5;Auenkolk, Woye;155464;0
+yFD;stehende Kleingewässer;137253;0
+yFD0;stehendes Kleingewässer;137254;0
+yFD1;Tümpel (periodisch);137255;0
+yFD2;Blänke;137256;0
+yFD3;Lache, Wagenspur;137257;0
+yFD4;Bombentrichter;155465;0
+yFD5;Mardelle, Doline;174891;0
+yFE;Heideweiher, Moorblänke;137258;0
+yFE0;Heideweiher, Moorblänke;137259;0
+yFE1;Heideweiher;137260;0
+yFE2;Moorblänke, Moortümpel;137261;0
+yFF;Teiche;137262;0
+yFF0;Teich;137263;0
+yFF1;Parkteich, Zierteich, Gartenteich;137264;0
+yFF2;Fischteich;137265;0
+yFF3;Mühlenteich;155466;0
+yFF4;Löschteich;155467;0
+yFF5;Naturschutzteich;155468;0
+yFG;Abgrabungsgewässer;137266;0
+yFG0;Abgrabungsgewässer;139388;0
+yFG1;Abgrabungsgewässer (Lockergestein);176601;0
+yFG1a;Abgrabungsgerwässer (Kies, Sand);3121;0
+yFG1b;Abgrabungsgewässer (Ton);3076;0
+yFG2;Abgrabungsgewässer (Festgestein);176602;0
+yFG2a;Abgrabungsgewässer (Basalt);3077;0
+yFG2b;Abgrabungsgewässer (Braunkohle);3078;0
+yFG2c;Abgrabungsgewässer (Kalk);3079;0
+yFH;Staugewässer;137267;0
+yFH0;Staugewässer;137268;0
+yFH1;Stausee, Talsperre, Vorbecken;137269;0
+yFH2;Fluss-, Bachstau;137270;0
+yFH3;Quellstau;137271;0
+yFJ;Absetzbecken, Rieselfelder;137272;0
+yFJ0;Absetz- und Klärbecken, Rieselfeld;139389;0
+yFK;Quellen;137273;0
+yFK0;Quelle, Quellbereich;137274;0
+yFK1;Grundquelle, Tümpelquelle;137275;0
+yFK2;Sicker-, Sumpfquelle;137276;0
+yFK3;Sturzquelle;137277;0
+yFK4;Tuff-, Sinterquelle;174892;0
+yFL;Wasserfälle, Stromschnellen;137278;0
+yFL0;Wasserfall, Stromschnelle, Bachschwinde;137279;0
+yFL1;Wasserfall;137280;0
+yFL2;Stromschnelle;137281;0
+yFL3;Bachschwinde;137282;0
+yFM;Bäche;137283;0
+yFM0;Bach;137284;0
+yFM1;Bachoberlauf im Mittelgebirge;137285;0
+yFM2;Bachmittellauf im Mittelgebirge;137286;0
+yFM3;Bachunterlauf im Mittelgebirge;137287;0
+yFM4;Quellbach;137288;0
+yFM4a;Quellbach im Tiefland;3080;0
+yFM4b;Quellbach im Mittelgebirge;3081;0
+yFM5;Tieflandbach;137289;0
+yFM6;Mittelgebirgsbach;174893;0
+yFN;Gräben;137290;0
+yFN0;Graben;137291;0
+yFN1;Graben mit intakter Fliessgewässervegetation;137292;0
+yFN2;Graben mit intakter Stillgewässervegetation;137293;0
+yFN3;Graben mit extensiver Instandhaltung;137294;0
+yFN4;Graben mit intensiver Instandhaltung;137295;0
+yFN5;Graben überwiegend verbaut oder verrohrt;137296;0
+yFO;Flüsse;137297;0
+yFO0;Fluss;137298;0
+yFO1;Mittelgebirgsfluss;137299;0
+yFO2;Tieflandfluss;137300;0
+yFP;Kanäle;137301;0
+yFP0;Kanal;139390;0
+yFR;Bergsenkungsgewässer;137302;0
+yFR0;Bergsenkungsgewässer;139391;0
+yFS;Rückhaltebecken;137303;0
+yFS0;Rückhaltebecken;139392;0
+yG;Gesteinsbiotope;137304;0
+yGA;Fels, Felswände, -klippen;137305;0
+yGA0;Fels, Felswand, -klippe;137306;0
+yGA1;natürlicher Kalkfels;137307;0
+yGA2;natürlicher Silikatfels;137308;0
+yGA3;sekundärer Kalkfels;137309;0
+yGA4;sekundärer Silikatfels;137310;0
+yGB;Blockschutt- / Feinschutthalden;137311;0
+yGB0;Blockschutt- / Feinschutthalde;137312;0
+yGB1;natürliche Kalk-Blockschutt- / Feinschutthalde;137313;0
+yGB2;natürliche Silikat-Blockschutt- / Feinschutthalde;137314;0
+yGB3;sekundäre Kalk-Blockschutt- / Feinschutthalde;137315;0
+yGB4;sekundäre Silikat-Blockschutt- / Feinschutthalde;137316;0
+yGC;Steinbrüche;137317;0
+yGC0;Steinbruch;137318;0
+yGC1;Kalksteinbruch;137319;0
+yGC2;Silikatsteinbruch;137320;0
+yGC3;Basaltsteinbruch;137321;0
+yGC4;Steinbruch, sonstiger magmatischer Gesteine;174894;0
+yGD;Lockergesteinsabgrabungen;137322;0
+yGD0;Lockergesteinsabgrabung;137323;0
+yGD1;Sand-, Kiesabgrabung;137324;0
+yGD2;Lehm-, Tonabgrabung;137325;0
+yGE;Höhlen und Stollen;137326;0
+yGE0;Höhlen und Stollen;137917;0
+yGE1;Höhle;137918;0
+yGE2;Stollen;137919;0
+yGF;Vegetationsarme oder -freie Bereiche;137327;0
+yGF0;Vegetationsarme oder -freie Bereiche;137328;0
+yGF1;Vegetationsarme Kies- und Schotterflächen;137329;0
+yGF2;Vegetationsarme Sandflächen;137330;0
+yGF3;Vegetationsarme Löss- und Lehmflächen;137331;0
+yGF4;Vegetationsarme Sand- und Kiesbänke;137332;0
+yGG;Sand-, Lösswände;137333;0
+yGG0;Sand-, Lösswand;137334;0
+yGG1;Sandwand;137335;0
+yGG2;Löss-, Lehmwand;137336;0
+yH;Weitere anthropogen bedingte Biotope;137337;0
+yHA;Äcker;137338;0
+yHA0;Acker;137339;0
+yHC;Rain, Strassenränder;137348;0
+yHC3;Strassenrand;137352;0
+yHE;Deiche;176547;0
+yHE4;Deich mit Extensivgrünland;176597;0
+yHE5;Deich mit Halbtrockenrasen;176598;0
+yHG;Hohlwege;174630;0
+yHG0;Hohlweg;174631;0
+yHG1;Lösshohlweg;174632;0
+yHK;Obstanlagen;137392;0
+yHK0;Obstanlage;137393;0
+yHK2;Streuobstwiese;174634;0
+yHK3;Streuobstweide;137396;0
+yK;Säume bzw. linienf. Hochstaudenfluren;137455;0
+yKA;Feuchte (nasse)  Säume bzw. linienf. Hochstaudenfluren;137456;0
+yKA0;Feuchter (nasser) Saum bzw. linienf. Hochstaudenflur;137457;0
+yKA1;Feuchter (nasser) Ruderalsaum bzw. linienf. Hochstaudenflur;137458;0
+yKA2;Gewässerbegleitender feuchter Saum bzw. linienf. Hochstaudenflur;137459;0
+yKA3;Feuchter Waldinnensaum bzw. linienf. Hochstaudenflur;137460;0
+yKA4;Feuchter Waldaussensaum bzw. linienf. Hochstaudenflur;137461;0
+yKB;Trockener Saum bzw. linienf. Hochstaudenflur;137462;0
+yKB0;Trockener (frischer) Saum bzw. linienf. Hochstaudenflur;137463;0
+yKB1;Trockener (frischer) Ruderalsaum bzw. linienf. Hochstaudenflur;137464;0
+yKB2;Gewässerbegleitender trockener Saum bzw. Hochstaudenflur, linienförmig;137465;0
+yKB3;Trockener Waldinnensaum bzw. Hochstaudenflur, linienförmig;137466;0
+yKB4;Trockener Waldaussensaum bzw. Hochstaudenflur, linienförmig;137467;0
+yL;Annuellenflur bzw. flächenh. Hochstaudenflur;137468;0
+yLA;Annuellenfluren;137469;0
+yLA0;Feuchte Annuellenflur;139395;0
+yLA1;Trockene Anuellenflur;139396;0
+yLB;flächenhafte Hochstaudenfluren;155552;0
+yLB0;Hochstaudenflur, flächenhaft;155553;0
+yLB1;Feuchte Hochstaudenflur, flächenhaft;155554;0
+yLB2;Trockene Hochstaudenflur, flächenhaft;155555;0
+yLB3;Neophytenflur;144585;0
+zA;Wälder;137472;0
+zAA;Buchenwälder;137473;0
+zAA0;Buchenwald;137474;0
+zAA1;Eichen-Buchenmischwald;137475;0
+zAA2;Buchenmischwald mit einheimischen Laubbaumarten;137476;0
+zAA3;Buchenmischwald mit gebietsfremden Laubbaumarten;137477;0
+zAA4;Nadelbaum-Buchenmischwald;137478;0
+zAA5;Orchideen-Buchenwald;137479;0
+zAA6;Zahnwurz-Buchenwald;137480;0
+zAA7;Buchenwald auf Schluchtwald- / Blockschuttstandort;137481;0
+zAB;Eichenwälder;137482;0
+zAB0;Eichenwald;137483;0
+zAB1;Buchen-Eichenmischwald;137484;0
+zAB2;Birken-Eichenmischwald;137485;0
+zAB3;Eichenmischwald mit einheimischden Laubbaumarten;137486;0
+zAB4;Eichenmischwald mit gebietsfremden Laubbaumarten;137487;0
+zAB5;Nadelbaum-Eichenmischwald;137488;0
+zAB6;Wärmeliebender Eichenwald;137489;0
+zAB7;Eichen-Auenwald;137490;0
+zAB8;Eichen-Schlucht- bzw. Hangschuttwald;137491;0
+zAB9;Hainbuchen-Eichenmischwald;137492;0
+zAC;Erlenwälder;137493;0
+zAC0;Erlenwald;137494;0
+zAC1;Erlenmischwald mit einheimischen Laubbaumarten;137495;0
+zAC2;Erlenmischwald mit gebietsfremden Laubbaumarten;137496;0
+zAC3;Nadelbaum-Erlenmischwald;137497;0
+zAC4;Erlen-Bruchwald;137498;0
+zAC5;Bachbegleitender Erlenwald;137499;0
+zAD;Birkenwälder;137500;0
+zAD0;Birkenwald;137501;0
+zAD1;Eichen-Birkenmischwald;137502;0
+zAD1a;Birkenmischwald mit einheimischen Laubbaumarten;3033;0
+zAD2;Birkenmischwald mit gebietsfremden Laubbaumarten;137503;0
+zAD3;Nadelbaum-Birkenmischwald;137504;0
+zAD4;Birken-Bruchwald;137505;0
+zAD5;Birken-Moorwald;137506;0
+zAD6;Karpaten-Birken-Blockschuttwald;174896;0
+zAE;Weidenwälder;137507;0
+zAE0;Weidenwald;137508;0
+zAE1;Weidenmischwald;137509;0
+zAE1a;Weidenmischwald mit einheimischen Laubbaumarten;3034;0
+zAE2;Weiden-Auenwald;137510;0
+zAE3;Weiden-Bruchwald;137511;0
+zAE4;Weidensumpfwald;8379;0
+zAF;Pappelwälder;137512;0
+zAF0;Pappelwald;137513;0
+zAF1;Pappelmischwald;137514;0
+zAF1a;Laubbaum-Pappelmischwald;3035;0
+zAF1b;Nadelbaum-Pappelmischwald;3036;0
+zAF2;Pappelwald auf Auenstandort;137515;0
+zAF3;Pappelwald auf Bruchwaldstandort;137516;0
+zAF4;Erlen-Pappelmischwald;155430;0
+zAG;Sonstige Laub(misch)wälder einheimischer Laubbaumarten;137517;0
+zAG0;Sonstiger Laubwald aus einer einheimischen Laubbaumart;137518;0
+zAG1;Sonstiger Laubmischwald einheimischer Arten (ein Art dominat);137519;0
+zAG2;Sonstiger Laubmischwald einheimischer Arten (ohne dominante Art);174646;0
+zAH;Sonstige Laub(misch)wälder gebietsfremder Laubbaumarten;137520;0
+zAH0;Sonstiger Laubwald aus einer gebietsfremden Laubbaumart;137521;0
+zAH1;Sonstiger Laubmischwald gebietsfremder Arten (eine Art dominant);137522;0
+zAH2;Sonstiger Laubmischwald gebietsfremder Arten (ohne dominante Art);174650;0
+zAJ;Fichtenwälder;137523;0
+zAJ0;Fichtenwald;137524;0
+zAJ1;Fichtenmischwald mit einheimischen Laubbaumarten;137525;0
+zAJ1a;Buchen-Fichtenmischwald;3037;0
+zAJ2;Fichtenmischwald mit gebietsfremden Laubbaumarten;137526;0
+zAJ3;Nadelbaum-Fichtenmischwald;137527;0
+zAJ4;Laub-, Nadelbaum-Fichtenmischwald;140111;0
+zAK;Kiefernwälder;137528;0
+zAK0;Kiefernwald;137529;0
+zAK1;Kiefernmischwald mit einheimischen Laubbaumarten;137530;0
+zAK1a;Eichen-Kiefernmischwald;3038;0
+zAK2;Kiefernmischwald mit gebietsfremden Laubbaumarten;137531;0
+zAK3;Nadelbaum-Kiefernmischwald;137532;0
+zAK4;Kiefern-Moorwald;137533;0
+zAK5;Laub-, Nadelbaum-Kiefernmischwald;140112;0
+zAL;Sonstige Wälder aus Nadelbaumarten;137534;0
+zAL0;Wald aus seltenen Nadelbaumarten;139397;0
+zAM;Eschenwälder;137535;0
+zAM0;Eschenwald;137536;0
+zAM1;Eschenmischwald;137537;0
+zAM1a;Eschenmischwald mit einheimischen Laubbaumarten;3039;0
+zAM1b;Eschenmischwald mit gebietsfremden Laubbaumarten;3040;0
+zAM1c;Nadelbaum-Eschenmischwald;2947;0
+zAM2;Bachbegleitender Eschenwald;137538;0
+zAM3;Eschenwald auf Auenstandort;137539;0
+zAM4;Eschen-Schlucht- bzw. Hangschuttwald;137540;0
+zAM5;Eschen-Sumpfwald;174898;0
+zAN;Robinienwälder;137541;0
+zAN0;Robinienwald;137542;0
+zAN1;Robinienmischwald;137543;0
+zAO;Roteichenwälder;137544;0
+zAO0;Roteichenwald;137545;0
+zAO1;Roteichenmischwald;137546;0
+zAP;Ulmenwälder;137547;0
+zAP0;Ulmenwald;137548;0
+zAP0a;Ulmenmischwald;3041;0
+zAP1;Ulmenmischwald auf Auenstandort;137549;0
+zAP2;Sommerlinden-Ulmen-Hangschuttwald;137550;0
+zAQ;Hainbuchenwälder;137551;0
+zAQ0;Hainbuchenwald;137552;0
+zAQ1;Eichen-Hainbuchenmischwald;137553;0
+zAQ1a;Hainbuchenmischwald;2943;0
+zAQ2;Winterlinden-Hainbuchen-Hangschuttwald;137554;0
+zAQ3;Eichen-Hainbuchenwald, trockene Standorte;174899;0
+zAR;Ahorn-/Lindenwälder;137555;0
+zAR0;Ahorn-/Lindenwald;137556;0
+zAR1;Ahornmischwald;137557;0
+zAR2;Ahorn-Schlucht- bzw. Hangschuttwald;137558;0
+zAR3;Lindenwald;3136;0
+zAR4;Lindenmischwald;3137;0
+zAR5;Felsenahornwald;8373;0
+zAR6;Spitzahorn-Sommerlinden-Blockschuttwald;174897;0
+zAR7;Ahornwald;167467;0
+zAS;Lärchenwälder;137559;0
+zAS0;Lärchenwald;137560;0
+zAS1;Lärchenmischwald;137561;0
+zAT;Schlagfluren, Kalamitätenflächen;137562;0
+zAT0;Schlagflur;137563;0
+zAT1;Kahlschlagfläche;137564;0
+zAT2;Windwurffläche;137565;0
+zAT4;Brandfläche;176819;0
+zAT5;Gehölzarme Waldfläche unbekannter Herkunft;176820;0
+zAT6;Totholzwald (Insekten-, Pilzbefall);2950;0
+zAU;Aufforstungen;137566;0
+zAU0;Aufforstung;137567;0
+zAU1;Wald, Jungwuchs;137568;0
+zAU2;Vorwald, Pionierwald;137569;0
+zAV;Waldränder;137570;0
+zAV0;Waldrand;139398;0
+zAV1;Waldmantel;155431;0
+zB;Kleingehölze;137571;0
+zBA;Feldgehölze;137572;0
+zBA0;Feldgehölz;137573;0
+zBA1;Feldgehölz aus einheimischen Baumarten;137574;0
+zBA2;Feldgehölz aus gebietsfremden Baumarten;137575;0
+zBB;Gebüsche;137576;0
+zBB0;Gebüsch, Strauchgruppe;137577;0
+zBB1;Gebüschstreifen, Strauchreihe;137578;0
+zBB10;Wärmeliebende Gebüsche;174900;0
+zBB4;Weiden-Auengebüsch;174901;0
+zBB5;Bruchgebüsch;174902;0
+zBB6;Moorgebüsch;174903;0
+zBB7;Felsengebüsch;174904;0
+zBB8;Haselgebüsche auf Blockschutt;174905;0
+zBB9;Gebüsche mittlerer Standorte;174906;0
+zBD;Hecken;137579;0
+zBD0;Hecke;137580;0
+zBD1;Wallhecke;137581;0
+zBD2;Strauchhecke, ebenerdig;137582;0
+zBD3;Gehölzstreifen;137583;0
+zBD4;Böschungshecke;137584;0
+zBD5;Schnitthecke;144586;0
+zBE;Ufergehölze;137585;0
+zBE0;Ufergehölz;137586;0
+zBE1;Weiden-Ufergehölz;137587;0
+zBE2;Erlen-Ufergehölz;137588;0
+zBE4;Erlen-Eschen-Ufergehölz;23970;0
+zBF;Baumgruppen, Baumreihen;137589;0
+zBF0;Baumgruppe, Baumreihe;137590;0
+zBF1;Baumreihe;137591;0
+zBF2;Baumgruppe;137592;0
+zBF3;Einzelbaum;137593;0
+zBG;Kopfbaumgruppen, Kopfbaumreihen;137594;0
+zBG0;Kopfbaumgruppe, Kopfbaumreihe;137595;0
+zBG1;Kopfbaumreihe;137596;0
+zBG2;Kopfbaumgruppe;137597;0
+zBG3;Kopfbaum;137598;0
+zBH;Alleen;137599;0
+zBH0;Allee;139399;0
+zBJ;Siedlungsgehölze;137600;0
+zBJ0;Siedlungsgehölz;139400;0
+zBJ2;Hofgehölz;23787;0
+zBL;Tothölzer;137601;0
+zBL0;Totholz;137602;0
+zBL1;starkes Totholz, stehend;137603;0
+zBL2;starkes Totholz, liegend;137604;0
+zBL3;schwaches Totholz, stehend;137605;0
+zBL4;schwaches Totholz, liegend;137606;0
+zBM;Erstaufforstung;155432;0
+zBM0;Erstaufforstung landwirtschaftlicher Flächen;155433;0
+zBM1;Erstaufforstung landwirtschaftlicher Flächen mit Nadelbäumen;155434;0
+zBM2;Erstaufforstung landwirtschaftlicher Flächen mit Laubbäumen;155435;0
+zBM3;Erstaufforstung landwirtschaftlicher Flächen, Nadel- und Laubbäumen gemischt;155436;0
+zC;Moore, Sümpfe;137607;0
+zCA;Hochmoore, Übergangsmoore;137608;0
+zCA0;Hochmoor, Übergangsmoor;137609;0
+zCA1;Hochmoor-, Torfmoos- bzw. Binsenaspekt;137610;0
+zCA2;Hochmoor-Feuchtheideaspekt;137611;0
+zCA3;Übergangs-, Zwischenmoor, Quellmoor;137612;0
+zCA4;Hoch-, Zwischenmoordegenerationsstadium;137613;0
+zCA5;Moorregenerationsfläche ausserhalb von Torfstichen;155437;0
+zCB;Torfstiche;137614;0
+zCB0;Torfstich;137615;0
+zCB1;Torfstich mit Moorregenerationsfläche;137616;0
+zCC;Kleinseggenriede;137617;0
+zCC0;Kleinseggenried, Binsensumpf;137618;0
+zCC1;Bodensaures Kleinseggenried;137619;0
+zCC2;Kalk-Kleinseggenried;137620;0
+zCC3;Bodensaurer Binsensumpf;137621;0
+zCC4;Kalk-Binsensumpf;137622;0
+zCD;Großseggenriede;137623;0
+zCD0;Großseggenried;137624;0
+zCD1;Rasen-Großseggenried;137625;0
+zCD2;Bulten-Großseggenried;137626;0
+zCF;Röhrichtbestände;137627;0
+zCF0;Röhrichtbestand;137628;0
+zCF1;Röhrichtbestand niedrigwüchsiger Arten;137629;0
+zCF2;Röhrichtbestand hochwüchsiger Arten;137630;0
+zCF2a;Schilfröhricht;2344;0
+zCF2b;Rohrkolbenröhricht;2345;0
+zCF3;Schneidenröhricht;137631;0
+zCF4;Bachröhricht;138597;0
+zD;Heiden, Trockenrasen;137632;0
+zDA;Trockene Heiden;137633;0
+zDA0;Trockene Heide;137634;0
+zDA1;Calluna-Heide;137635;0
+zDA2;Degenerierte Calluna-Heide;137636;0
+zDA3;Besenginster-Heide;137637;0
+zDA4;Wacholder-Heide;137638;0
+zDA5;Bergheide-Beerenstrauchheide;137639;0
+zDA6;Lineare trockene Heideelemente, -säume;137640;0
+zDB;Feuchtheiden;137641;0
+zDB0;Feuchtheide;137642;0
+zDB1;Zwergstrauch-Feuchtheide;137643;0
+zDB2;Pfeifengras-Feuchtheide;137644;0
+zDC;Silikattrockenrasen;137645;0
+zDC0;Silikattrockenrasen;137646;0
+zDC1;Sukkulentenreicher Silikattrockenrasen;137647;0
+zDC2;Silbergrasflur;137648;0
+zDC3;Straussgrasrasen;137649;0
+zDC4;Rheinischer Glanzlieschgrasrasen;174907;0
+zDC5;Vulkanit-Magerrasen;174908;0
+zDD;Kalkhalbtrockenrasen;137650;0
+zDD0;Kalkhalbtrockenrasen, Kalkmagerrasen;137651;0
+zDD1;Enzian-Schillergrasrasen;137652;0
+zDD2;Trespen-Halbtrockenrasen;137653;0
+zDD3;Wacholder-Kalkhalbtrockenrasen;137654;0
+zDD4;Kalktrockenrasen;174909;0
+zDD5;Sandsteppenrasen;174910;0
+zDD6;Subkontinentale Halbtrocken- und Steppenrasen;174911;0
+zDE;Schwermetallrasen;137655;0
+zDE0;Schwermetallrasen;139401;0
+zDF;Borstgrasrasen;137656;0
+zDF0;Borstgrasrasen;139402;0
+zE;Grünland;137657;0
+zEA;Fettwiesen;137658;0
+zEA0;Fettwiese;137659;0
+zEA1;Fettwiese, Flachlandausbildung (Glatthaferwiese);137660;0
+zEA2;Fettwiese, Mittelgebirgsausbildung (Goldhaferwiese);137661;0
+zEA3;Fettwiese, Neueinsaat;137662;0
+zEB;Fettweiden;137663;0
+zEB0;Fettweide;137664;0
+zEB1;Fettweide, Neueinsaat;137665;0
+zEC;Nass- und Feuchtgrünländer;137666;0
+zEC0;Nass- und Feuchtgrünland;137667;0
+zEC1;Nass- und Feuchtwiese;137668;0
+zEC1a;Nasswiese;2638;0
+zEC1b;Feuchtwiese;2642;0
+zEC2;Nass- und Feuchtweide;137669;0
+zEC2a;Nassweide;2679;0
+zEC2b;Feuchtweide;2680;0
+zEC3;basenreiche Pfeifengraswiese;137670;0
+zEC4;basenarme  Pfeifengraswiese;137671;0
+zEC5;Flutrasen;137672;0
+zEC6;Nass- und Feuchtmähweide;174552;0
+zEC6a;nasse Mähweide;2685;0
+zEC6b;feuchte Mähweide;2701;0
+zEC7;Brenndolden-Stromtalwiese;174912;0
+zEC8;Pfeifengras-Stromtalwiese;174913;0
+zED;Magergrünländer;137673;0
+zED0;Magergrünland;137674;0
+zED1;Magerwiese;137675;0
+zED1a;magere Feuchtwiese;2718;0
+zED2;Magerweide;137676;0
+zED2a;magere Feuchtweide;2731;0
+zED3;magere Mähweide;2707;0
+zED3a;magere Feucht-Mähweide;2748;0
+zEE;Grünlandbrachen;137677;0
+zEE0;Grünlandbrache;137678;0
+zEE0a;brachgefallenes Fettgrünland;2770;0
+zEE1;Brachgefallene Fettwiese;137679;0
+zEE2;Brachgefallene Fettweide;137680;0
+zEE3;Brachgefallenes Nass- und Feuchtgrünland;137681;0
+zEE3a;brachgefallenes Nassgrünland;2915;0
+zEE3b;brachgefallenes Feuchtgrünland;2918;0
+zEE4;brachgefallenes Magergrünland;137682;0
+zEE4a;brachgefallenes feuchtes Magergrünland;2926;0
+zEF;Salzrasen;137683;0
+zEF0;Salzrasen;139403;0
+zF;Gewässer;137684;0
+zFA;Seen;137685;0
+zFA0;See;139404;0
+zFB;Weiher;137686;0
+zFB0;Weiher (stetig);139405;0
+zFC;Altarme, Altwasser;137687;0
+zFC0;Altarm, Altwasser;137688;0
+zFC1;Altarm (angebunden);137689;0
+zFC2;Altwasser (abgebunden);137690;0
+zFC3;Altarm (angebunden, nicht durchströmt);137691;0
+zFC4;Altarm (angebunden, durchströmt);137692;0
+zFC5;Auenkolk, Woye;155438;0
+zFD;stehende Kleingewässer;137693;0
+zFD0;stehendes Kleingewässer;137694;0
+zFD1;Tümpel (periodisch);137695;0
+zFD2;Blänke;137696;0
+zFD3;Lache, Wagenspur;137697;0
+zFD4;Bombentrichter;155439;0
+zFD5;Mardelle, Doline;174914;0
+zFE;Heideweiher, Moorblänke;137698;0
+zFE0;Heideweiher, Moorblänke;137699;0
+zFE1;Heideweiher;137700;0
+zFE2;Moorblänke, Moortümpel;137701;0
+zFF;Teiche;137702;0
+zFF0;Teich;137703;0
+zFF1;Parkteich, Zierteich, Gartenteich;137704;0
+zFF2;Fischteich;137705;0
+zFF3;Mühlenteich;155440;0
+zFF4;Löschteich;155441;0
+zFF5;Naturschutzteich;155442;0
+zFF9;Dystropher Teich;174915;0
+zFG;Abgrabungsgewässer;137706;0
+zFG0;Abgrabungsgewässer;139406;0
+zFG1;Abgrabungsgewässer (Lockergestein);176603;0
+zFG1a;Abgrabungsgerwässer (Kies, Sand);3122;0
+zFG1b;Abgrabungsgewässer (Ton);3082;0
+zFG2;Abgrabungsgewässer (Festgestein);176604;0
+zFG2a;Abgrabungsgewässer (Basalt);3083;0
+zFG2b;Abgrabungsgewässer (Braunkohle);3084;0
+zFG2c;Abgrabungsgewässer (Kalk);3085;0
+zFH;Staugewässer;137707;0
+zFH0;Staugewässer;137708;0
+zFH1;Stausee, Talsperre, Vorbecken;137709;0
+zFH2;Fluss-, Bachstau;137710;0
+zFH3;Quellstau;137711;0
+zFJ;Absetzbecken, Rieselfelder;137712;0
+zFJ0;Absetz- und Klärbecken, Rieselfeld;139407;0
+zFK;Quellen;137713;0
+zFK0;Quelle, Quellbereich;137714;0
+zFK1;Grundquelle, Tümpelquelle;137715;0
+zFK2;Sicker-, Sumpfquelle;137716;0
+zFK3;Sturzquelle;137717;0
+zFK4;Tuff-, Sinterquelle;174916;0
+zFL;Wasserfälle, Stromschnellen;137718;0
+zFL0;Wasserfall, Stromschnelle, Bachschwinde;137719;0
+zFL1;Wasserfall;137720;0
+zFL2;Stromschnelle;137721;0
+zFL3;Bachschwinde;137722;0
+zFM;Bäche;137723;0
+zFM0;Bach;137724;0
+zFM1;Bachoberlauf im Mittelgebirge;137725;0
+zFM2;Bachmittellauf im Mittelgebirge;137726;0
+zFM3;Bachunterlauf im Mittelgebirge;137727;0
+zFM4;Quellbach;137728;0
+zFM4a;Quellbach im Tiefland;3086;0
+zFM4b;Quellbach im Mittelgebirge;3087;0
+zFM5;Tieflandbach;137729;0
+zFM6;Mittelgebirgsbach;174917;0
+zFN;Gräben;137730;0
+zFN0;Graben;137731;0
+zFN1;Graben mit intakter Fliessgewässervegetation;137732;0
+zFN2;Graben mit intakter Stillgewässervegetation;137733;0
+zFN3;Graben mit extensiver Instandhaltung;137734;0
+zFN4;Graben mit intensiver Instandhaltung;137735;0
+zFN5;Graben überwiegend verbaut oder verrohrt;137736;0
+zFO;Flüsse;137737;0
+zFO0;Fluss;137738;0
+zFO1;Mittelgebirgsfluss;137739;0
+zFO2;Tieflandfluss;137740;0
+zFP;Kanäle;137741;0
+zFP0;Kanal;139408;0
+zFR;Bergsenkungsgewässer;137742;0
+zFR0;Bergsenkungsgewässer;139409;0
+zFS;Rückhaltebecken;137743;0
+zFS0;Rückhaltebecken;139410;0
+zG;Gesteinsbiotope;137744;0
+zGA;Fels, Felswände, -klippen;137745;0
+zGA0;Fels, Felswand, -klippe;137746;0
+zGA1;natürlicher Kalkfels;137747;0
+zGA2;natürlicher Silikatfels;137748;0
+zGA3;sekundärer Kalkfels;137749;0
+zGA4;sekundärer Silikatfels;137750;0
+zGB;Blockschutt- / Feinschutthalden;137751;0
+zGB0;Blockschutt- / Feinschutthalde;137752;0
+zGB1;natürliche Kalk-Blockschutt- / Feinschutthalde;137753;0
+zGB2;natürliche Silikat-Blockschutt- / Feinschutthalde;137754;0
+zGB3;sekundäre Kalk-Blockschutt- / Feinschutthalde;137755;0
+zGB4;sekundäre Silikat-Blockschutt- / Feinschutthalde;137756;0
+zGC;Steinbrüche;137757;0
+zGC0;Steinbruch;137758;0
+zGC1;Kalksteinbruch;137759;0
+zGC2;Silikatsteinbruch;137760;0
+zGC3;Basaltsteinbruch;137761;0
+zGD;Lockergesteinsabgrabungen;137762;0
+zGD0;Lockergesteinsabgrabung;137763;0
+zGD1;Sand-, Kiesabgrabung;137764;0
+zGD2;Lehm-, Tonabgrabung;137765;0
+zGE;Höhlen und Stollen;137766;0
+zGE0;Höhlen und Stollen;137920;0
+zGE1;Höhle;137921;0
+zGE2;Stollen;137922;0
+zGF;Vegetationsarme oder -freie Bereiche;137767;0
+zGF0;Vegetationsarme oder -freie Bereiche;137768;0
+zGF1;Vegetationsarme Kies- und Schotterflächen;137769;0
+zGF2;Vegetationsarme Sandflächen;137770;0
+zGF3;Vegetationsarme Löss- und Lehmflächen;137771;0
+zGF4;Vegetationsarme Sand- und Kiesbänke;137772;0
+zGG;Sand-, Lösswände;137773;0
+zGG0;Sand-, Lösswand;137774;0
+zGG1;Sandwand;137775;0
+zGG2;Löss-, Lehmwand;137776;0
+zH;Weitere anthropogen bedingte Biotope;137777;0
+zHA;Äcker;137778;0
+zHA0;Acker;137779;0
+zHC;Rain, Strassenränder;137788;0
+zHC3;Strassenrand;137792;0
+zHK;Obstanlagen;137832;0
+zHK0;Obstanlage;137833;0
+zHK2;Streuobstwiese;706278;0
+zHK3;Obstweide;137836;0
+zK;Säume bzw. linienf. Hochstaudenfluren;137895;0
+zKA;Feuchte (nasse)  Säume bzw. linienf. Hochstaudenfluren;137896;0
+zKA0;Feuchter (nasser) Saum bzw. linienf. Hochstaudenflur;137897;0
+zKA1;Feuchter (nasser) Ruderalsaum bzw. linienf. Hochstaudenflur;137898;0
+zKA2;Gewässerbegleitender feuchter Saum bzw. linienf. Hochstaudenflur;137899;0
+zKA3;Feuchter Waldinnensaum bzw. linienf. Hochstaudenflur;137900;0
+zKA4;Feuchter Waldaussensaum bzw. linienf. Hochstaudenflur;137901;0
+zKB;Trockener Saum bzw. linienf. Hochstaudenflur;137902;0
+zKB0;Trockener (frischer) Saum bzw. linienf. Hochstaudenflur;137903;0
+zKB1;Trockener (frischer) Ruderalsaum bzw. linienf. Hochstaudenflur;137904;0
+zKB2;Gewässerbegleitender trockener Saum bzw. Hochstaudenflur, linienförmig;137905;0
+zKB3;Trockener Waldinnensaum bzw. Hochstaudenflur, linienförmig;137906;0
+zKB4;Trockener Waldaussensaum bzw. Hochstaudenflur, linienförmig;137907;0
+zL;Annuellenflur bzw. flächenh. Hochstaudenflur;137908;0
+zLA;Annuellenfluren;137909;0
+zLA0;Feuchte Annuellenflur;139413;0
+zLA1;Trockene Anuellenflur;139414;0
+zLB;flächenhafte Hochstaudenfluren;155556;0
+zLB0;Hochstaudenflur, flächenhaft;155557;0
+zLB1;Feuchte Hochstaudenflur, flächenhaft;155558;0
+zLB2;Trockene Hochstaudenflur, flächenhaft;155559;0
+zLB3;Neophytenflur;144587;0

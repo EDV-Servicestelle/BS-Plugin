@@ -1,0 +1,186 @@
+# GISPAD-Exporte übernehmen
+
+Werkzeuge, um GISPAD-Daten aus einem File-Geodatabase-Export in GeoPackages
+zu überführen — **ohne GISPAD, ohne ODBC-Treiber, ohne Access**. Gelesen wird
+die `.gdb` direkt über GDALs `OpenFileGDB`-Treiber, der in QGIS enthalten ist.
+
+## Warum
+
+GISPAD lässt sich nicht mehr dauerhaft betreiben (ODBC-Treiber und alte
+Windows-Kernel-Funktionen; con terra kann es nicht weiter unterstützen). Was
+nicht aus den Projekten herausgeholt wird, ist danach nicht mehr zugänglich.
+Diese Werkzeuge sind deshalb in erster Linie eine **Sicherungsfunktion** und
+erst in zweiter Linie eine Arbeitserleichterung.
+
+## Für die Stationen: der Menüpunkt
+
+*Erweiterungen → Fundpunkte Tiere → **GISPAD-Export übernehmen …***
+
+Der Dialog führt in drei Schritten:
+
+1. **Export wählen** — den Ordner, der auf `.gdb` endet. Das Plugin sieht
+   selbst nach, was darin steckt, und zeigt es an.
+2. **Was übernommen wird** — voreingestellt ist *Alles sichern*. Die
+   fachliche Auswahl einer Objektklasse ist die Zusatzoption, nicht
+   umgekehrt: Was jetzt nicht herausgeholt wird, ist später nicht mehr
+   zugänglich.
+3. **Zieldatei** — wird neben dem Export vorgeschlagen. Auf Wunsch landen
+   die Layer anschließend direkt in QGIS.
+
+Die Übernahme läuft im Hintergrund, QGIS bleibt bedienbar.
+
+## Für den Stapelbetrieb: die Kommandozeile
+
+Gleiche Logik, andere Oberfläche — etwa wenn mehrere Projektordner auf
+einmal gesichert werden:
+
+```bash
+# 1. Sichten: was steckt im Export, wie hängt es zusammen?
+python3 tools/gispad_export.py --gdb Export.gdb --modus beziehungen
+
+# 2. Sichern: alles, vollständig, verlustfrei
+python3 tools/gispad_export.py --gdb Export.gdb --modus alles \
+    --out Sicherung.gpkg
+
+# 3. Arbeiten: die fachliche Auswahl je Objektklasse
+python3 tools/gispad_export.py --gdb Export.gdb --modus fachlich \
+    --klasse BT --out BT.gpkg
+```
+
+Objektklassen: `BT` (Biotoptypen), `BK` (Biotopkataster), `MAS` (Maßnahmen).
+
+**Bei einem unbekannten Export immer mit `--modus beziehungen` anfangen.**
+
+Das Skript ist nur die Kommandozeile; die Logik liegt im Plugin
+(`core/gispad.py`, `core/gispad_klassen.py`). Zwei Fassungen würden
+auseinanderlaufen.
+
+## Das Datenmodell
+
+GISPAD speichert nach dem OSIRIS-Modell: `LINFOS` ist die Haupttabelle, die
+übrigen hängen daran, teils über mehrere Stufen. Im Geodatabase-Export
+erscheint LINFOS als die Geometrie-Layer der Objektklasse (`BT_Polygon`,
+`BT_Polyline`, `BT_Point`).
+
+Für BT ergibt sich — aus den Daten abgeleitet und deckungsgleich mit dem
+Schema der DV-Verfahrensbeschreibung V2020a, S. 30:
+
+```
+LINFOS  (BT_Polygon / BT_Polyline / BT_Point)
+├─ BtypHtyp            1:1    Biotoptyp, LR-Typ, §30/62, Bewertung
+│   ├─ Vegetationstyp  1:n
+│   │   └─ Schichtung  1:n
+│   │       ├─ Pflanzenliste  1:n
+│   │       └─ Tierliste      1:n
+│   ├─ Zusatzcodes     1:n
+│   └─ Wuchsklasse     1:n
+├─ adressrolle → adressen → Termine     (wer, wann, welcher Arbeitsschritt)
+└─ PRJ_ID · HINWEIS · Waldstruktur · LINFOS2 · MASSN · BESITZ · …
+```
+
+### Zwei Fallen
+
+**GISPADID taugt nicht zum Verknüpfen.** Sie ist in allen Tabellen eines
+Objektes gleich. Bei `1:n:n` lässt sich damit nicht mehr sagen, welche
+Pflanzenzeile zu welcher Schicht gehörte — die Hierarchie geht verloren.
+Verknüpft wird über `FKEY → PKEY`, Ebene für Ebene. So steht es auch in der
+DV-Verfahrensbeschreibung BT (V2020a, S. 29).
+
+**PKEY ist nur innerhalb einer Tabelle eindeutig.** Die Wertebereiche
+verschiedener Tabellen überlappen stark, deshalb „trifft" ein FKEY rein
+zufällig auch in falschen Tabellen. Eine hohe Trefferquote beweist nichts:
+`Termine → adressrolle` erreichte 99,2 % und war trotzdem falsch — richtig ist
+`Termine → adressen` (2104 von 2104, ohne einen Widerspruch).
+
+Deshalb prüft die Ableitung nicht die Trefferquote, sondern die
+**Widerspruchsfreiheit der GISPADID**: Passt der über FKEY gefundene
+Elternsatz zu einem anderen Objekt, war der Treffer Zufall. Ein einziger
+Widerspruch schließt einen Kandidaten aus.
+
+### Warum abgeleitet statt fest verdrahtet
+
+Der Export liefert die Beziehungen nicht mit; die DV-Verfahrensbeschreibung
+hält auf S. 35 ausdrücklich fest, die „relationship classes werden nicht
+exportiert und müssen weiterhin nachträglich definiert werden". Sie aus den
+Daten zu bestimmen hat den Vorteil, dass auch Objektklassen funktionieren,
+deren Schema nicht vorliegt — die BK-Beschreibung v2019a etwa führt keine
+Tabellenspalte. Das Verfahren wurde gegen das dokumentierte BT-Schema geprüft
+und hat es vollständig reproduziert.
+
+Die Sicherung (`--modus alles`) legt die abgeleiteten Beziehungen als Tabelle
+`gispad_beziehungen` mit ins GeoPackage. Sie dokumentiert sich damit selbst.
+
+## Referenzlisten (OSIRIS)
+
+Der Export enthält nur Schlüssel (`CA4`, `NEC0`, `str`). Der Klartext steht in
+der OSIRIS-Datenbank `v_osiris*.mdb`. Die wird einmalig ausgelesen:
+
+```bash
+apt-get install mdbtools        # bzw. unter Windows einmalig auf einem Linux-Rechner
+python3 tools/osiris_listen_export.py --mdb v_osiris54_2025a.mdb
+```
+
+Geschrieben wird nach `<Plugin>/data/osiris/` — dort findet der Dialog die
+Listen ohne Zutun der Anwenderinnen und Anwender, und sie reisen mit dem
+Plugin-Paket mit. Die `.mdb` (68 MB, Access) wird danach nicht mehr
+gebraucht.
+
+Mehrdeutige Schlüssel sind markiert (Spalte `mehrdeutig`) und tragen alle
+Lesarten: `AV1` ist in der Biotoptypen-Liste sowohl „Ausbreitungskorridor,
+Vernetzungsachse" als auch „Waldmantel". Das soll auffallen statt
+stillschweigend zu einer willkürlichen Bedeutung zu werden.
+
+## Was BT übernimmt
+
+| Zielfeld | Quelle |
+| --- | --- |
+| Geometrie | `BT_Polygon` / `BT_Polyline` / `BT_Point`, EPSG:25832 |
+| `Kennung` | LINFOS `KENNUNG` (Objektkennung, z. B. `BT-0161`) |
+| `Gispad_ID` | `GISPADID` (Herkunftsnachweis, **kein** Join-Schlüssel) |
+| `Biotoptyp` + `_Text` | `BtypHtyp.Biotoptyp` + OSIRIS-Liste 13 |
+| `LR_Typ` + `_Text` + `LR_Art` | `BtypHtyp.Oekotyp` + OSIRIS-Liste 19 |
+| `P62` / `P62_Typ` | `BtypHtyp.ist_P62_typ` / `.P62_Typ` |
+| `Zusatzcodes` + `_Text` | `Zusatzcodes` über FKEY, aggregiert + OSIRIS-Liste 14 |
+
+**Der LR-Typ steht in `Oekotyp`**, nicht in den `FFH_*`-Feldern — so die
+DV-Verfahrensbeschreibung S. 4. Die `FFH_*`-Felder dienen anderen Zwecken und
+sind in Exporten meist leer; wer dort sucht, hält den LR-Typ fälschlich für
+nicht enthalten. `LR_Art` unterscheidet FFH-LRT (vierstelliger FFH-Code, auch
+mit Buchstabe wie `91D0`) von N-LRT (beginnt mit `N`).
+
+## Fallstricke in den Quelldaten
+
+- `GK_RW` / `GK_HW` heißen „Rechtswert"/„Hochwert", enthalten aber
+  **UTM-Werte als Text, mit angehängtem Komma** (`'360842,'`). Wer sie als
+  Gauß-Krüger liest, bekommt Unsinn. `UTM_East`/`UTM_North` sind sauberes
+  Integer — oder gleich die Geometrie.
+- Die BT-Datumsfelder (`Kartierung`, `E_DAT`, `DatumAusgZust`) sind oft leer.
+  Das Kartierdatum steht in `Termine.K_Termin` als `TT.MM.JJJJ`.
+- Wahrheitswerte kommen als deutscher Text `Wahr` / `Falsch`. Unbekanntes
+  wird als NULL übernommen, nicht als „nein".
+- `BtypHtyp` deckt Polygon **und** Linie ab. Wer nur `BT_Polygon` liest, hält
+  die Linienzeilen fälschlich für verwaist.
+
+## Prüfstand
+
+Gegen einen echten Export (Biotopkartierung, 1314 Polygone + 8 Linien,
+10.739 Pflanzenzeilen):
+
+- Beziehungsableitung: alle 14 Sachtabellen eindeutig, keine Toleranz nötig,
+  deckungsgleich mit dem offiziellen Schema
+- Fachlicher BT-Import: satzweiser Vergleich mit der Quelle über alle 1314
+  Datensätze — keine Abweichung
+- Klartextauflösung: 37/37 Biotoptypen, 14/14 LR-Typen, 55/55 Zusatzcodes
+- Vollsicherung: 16 Tabellen, alle Zeilen, alle Felder, Schlüsselspalten
+  erhalten
+- BK und MAS gegen eine synthetische Geodatabase geprüft (die Pfade laufen;
+  die Feldauswahl ist mangels echter Daten noch eine Erwartung)
+- Dialog mit QGIS-Attrappen konstruiert, Kommandozeile gegen dieselbe
+  Plugin-Logik gefahren — beide liefern dasselbe Ergebnis
+
+## Empfehlung für die Stationen
+
+Solange für BK und MAS keine echten Exporte geprüft sind, für diese beiden
+Klassen **nur „Alles sichern"** verwenden. Die Sicherung ist von der
+Feldauswahl unabhängig und rettet alles; die fachliche Ebene lässt sich
+später jederzeit aus der gesicherten Geodatabase nachziehen.
