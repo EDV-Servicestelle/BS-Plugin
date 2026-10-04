@@ -14,6 +14,22 @@ include:
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
 
+# ── Wann ueberhaupt eine Pipeline entsteht ──────────────────────────────────
+# Ohne diese Regeln laeuft die Pipeline nur beim Branch-Push. Ein Merge
+# Request hat dann keine eigene Pipeline, auf die die Merge-Pruefung
+# "Pipelines muessen erfolgreich sein" warten koennte.
+#
+# Die vorletzte Regel verhindert Doppellaeufe: Hat ein Branch einen offenen
+# Merge Request, genuegt dessen Pipeline.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
 stages:
   - test        # von den Vorlagen vorausgesetzt
   - bauen
