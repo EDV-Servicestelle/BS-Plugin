@@ -39,10 +39,11 @@ def version_aus_ci():
     diese Quelle faellt das Skript still auf metadata.txt zurueck und baut
     ein Paket mit falscher Versionsnummer.
 
-    CI_COMMIT_TAG  setzt GitLab bei Tag-Pipelines.
-    PLUGIN_VERSION kann man in einem Job von Hand setzen.
+    CI_COMMIT_TAG    setzt GitLab bei Tag-Pipelines.
+    GITHUB_REF_NAME  setzt GitHub Actions (bei Tags der Tagname).
+    PLUGIN_VERSION   kann man in einem Job von Hand setzen.
     """
-    for var in ("PLUGIN_VERSION", "CI_COMMIT_TAG"):
+    for var in ("PLUGIN_VERSION", "CI_COMMIT_TAG", "GITHUB_REF_NAME"):
         wert = os.environ.get(var, "").strip()
         if wert:
             return wert.lstrip("vV")
