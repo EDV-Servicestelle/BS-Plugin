@@ -23,6 +23,7 @@ try:
         ensemble_rank, _FIELD_TO_VOCAB,
         _build_field_vocab, _fuzzy_match_field,
         _validate_matcher, _extract_test_pairs, _kappa_interpretation,
+        _q_ident,
     )
 except ImportError:
     from ..core.import_core import (
@@ -36,6 +37,7 @@ except ImportError:
         ensemble_rank, _FIELD_TO_VOCAB,
         _build_field_vocab, _fuzzy_match_field,
         _validate_matcher, _extract_test_pairs, _kappa_interpretation,
+        _q_ident,
     )
 
 class _ScanWorker(QThread):
@@ -351,7 +353,7 @@ def _build_field_vocab(table: str) -> dict:
     try:
         con = _sq.connect(_REF_GPKG)
         cur = con.cursor()
-        cur.execute(f'SELECT listitemid, term FROM "{table}"')
+        cur.execute("SELECT listitemid, term FROM " + _q_ident(table))
         lookup = {}
         for listitemid, term in cur.fetchall():
             if term:
