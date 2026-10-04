@@ -48,6 +48,8 @@ class NewProjectPlugin:
             ("Fundpunkte – Papierreviere → Fundpunkte …", self._papierreviere_export),
             ("Fundpunkte – Export (CSV/XLSX/GPKG) …",   self._fundpunkte_export),
             ("─────────────────────────",     None),
+            ("GISPAD-Export übernehmen …",     self._gispad),
+            ("─────────────────────────",     None),
             ("NRW Luftbild → COG …",           self._luftbild),
             ("NRW LiDAR-Analyse …",            self._lidar),
             ("Hydrologische Analyse …",        self._hydro),
@@ -68,6 +70,10 @@ class NewProjectPlugin:
                 act.triggered.connect(slot)
             self.iface.addPluginToMenu(self.MENU, act)
             self._actions.append(act)
+
+    def _gispad(self):
+        from .gispad_import_dialog import GispadImportDialog
+        GispadImportDialog(self.iface.mainWindow()).exec()
 
     def _papierreviere_export(self):
         dlg = PapierreviereExportDialog(self.iface.mainWindow())

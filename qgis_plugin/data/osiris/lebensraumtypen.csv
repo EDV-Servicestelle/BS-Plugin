@@ -1,0 +1,112 @@
+schluessel;bezeichnung;atom_id;mehrdeutig
+1340;Salzstellen im Binnenland;61105;0
+2310;Trockene Sandheiden mit Calluna und Genista [Dünen im Binnenland];61124;0
+2330;Dünen mit offenen Grasflächen mit Corynephorus und Agrostis [Dünen im Binnenland];61126;0
+3110;Oligotrophe, sehr schwach mineralische Gewässer der Sandebenen (Littorelletalia uniflorae);61127;0
+3130;Oligo- bis mesotrophe stehende Gewässer mit Vegetation der Littorelletea uniflorae und/oder der Isoeto-Nanojuncetea;61128;0
+3131;Oligo- bis mesotrophe Stillgewässer mit Vegetation der Littoretalia;174919;0
+3132;Oligo- bis mesotrophe Stillgewässer mit Vegetation der Isoeto-Nanojuncetea;174921;0
+3140;Oligo- bis mesotrophe kalkhaltige Gewässer mit benthischer Vegetation aus Armleuchteralgen;61129;0
+3150;Natürliche eutrophe Seen und Altarme;61130;0
+3160;Dystrophe Seen und Teiche;61131;0
+3260;Fließgewässer mit Unterwasservegetation;61139;0
+3270;Flüsse mit Schlammbänken mit Vegetation des Chenopodion rubri p.p. und des Bidention p.p.;61140;0
+4010;Feuchte Heiden des nordatlantischen Raums mit Erica tetralix;61141;0
+4030;Trockene europäische Heiden;61142;0
+40A0;Subkontinentale peripannonische Gebüsche;9342;0
+5110;Stabile xerothermophile Gebüschformationen mit Buxus sempervirens an Felshängen (Berberidion p.p.);9343;0
+5130;Wacholderbestände auf Zwergstrauchheiden oder Kalkhalbtrockenrasen;61146;0
+5130 khtr;5130 auf Kalkhalbtrockenrasen;190590;0
+5130 zsh;5130 auf Zwergstrauchheiden;190576;0
+6110;Lückige basophile oder Kalk-Pionierrasen (Alysso-Sedion albi);61147;0
+6120;Subkontinentale Blauschillergrasrasen (Kölerion glaucae);9344;0
+6130;Schwermetallrasen;61149;0
+6210;Naturnahe Kalk-Trockenrasen und deren Verbuschungsstadien (Festuco-Brometalia)(* bes. Bestände mit bemerkenswerten Orchideen);61155;0
+6212;Submediterrane Halbtrockenrasen (Mesobromion);174922;0
+6214;Halbtrockenrasen sandig-lehmiger, basenreicher Böden (Koelerio-Phleion phleoidis);174923;0
+6230;Borstgrasrasen;61160;0
+6240;Subpannonische Steppen-Trockenrasen;9345;0
+6410;Pfeifengraswiesen auf lehmigen oder torfigen Böden;61162;0
+6430;Feuchte Hochstaudenfluren;61163;0
+6431;Feuchte Hochstaudenfluren, planar bis montan;174924;0
+6440;Brenndolden-Auenwiesen der Stromtäler;177043;0
+6510;Glatthafer- und Wiesenknopf-Silgenwiesen;61167;0
+6520;Berg-Mähwiesen;61168;0
+7110;Lebende Hochmoore;61169;0
+7120;Noch renaturierungsfähige degradierte Hochmoore;61170;0
+7140;Übergangs- und Schwingrasenmoore;61171;0
+7150;Torfmoor-Schlenken (Rhynchosporion);61172;0
+7210;Kalkreiche Sümpfe mit Cladium mariscus und Arten des Caricion davallianae;61173;0
+7220;Kalktuffquellen (Cratoneurion);61174;0
+7230;Kalk- und basenreiche Niedermoore;61175;0
+8150;Silikatschutthalden;61179;0
+8160;Kalkschutthalden;61180;0
+8210;Kalkfelsen mit Felsspaltenvegetation;61181;0
+8220;Silikatfelsen mit Felsspaltenvegetation;61182;0
+8230;Silikatfelskuppen mit Pioniervegetation;61183;0
+8310;Nicht touristisch erschlossene Höhlen;61184;0
+9110;Hainsimsen-Buchenwald;61187;0
+9130;Waldmeister-Buchenwald;61189;0
+9150;Orchideen-Kalk-Buchenwald;61191;0
+9160;Stieleichen-Hainbuchenwald;61192;0
+9170;Labkraut-Eichen-Hainbuchenwald;61193;0
+9180;Schlucht- und Hangmischwälder;61194;0
+9190;Alte bodensaure Eichenwälder auf Sandebenen mit Quercus robur;61195;0
+91D0;Moorwälder;61196;0
+91D1;Birken-Moorwald;174925;0
+91D2;Waldkiefern-Moorwald;174926;0
+91E0;Erlen-Eschen- und Weichholz-Auenwälder;61201;0
+91E0_erle;91E0 (Ausprägung Erlen-Eschen-Auenwälder);168873;0
+91E0_weide;91E0 (Ausprägung Weidenauenwälder);168850;0
+91F0;Hartholz-Auenwälder;61202;0
+91T0;Mitteleuropäische Flechten- und Kiefernwälder;9347;0
+91U0;Kiefernwälder der sarmatischen Steppe;9348;0
+NA00;Laubwälder ausserhalb von Sonderstandorten;161359;0
+NAB0;Wärmeliebende Wälder und Gebüsche;161360;0
+NAC0;Sumpf-, Moor- und Bruchwälder;161361;0
+NAD0;Wälder auf Dünenstandorten und nährstoffarmen Sandböden;161362;0
+NAK0;Schutzwürdige und gefährdete Nadelwälder (nicht auf Dünen);12244;0
+NAV0;Waldränder;161363;0
+NAW0;Nieder- und Mittelwälder;161364;0
+NAX0;Auenwälder;161365;0
+NAY0;Schlucht- und Hangmischwälder, felsenreiche Wälder und bodensaure Hangmischwälder mit Eiche;161366;0
+NB00;Kleingehölze (Alleen, linienförmige Gehölzstrukturen, Einzelbäume, Ufergehölze, flächige Gebüsche, Baumgruppen und Feldgehölze);8119;0
+NB00-ung.;Schutzwürdige und gefährdete Gehölzstrukturen;161367;0
+NBA0;Schutzwürdige und gefährdete Feldgehölze (nicht FFH-LRT);15834;0
+NBB0;Schutzwürdige und gefährdete flächige Gebüsche und Baumgruppen;15835;0
+NBD0;linienförmige Gehölzstrukturen und Einzelbäume;15836;0
+NBE0;Ufergehölze;15838;0
+NBH0;Schutzwürdige und gefährdete Alleen;15837;0
+NCA0;Hochmoore, Übergangsmoore und Torfstiche;15839;0
+NCA0-ung.;Schutzwürdige und gefährdete Moore, Sümpfe, Riede und Röhrichte (nicht FFH) auf Primärstandorten;161368;0
+NCA1-ung.;Schutzwürdige und gefährdete Moore, Sümpfe, Riede und Röhrichte (nicht FFH) auf Sekundärstandorten;161369;0
+NCC0;Sümpfe, Riede und Röhrichte;15840;0
+ND00-ung.;Schutzwürdige und gefährdete Heideflächen;161370;0
+NDA0;Trockene Heiden;15841;0
+NDB0;Feuchtheiden;15842;0
+NDC0;Silikattrockenrasen;15843;0
+NDD0;Kalkhalbtrockenrasen;15844;0
+NDE0;Schwermetallrasen;15845;0
+NDF0;Borstgrasrasen;15846;0
+NE00;Mesophiles Wirtschaftsgrünland incl. Brachen;161371;0
+NEC0;Nass- und Feuchtgrünland incl. Brachen;161372;0
+NED0;Magergrünland incl. Brachen;161373;0
+NFD0;Stillgewässer;161374;0
+NFK0;Quellbereiche;161375;0
+NFM0;Fließgewässer;161376;0
+NGA0;Felsen;15847;0
+NGA0-ung.;Schutzwürdige und gefährdete Fels- und Rohbodenstandorte (nicht FFH);161377;0
+NGB0;Block- und Schutthalden;15848;0
+NGC0-ung.;Höhlen und Stollen;20339;0
+NGE0;Stollen, Höhlen und Tunnel;161378;0
+NGF0;vegetationsarme Sand-, Kies- oder Schotterflächen und Rohböden;15849;0
+NGF0-ung.;Schutzwürdige und gefährdete vegetationsarme Sand-, Kies- oder Schotterflächen;161379;0
+NGG0;Sand-, Lehm- oder Lösswände;161380;0
+NHA0;Äcker und Ackerbrachen (auf Sonderstandorten);161381;0
+NHAB;Habitate für ausgewählte Tier-, Pflanzen- und Pilzarten;15850;0
+NHG0;Hohlwege, unbefestigte Feldwege und Wegböschungen;161382;0
+NHK0;Streuobstbestände;161383;0
+NHN0-ung.;Gebäudestrukturen und Hofstellen;161384;0
+NHW0;Brachflächen (ausserhalb von landwirtschaftlichen Flächen);161385;0
+NK00;Säume und Hochstaudenfluren (nicht FFH-LRT);161386;0
+kein LRT;kein LRT;168820;0

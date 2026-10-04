@@ -101,10 +101,20 @@ class FundpunkteImportDialog(QDialog):
         fl = QHBoxLayout()
         self.file_edit = QLineEdit()
         self.file_edit.setPlaceholderText(
-            "Vektordatei oder Tabelle (GPKG, SHP, CSV, XLSX, GeoJSON …)")
+            "Vektordatei, Tabelle oder File-Geodatabase "
+            "(GPKG, SHP, CSV, XLSX, GeoJSON, GDB …)")
         browse_btn = QPushButton("…"); browse_btn.setFixedWidth(30)
+        browse_btn.setToolTip("Datei wählen (GPKG, SHP, CSV, XLSX …)")
         browse_btn.clicked.connect(self._browse_src)
+        # Eine File-Geodatabase ist ein ORDNER (xyz.gdb), keine Datei - der
+        # Dateidialog kann sie darum nicht auswaehlen. Deshalb ein eigener
+        # Knopf mit Ordnerdialog (z. B. fuer den GISPAD-Export).
+        gdb_btn = QPushButton("GDB …"); gdb_btn.setFixedWidth(58)
+        gdb_btn.setToolTip("File-Geodatabase (*.gdb) wählen – z. B. "
+                           "GISPAD-Export")
+        gdb_btn.clicked.connect(self._browse_gdb)
         fl.addWidget(self.file_edit); fl.addWidget(browse_btn)
+        fl.addWidget(gdb_btn)
         file_box.setLayout(fl)
 
         art_box = QGroupBox("Artname-Auflösung")
@@ -492,9 +502,148 @@ class FundpunkteImportDialog(QDialog):
             self, "Quelldatei wählen", "",
             "Vektordateien (*.shp *.gpkg *.geojson *.csv *.xlsx *.xls *.ods *.kml);;Alle (*)"
         )
-        if path:
-            self.file_edit.setText(path)
-            self._load_source(path)
+        if not path:
+            return
+        # Hat der Nutzer ueber "Alle (*)" in eine File-Geodatabase hinein
+        # navigiert und dort eine Einzeldatei erwischt (a00000001.gdbtable),
+        # ist der GDB-Ordner gemeint - darauf zurueckfuehren.
+        gdb = self._gdb_wurzel(path)
+        if gdb:
+            self._uebernehmen(gdb)
+            return
+        self.file_edit.setText(path)
+        self._load_source(path)
+
+    @staticmethod
+    def _gdb_wurzel(path):
+        """
+        Oberster .gdb-Ordner im Pfad, oder None.
+
+        Beide Trennzeichen werden ausgewertet, nicht nur os.sep: QFileDialog
+        liefert unter Windows Schraegstriche, Pfade aus der Projektdatei
+        dagegen Rueckstriche. Die Rueckgabe behaelt die Schreibweise der
+        Eingabe, damit sie unveraendert an OGR weitergegeben werden kann.
+        """
+        if not path:
+            return None
+        norm = path.replace("\\", "/")
+        teile = norm.split("/")
+        for i, t in enumerate(teile):
+            if t.lower().endswith(".gdb"):
+                laenge = len("/".join(teile[:i + 1]))
+                return path[:laenge]
+        return None
+
+    def _browse_gdb(self):
+        """File-Geodatabase waehlen (Ordner) und Layer/Tabelle bestimmen."""
+        pfad = QFileDialog.getExistingDirectory(
+            self, "File-Geodatabase wählen (Ordner *.gdb)", "")
+        if not pfad:
+            return
+        gdb = self._gdb_wurzel(pfad) or pfad
+        if not gdb.lower().endswith(".gdb"):
+            self._log(f"⚠ Kein .gdb-Ordner: {os.path.basename(gdb)}")
+            QMessageBox.warning(
+                self, "Keine File-Geodatabase",
+                "Der gewählte Ordner endet nicht auf '.gdb'.\n\n"
+                "Eine File-Geodatabase ist der Ordner selbst (z. B. "
+                "'GISPAD_Export.gdb') – nicht der Ordner darüber und nicht "
+                "eine Datei darin.")
+            return
+        self._uebernehmen(gdb)
+
+    def _uebernehmen(self, pfad):
+        """Sublayer aufloesen (bei mehreren: Abfrage) und Quelle laden."""
+        uri = self._resolve_sublayer(pfad)
+        if uri is None:      # Auswahl abgebrochen
+            return
+        self.file_edit.setText(uri)
+        self._load_source(uri)
+
+    def _resolve_sublayer(self, pfad):
+        """
+        Enthaelt die Datenquelle mehrere Layer/Tabellen, wird abgefragt,
+        welche gelesen werden soll. Rueckgabe: OGR-URI (ggf. mit
+        '|layername=…'), bei genau einem Layer dessen URI, bei Abbruch None.
+
+        Anders als beim Untersuchungsgebiet wird hier NICHT auf Geometrie
+        gefiltert: Ein GISPAD-Export enthaelt Sachtabellen ohne Geometrie,
+        die als Quelle ebenso in Frage kommen.
+        """
+        kandidaten = []
+        try:
+            from qgis.core import QgsProviderRegistry, Qgis, QgsWkbTypes
+            reg = QgsProviderRegistry.instance()
+            flags = None
+            try:
+                flags = (Qgis.SublayerQueryFlag.ResolveGeometryType
+                         | Qgis.SublayerQueryFlag.CountFeatures)
+            except Exception:
+                try:
+                    flags = Qgis.SublayerQueryFlag.ResolveGeometryType
+                except Exception:
+                    flags = None
+            try:
+                subs = (reg.querySublayers(pfad, flags) if flags is not None
+                        else reg.querySublayers(pfad))
+            except Exception:
+                subs = reg.querySublayers(pfad)
+            kandidaten = list(subs)
+        except Exception:
+            from .debug_log import log_exc
+            log_exc("Import._resolve_sublayer")
+            kandidaten = []
+
+        if not kandidaten:
+            return pfad
+        if len(kandidaten) == 1:
+            return kandidaten[0].uri()
+
+        # Beschriftung mit Geometrietyp und Objektzahl - in einem
+        # GISPAD-Export sind die Namen allein oft nicht sprechend.
+        from qgis.PyQt.QtWidgets import QInputDialog
+        try:
+            from qgis.core import QgsWkbTypes
+        except Exception:
+            QgsWkbTypes = None
+
+        def beschriftung(s):
+            teile = [s.name()]
+            try:
+                if QgsWkbTypes is not None:
+                    gt = QgsWkbTypes.geometryDisplayString(
+                        QgsWkbTypes.geometryType(s.wkbType()))
+                    teile.append(gt if gt else "Tabelle")
+            except Exception:
+                pass
+            try:
+                n = s.featureCount()
+                if n is not None and n >= 0:
+                    teile.append(f"{n:n} Objekte")
+            except Exception:
+                pass
+            return f"{teile[0]}   ({', '.join(teile[1:])})" if len(teile) > 1 \
+                else teile[0]
+
+        namen = [beschriftung(s) for s in kandidaten]
+        name, ok = QInputDialog.getItem(
+            self, "Layer oder Tabelle wählen",
+            "Die Datenquelle enthält mehrere Layer/Tabellen.\n"
+            "Welche soll als Quelle gelesen werden?",
+            namen, 0, False)
+        if not ok:
+            return None
+        return kandidaten[namen.index(name)].uri()
+
+    @staticmethod
+    def _quellname(uri):
+        """'x.gdb|layername=Fund' -> 'x.gdb → Fund' (fuer die Protokollzeile)."""
+        teile = uri.split("|")
+        name  = os.path.basename(teile[0])
+        for t in teile[1:]:
+            if t.startswith("layername="):
+                name += " → " + t.split("=", 1)[1]
+        return name
 
     def _load_source(self, path):
         if path.lower().endswith(".csv"):
@@ -535,7 +684,7 @@ class FundpunkteImportDialog(QDialog):
                 self.artname_combo.setCurrentText(f)
         self.artname_combo.setEnabled(True)
         self._rebuild_map_table()
-        self._log(f"✓ {os.path.basename(path)}  "
+        self._log(f"✓ {self._quellname(path)}  "
                   f"({lyr.featureCount()} Features, {len(src_fields)} Felder)")
         if len(src_fields) == 1 and path.lower().endswith(".csv"):
             self._log("  ⚠ Nur 1 Feld erkannt – CSV evtl. mit falschem"

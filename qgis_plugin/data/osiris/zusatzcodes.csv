@@ -1,0 +1,1043 @@
+schluessel;bezeichnung;atom_id;mehrdeutig
+Aufforstung;Aufforstung;16886;0
+ace;Acker, extensiv, Anzahl Wildkräuter sehr hoch;174653;0
+acer;Acker, extensiv, Anzahl Wildkräuter sehr hoch, RL-Arten vorhanden;174654;0
+aci;Acker, intensiv, Anzahl Wildkräuter gering;174655;0
+acme;Acker, mässig extensiv, Anzahl Wildkräuter hoch;174656;0
+acmi;Acker, mässig intensiv, Anzahl Wildkräuter mässig;174657;0
+acs;Acker, sehr intensiv, Wilkräuter fehlen;174658;0
+al1;keine Lücken;14214;0
+al10;wechselständige Allee;15859;0
+al11;freiwachsende Allee;15860;0
+al12;geschnittene Allee;15861;0
+al13;geformte Allee;15862;0
+al14;Hinweise auf frühere Schnittmassnahmen;15863;0
+al15;enger Baumabstand;15864;0
+al16;weiter Baumabstand;15865;0
+al2;wenige Lücken;14215;0
+al2b;einige Lücken;25001;0
+al3;zahlreiche Lücken;14216;0
+al4;streckenweise einseitig;14217;0
+al5;unterbrochen;14218;0
+al6;Zwischenraum als Parkplatz genutzt;14219;0
+al7;offene Allee (überwiegend offenes Kronendach);15856;0
+al8;bedeckte Allee (überwiegend geschlossenes Kronendach);15857;0
+al9;gegenständige Allee;15858;0
+bar1;Pionierbaumarten im aussaatfähigem Alter vorhanden;167409;0
+bar2;LR-typische Baumarten im aussaatfähigem Alter vorhanden;167410;0
+bas1;Baumstruktur mittel bis schlecht ausgeprägt;174659;0
+bas2;Baumstruktur gut ausgeprägt;174660;0
+bas3;Baumstruktur hervorragend ausgeprägt;174661;0
+bas4;Baumscheibe, versiegelt;14212;0
+bas5;Baumscheibe, unversiegelt;14213;0
+bes1;Bestand ohne oder mit geringer B2- oder Str.Schicht (jeweils < 10%);167411;0
+bes10;gepflanzte Gehölze;171411;0
+bes11;spontane Bäume;171412;0
+bes12;spontane Sträuche;171413;0
+bes13;Krautschicht;171414;0
+bes14;keine Sonderstrukturen vorhanden;176543;0
+bes15;dreischichtiger Bestand;19761;0
+bes2;Bestand mit mässiger B2- (10-30%) u/o Str.Schicht;167412;0
+bes3;Bestand mit deutlicher B2- (> 30%) ohne oder mit Str.Schicht;167413;0
+bes4;Bestand mit zwei deutlich ausgeprägte Baumschichten (B2- und Str.Schicht jeweils > 30% ) in kleinfl. Mischung (femelartig);167414;0
+bes5;Bestand mit zwei deutlich ausgeprägte Baumschichten (B2- und Str.Schicht jeweils > 30%) in Einzelmischung (plenterartig);167415;0
+bes6;einschichtiger Bestand;170956;0
+bes7;zweischichtiger Bestand;170957;0
+bes8;kleinflächig gestufter Bestand;170958;0
+bes9;Niederwaldstruktur;170959;0
+bfl;Boden flachgründig;174662;0
+bs0;Brachezeiger;174944;0
+bs1;Arten trockenwarmer Säume;174945;0
+cc;Cross Compliance-Objekt;176449;0
+chf;Charakter- u/o Trennarten fehlen;174663;0
+chg;Charakter- u/o Trennarten, Anzahl gering;174664;0
+chh;Charakter- u/o Trennarten, Anzahl hoch;174665;0
+chm;Charakter- u/o Trennarten, Anzahl mittel;174666;0
+chs;Charakter- u/o Trennarten, Anzahl sehr gering;174667;0
+dg1;Deckungsgrad der Magerkeitszeiger: 2m oder höher;168817;0
+dg2;Deckungsgrad der Nässe-/ Feuchtezeiger: 2m oder höher;168819;0
+ea;Getreide;155570;0
+ea1;Weizen;155571;0
+ea2;Gerste;155572;0
+ea3;Sommergerste;155573;0
+ea4;Wintergerste;155574;0
+ea5;Hafer;155575;0
+ea6;Hafer-Gerste-Gemenge;155576;0
+ea7;Roggen;155577;0
+ea8;Triticale;155578;0
+ea9;Mais;155579;0
+eb1;Raps;155580;0
+eb10;Sonnenblumen;161502;0
+eb11;Topinambur;161503;0
+eb12;Kräuter;161504;0
+eb13;Bohnen;161505;0
+eb14;Erbsen;161506;0
+eb15;Kohl;161507;0
+eb16;Spinat, Salat;161508;0
+eb17;Wurzelgemüse;161509;0
+eb18;Zwiebeln;161510;0
+eb19;Gurken, Kürbis;161511;0
+eb2;Kartoffeln;155581;0
+eb20;Wicken;161512;0
+eb21;Rotklee;161513;0
+eb22;Perserklee;161514;0
+eb23;Inkarnatklee;161515;0
+eb24;Luzerne;161516;0
+eb25;Senf;161517;0
+eb26;Erdbeeren;161518;0
+eb27;Spargel;161519;0
+eb28;Buchweizen;161520;0
+eb29;Phacelia;161521;0
+eb3;Rüben;155582;0
+eb30;Einsaat, Feldgras;161522;0
+eb31;Einsaat, Klee - Feldgras;161523;0
+eb32;Gartenland;171236;0
+eb33;(Küchen-)Kräuter;7687;0
+eb34;Weissklee;167489;0
+eb35;Blattgemüse;168899;0
+eb36;Miscanthus (Chinaschilf);168897;0
+eb37;Rollrasen;168898;0
+eb4;Gemüse, Gemüse-Mischung;155583;0
+eb5;Lein;155584;0
+eb6;Blumen;155585;0
+eb7;Dinkel;161499;0
+eb8;Hirse;161500;0
+eb9;Hanf;161501;0
+ec;Sukzessions-Ackerbrache;155586;0
+ed;Einsaatbrache;155587;0
+ed1;Blühstreifen (-flächen);174668;0
+ee1;Strauch-Beerenobst;161524;0
+ee2;Spalierobst;161525;0
+ef;Selbsterntefeld;161526;0
+eg1;Halmdichte, doppelter Reihenabstand;170798;0
+eg2;Halmdichte, dicht, normal;170799;0
+eg3;Halmdichte, nicht relevant;170800;0
+eh1;(nahezu) wildkrautfrei;170801;0
+eh2;Wildkräuter, nur randlich;170802;0
+eh3;Wildkräuter, vereinzelt in der Fläche;170803;0
+eh4;Wildkräuter, Ackerrandstreifen;170804;0
+eh5;Wildkräuter, frequent in der Fläche;170805;0
+ehz;Energieholz;174940;0
+en1;durch Kahlschlag entstanden;171156;0
+en2;durch Sturm entstanden;171157;0
+en3;durch Brand entstanden;171158;0
+en4;durch natürliche Sukzession entstanden;171159;0
+en5;Entstehung unbekannt;171160;0
+esr;Schmuckreisig;174939;0
+fa;keine wasserwirtschaftliche Funktion;160416;0
+fb;wasserwirtschaftliche Funktion;160417;0
+fc;Abwasserkanal;160418;0
+fd;Vorfluter;160419;0
+fe;Wasserstrasse;160420;0
+ff;Trinkwassereservoir;160421;0
+fuf1;Soldatenfriedhof;161773;0
+fuf2;Ehrenmal, Kriegerdenkmal;161774;0
+fuf3;Begräbnisstätte, Erbbegräbnis;161775;0
+fuf4;Jüdischer Friedhof;161776;0
+fuf5;Islamischer Friedhof;161777;0
+fuf6;Kirchlicher Friedhof;161778;0
+fuf7;Städtischer, öffentlicher Friedhof;161779;0
+ga;Gewässer;137923;0
+ga1;temporäre Kleingewässer;152993;0
+ga2;permanente Kleingewässer;152994;0
+ga3;fließgewässerbegleitend;168853;0
+gb;Pionierflur trocken;137924;0
+gc;Pionierflur nass-feucht;137925;0
+gd;Gebüsch, Pionier-, Vorwaldstadium;137926;0
+ge;hohe Strukturvielfalt des Kleinreliefs;152995;0
+gf;Sandwand;152996;0
+gg;Kieswand;152997;0
+gh;Lösswand;151865;0
+gi;Rohböden;151866;0
+gj;Trockenrasen;151867;0
+gj1;Felsrasen;174669;0
+gk;Mosaik verschiedenartiger Biotope;151868;0
+gl;Hangvernässungen durch Druckwasser;151869;0
+gm;carbonathaltiges Festgestein;155564;0
+gn;nicht carbonathaltiges Festgestein;155565;0
+go;carbonathaltiges Lockergestein;155566;0
+gp;nicht carbonathaltiges Lockergestein;155567;0
+gq;Braunkohle;155568;0
+gr1;Glatthafer;160471;0
+gr2;Land-Reitgras;160472;0
+gr3;Riesen-Straussgras;160473;0
+gr4;Rotes Straussgras;160474;0
+gr5;Trittrasen- bzw. Scherrasengräser;160475;0
+gs;Abgrabung, Steinbruch in Betrieb;161527;0
+gs1;Abgrabung, Steinbruch stillgelegt;161528;0
+gs2;Steinbruch;172514;0
+gs3;Abgrabung, Steinbruch, Verfüllung;18417;0
+gs4;Abgrabung, Steinbruch, Fremdnutzung;18418;0
+gt;Deponiematerial;161743;0
+gt1;Bodenmaterial, Erden;161744;0
+gt10;Steinkohle, Kohlenstaub;161753;0
+gt11;Erze, Erzstaub;161754;0
+gt12;Schlacke;161755;0
+gt2;Bergematerial;161745;0
+gt3;Bauschutt;161746;0
+gt4;Schotter;161747;0
+gt5;Splitt;161748;0
+gt6;Holz, -schnitze, Rindenmulch;161749;0
+gt7;Kompostmaterial;161750;0
+gt8;Hausmüll;161751;0
+gt9;Sondermüll;161752;0
+gu;Bunker, gesprengt;174932;0
+gv;Liegeplatz (z.B. Wildkatze);174933;0
+gw1;Hohlraum, offen;174930;0
+gw2;Hohlraum, geschlossen;174931;0
+gx1a;Abtragungsform-erosionsbedingt;34292;0
+gx1b;Abtragungsform-korrosionsbedingt;34293;0
+gx1c;Abtragungsform-subrosionsbedingt;34294;0
+gx2a;Aufschluss-Bodenprofile;34296;0
+gx2b;Aufschluss-Fossilien;34297;0
+gx2c;Aufschluss-Gesteine;34298;0
+gx2d;Aufschluss-Gesteins- und Bodenstrukturen;34299;0
+gx2e;Aufschluss-Gesteinsdeformationen;34300;0
+gx2f;Aufschluss-künstlich;34301;0
+gx2g;Aufschluss-Minerale;34302;0
+gx2h;Aufschluss-mit Einzelelementen;34303;0
+gx2i;Aufschluss-mit Kombination von Einzelelementen;34304;0
+gx2j;Aufschluss-natürlich;34305;0
+gx2k;Aufschluss-Schichtfolge;34306;0
+gx3a;Aufschüttungsform-äolisch bedingt;34308;0
+gx3b;Aufschüttungsform-biogen;34309;0
+gx3c;Aufschüttungsform-fluviatil bedingt;34310;0
+gx3d;Aufschüttungsform-glazial- und periglazial bedingt;34311;0
+gx3e;Aufschüttungsform-vulkanogen;34312;0
+gx4a;Landschaftsform-biogen;139480;0
+gx4b;Landschaftsform-erosionsbedingt;139481;0
+gx4c;Landschaftsform-vulkanogen;139482;0
+gx4d;Landschaftsform-biogen-Moor;140125;0
+gx4e;Landschaftsform-biogen-Sinterterrasse;140126;0
+gx5a;Geowissenschaftlich-historisches Objekt;60955;0
+gx5b;Moor;9363;0
+gx5c;Quelle;9364;0
+gx5d;Schwinde;34316;0
+gx5e;Sinterterrasse;9365;0
+hb;Moorheidestadium;151856;0
+hc;Pfeifengrasstadium;152986;0
+hd;Randsumpf;152987;0
+he;Drahtschmielenstadium;151857;0
+hf;Borstgrasstadium;152988;0
+hg;Wacholdergebüsche;152989;0
+hi;alte Einzelbäume;151858;0
+hj;starke Verbuschung (> 50%);152990;0
+hk;Sandanrisse, offene Stellen;152991;0
+hs1;Besenheide;174946;0
+hs2;Sandrasenarten;174947;0
+hs3;Felsgrusarten;174948;0
+ka;gleichartige Bestockung;152998;0
+ka1;verschiedenartige Bestockung;152999;0
+ka2;nicht bodenständige Baumarten;161529;0
+ka3;nicht heimische Baum-, Straucharten vorhanden;161530;0
+ka4;nicht heimische Baum-, Straucharten überwiegen;174670;0
+ka6;einheimische Baum-, Straucharten überwiegen;174671;0
+kan;keine Angabe;15813;0
+kb;einreihige Hecke;153000;0
+kb1;mehrreihige Hecke;153001;0
+kb2;Hecke mit Einzelbäumen, Baum-Hecke;160422;0
+kb3;Hecke ohne Einzelbäume, Strauch-Hecke;161531;0
+kb4;Einreihige Allee (ungültiger Begriff);167402;0
+kb5;Zweireihige Allee;167403;0
+kb6;Linienhafte Laubwaldstruktur;167416;0
+kb7;Säulenbäume;168920;0
+kb8;Kopfbäume;168919;0
+kc1;Einzelbaum, vital, allenfalls tote Zweige;170806;0
+kc2;Einzelbaum, wenige Kronenäste abgestorben;170807;0
+kc3;Einzelbaum, ca. Hälfte der Krone abgestorben;170808;0
+kc3a;Einzelbaum, 1/3 bis 2/3 der Krone abgestorben;10053;0
+kc3b;Einzelbaum, mind. 2/3 der Krone abgestorben;10054;0
+kc4;Einzelbaum, grössere Stammschäden;170809;0
+kc5;Einzelbaum, Krone/Stamm überw. b. voll. abgestorben;170810;0
+kd1;frisch geschneitelt (< 5 Jahre);171353;0
+kd2;zuletzt geschneitelt vor 5-10 Jahren;171354;0
+kd3;zuletzt geschneitelt vor über 10 Jahre;171355;0
+kd4;intensiv gepflegt;174672;0
+kd5;fachgerecht gepflegt;174673;0
+kd6;nicht fachgerecht gepflegt;176451;0
+kd7;ungepflegt;176452;0
+kd8;Pflegezustand, keine Angabe;176577;0
+kl1;Teich;170949;0
+kl10;natürlicher Uferwall;379;0
+kl11;Flutmulde;380;0
+kl12;Keine besondere Umfeldstrukturen;376;0
+kl2;(Schlamm)-Pfützen;170950;0
+kl3;Misthaufen;171183;0
+kl4;Hühnerhof;171184;0
+kl5;Fahrsilo;171185;0
+kl6;Gartentümpel;171186;0
+kl7;Strom-, Telefonleitungen;177027;0
+kl8;Altarm;381;0
+kl9;ausgeprägte Terassenkanten;378;0
+l2;Walnuss;160437;0
+l3;Götterbaum;160438;0
+l4;anderer Laub-Zierbaum;160439;0
+la;Baumweide;137927;0
+lb;Bergahorn;137928;0
+lc;Buche;137929;0
+ld;Eberesche;137930;0
+le;Esche;137931;0
+lf;Esskastanie;137932;0
+lg;Feldahorn;137933;0
+lh;Grauerle;137934;0
+lim;zum Limes gehörig;174928;0
+lj;Hainbuche;137935;0
+lk;Linde;137936;0
+lk1;Silberlinde;160432;0
+ll;Moorbirke;137937;0
+lm;Pappel;137938;0
+lm1;Zitterpappel;160433;0
+lm2;Hybridpappel;160434;0
+lm3;Silberpappel;160435;0
+ln;Platane;137939;0
+lo;Robinie;137940;0
+lp;Rosskastanie;137941;0
+lq;Roteiche;137942;0
+lr;Sandbirke;137943;0
+lrg0;LR-typische Gehölzanteil < 50;174674;0
+lrg100;LR-typische Gehölzanteil > 70;174675;0
+lrg50;LR-typische Gehölzanteil > 50;174676;0
+lrg70;LR-typische Gehölzanteil 50-70;174677;0
+lrt0;LR-typischer Baumartenanteil nicht einstufbar;172401;0
+lrt1;keine LR-typische Baumarten oder Anteil < 25%;167417;0
+lrt100;LR-typische Baumartenanteil 90-100 %;174678;0
+lrt2;LR-typische Baumartenantel > 25 und <70%;167418;0
+lrt3;LR-typische Baumartenanteil > 70 und < 85%;167419;0
+lrt30;LR-typische Baumartenanteil 0-30 %;174679;0
+lrt4;LR-typische Baumartenzusammensetzung unvollständig, Anteil aber > 85 und < 100%;167420;0
+lrt5;LR-typische Baumartenzusammensetzung vollständig, Anteil 100%;167421;0
+lrt50;LR-typische Baumartenanteil 30-50 %;174680;0
+lrt70;LR-typische Baumartenanteil 50-70 %;174681;0
+lrt90;LR-typische Baumartenanteil 70-90 %;174682;0
+ls;Schwarzerle;137944;0
+lt;Spitzahorn;137945;0
+lu;Stieleiche;137946;0
+lv;Traubeneiche;137947;0
+lw;Ulme;137948;0
+lx;Vogelkirsche;137949;0
+ly;Traubenkirsche;137950;0
+ly1;Späte Traubenkirsche;160436;0
+lz;Obstbaum;137951;0
+lz1;Obstbaum-Hochstämme (Kronenansatz ab 180 cm);161532;0
+lz10;25 oder mehr (hochstämmige) Streuobstbäume im Bestand;191735;0
+lz2;Obstbaum-Niedrigstämme;161533;0
+lz3;Obstbaum-Busch;174937;0
+lz4;Obstbaum-Halbstamm (Kronenansatz 100 -180 cm);174938;0
+lz5;Jungpflanzung;179358;0
+lz6;mittelalter Bestand;179359;0
+lz7;Altbestand;179360;0
+lz7a;lückiger Altbestand;179361;0
+lz8;überalterter Bestand;179362;0
+lz9;9 oder mehr Streuobstbäume im Bestand;100018;0
+ma1;freiwachsende, sommergrüne Zierstrauchpflanzungen;137952;0
+ma2;freiwachsende, immergrüne Zierstrauchpflanzungen;137953;0
+ma3;schmale, streng geschnittene Gehölzpflanzungen;137954;0
+ma4;Lärmschutzgehölze;137955;0
+ma5;Bodendecker;137956;0
+ma6;Zier-Laubbäume;137957;0
+ma7;Zier-Nadelbäume;137958;0
+mb1;Gemüsebeete;137959;0
+mb2;Blumenbeete, Staudenbeete;137960;0
+mb3;Grabstätten;137961;0
+mc1;Trittrasen;137962;0
+mc2;extensiv gepflegte Rasenflächen;137963;0
+mc3;ruderalisierte Magerrasen;137964;0
+md1;Zäune mit Saumgesellschaften;137965;0
+md2;dörfliche Ruderalsäume;137966;0
+md3;gut ausgebildete Saumgesellschaften;137967;0
+me1;Pflaster- und Plattenbeläge;137968;0
+me10;unbefestigter Weg, Strukturen fehlend;171410;0
+me2;Asphalt- und Betonflächen;137969;0
+me3;wassergebundene Decken;137970;0
+me4;unbefestigte Wegränder mit Spontanvegetation;137971;0
+me5;Pflasterritzengesellschaften;137972;0
+me6;unbefestigter Weg, breit (> 1 m);170937;0
+me7;unbefestigter Weg, schmal (< 1 m);170938;0
+me8;unbefestigter Weg, Hochstauden, Brache mit Fahrspuren;170939;0
+me9;unbefestigter Weg, Hochstauden, Brache ohne Fahrspuren;170940;0
+mf1;Bodenbedeckungen aus Kies, Grobsand, Schotter, Schlacke;137973;0
+mf10;Fernstrasse, zweispurig;170944;0
+mf11;Fernstrasse, dreispurig;170945;0
+mf12;Strasse mit Bürgersteig;170946;0
+mf13;Strasse mit Radweg;170947;0
+mf14;Strasse mit Parkstreifen;170948;0
+mf15;Gleis-/Bahnlinie (1-2 gleisig);168944;0
+mf16;Gleisanlage (>= 3 gleisig);169331;0
+mf2;Bodenbedeckungen aus sandigem Material;137974;0
+mf3;Bodenbedeckungen aus Bergematerial;137975;0
+mf4;Bodenbedeckungen aus erdigem Material;137976;0
+mf5;Bodenbedeckungen aus Bauschutt, Trümmerschutt;137977;0
+mf6;geschotterte Gleisanlagen;137978;0
+mf7;Bodenbedeckungen aus Schotter;170941;0
+mf8;Grasweg;170942;0
+mf9;Fernstrasse, einspurig;170943;0
+mg1;Gebäudefassaden mit Kletterpflanzen;137979;0
+mg10;Flachdächer;161549;0
+mg11;Einflugmöglichkeit fehlend;170907;0
+mg12;normaler Bauzustand;171168;0
+mg13;Rohbau;171169;0
+mg14;Baustelle (Neubau);171170;0
+mg15;Ruine/ verfallen;171171;0
+mg16;Baustelle (Abbruch);171172;0
+mg17;vor 1950, nicht renoviert;171164;0
+mg18;vor 1950, renoviert;171165;0
+mg19;nach 1950;171166;0
+mg2;Kirchtürme mit Einflugmöglichkeiten;137980;0
+mg20;baufällig;171167;0
+mg22;Keller;171177;0
+mg23;Dachboden;171178;0
+mg24;Brunnen;171179;0
+mg25;1-1,5stockig;171173;0
+mg26;2-3stockig;171174;0
+mg27;4-mehrstockig;171175;0
+mg28;Einflugmöglichkeit für (Schleier)-eule;171344;0
+mg29;Einflugmöglichkeit für (Rauch)-schwalbe;171345;0
+mg3;Wohngebäude mit Einflugmöglichkeiten;137981;0
+mg30;Parkplatz;7733;0
+mg31;Lagerplatz;7734;0
+mg32;keine Einflugmöglichkeit;7736;0
+mg4;Stallungen mit Einflugmöglichkeiten;137982;0
+mg5;Mauerwerk mit Nischen, Spalten, Fugen, Hohlräumen;151877;0
+mg6;breite Dachüberstände;151878;0
+mg7;Fachwerk;151879;0
+mg8;Lehmwände;151880;0
+mg9;bodengefüllte Mauerritzen;151881;0
+mh1;dorftypische Arten;144589;0
+mi1;Dachbegrünung;151882;0
+mi2;Fassadenbegrünung;151883;0
+mi3;Schilf- und Strohdächer;151884;0
+mj1;Brutkästen;151885;0
+mk1;Altes Bauholz;151886;0
+ml1;Kleintierhaltung;155588;0
+mm1;überwiegend alte Bausubstanz;155589;0
+mm2;überwiegend neue Bausubstanz;155590;0
+mo1;ausrangiertes Ackergerät;155591;0
+mp1;Wilder Wein;159538;0
+mp10;Mauerfarne;159547;0
+mp11;Moose, Flechten;159548;0
+mp12;Gräser;159549;0
+mp13;Kräuter;159550;0
+mp14;Sträucher, junge Bäume;159551;0
+mp15;Sonstiges (siehe Bem.);159552;0
+mp16;Fassadenbegrünung nicht vorhanden;170900;0
+mp17;Fassadenbegrünung frisch gepflanzt;170901;0
+mp18;Fassadenbegrünung alt;170902;0
+mp19;Fassadenbegrünung an einer Gebäudeseite;170903;0
+mp2;Efeu;159539;0
+mp20;Fassadenbegrünung an zwei Gebäudeseiten;170904;0
+mp21;Fassadenbegrünung an drei Gebäudeseiten;170905;0
+mp22;Fassadenbegrünung an alle Gebäudeseiten;170906;0
+mp3;Blauregen;159540;0
+mp4;Knöterich;159541;0
+mp5;Kletter-Hortensie;159542;0
+mp6;Waldrebe;159543;0
+mp7;Geissblatt;159544;0
+mp8;Kletterrose;159545;0
+mp9;Hopfen;159546;0
+mq1;alter Baumbestand;161535;0
+mq10;Ast- und / oder Reisighaufen;161544;0
+mq11;Grünabfall-Laubhaufen;161545;0
+mq12;waldartig;161546;0
+mq13;parkartig;161547;0
+mq2;bodenständiger Strauchbestand;161536;0
+mq3;dichter Strauchbestand;161537;0
+mq4;alter Obstbaumbestand;161538;0
+mq5;naturnahes Kleingewässer;161539;0
+mq6;naturnaher Garten;161540;0
+mq7;Trockenmauer;161541;0
+mq8;Komposthaufen;161542;0
+mq9;Holzstapel;161543;0
+mr1;in Dammlage;161555;0
+mr10;mit Gebüsch;161564;0
+mr11;mit Rasen;161565;0
+mr12;mit Wiese oder Ruderalbewuchs;161566;0
+mr13;mit Bodendecker;161567;0
+mr14;mit Zierpflanzen;161568;0
+mr15;mit Rankpflanzen;161569;0
+mr2;im Einschnitt;161556;0
+mr3;mit grünem Mittelstreifen;161557;0
+mr4;mit Strassenbegleitgrün;161558;0
+mr5;mit grüner Vekehrsinsel;161559;0
+mr6;mit Seitengraben;161560;0
+mr7;mit Schutzwall;161561;0
+mr8;mit Schutzwand, -mauer;161562;0
+mr9;mit Strassenbäumen;161563;0
+na;Douglasie;137983;0
+nb;Fichte;137984;0
+nc;Kiefer;137985;0
+nd;Lärche;137986;0
+ne;Tanne;137987;0
+neo0;Neo- / Nitrophyten fehlen;174683;0
+neo1;Anteil Neo- / Nitrophyten < 25 %;174684;0
+neo2;Anteil Neo- / Nitrophyten > 25-50 %;174685;0
+neo3;Anteil Neo- / Nitrophyten > 50 %;174686;0
+neo4;Anteil Neo- / Nitrophyten > 50-75 %;174687;0
+neo5;Anteil Neo- / Nitrophyten > 75 %;174688;0
+nf;Eibe;151873;0
+ng;Sumpfzypresse;151874;0
+ngb-1;Verkehrsbegleitfläche;155593;0
+ngb-10;Pionierstadium auf genutzten Flächen;155602;0
+ngb-11;naturferner Graben;155603;0
+ngb-12;typisch ausgebildete Vegetation fehlt;155604;0
+ngb-13;Quelle, Quellbereich naturfern;155605;0
+ngb-14;typische Vegetation offener Binnendünen fehlt;155606;0
+ngb-15;anthropogene Felswand;155607;0
+ngb-16;Degenerations-, Gebüschstadium;155608;0
+ngb-17;Kahlschlagvegetation;155609;0
+ngb-18;typische Arten nur Einzelexemplare;155610;0
+ngb-19;Magerkeitszeiger fehlen oder Anzahl nicht ausreichend;155611;0
+ngb-2;bebautes Grundstück;155594;0
+ngb-20;Magerkeitszeiger nicht regelmässig verteilt;155612;0
+ngb-21;keine typischen Arten;155613;0
+ngb-22;thermophile Arten fehlen;155614;0
+ngb-23;Fremdgehölze dominieren;155615;0
+ngb-24;Störzeiger dominieren;155616;0
+ngb-25;standortfremder Baumbestand;155617;0
+ngb-26;Sonstiges, siehe Bemerkung;155618;0
+ngb-27;Feuchtezeiger fehlen oder Anzahl nicht ausreichend;174629;0
+ngb-3;Versorgungs-, Entsorgungsanlage;155595;0
+ngb-4;Funktionsfläche-grünfläche;155596;0
+ngb-5;Funktionsfläche-Abgrabung, Aufschüttung, Deponie;155597;0
+ngb-6;Funktionsfläche-Rückhaltebecken;155598;0
+ngb-7;Funktionsfläche-Talsperre;155599;0
+ngb-8;naturfernes Fliessgewässer;155600;0
+ngb-9;naturfernes Stillgewässer;155601;0
+nh;Lebensbaum;160440;0
+nj;anderer Nadel-Zierbaum;160441;0
+oa;strauchreich;137988;0
+ob;straucharm;137989;0
+ob1;gehölzarm;191704;0
+oc;zwergstrauchreich;137990;0
+od;farnreich;137991;0
+oe;grasreich;137992;0
+oe1;wiesenartig;160415;0
+of;geophytenreich;137993;0
+og;schlingpflanzenreich;137994;0
+oh;Höhlenbaum(bäume);137995;0
+oh1;reich an Baumhöhlen;151810;0
+oh2;Grosshöhlenbaum (Höhle > 5cm Durchmesser);151811;0
+oh3;Horstbaum(bäume);167423;0
+oh4;Spechtbaum(bäume);15831;0
+oh5;Kleinhöhlenbaum (>= 3 Spechthöhlen u./o. Naturhöhlen);190702;0
+oj;totholzreich;137996;0
+oj1;Totholz, stehend (BHD > 50 cm);137997;0
+oj10;Totholz, stark zersetzt, vermodert;170814;0
+oj11;Totholz, sehr trocken;170815;0
+oj12;Totholz, feuchte Stellen;170816;0
+oj13;Totholz, durchgängig feucht;170817;0
+oj14;Totholz, sehr feucht bis nass;170818;0
+oj15;Totholz, hängend (BHD > 50 cm);176575;0
+oj16;Totholz, Feuchtigkeitsgrad, keine Angabe;176569;0
+oj17;Totholz (BHD > 50 cm);169277;0
+oj18;geworfener Baum (lebend) (BHD >50cm);169278;0
+oj19;Zwiesel (mehrstämmiger Baum);169283;0
+oj2;Totholz, liegend (BHD > 50 cm);137998;0
+oj3;schwaches Totholz, stehend (BHD < 50 cm);137999;0
+oj4;schwaches Totholz, liegend  (BHD < 50 cm);138000;0
+oj5;sonnenexponiertes Totholz;151812;0
+oj6;anbrüchige stämme;167422;0
+oj7;Totholz, frisch tot, Rinde fest;170811;0
+oj8;Totholz, beginnende Zersetzung, ohne Rinde;170812;0
+oj9;Totholz, fortgeschrittene Zersetzung;170813;0
+ok;Waldrand, Waldmantel;138001;0
+ok1;mehrstufiger Waldrandaufbau;151813;0
+ok2;südlich exponierter gut ausgebildeter Waldrand;151814;0
+ok3;Brachland;174605;0
+ok4;Bachzone;174606;0
+ol;Waldsaum;138002;0
+om;Rotationsbrache;138003;0
+on;Niederterassenkante;138004;0
+op;Hauptterassenkante;138005;0
+opo;Biotop mit Potential zum Vorkommen planungsrelevanter Arten;174934;0
+oq;lückige Vegetationsdecke, ohne geschlossene Krautschicht;138006;0
+oq1;weitgehend ohne Vegetation;172591;0
+oq2;mit geschlossener Krautschicht;174689;0
+or;orchideenreich;138007;0
+or1;orchideenreich, hohe Artenzahl;138008;0
+or2;orchideenreich, bedeutende Population;138009;0
+or3;orchideenreich, seltene Arten;138010;0
+or4;mindestens eine bundesweit gefährdete Orchideenart (Aspekt seltene Arten);168909;0
+or5;mindestens drei Orchideenarten (Aspekt hohe Artenzahl);168911;0
+or6;mindestens eine Orchideenart mit 1000 Exemplaren (Aspekt bedeutende Population);168912;0
+os;gesellschaftstypische Artenkombination vorhanden;138011;0
+ot;Bulten-Schlenken-Komplex;138012;0
+ou;Voranbau, Sukzession mit Laubholzarten;138013;0
+ou1;Voranbau, Sukzession mit Laubholzarten, Buche;138014;0
+ou2;Voranbau, Sukzession mit Laubholzarten, Eiche;138015;0
+ov;Voranbau, Sukzession mit Nadelholzarten;138016;0
+ova;Biotop mit nachgewiesenem Vorkommen planungsrelevanter Arten;174935;0
+ova1;Habitat für hoch spezialisierte Flora und Fauna;191747;0
+ow;FFH-Waldlebensraumtyp in Entwicklung;138017;0
+ox;forstlich veränderte Baumartendominanz aus lebensraumtypischen Laubholzarten;159153;0
+oy1;ohne Aufforstung;170819;0
+oy2;mit Laubholz-Aufforstung;170820;0
+oy3;mit Nadelholz-Aufforstung;170821;0
+oy4;mit Laub- und Nadelholz-Aufforstung;170822;0
+ra;Binnendüne, Flugsande;138018;0
+ra1;Flugsande;151840;0
+rb;Doline;138019;0
+rbv;relevant für den Biotopverbund;174936;0
+rc;Erdfallsee;138020;0
+rc1;Erdfall / Pinge;167390;0
+rd;Maar;138021;0
+re;geowissenschaftlich wertvoller Aufschluss;138022;0
+rf;Fossilienvorkommen;138023;0
+rg;kalksinter;138024;0
+rh;Steilwand überhängend;151841;0
+rj;Höhle, Stollen, tiefe Felsspalte;167391;0
+rj1;Höhlengewässer;172374;0
+rj2;Felsen;172515;0
+rj3;Felswand;377;0
+rk;Hohlweg(e);167392;0
+rl1;Felsen mit Nischen, Spalten, Fugen, Hohlräumen;171180;0
+rm;Wall, Wälle;176450;0
+ru0;Hochstauden ruderaler Standorte;174949;0
+ru1;Acker-Kratzdistel;160476;0
+ru10;Schmalblättriges Greiskraut;160485;0
+ru11;Schmalblättriges Weidenröschen;160486;0
+ru12;Staudenknöterich;160487;0
+ru13;Steinklee;160488;0
+ru14;Wasserdost;160489;0
+ru15;Zottiges Weidenröschen;160490;0
+ru16;mit Misteln;15832;0
+ru2;Adlerfarn;160477;0
+ru3;Astern;160478;0
+ru4;Brennnessel;160479;0
+ru5;Gemeiner Beifuss;160480;0
+ru6;Goldrute;168879;0
+ru7;Johanniskraut;160482;0
+ru8;Klebriger Alant;160483;0
+ru9;Rainfarn;160484;0
+s0;Forsythie;160442;0
+s1;Rhododendron;160443;0
+s2;Flieder;160444;0
+s3;Sanddorn;160445;0
+s4;Obst-Johanisbeere;160446;0
+s5;Zier-Johannisbeere;160447;0
+s6;Stachelbeere;160448;0
+s7;anderer Zierstrauch;160449;0
+sa;Berberitze;138025;0
+sb;Besenginster;138026;0
+sc;Brombeere;138027;0
+sd;Faulbaum;138028;0
+se;Gagelstrauch;138029;0
+sf;Hartriegel;138030;0
+sg;Hasel;138031;0
+sh;Himbeere;138032;0
+sj;Holunder;138033;0
+sk;Liguster;138034;0
+sl;Rose;138035;0
+sm;Schlehe;138036;0
+sn;Schneeball;138037;0
+so;Stechpalme;138038;0
+sp;Wacholder;138039;0
+sps1;Personengruppe < 6 Jahre;161186;0
+sps2;Personengruppe 6 - 12 Jahre;161187;0
+sps3;Personengruppe 13-17 Jahre;161188;0
+sps4;Personengruppe > 18 Jahre;161189;0
+sps5;Spiel mit Wasser;161190;0
+sps6;Spiel mit Naturmaterial ausser Sand;161191;0
+sps7;Spiel mit Sand;161192;0
+sq;Strauchweide;138040;0
+sr;Weissdorn;138041;0
+sta;basenarm;138042;0
+sta1;kalkarm;138043;0
+sta2;sandig;174690;0
+sta3;nährstoffarm;174691;0
+stb;basenreich;138044;0
+stb1;kalkreich;138045;0
+stb2;Störungszeiger, Nährstoffanreicherung;163815;0
+stb3;nährstoffreich;174692;0
+stc;dystroph;138046;0
+std;oligotroph;138047;0
+ste;eutroph;138048;0
+stf;mesotroph;138049;0
+stg;hypertroph, polytroph;138050;0
+sth;extensiv genutzt;138051;0
+sth1;mässig extensiv genutzt;174693;0
+sti;Block- und Hangschutt;174927;0
+stj;mässig intensiv genutzt;138052;0
+stk;intensiv genutzt;138053;0
+stk1;sehr intensiv genutzt (z.B. Ackerbau unter Folie);174694;0
+stl;ungenutzt, brachgefallen;138054;0
+stm;auf trocken-warmem Standort;138055;0
+stm1;auf trocken-frischem Standort;138056;0
+stm2;wechseltrocken;138057;0
+stm3;frostfrei;171181;0
+stn;auf frischem Standort;138058;0
+stn1;auf frisch-feuchtem Standort;138059;0
+sto;auf feucht-nassem Standort;138060;0
+sto1;auf feucht-kühlem Standort;138061;0
+sto2;wechselfeucht;138062;0
+sto3;auf Bruch- oder Sumpfwaldstandort;168854;0
+stp;planar, submontan;138063;0
+stq;montan;138064;0
+str;Torfsubstrat;138065;0
+str1;auf Moorwaldstandort;168855;0
+str2;geringmächtiger Torf;179237;0
+sts;Sand-Rohboden;138066;0
+sts1;auf Mineralboden;179238;0
+sts2;kolluviale Mischgesteine/-sedimente;190550;0
+stt;Standort primär;138067;0
+stu;Standort sekundär;138068;0
+stv;episodisch überflutet;138069;0
+stv1;regelmäßig, mindestens jährlich überflutet;174942;0
+stv2;auf Auwaldstandort;168856;0
+stw;quellig, durchsickert;138070;0
+stw1;hoher Grundwasserstand;151832;0
+stw2;Störungszeiger, Grundwasserabsenkung;163816;0
+stx;regenerierbar;138071;0
+sty;sonnenexponiert;151833;0
+sty1;beschattete Lage;151834;0
+sty2;keine Beschattung durch Vegetation;151835;0
+sty3;windgeschützt;151836;0
+stz;welliges Bodenrelief;151837;0
+stz1;hoher Neigungswinkel;151838;0
+su;Sommerflieder;151875;0
+sv;Felsenbirne;174950;0
+sw1;Schilf;160450;0
+sw10;Kalmus;160459;0
+sw11;bultige Seggen;160460;0
+sw12;Ausläufer bildende Seggen;160461;0
+sw13;bultige Binsen;160462;0
+sw14;Ausläufer bildende Binsen;160463;0
+sw15;Wasserlinse;160464;0
+sw16;Teichrose;160465;0
+sw17;Seerose;160466;0
+sw18;Laichkräuter;160467;0
+sw19;Wasserpest;160468;0
+sw2;Rohrkolben;160451;0
+sw20;Algen;160469;0
+sw21;Sonstige Sumpf- bzw. Wasserpflanzen;160470;0
+sw22;Waldbinse;174951;0
+sw3;Rohrglanzgras;160452;0
+sw4;Wasserschwaden;160453;0
+sw5;Igelkolben;160454;0
+sw6;Teichsimse;160455;0
+sw7;Strandsimse;160456;0
+sw8;Gemeine Sumpfsimse;160457;0
+sw9;Waldsimse;160458;0
+ta;starkes Baumholz (BHD 50 bis 80  cm);138072;0
+ta1;mittleres Baumholz (BHD 38 bis 50 cm);161571;0
+ta10;Baumholz (ab 14 cm BHD);167429;0
+ta11;sehr starkes Baumholz (BHD 80 bis 100 cm);167430;0
+ta11a;mächtiges Baumholz (BHD über 100 cm);176545;0
+ta12;Blöße, nicht überschirmte, offene Waldbereiche;167431;0
+ta13;Sukzession jünger als 10 Jahre;170823;0
+ta14;Pflanzung jünger als 10 Jahre;170824;0
+ta15;Pflanzung älter als 10 Jahre;170825;0
+ta15a;Pflanzung, 10 - 50 Jahre;174695;0
+ta15b;Pflanzung, älter als 50 Jahre;174696;0
+ta16;naturnaher Bestand, älter als 10 Jahre;170826;0
+ta17;in den letzten 10 Jahren auf den Stock gesetzt;170960;0
+ta18;normaler Wirtschaftwald;170961;0
+ta19;Sammelhieb;170962;0
+ta2;geringes Baumholz (BHD 14 bis 38 cm);161572;0
+ta20;keine forstwirtschaftliche Nutzung;170963;0
+ta20a;nachweislich keine forstwirtschaftliche Nutzung;169215;0
+ta21;Holzlager;171182;0
+ta22;Neupflanzung;171349;0
+ta23;Strauch < 2 m;171350;0
+ta24;Strauch > 2 m;171351;0
+ta25;Femel- bzw. plenterartiges Stadium;172398;0
+ta26;Komplexstadium;172399;0
+ta27;Wildnisbiotop, Naturwaldzelle;176576;0
+ta28;Sukzessionsfläche jünger als 10 Jahre;2996;0
+ta29;Strauchbestände;168883;0
+ta3;Stangenholz (BHD 7 bis 14 cm);161573;0
+ta30;Altersklassenwald;168884;0
+ta4;Dickung (BHD bis 7 cm);161574;0
+ta5;Jungwuchs (Pflanzung oder Naturverjüngung);161575;0
+ta5a;Altholz in Pflanzung;174603;0
+ta5b;Jungwuchs, Naturverjüngung;176544;0
+ta6;Naturverjüngung, Kultur;161576;0
+ta6a;Altholz in Naturverjüngung;174604;0
+ta7;Bestand über 120 Jahren;161577;0
+ta8;Bestand zwischen 80 und 120 Jahren;161578;0
+ta9;Bestand unter 80 Jahren;161579;0
+tb;Altholz;138073;0
+tb1;Altholzinseln;151815;0
+tb2;mächtiger Baum / Uraltbaum (BHD >100cm);167424;0
+tb3;markanter Einzelbaum (BHD > 80 cm);167425;0
+tb4;absterbender Baum;167426;0
+tb5;kranker Baum;167427;0
+tb5a;kranker oder mechanisch geschädigter Baum (BHD > 50 cm);176573;0
+tb6;markante Baumgruppe;167428;0
+tb7;Kopfbaum (BHD > 100cm);176574;0
+tc;Überhälter;138074;0
+td;Niederwaldstrukturen erkennbar;138075;0
+td1;ehemalige Niederwaldnutzung;151843;0
+td2;Kahlschlag;161553;0
+td3;aktuelle Niederwaldnutzung;169216;0
+te;Mittelwaldstrukturen erkennbar;138076;0
+te1;aktuelle Mittelwaldnutzung;3153;0
+te2;ehemalige Mittelwaldnutzung;3154;0
+tf;Vorkommen epiphytischer Bartflechten;138077;0
+tg;moosreich;138078;0
+th;torfmoosreich;138079;0
+ti;flechtenreich;138080;0
+tj;binsenreich;138081;0
+tk;seggenreich;138082;0
+tl;blütenpflanzenreich;138083;0
+tm;hochstaudenreich;138084;0
+tn;sukkulentenreich;8267;0
+to;Felsvegetation;138086;0
+tp;Schutthaldenvegetation;138087;0
+tq;Mauerfugenvegetation;138088;0
+ts;vergrast;168916;0
+tt;verbuscht;138089;0
+tu;ruderalisiert;138090;0
+tx;Pionierflur;138091;0
+ty;heterogen;138092;0
+tz;homogen;138093;0
+ua;naturnahe Bestockung;151816;0
+ub;grosse Baumhöhenvielfalt;151817;0
+ub1;geringe Baumhöhenvielfalt;151818;0
+uc;aufgeklappte Wurzelteller, Windwurfteller;151819;0
+uc1;Baumstubben;151820;0
+ud;Felseinsprengsel;151821;0
+ud1;Lesesteinhaufen;151822;0
+ud2;Bunker, Bunkeranlagen;167404;0
+ud3;Gebäuderest/Ruine;167405;0
+ud4;große Steine und Blöcke;174952;0
+ud5;lückige Biotopstrukturen (mit Nischen, Spalten, Fugen, Hohlräumen);191745;0
+ud6;unverfugt (bzw. ehemals verfugt oder in Lehm aufgesetzt);191746;0
+ue;artenreiche Krautschicht;151823;0
+ue1;verarmte Krautschicht;151824;0
+uf;Freifläche(n), Lichtung(en), Baumlücke(n) vorhanden;151825;0
+uf1;keine Lichtungen, Baumlücken vorhanden;151826;0
+ug;Ameisenbauten, Ameisenhaufen;151827;0
+ug1;Tierbau(e), Dachs etc.;167406;0
+ug2;(Fraß)Spuren Biber, Otter und Verbiss z.B. Nutria, Gänse, usw.;167407;0
+uh;Pfützen auf Wald- und Waldrandwegen;151828;0
+uh1;stark begangene Wildwechsel / Pässe;167408;0
+ui;unbefestigte Wegränder;151829;0
+uj1;extensiv genutzter Wildkrautsaum;151830;0
+uj2;frischer Grassaum;171187;0
+uj3;magerer Grassaum;171188;0
+uj4;blütenreicher frischer Grassaum;171189;0
+uj5;blütenreicher magerer Grassaum;171190;0
+uj6;Buckelrain;171191;0
+um01;keine Einzäunung, nicht gegattert;170881;0
+um01a;Eingezäunt, gegattert;172375;0
+um02;Eichenpfähle und Draht;170882;0
+um03;Steckpfähle und Draht;170883;0
+um04;Pfähle und Flatterbände;170884;0
+um05;Knotengeflecht;170885;0
+um06;Maschendrahtzaun;170886;0
+um07;Ranchzaun;170887;0
+um08;Staketenzaun;170888;0
+um09;ungeschnittene Hecke;170889;0
+um10;geschnittene Hecke;170890;0
+um11;Natursteinmauer;170891;0
+um12;Grobsteinmauer;170892;0
+um13;Betonmauer;170893;0
+um14;Scherenzaun;170894;0
+um15;Metallgitterzaun;170895;0
+um16;Holzflechtzaun;170896;0
+um17;mobile Umzäunung;170897;0
+um18;dauerhafte Umzäunung;170898;0
+um19;Zaun;170899;0
+un1;ehemalige industrielle Torfabbaufläche;190745;0
+un2;Sodentorfstichstruktur, bäuerlicher Handtorfstich;190746;0
+va;Zaunpfähle;151860;0
+vb;temporäre Wasserstellen;152992;0
+vc;vegetationsfreie Inseln;151861;0
+vc1;ohne Bewuchs, vegetationsfrei;174607;0
+vd;Eutrophierungstellen;151862;0
+ve;defekte Grasnarbe;151863;0
+veg1;Vegetation mittel bis schlecht ausgeprägt;174697;0
+veg2;Vegetation gut ausgeprägt;174698;0
+veg3;Vegetation hervorragend ausgeprägt;174699;0
+vf0;Beweidung;161596;0
+vf1;keine Beweidung;161597;0
+vf10;Pferdebeweidung;161606;0
+vf11;Schafbeweidung, Koppel;161607;0
+vf12;Schafbeweidung, Wanderschäferei;161608;0
+vf13;Damwildbeweidung;161609;0
+vf14;Ziegenbeweidung;161610;0
+vf15;Beweidung mit Gänsen;161611;0
+vf15a;Entenhaltung;176823;0
+vf16;Beweidung mit Hühnern;161612;0
+vf17;Beweidung mit Schweinen;161613;0
+vf18;Weide für Hobbytierhaltung;161614;0
+vf19;Beweidung mit andere Arten;161615;0
+vf1a;keine Weidetiere;176826;0
+vf2;Standweide;161598;0
+vf20;Hutung;170933;0
+vf21;intensive Beweidung;171417;0
+vf22;Beweidung nicht relevant;171418;0
+vf23;Beweidung durch Wildtiere;14460;0
+vf24;Beweidung im Herbst;23788;0
+vf25;Herbstweide;19762;0
+vf26;Wildweide;167479;0
+vf27;Ganzjahresweide;188450;0
+vf28;Grünlandbrache;188449;0
+vf29;keine Bewirtschaftung / Pflege;188451;0
+vf2a;Standweide 2-4 GVE/ha;176821;0
+vf2b;Ext. Standweide < 2 GVE/ha;7684;0
+vf3;extensive Beweidung (<2 GVE/ha);161599;0
+vf4;Mähweide;161600;0
+vf5;Rotationsweide;161601;0
+vf5a;Rotationsweide (> 4 GVE/ha);176822;0
+vf6;Portionsweide;161602;0
+vf7;Winterweide;161603;0
+vf8;Rinderbeweidung;161604;0
+vf8a;Mastbullenhaltung;176824;0
+vf9;Rinderbeweidung mit Mutterkuhhaltung;161605;0
+vf9a;Milchkuhhaltung;176825;0
+vg0;Mahd, Wiesennutzung;161616;0
+vg1;Mahd 1 x jährlich;161617;0
+vg2;Mahd 2 x jährlich;161618;0
+vg3;Mahd > 3 x jährlich;161619;0
+vg4;keine Mahd;170934;0
+vg5;Mahd im langjährigen Rhythmus;170935;0
+vh0;Weideunkräuter;161620;0
+vh1;Weideunkräuter, < 10 %;161621;0
+vh2;Weideunkräuter, 10-25 %;161622;0
+vh3;Weideunkräuter, 25-50 %;161623;0
+vh4;Weideunkräuter, > 50 %;161624;0
+vi0;Gehölze im Grünland, in Brachen;161625;0
+vi1;Gehölze im Grünland, in Brachen, fehlend;161626;0
+vi2;Gehölze im Grünland, in Brachen, < 1 / ha;161627;0
+vi3;Gehölze im Grünland, in Brachen, 2-5 / ha;161628;0
+vi4;Gehölze im Grünland, in Brachen, > 5 / ha;161629;0
+vi5;Gehölze im Grünland, in Brachen, mind. 1 Strauchgruppe / ha;161630;0
+vk1;Die Kennarten treten in der Summe frequent und regelmäßig mit einer Deckung > 1% auf;188444;0
+vm1;Entstanden durch Mahdgutübertragung;20292;0
+vm2;konventionelles Saatgut;8143;0
+vm3;Regiosaatgut;8144;0
+vm4;Heu-/Wiesendrusch;8145;0
+vnat;Vertragsnaturschutz;100000;0
+vo1;Obernutzung Streuobst;174953;0
+vo2;Obernutzung Obstbaumkultur;174954;0
+w;Wildnisbiotop;168815;0
+wa;Flachwasser-, Verlandungszone (aquatischer Bereich);138094;0
+wa1;offene Wasserfläche;151845;0
+wa2;Wassertiefe bis 3 m;161550;0
+wa3;Wassertiefe über 3 m;161551;0
+wa4;Verlandungszone (nicht aquatischer Bereich);172587;0
+wb;temporär wasserführend;138095;0
+wb1;permanent wasserführend;161489;0
+wb2;Strömungsbild, fliessend;161490;0
+wb3;Strömungsbild, stehend;161491;0
+wb4;Bachstau;167393;0
+wb5;Grabenstau;167394;0
+wb6;Kleinweiher;167395;0
+wb7;wechselnder Wasserstand;172588;0
+wc;Steilufer;138096;0
+wd;Flachufer;138097;0
+we;mäandrierend;138098;0
+wf;naturnah;138099;0
+wf1;bedingt naturnah, gering beeinträchtigt;138182;0
+wf2;bedingt naturnah, mässig beeinträchtigt;151846;0
+wf3;bedingt naturnah;155561;0
+wf4;naturfern;155562;0
+wf4a;bedingt naturfern;174700;0
+wf5;naturfremd;155563;0
+wg;Unterwasservegetation;138100;0
+wg1;Unterwasservegetation, Gefässpflanzen;138101;0
+wg2;Unterwasservegetation, Moose;138102;0
+wg3;Unterwasservegetation, Armleuchteralgen;138103;0
+wg4;typische Ufervegetation;167396;0
+wg5;typische Quellvegetation;167439;0
+wg6;emerse Vegetation;172589;0
+wh;Schwimmblattvegetation;138104;0
+wh1;Wasserlinsendecke;174941;0
+wi;Quellflur;138105;0
+wi1;Quelle;167397;0
+wi2;Quellstau;167398;0
+wi3;Quelltuempel;167399;0
+wj;Schwingrasen;138106;0
+wk;Röhrichtsaum;138107;0
+wk1;Großseggensaum;151847;0
+wl;niedrigwüchsige (< 50 cm) Uferfluren;138108;0
+wl1;vegetationsfreie  Uferbereiche;172590;0
+wm;Uferhochstaudenfluren (> 50 cm);138109;0
+wn;Schlammufer;138110;0
+wn1;Schlammbank;174943;0
+wo;Sand- und Kiesbänke;138111;0
+wo1;Kiesufer;151848;0
+wo2;Sandufer;151849;0
+wo3;Geröllufer, -bank;151850;0
+wo4;Sandsteilwand;151851;0
+wo5;Kiessteilwand;151852;0
+wo6;Lößsteilwand;151853;0
+wp;Stromschnelle, Wasserfall;138112;0
+wq;Bachschwinde;138113;0
+wr;salzhaltig;138114;0
+ws;Ufergehölz einseitig;138115;0
+wt;Ufergehölz beidseitig;138116;0
+wu;periodisch trockenfallende Ufer;138117;0
+wwa;zum Westwall gehörig;174929;0
+wx;technisch ausgebaut;138118;0
+wx1;begradigt;151854;0
+wx10;renaturiert;161757;0
+wx11;Ufer-, Sohlbefestigung, Befestigung des Gewässeruntergrundes;161758;0
+wx12;Uferbefestigung;161759;0
+wx13;Ufermauer;161760;0
+wx14;Spundwand;161761;0
+wx15;Staumauer;161762;0
+wx16;Stauvorrichtung;161763;0
+wx17;Staustufe, niedrig (bis 1m);161764;0
+wx18;Staustufe hoch (> 1 m);161765;0
+wx19;Stauwall, Erdwall;161766;0
+wx2;Bach, Graben weitgehend mit naturnahen Strukturelementen;161492;0
+wx20;Schleuse;161767;0
+wx21;Sperrtor;161768;0
+wx22;Fischaufstiegstreppen;161769;0
+wx23;Wasserkraftanlage;161770;0
+wx24;künstlich angelegte Uferböschung;161771;0
+wx25;landschafts- oder gewässeruntypische Baumaterialien;161772;0
+wx26;Graben;167400;0
+wx27;Kleingewässer, Tümpel;167401;0
+wx28;Sohlenverbau, Befestigung des Gewässeruntergrundes;170913;0
+wx29;Sohlenverbau, Massivsohle, kein Sediment;170914;0
+wx3;Bach, Graben mit einzelnen naturnahen Strukturelementen;161493;0
+wx30;Sohlenverbau, Massivsohle, Sediment;170915;0
+wx31;Sohlenverbau, Steinschüttung;170916;0
+wx32;kein Sohlenverbau;170917;0
+wx33;kein Uferverbau;170921;0
+wx34;Uferverbau, Lebendverbau;170922;0
+wx35;Uferverbau, Steinschüttung;170923;0
+wx36;Uferverbau, Holzverbau;170924;0
+wx37;Uferverbau, Böschungsrasen;170925;0
+wx38;Uferverbau, Pflaster, Steinsatz, unverfugt;170926;0
+wx39;Uferverbau, wilder Verbau;170927;0
+wx4;Bach, Graben ohne naturnahe Strukturelementen;161494;0
+wx40;Uferverbau, Beton, Mauerwerk, Pflaster;170928;0
+wx41;Sohlenerosion erkennbar;3158;0
+wx42;keine Sohlenerosion;3159;0
+wx43;Mühlengraben, Obergraben | aufgelassen, ungenutzt;167455;1
+wx5;Verkehrsweg-Begleitgraben;161495;0
+wx6;Abwassergraben;161496;0
+wx7;Entwässerungsgraben, Feldflur;161497;0
+wx7a;Entwässerungsgraben;169335;0
+wx8;Entwässerungsgraben, Wald;161498;0
+wx9;verrohrt;161756;0
+wy1;Laichhabitat für Grasfrosch;170918;0
+wy2;Laichhabitat für Erdkröte;170919;0
+wy3;Laichhabitatfunktion nicht beurteilbar;170920;0
+wy4;Laichhabitat für Feuersalamander;177013;0
+wy5;Laichhabitat für Grünfrosch;177014;0
+wz;amphibische Vegetation;138119;0
+xa;begleitender Biotoptyp;138120;0
+xb;schutzwürdiger Biotoptyp;138121;0
+xc;touristisch erschlossen;138122;0
+xc1;Vergesellschaftungsarten vollständig;159151;0
+xc2;Vergesellschaftungsarten unvollständig;159152;0
+xd;nicht touristisch erschlossen;138123;0
+xd1;artenreich;161485;0
+xd2;artenarm;161486;0
+xd3;strukturreich;174701;0
+xd4;strukturarm;174702;0
+xe;hohe historische Kontinuität;138124;0
+xf;Hutewaldstrukturen erkennbar;152984;0
+xf1;aktuelle Hutewaldnutzung;3155;0
+xf2;ehemalige Hutewaldnutzung;3156;0
+xg;Erstaufforstung;152985;0
+xh;Störung (s. Bemerkung);174602;0
+xj;keine aktuelle Nutzung;7735;0
+xk;flächig ausgebildet;2967;0
+xl;saumartig ausgebildet;2968;0
+xm;prioritärer Lebensraum;9291;0
