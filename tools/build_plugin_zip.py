@@ -30,6 +30,25 @@ AUSGESCHLOSSEN_ORDNER = {"__pycache__", ".git", ".idea", ".vscode"}
 AUSGESCHLOSSEN_ENDUNG = (".pyc", ".pyo", ".gpkg-wal", ".gpkg-shm", ".log")
 
 
+def version_aus_ci():
+    """
+    Version aus der CI-Umgebung.
+
+    Zuverlaessiger als `git describe`: Der Job-Container (python:3.12-slim)
+    bringt kein git mit, und ein flacher Klon enthaelt oft keine Tags. Ohne
+    diese Quelle faellt das Skript still auf metadata.txt zurueck und baut
+    ein Paket mit falscher Versionsnummer.
+
+    CI_COMMIT_TAG  setzt GitLab bei Tag-Pipelines.
+    PLUGIN_VERSION kann man in einem Job von Hand setzen.
+    """
+    for var in ("PLUGIN_VERSION", "CI_COMMIT_TAG"):
+        wert = os.environ.get(var, "").strip()
+        if wert:
+            return wert.lstrip("vV")
+    return None
+
+
 def version_aus_git():
     """Letzter Git-Tag ohne fuehrendes 'v', oder None."""
     try:
@@ -87,10 +106,20 @@ def main():
                     help="Version erzwingen statt aus Tag/metadata.txt")
     args = ap.parse_args()
 
-    version = (args.version or version_aus_git()
-               or version_aus_metadata(args.plugin))
-    if not version:
-        sys.exit("Keine Version ermittelbar (weder Git-Tag noch metadata.txt).")
+    # Reihenfolge: ausdrueckliche Angabe, CI-Variable, Git-Tag, metadata.txt.
+    # Die Quelle wird mit ausgegeben - sonst faellt eine stille Ruecknahme
+    # auf metadata.txt erst am falschen Dateinamen des Pakets auf.
+    for quelle, wert in (("--version",   args.version),
+                         ("CI-Variable", version_aus_ci()),
+                         ("Git-Tag",     version_aus_git()),
+                         ("metadata.txt", version_aus_metadata(args.plugin))):
+        if wert:
+            version = wert
+            print(f"Version aus: {quelle}")
+            break
+    else:
+        sys.exit("Keine Version ermittelbar (weder CI-Variable, Git-Tag "
+                 "noch metadata.txt).")
 
     os.makedirs(args.out, exist_ok=True)
     kurz = args.ordner
