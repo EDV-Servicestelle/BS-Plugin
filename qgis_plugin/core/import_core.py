@@ -81,21 +81,16 @@ def _ensure_dependencies():
         def run(self):
             import subprocess, sys
             try:
-                import platform as _plat
-                if _plat.system() == "Windows":
-                    # Pfad in Quotes wrappen falls er Leerzeichen enthält
-                    _exe = f'"{sys.executable}"'
-                    _cmd = (f"{_exe} -m pip install --no-warn-script-location "
-                            + " ".join(self.pkgs))
-                    proc = subprocess.Popen(
-                        _cmd, stdout=subprocess.PIPE,
-                        stderr=subprocess.STDOUT, text=True, shell=True)
-                else:
-                    proc = subprocess.Popen(
-                        [sys.executable, "-m", "pip", "install",
-                         "--no-warn-script-location"] + self.pkgs,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.STDOUT, text=True)
+                # Argumentliste statt Kommandozeile, auf allen Systemen:
+                # Ohne shell=True gibt es keine Kommandozeile, die
+                # interpretiert werden koennte. Leerzeichen im Pfad sind
+                # dabei kein Problem - subprocess setzt die Anfuehrungs-
+                # zeichen unter Windows selbst (list2cmdline).
+                proc = subprocess.Popen(
+                    [sys.executable, "-m", "pip", "install",
+                     "--no-warn-script-location"] + self.pkgs,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT, text=True)
                 for line in proc.stdout: self.line_out.emit(line.rstrip())
                 proc.wait(); self.done.emit(proc.returncode == 0)
             except Exception as e:
@@ -1055,6 +1050,21 @@ def _is_unset(v) -> bool:
     return False
 
 
+def _q_ident(name: str) -> str:
+    """
+    Quotet einen SQL-Bezeichner (Tabellen- oder Spaltenname) sicher.
+
+    Werte gehoeren in Platzhalter (?), Bezeichner koennen das nicht: SQL
+    erlaubt keine Parametrisierung von Tabellen- und Spaltennamen. Deshalb
+    der vorgeschriebene Weg - in doppelte Anfuehrungszeichen setzen und
+    enthaltene Anfuehrungszeichen verdoppeln. Damit kann ein Name die
+    Zeichenkette nicht verlassen.
+    """
+    if not isinstance(name, str) or not name or "\x00" in name:
+        raise ValueError(f"Unzulaessiger SQL-Bezeichner: {name!r}")
+    return '"' + name.replace('"', '""') + '"'
+
+
 def _s(feat, fields, name, value):
     idx = fields.indexFromName(name)
     if idx >= 0:
@@ -1191,7 +1201,7 @@ def _build_field_vocab(table: str) -> dict:
     try:
         con = _sq.connect(_REF_GPKG)
         cur = con.cursor()
-        cur.execute(f'SELECT listitemid, term FROM "{table}"')
+        cur.execute("SELECT listitemid, term FROM " + _q_ident(table))
         lookup = {}
         for listitemid, term in cur.fetchall():
             if term:

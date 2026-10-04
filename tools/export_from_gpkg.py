@@ -34,6 +34,24 @@ KEINE_REFLISTE = {"gpkg_contents", "gpkg_ogr_contents", "layer_styles",
                   "sqlite_sequence"}
 
 
+def q_ident(name: str) -> str:
+    """
+    Quotet einen SQL-Bezeichner (Tabellen- oder Spaltenname) sicher.
+
+    Werte gehoeren in Platzhalter (?), Bezeichner koennen das nicht: SQL
+    erlaubt keine Parametrisierung von Tabellen- und Spaltennamen. Deshalb
+    hier der vorgeschriebene Weg - in doppelte Anfuehrungszeichen setzen und
+    enthaltene Anfuehrungszeichen verdoppeln. Damit kann ein Name die
+    Zeichenkette nicht verlassen, egal was in der Datei steht.
+
+    Die Namen stammen aus sqlite_master bzw. PRAGMA table_info des jeweiligen
+    GeoPackages, also aus einer Datei, die auch von aussen kommen kann.
+    """
+    if not isinstance(name, str) or not name or "\x00" in name:
+        raise ValueError(f"Unzulaessiger SQL-Bezeichner: {name!r}")
+    return '"' + name.replace('"', '""') + '"' 
+
+
 def gpkgs_finden(plugin_dir):
     """Alle GeoPackages unterhalb von <plugin>/data finden."""
     basis = os.path.join(plugin_dir, "data")
@@ -81,17 +99,18 @@ def ddl_lesen(con):
 
 def refliste_lesen(con, tabelle):
     """Inhalt einer Referenzliste als (spalten, zeilen) - ohne fid."""
-    spalten = [r[1] for r in con.execute(f'PRAGMA table_info("{tabelle}")')
+    spalten = [r[1] for r in con.execute("PRAGMA table_info(" + q_ident(tabelle) + ")")
                if r[1] != "fid"]
     if not spalten:
         return None, None
-    quoted = ",".join(f'"{s}"' for s in spalten)
+    quoted = ",".join(q_ident(sp) for sp in spalten)
     # Ueber ALLE Spalten sortieren: eine Sortierung nur nach der ersten
     # Spalte waere bei Dubletten nicht reproduzierbar und erzeugte
-    # Schein-Diffs im Repository.
+    # Schein-Diffs im Repository. Die Sortierung nutzt Spaltennummern,
+    # keine Namen - dort kann nichts eingeschleust werden.
     order = ",".join(str(i + 1) for i in range(len(spalten)))
-    zeilen = con.execute(
-        f'SELECT {quoted} FROM "{tabelle}" ORDER BY {order}').fetchall()
+    sql = "SELECT " + quoted + " FROM " + q_ident(tabelle) + " ORDER BY " + order
+    zeilen = con.execute(sql).fetchall()
     return spalten, zeilen
 
 
@@ -99,7 +118,7 @@ def ist_refliste(con, tabelle):
     """Referenzlisten sind Attributtabellen ohne Geometrie."""
     if tabelle in KEINE_REFLISTE:
         return False
-    spalten = {r[1].lower() for r in con.execute(f'PRAGMA table_info("{tabelle}")')}
+    spalten = {r[1].lower() for r in con.execute("PRAGMA table_info(" + q_ident(tabelle) + ")")}
     return "geom" not in spalten and "geometry" not in spalten
 
 
