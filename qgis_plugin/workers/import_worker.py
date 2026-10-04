@@ -69,7 +69,9 @@ class _ScanWorker(QThread):
             self.finished.emit([], [], {})
 
     def _do_scan(self):
-        global _ARTEN_LOOKUP_CACHE, _ARTEN_LOOKUP_MODE, _CONTEXT, _TFIDF_INDEX  # _KNN_INDEX in-place mutiert, kein global nötig
+        # Nur die Namen, die hier wirklich zugewiesen werden; _CONTEXT,
+        # _TFIDF_INDEX und _KNN_INDEX werden in-place mutiert.
+        global _ARTEN_LOOKUP_CACHE, _ARTEN_LOOKUP_MODE
 
         # 1. Arten-Lookup (gecacht)
         if self.mode != _ARTEN_LOOKUP_MODE or not _ARTEN_LOOKUP_CACHE:
@@ -340,7 +342,7 @@ class _ScanWorker(QThread):
 _FIELD_VOCAB_CACHE: dict = {}
 
 def _build_field_vocab(table: str) -> dict:
-    global _FIELD_VOCAB_CACHE
+    # kein "global": _FIELD_VOCAB_CACHE wird nur gelesen und mutiert
     if table in _FIELD_VOCAB_CACHE:
         return _FIELD_VOCAB_CACHE[table]
     if not os.path.isfile(_REF_GPKG):

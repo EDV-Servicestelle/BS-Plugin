@@ -86,7 +86,7 @@ class _GrundlagenWorker(QThread):
                 elif typ == "lod2_ogcapi":
                     features = _fetch_lod2_ogcapi(dienst_cfg, bbox_wgs84, timeout)
                 elif typ == "lod2":
-                    n = _fetch_lod2(dienst_cfg, bbox_wgs84, out_path, self)
+                    n = _fetch_lod2(dienst_cfg, bbox_wgs84, gpkg_path, self)
                     self.progress.emit(-1, f"  ✓ {n} Gebäude (CityGML)")
                     continue
                 else:
