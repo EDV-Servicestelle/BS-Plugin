@@ -1,12 +1,6 @@
 # Lokale Prüfungen vor jedem Commit.
 # Einrichten:  pip install pre-commit && pre-commit install
 repos:
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.21.2
-    hooks:
-      - id: gitleaks
-        name: Zugangsdaten aufspüren
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -26,3 +20,15 @@ repos:
       - id: flake8
         args: [--max-line-length=100, --extend-ignore=E203]
         files: ^(qgis_plugin|tools)/
+
+  # Stile/Referenzlisten im GeoPackage gegen die Textfassung im Repository
+  # prüfen - dieselbe Prüfung wie der CI-Job "quellen-synchron", nur früher.
+  # Bewusst nur prüfend: ein Hook, der still Dateien ändert, verbirgt den Diff.
+  - repo: local
+    hooks:
+      - id: quellen-synchron
+        name: Stile und Referenzlisten synchron
+        entry: python tools/export_from_gpkg.py --plugin qgis_plugin --out . --pruefen
+        language: system
+        pass_filenames: false
+        files: ^(qgis_plugin/data/|styles/|reflists/|datamodel/)

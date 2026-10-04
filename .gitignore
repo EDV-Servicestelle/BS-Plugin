@@ -6,8 +6,16 @@
 # ACHTUNG: Hier keine Sammelregel "*.gpkg" mit anschliessenden
 # Ausnahmen ("!...") verwenden. Git wertet die zuletzt passende Regel aus,
 # eine Ausnahme hebt den Ausschluss damit wieder auf.
+# Nutzung.gpkg (103 MB): ATKIS-Nutzungsflaechen des Kreises Wesel, dienen im
+# Altdaten-Import nur als Vorauswahl fuer die Habitat-Zuordnung. Das Plugin
+# oeffnet die Datei nie selbst - fehlt sie, waehlt der Anwender im Dialog einen
+# beliebigen anderen Nutzungslayer. Fuer die uebrigen 39 Stationen in NRW ist
+# der Kreis-Wesel-Datensatz ohnehin nicht verwendbar.
 qgis_plugin/data/Nutzung.gpkg
-qgis_plugin/data/biotopbaum/Grenzen1.gpkg
+
+# Grenzen1.gpkg wurde entfernt: Kreise, FFH-Gebiete und Verwaltungsgrenzen
+# kommen bei allen Fachschalen ueber den Grundlagen-Dialog (Grundlagen-DB bzw.
+# WFS), genau wie bei "Fundpunkte Tiere". border_layers ist entsprechend leer.
 
 # GeoPackages ausserhalb des Plugin-Datenordners (Arbeitskopien, Exporte)
 /*.gpkg

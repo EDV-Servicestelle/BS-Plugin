@@ -73,6 +73,27 @@ python3 tools/build_reflisten_from_ods.py \
     --bericht migration_bericht.csv
 ```
 
+## Pipeline
+
+| Job | Stufe | Zweck |
+| --- | --- | --- |
+| `secret_detection` | test | GitLab Secret Detection (Vorlage), prüft auch die Historie |
+| `semgrep-sast` u. a. | test | GitLab SAST (Vorlage) |
+| `quellen-synchron` | test | Textfassung == GeoPackage |
+| `codestil` | test | PEP 8 (Leistungsbeschreibung Abschnitt 6) |
+| `paket` | bauen | Plugin-ZIP, Version aus dem Git-Tag |
+| `release` | release | hängt das ZIP an ein GitLab-Release (nur bei Tags) |
+
+Veröffentlichung einer Version:
+
+```bash
+git tag v2.7.8
+git push origin v2.7.8
+```
+
+Das Release entsteht automatisch, mit stabiler Download-URL für die Stationen.
+Ohne Tag wird das Paket zwar gebaut, verfällt aber nach zwei Wochen.
+
 ## Mitarbeit
 
 Vor dem ersten Commit einmalig einrichten:

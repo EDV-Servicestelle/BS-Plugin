@@ -137,8 +137,7 @@ qgis_new_project_plugin_v152/
     │   └── Referenzen.gpkg        13.291 Arten, Status, Geschlecht, Institution
     ├── biotopbaum/
     │   ├── Erfassung.gpkg
-    │   ├── Referenzlisten.gpkg
-    │   └── Grenzen1.gpkg
+    │   └── Referenzlisten.gpkg
     └── brutvogel/
         ├── QFS_bv.gpkg
         └── Untersuchungsgebiet.gpkg

@@ -1,60 +1,97 @@
 # CI für das QGIS-/QField-Plugin "Fundpunkte Tiere"
 #
-# Die Stufen sind bewusst klein gehalten und laufen ohne QGIS-Installation.
-# Alles, was eine laufende QGIS-Instanz braucht, bleibt manuellem Test
-# vorbehalten.
+# Zugeschnitten auf GitLab Ultimate: Secret Detection und SAST kommen über die
+# mitgelieferten Vorlagen, nicht als selbstgebaute Jobs. Ihre Treffer landen
+# damit im Sicherheitsdashboard und im Merge-Request-Widget statt nur im Log.
+#
+# Projektspezifisch bleiben:
+#   quellen-synchron  Stile/Referenzlisten im GeoPackage == Textfassung im Repo
+#   codestil          PEP 8 (Leistungsbeschreibung Abschnitt 6)
+#   paket             Plugin-ZIP bauen
+#   release           ZIP an ein GitLab-Release hängen (nur bei Tags)
+
+include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
 
 stages:
-  - pruefen
+  - test        # von den Vorlagen vorausgesetzt
   - bauen
+  - release
 
-default:
+variables:
+  # Secret Detection auch die volle Historie prüfen lassen, nicht nur den
+  # letzten Commit - entscheidend vor dem ersten GitHub-Spiegel.
+  SECRET_DETECTION_HISTORIC_SCAN: "true"
+
+# ── Textquellen stimmen mit den GeoPackages überein ─────────────────────────
+# Fängt den Fehlertyp ab, der in der Vergangenheit mehrfach aufgetreten ist:
+# Stil bzw. Referenzliste im GeoPackage geändert, die Textfassung im Repository
+# aber nicht nachgezogen (oder umgekehrt).
+quellen-synchron:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - python3 tools/export_from_gpkg.py --plugin qgis_plugin --out . --pruefen
+
+# ── Codestil (Leistungsbeschreibung Abschnitt 6: PEP 8) ─────────────────────
+# SAST findet Sicherheitsmuster, nicht Formatierung - deshalb zusätzlich.
+codestil:
+  stage: test
   image: python:3.12-slim
   before_script:
-    - python -m pip install --quiet --upgrade pip
-
-# ── 1. Keine Zugangsdaten im Repository ─────────────────────────────────────
-# Wichtigster Job: Das Repository wird spaeter oeffentlich gespiegelt. Ein
-# einmal gepushtes Geheimnis bleibt ueber die Historie abrufbar, auch wenn es
-# im naechsten Commit entfernt wird.
-geheimnisse:
-  stage: pruefen
-  image:
-    name: zricethezav/gitleaks:latest
-    entrypoint: [""]
-  before_script: []
-  script:
-    - gitleaks detect --source . --no-banner --redact --verbose
-  allow_failure: false
-
-# ── 2. Syntax und Stil (Leistungsbeschreibung §6: PEP 8) ────────────────────
-codestil:
-  stage: pruefen
-  script:
     - pip install --quiet flake8
+  script:
     # Syntaxfehler und undefinierte Namen sind harte Fehler
     - flake8 qgis_plugin tools --count --select=E9,F63,F7,F82 --show-source
     # Stilabweichungen werden berichtet, brechen den Build aber nicht ab
     - flake8 qgis_plugin tools --count --max-line-length=100 --exit-zero
       --statistics
 
-# ── 3. Textquellen stimmen mit den GeoPackages überein ──────────────────────
-# Fängt genau den Fehlertyp ab, der in der Vergangenheit mehrfach aufgetreten
-# ist: Stil bzw. Referenzliste im GeoPackage geändert, die Textfassung im
-# Repository aber nicht nachgezogen (oder umgekehrt).
-quellen-synchron:
-  stage: pruefen
-  script:
-    - python3 tools/export_from_gpkg.py --plugin qgis_plugin --out . --pruefen
-
-# ── 4. Plugin-Paket bauen ───────────────────────────────────────────────────
+# ── Plugin-Paket bauen ──────────────────────────────────────────────────────
 paket:
   stage: bauen
+  image: python:3.12-slim
   script:
-    - pip install --quiet odfpy
     - mkdir -p dist
     - python3 tools/build_plugin_zip.py --plugin qgis_plugin --out dist
+    # Dateinamen für den Release-Job weiterreichen
+    - echo "PAKET_DATEI=$(cd dist && ls *.zip | head -1)" > paket.env
+    # Eigene Job-ID mitgeben: der Release-Job braucht sie fuer die Artefakt-URL,
+    # $CI_JOB_ID waere dort die ID des Release-Jobs selbst.
+    - echo "PAKET_JOB_ID=$CI_JOB_ID" >> paket.env
+    - cat paket.env
   artifacts:
     paths:
       - dist/*.zip
-    expire_in: 4 weeks
+    reports:
+      dotenv: paket.env
+    # Ohne Tag nur kurz aufbewahren; die dauerhafte Fassung hängt am Release.
+    expire_in: 2 weeks
+
+# ── Release anlegen (nur bei Tags) ──────────────────────────────────────────
+# Das Paket bekommt damit eine stabile Download-URL für die Stationen und
+# verfällt nicht mit den Job-Artefakten.
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: paket
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "Release $CI_COMMIT_TAG mit $PAKET_DATEI"
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: "Fundpunkte Tiere $CI_COMMIT_TAG"
+    description: |
+      Plugin-Paket für QGIS, erzeugt aus Tag $CI_COMMIT_TAG.
+
+      Installation in QGIS: Erweiterungen -> Erweiterungen verwalten und
+      installieren -> Aus ZIP installieren.
+    assets:
+      links:
+        - name: "$PAKET_DATEI"
+          url: "$CI_PROJECT_URL/-/jobs/$PAKET_JOB_ID/artifacts/raw/dist/$PAKET_DATEI"
+          link_type: package
