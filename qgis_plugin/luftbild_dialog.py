@@ -5,6 +5,14 @@ Reine UI-Schicht.
 Algorithmen: core/luftbild.py | Worker: workers/luftbild_worker.py
 """
 import os
+import re
+
+# requests ist in manchen QGIS-Installationen nicht vorhanden; die
+# Aufrufstellen pruefen vorher _REQUESTS_OK aus core.luftbild.
+try:
+    import requests
+except ImportError:
+    requests = None
 from qgis.PyQt.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QFormLayout,
     QLabel, QPushButton, QGroupBox, QDialogButtonBox,

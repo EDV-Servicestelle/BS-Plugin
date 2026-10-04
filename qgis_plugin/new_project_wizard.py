@@ -602,6 +602,7 @@ class NewProjectWizard(QWizard):
                     all_layers[lyr.name()]        = lyr
                     all_layers[lyr.name().lower()] = lyr
             self._apply_relations(project, all_layers, relations)
+            from .debug_log import log
             log(f"{len(relations)} Beziehung(en) registriert", context="Wizard")
 
         # Hinweis: Das Untersuchungsgebiet wird NICHT mehr hier behandelt –

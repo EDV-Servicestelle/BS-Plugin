@@ -1123,7 +1123,7 @@ _TFIDF_INDEX = _TFIDFIndex()
 
 def _build_tfidf_index():
     """Lädt alle Arten und baut den sklearn TF-IDF-Index (einmalig)."""
-    global _TFIDF_INDEX
+    # kein "global": _TFIDF_INDEX wird nur gelesen und in-place gefuellt
     if _TFIDF_INDEX.built or not os.path.isfile(_REF_GPKG):
         return
     import sqlite3 as _sq
@@ -1182,7 +1182,7 @@ _KNN_INDEX = _KNNSpatialIndex()
 _FIELD_VOCAB_CACHE: dict = {}
 
 def _build_field_vocab(table: str) -> dict:
-    global _FIELD_VOCAB_CACHE
+    # kein "global": _FIELD_VOCAB_CACHE wird nur gelesen und mutiert
     if table in _FIELD_VOCAB_CACHE:
         return _FIELD_VOCAB_CACHE[table]
     if not os.path.isfile(_REF_GPKG):
