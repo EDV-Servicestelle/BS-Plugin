@@ -179,22 +179,119 @@ OBJEKTKLASSEN = {
 }
 
 
+#: Wert, den OSIRIS fuer "kein Lebensraumtyp" vergibt (Liste 19, Atom
+#: 168820). Er steht als regulaerer Eintrag in Oekotyp und ist KEIN Code.
+KEIN_LRT = "kein lrt"
+
+
+def ist_lrt_code(wert):
+    """
+    Ist das ein Lebensraumtyp-Code - oder nur Text?
+
+    Codes sind vierstellig und alphanumerisch: 3150, 6510, 91E0, NB00. Der
+    Eintrag "kein LRT" ist beides nicht, und genau daran war die erste
+    Fassung dieser Pruefung gescheitert (siehe lr_art).
+    """
+    t = (wert or "").strip()
+    return len(t) == 4 and t.isalnum()
+
+
 def lr_art(satz):
     """
     FFH-LRT oder N-LRT aus dem LR-Typ.
 
     FFH-Lebensraumtypen tragen den vierstelligen FFH-Code (3150, 7120, auch
-    91D0 - Buchstaben kommen vor), die uebrigen beginnen mit "N" (NDC0). Die
-    Regel "beginnt nicht mit N" deckte sich in einem Testexport mit dem Flag
-    ist_FFHLRT fuer alle 1322 Zeilen.
+    91D0 - Buchstaben kommen vor), die uebrigen beginnen mit "N" (NDC0).
+
+    Die erste Fassung fragte nur "beginnt nicht mit N" und stuefte damit
+    jeden anderen Text als FFH-LRT ein. In einem Testexport traf das 261 von
+    759 Objekten: Dort steht in Oekotyp der Klartext "kein LRT" - also
+    gerade KEIN Lebensraumtyp. Deshalb wird jetzt zuerst geprueft, ob
+    ueberhaupt ein Code vorliegt.
     """
     t = (satz.get("LR_Typ") or "").strip().upper()
-    if not t:
+    if not ist_lrt_code(t):
         return None
     return "N-LRT" if t.startswith("N") else "FFH-LRT"
 
 
 ABGELEITET = {"lr_art": lr_art}
+
+
+# ── Kuratierter Layer ───────────────────────────────────────────────────────
+#
+# Die Fachauswahl gibt wieder, was im Export steht. Der kuratierte Layer ist
+# das, was man einer Station in die Hand gibt: wenige Spalten, sprechende
+# Namen, Wahrheitswerte als Text, und keine Platzhalter, die wie Inhalte
+# aussehen.
+#
+# Die Spaltennamen der Fachauswahl bleiben erhalten - vor allem KENNUNG und
+# BT_CODE, denn darauf greift der LANUK-Stil zu.
+
+#: (Feld, Typ, Alias). Der Alias landet als Anzeigename im GeoPackage
+#: (gpkg_data_columns, die Schema-Erweiterung des Formats); QGIS zeigt ihn
+#: als Feldalias an. Er bleibt damit an der Datei, nicht am Projekt.
+KURATIERT_SPALTEN = {
+    "BT": [
+        ("KENNUNG",          "str",  "Objektkennung"),
+        ("BT_CODE",          "str",  "Biotoptyp (Code)"),
+        ("BT_TEXT",          "str",  "Biotoptyp"),
+        ("FL_HA",            "real", "Fläche (ha)"),
+        ("LR_Typ",           "str",  "Lebensraumtyp (Code)"),
+        ("LR_Typ_Text",      "str",  "Lebensraumtyp"),
+        ("FFH_LRT",          "str",  "FFH-Lebensraumtyp?"),
+        ("P62",              "str",  "§ 62 geschützt?"),
+        ("P62_Typ",          "str",  "§-62-Biotoptyp"),
+        ("Zusatzcodes",      "str",  "Zusatzcodes (Code)"),
+        ("Zusatzcodes_Text", "str",  "Zusatzcodes (Klartext)"),
+        ("Ohne_BT_Code",     "str",  "ohne Biotoptyp"),
+    ],
+}
+
+
+def ja_nein(wert):
+    """Wahrheitswert als Text. Leer bleibt leer - 'nicht erhoben' ist
+    weder Ja noch Nein."""
+    if wert is None:
+        return None
+    return "Ja" if wert else "Nein"
+
+
+def kuratiere_bt(satz):
+    """
+    Einen BT-Satz der Fachauswahl in die kuratierte Form bringen.
+
+    Vier Eingriffe, alle aus demselben Grund: Was in der Tabelle steht, soll
+    ohne Vorwissen lesbar sein.
+
+      * "kein LRT" wird zur leeren Zelle. Als Text sieht es wie ein
+        Lebensraumtyp aus und wird in Auswertungen mitgezaehlt; gemeint ist
+        das Gegenteil.
+      * Wahrheitswerte als Ja/Nein statt 0/1.
+      * Die Flaeche auf vier Nachkommastellen - das sind Quadratzentimeter,
+        und mehr behauptet keine Kartierung.
+      * Objekte ohne Biotoptyp werden gekennzeichnet statt weggeworfen. Der
+        LANUK-Konverter laesst sie fallen; bei einer Notfallsicherung waeren
+        sie damit verloren.
+    """
+    neu = dict(satz)
+
+    lr = (satz.get("LR_Typ") or "").strip()
+    if not lr or lr.lower() == KEIN_LRT or not ist_lrt_code(lr):
+        neu["LR_Typ"] = None
+        neu["LR_Typ_Text"] = None
+
+    neu["FFH_LRT"] = ja_nein(satz.get("FFH_LRT"))
+    neu["P62"] = ja_nein(satz.get("P62"))
+
+    fl = satz.get("FL_HA")
+    neu["FL_HA"] = None if fl is None else round(float(fl), 4)
+
+    neu["Ohne_BT_Code"] = "Ja" if not satz.get("BT_CODE") else "Nein"
+    return neu
+
+
+KURATIERT = {"BT": kuratiere_bt}
 
 
 def _nichts(_p=0, _t=""):
@@ -334,10 +431,23 @@ def _zeilen_zu_objekt(pfad, index, start_pkey):
 
 # ── Fachlicher Export ───────────────────────────────────────────────────────
 
-def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
-    """Fachliche Auswahl einer Objektklasse. Rueckgabe: (geschrieben, befunde)."""
+def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts,
+                        kuratiert=False):
+    """
+    Fachliche Auswahl einer Objektklasse. Rueckgabe: (geschrieben, befunde).
+
+    Mit kuratiert=True kommt dieselbe Auswertung heraus, aber auf die
+    Spalten des kuratierten Layers eingedampft und aufbereitet (siehe
+    kuratiere_bt). Bewusst derselbe Code-Weg: zwei getrennte Fassungen
+    wuerden mit der Zeit auseinanderlaufen, und dann saehe man den
+    Unterschied erst an den Daten.
+    """
     profil = OBJEKTKLASSEN[klasse]
     listen_dir = listen_dir or LISTEN_DIR
+    if kuratiert and klasse not in KURATIERT:
+        raise ValueError(
+            f"Fuer die Objektklasse {klasse} gibt es keinen kuratierten "
+            f"Layer (nur fuer: {', '.join(sorted(KURATIERT))}).")
 
     melde(5, "Öffne Geodatabase …")
     ds = oeffne(gdb)
@@ -369,10 +479,13 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
         listen[zielspalte] = lies_referenzliste(
             os.path.join(listen_dir, datei))
 
-    spalten = [(z, t) for z, _q, _f, t in profil["kopf"]]
-    spalten += [(z, "str") for z in profil["abgeleitet"]]
-    spalten += [(z, "str") for z, _t, _f, _s in profil["sammeln"]]
-    spalten += [(z, "str") for z in profil["klartext"]]
+    if kuratiert:
+        spalten = list(KURATIERT_SPALTEN[klasse])
+    else:
+        spalten = [(z, t) for z, _q, _f, t in profil["kopf"]]
+        spalten += [(z, "str") for z in profil["abgeleitet"]]
+        spalten += [(z, "str") for z, _t, _f, _s in profil["sammeln"]]
+        spalten += [(z, "str") for z in profil["klartext"]]
 
     benoetigt = {q for _z, q, _f, _t in profil["kopf"] if q != "geom"}
     benoetigt |= {t for _z, t, _f, _s in profil["sammeln"]}
@@ -440,6 +553,8 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
             for zielspalte, (code, _d) in profil["klartext"].items():
                 satz[zielspalte] = loese_auf(satz.get(code),
                                              listen.get(zielspalte) or {})
+            if kuratiert:
+                satz = KURATIERT[klasse](satz)
             saetze.append((i, satz))
 
         lyr = ds.GetLayerByName(gname)
@@ -571,17 +686,28 @@ def _schreibe(pfad, bloecke):
     for name, wkb_typ, srs, spalten, saetze, geoms in bloecke:
         if not saetze:
             continue
+        # Spalten kommen als (Feld, Typ) oder (Feld, Typ, Alias).
+        spalten = [(s[0], s[1], s[2] if len(s) > 2 else None)
+                   for s in spalten]
         lyr = ds.CreateLayer(name, srs,
                              wkb_typ if wkb_typ != 100 else ogr.wkbNone)
-        for feld, typ in spalten:
+        for feld, typ, alias in spalten:
             if typ == "bool":
                 fd = ogr.FieldDefn(feld, ogr.OFTInteger)
                 fd.SetSubType(ogr.OFSTBoolean)
             else:
                 fd = ogr.FieldDefn(feld, typ_map.get(typ, ogr.OFTString))
+            if alias:
+                # Landet in gpkg_data_columns, der Schema-Erweiterung des
+                # GeoPackage-Formats. QGIS zeigt den Wert als Feldalias;
+                # er bleibt damit an der Datei und nicht am Projekt.
+                try:
+                    fd.SetAlternativeName(alias)
+                except AttributeError:
+                    pass          # aeltere GDAL-Fassung: dann eben ohne
             lyr.CreateField(fd)
         defn = lyr.GetLayerDefn()
-        typen = dict(spalten)
+        typen = {f: t for f, t, _a in spalten}
         lyr.StartTransaction()
         for gi, satz in saetze:
             feat = ogr.Feature(defn)

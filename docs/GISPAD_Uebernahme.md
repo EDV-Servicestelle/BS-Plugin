@@ -31,11 +31,57 @@ Der Dialog führt in drei Schritten:
 2. **Was übernommen wird** — voreingestellt ist *Alles sichern*. Die
    fachliche Auswahl einer Objektklasse ist die Zusatzoption, nicht
    umgekehrt: Was jetzt nicht herausgeholt wird, ist später nicht mehr
-   zugänglich.
+   zugänglich. Dazu kommt der *kuratierte Biotoptypen-Layer* (siehe unten),
+   wenn im Export Biotoptypen stecken.
 3. **Zieldatei** — wird neben dem Export vorgeschlagen. Auf Wunsch landen
    die Layer anschließend direkt in QGIS.
 
 Die Übernahme läuft im Hintergrund, QGIS bleibt bedienbar.
+
+### Der kuratierte Biotoptypen-Layer
+
+Die Fachauswahl gibt wieder, was im Export steht. Der kuratierte Layer ist
+das, was man einer Station in die Hand gibt: zwölf Spalten mit sprechenden
+Anzeigenamen, Wahrheitswerte als Text, und keine Platzhalter, die wie
+Inhalte aussehen.
+
+| Feld | Anzeigename | Herkunft |
+|---|---|---|
+| `KENNUNG` | Objektkennung | Geometrielayer |
+| `BT_CODE` | Biotoptyp (Code) | `BtypHtyp.Biotoptyp` |
+| `BT_TEXT` | Biotoptyp | OSIRIS-Liste 13 |
+| `FL_HA` | Fläche (ha) | Geometrielayer, auf 4 Stellen gerundet |
+| `LR_Typ` | Lebensraumtyp (Code) | `BtypHtyp.Oekotyp` |
+| `LR_Typ_Text` | Lebensraumtyp | OSIRIS-Liste 19 |
+| `FFH_LRT` | FFH-Lebensraumtyp? | `BtypHtyp.ist_FFHLRT`, als Ja/Nein |
+| `P62` | § 62 geschützt? | `BtypHtyp.ist_P62_typ`, als Ja/Nein |
+| `P62_Typ` | §-62-Biotoptyp | `BtypHtyp.P62_Typ` |
+| `Zusatzcodes` | Zusatzcodes (Code) | Tabelle `Zusatzcodes`, aggregiert |
+| `Zusatzcodes_Text` | Zusatzcodes (Klartext) | OSIRIS-Liste 14 |
+| `Ohne_BT_Code` | ohne Biotoptyp | abgeleitet |
+
+Die Anzeigenamen landen in `gpkg_data_columns`, der Schema-Erweiterung des
+GeoPackage-Formats, und damit *in* der Datei — QGIS zeigt sie als
+Feldaliase. Sie hängen nicht am Projekt und gehen beim Weitergeben nicht
+verloren. Die Feldnamen selbst bleiben die der Fachauswahl, damit der
+LANUK-Stil greift; er liegt auch auf diesem Layer.
+
+Vier Eingriffe beim Aufbereiten:
+
+* **„kein LRT" wird zur leeren Zelle.** Das ist ein regulärer
+  OSIRIS-Eintrag (Liste 19, Atom 168820) und steht im Export als Text in
+  `Oekotyp` — im Testdatensatz bei 261 von 759 Objekten. Als Text sieht er
+  wie ein Lebensraumtyp aus und wird in Auswertungen mitgezählt; gemeint ist
+  das Gegenteil.
+* **Wahrheitswerte als Ja/Nein** statt 0/1. Leer bleibt leer: „nicht
+  erhoben" ist weder Ja noch Nein.
+* **Die Fläche auf vier Nachkommastellen.** Das sind Quadratzentimeter, und
+  mehr behauptet keine Kartierung. (Der LANUK-Konverter liefert sie
+  ungerundet.)
+* **Objekte ohne Biotoptyp bleiben drin, gekennzeichnet.** Im
+  Testdatensatz 78 von 759. Der LANUK-Konverter lässt sie fallen; bei einer
+  Notfallsicherung wären sie damit verloren. `Ohne_BT_Code` trennt sie mit
+  einem Filter wieder ab.
 
 ### Darstellung
 
@@ -107,6 +153,10 @@ python3 tools/gispad_export.py --gdb Export.gdb --modus alles \
 # 3. Arbeiten: die fachliche Auswahl je Objektklasse
 python3 tools/gispad_export.py --gdb Export.gdb --modus fachlich \
     --klasse BT --out BT.gpkg
+
+# 4. Weitergeben: der kuratierte Biotoptypen-Layer
+python3 tools/gispad_export.py --gdb Export.gdb --modus kuratiert \
+    --out BT_kuratiert.gpkg
 ```
 
 Objektklassen: `BT` (Biotoptypen), `BK` (Biotopkataster), `FFH` (FFH-Gebiete), `MAS` (Maßnahmen).

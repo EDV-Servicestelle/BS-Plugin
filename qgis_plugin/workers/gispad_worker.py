@@ -18,7 +18,8 @@ except ImportError:
 
 
 class GispadWorker(QThread):
-    """auftrag: 'erschliessen' | 'analyse' | 'alles' | 'fachlich'"""
+    """auftrag: 'erschliessen' | 'analyse' | 'alles' | 'fachlich'
+    | 'kuratiert'"""
 
     fortschritt = pyqtSignal(int, str)
     fertig = pyqtSignal(bool, str, object)
@@ -49,7 +50,8 @@ class GispadWorker(QThread):
                                             "befunde": befunde})
             else:
                 geschrieben, befunde = exportiere_fachlich(
-                    cfg["gdb"], cfg["klasse"], cfg["ziel"], melde=melde)
+                    cfg["gdb"], cfg["klasse"], cfg["ziel"], melde=melde,
+                    kuratiert=(self.auftrag == "kuratiert"))
                 self.fertig.emit(True, "", {"geschrieben": geschrieben,
                                             "befunde": befunde})
         except Exception as e:
