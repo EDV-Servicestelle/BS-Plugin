@@ -52,7 +52,10 @@ vollstaendig reproduziert.
 """
 
 import os
+import shutil
 import sys
+import tempfile
+import zipfile
 
 #: Spalten, die zum Modell gehoeren und keine Fachdaten sind.
 SCHLUESSELSPALTEN = ("GISPADID", "PKEY", "SKEY", "FKEY")
@@ -91,6 +94,272 @@ def oeffne(gdb_pfad):
     if ds is None:
         sys.exit(f"Nicht lesbar als Geodatabase: {gdb_pfad}")
     return ds
+
+
+def ist_geodatabase(pfad):
+    """
+    Laesst sich der Ordner als Geodatabase oeffnen? (True/False)
+
+    Geprueft wird durch OEFFNEN, nicht am Namen: wo im Verzeichnisbaum der
+    Export liegt und wie der Ordner darueber heisst, ist damit gleichgueltig.
+
+    Eine Einschraenkung bleibt, und sie kommt vom Treiber, nicht von hier:
+    OpenFileGDB oeffnet nur Ordner, deren Name auf .gdb endet. Ein
+    umbenannter Export laesst sich also nicht lesen. `hat_gdb_tabellen`
+    erkennt diesen Fall, damit man es sagen kann.
+    """
+    if not pfad or not os.path.isdir(pfad):
+        return False
+    try:
+        ogr = ogr_modul()
+        ds = ogr.Open(pfad)
+    except Exception:
+        return False
+    if ds is None:
+        return False
+    # Der TREIBER entscheidet, nicht die blosse Lesbarkeit: OGR oeffnet auch
+    # ein Verzeichnis voller Shapefiles und meldet Layer. Ohne diese Pruefung
+    # haelt die Suche jeden Shapefile-Ordner fuer eine Geodatabase.
+    try:
+        treiber = ds.GetDriver().GetName()
+    except Exception:
+        treiber = ""
+    treffer = (treiber in ("OpenFileGDB", "FileGDB")
+               and ds.GetLayerCount() > 0)
+    ds = None
+    return treffer
+
+
+def finde_geodatabases(pfad, tiefe=1):
+    """
+    Geodatabases in `pfad` und darunter suchen.
+
+    Gesucht wird in drei Richtungen, weil Leute an unterschiedlichen Stellen
+    landen: der Ordner selbst, ein .gdb-Ordner im Pfad DARUEBER (man ist
+    hineinnavigiert) und Unterordner bis `tiefe`. Zurueck kommt eine Liste
+    ohne Dubletten in der Reihenfolge der Wahrscheinlichkeit.
+    """
+    gefunden = []
+
+    def merke(k):
+        k = os.path.normpath(k)
+        if k not in gefunden and ist_geodatabase(k):
+            gefunden.append(k)
+
+    merke(pfad)
+    # im Pfad aufwaerts: wurde in die Geodatabase hineinnavigiert?
+    teile = (pfad or "").replace("\\", "/").split("/")
+    for i, t in enumerate(teile):
+        if t.lower().endswith(".gdb"):
+            merke(pfad[:len("/".join(teile[:i + 1]))])
+    # und ein, zwei Ebenen darunter
+    if os.path.isdir(pfad) and tiefe > 0:
+        try:
+            for name in sorted(os.listdir(pfad)):
+                unter = os.path.join(pfad, name)
+                if os.path.isdir(unter):
+                    gefunden.extend(x for x in finde_geodatabases(unter,
+                                                                  tiefe - 1)
+                                    if x not in gefunden)
+        except OSError:
+            pass
+    return gefunden
+
+
+# ── Gepackte Exporte ────────────────────────────────────────────────────────
+#
+# Eine File-Geodatabase ist ein Ordner mit hunderten Dateien. Wer sie
+# weitergibt, packt sie - und beim Verschicken bleibt es oft dabei: auf der
+# Platte liegt dann ein ZIP-Archiv, nicht der Ordner. Erschwerend kommt
+# hinzu, dass der Windows-Explorer bekannte Endungen ausblendet: aus
+# "Export.gdb.zip" wird in der Anzeige "Export.gdb", und es sieht aus wie
+# der Ordner, den man sucht. Nur die Spalte "Typ" verraet das Archiv.
+#
+# Deshalb werden Archive hier mitbehandelt - erkannt am INHALT, nicht an der
+# Endung, denn die taeuscht ja gerade.
+
+def ist_archiv(pfad):
+    """Ist das eine ZIP-Datei? (Am Inhalt geprueft, nicht am Namen.)"""
+    try:
+        return os.path.isfile(pfad) and zipfile.is_zipfile(pfad)
+    except OSError:
+        return False
+
+
+#: Dateiendungen, an denen eine File-Geodatabase zu erkennen ist.
+GDB_DATEIEN = (".gdbtable", ".gdbtablx")
+
+
+def hat_gdb_tabellen(ordner):
+    """
+    Liegen in dem Ordner die Tabellendateien einer Geodatabase?
+
+    Gebraucht wird das fuer die Diagnose: der OpenFileGDB-Treiber oeffnet
+    ausschliesslich Ordner, deren NAME auf .gdb endet. Ein ausgepackter,
+    aber umbenannter Export laesst sich deshalb nicht lesen - mit dieser
+    Pruefung kann man das sagen, statt "keine Geodatabase gefunden" zu
+    melden, obwohl sie direkt vor einem liegt.
+    """
+    if not ordner or not os.path.isdir(ordner):
+        return False
+    try:
+        return any(n.lower().endswith(GDB_DATEIEN)
+                   for n in os.listdir(ordner))
+    except OSError:
+        return False
+
+
+def archiv_befund(pfad):
+    """
+    Was steckt in dem Archiv? -> (hat_geodatabase, tabellen_in_der_wurzel)
+
+    Gelesen wird nur das Inhaltsverzeichnis - das geht auch bei grossen
+    Dateien sofort. Ohne diese Vorpruefung wuerde die Suche jedes beliebige
+    Archiv auspacken, nur um festzustellen, dass Fotos darin sind.
+
+    Der zweite Wert unterscheidet zwei Packweisen: entweder wurde der
+    Ordner "Export.gdb" gepackt (dann steht er im Archiv), oder es wurde
+    aus dem Ordner HERAUS gepackt (dann liegen die Tabellendateien
+    unmittelbar in der Archivwurzel). Im zweiten Fall muss der Zielordner
+    beim Auspacken auf .gdb endet, sonst liest der Treiber ihn nicht.
+    """
+    try:
+        with zipfile.ZipFile(pfad) as zf:
+            namen = zf.namelist()
+    except (OSError, zipfile.BadZipFile):
+        return False, False
+    hat = wurzel = False
+    for name in namen:
+        if not name.lower().endswith(GDB_DATEIEN):
+            continue
+        hat = True
+        if "/" not in name.replace("\\", "/").strip("/"):
+            wurzel = True
+    return hat, wurzel
+
+
+def archiv_hat_geodatabase(pfad):
+    """Steckt in dem Archiv eine Geodatabase? (True/False)"""
+    return archiv_befund(pfad)[0]
+
+
+def finde_archive(pfad, tiefe=1):
+    """
+    Archive mit Geodatabase-Inhalt in `pfad` und darunter.
+
+    Gesucht wird so weit wie bei den ausgepackten Exporten, damit es nicht
+    davon abhaengt, ob der Export gepackt ist oder nicht.
+    """
+    if ist_archiv(pfad) and archiv_hat_geodatabase(pfad):
+        return [pfad]
+    if not pfad or not os.path.isdir(pfad):
+        return []
+    treffer = []
+    try:
+        namen = sorted(os.listdir(pfad))
+    except OSError:
+        return []
+    for name in namen:
+        eintrag = os.path.join(pfad, name)
+        if os.path.isdir(eintrag):
+            if tiefe > 0:
+                treffer.extend(x for x in finde_archive(eintrag, tiefe - 1)
+                               if x not in treffer)
+        elif ist_archiv(eintrag) and archiv_hat_geodatabase(eintrag):
+            treffer.append(eintrag)
+    return treffer
+
+
+def entpacke_archiv(pfad, ziel=None, melde=None):
+    """
+    Archiv auspacken und den Zielordner zurueckgeben.
+
+    Ohne `ziel` wird ein temporaerer Ordner angelegt; ihn wieder zu
+    entfernen ist Sache der Aufrufenden (`raeume_auf`). Bewusst nicht in den
+    Ordner des Archivs: der liegt oft auf einem Netzlaufwerk oder ist
+    schreibgeschuetzt, und ein halb ausgepacktes Archiv neben dem Original
+    waere eine Falle fuer den naechsten Durchgang.
+    """
+    if ziel is None:
+        ziel = tempfile.mkdtemp(prefix="gispad_")
+    else:
+        os.makedirs(ziel, exist_ok=True)
+    with zipfile.ZipFile(pfad) as zf:
+        glieder = zf.namelist()
+        # Eintraege, die aus dem Zielordner herausfuehren, werden
+        # uebergangen. Python entschaerft solche Namen beim Auspacken
+        # inzwischen selbst; hier steht es ausdruecklich, damit es auch bei
+        # einer anderen Python-Fassung gilt.
+        sauber = []
+        for name in glieder:
+            n = name.replace("\\", "/")
+            if n.startswith("/") or ".." in n.split("/"):
+                continue
+            sauber.append(name)
+        if melde:
+            melde(-1, f"Entpacke {len(sauber)} Dateien aus "
+                      f"{os.path.basename(pfad)} …")
+        zf.extractall(ziel, members=sauber)
+    return ziel
+
+
+def raeume_auf(ordner):
+    """Einen von `entpacke_archiv` angelegten Ordner wieder entfernen."""
+    if ordner and os.path.isdir(ordner):
+        shutil.rmtree(ordner, ignore_errors=True)
+
+
+def erschliesse(pfad, melde=None):
+    """
+    Aus einer Nutzerangabe die Liste der Geodatabases machen.
+
+    `pfad` darf ein Geodatabase-Ordner, ein Ordner darueber oder darunter,
+    ein Archiv oder ein Ordner mit Archiven sein. Zurueck kommt
+    (geodatabases, temporaerer_ordner). Der zweite Wert ist None, wenn
+    nichts ausgepackt wurde, sonst nach dem Lesen an `raeume_auf` zu
+    uebergeben.
+
+    Reihenfolge: zuerst wird nach ausgepackten Geodatabases gesucht. Liegt
+    beides vor - Ordner und Archiv -, ist der Ordner der naehere Treffer;
+    auspacken kostet Zeit und Platz.
+    """
+    treffer = finde_geodatabases(pfad)
+    if treffer:
+        return treffer, None
+
+    archive = finde_archive(pfad)
+    if not archive:
+        return [], None
+
+    temp = tempfile.mkdtemp(prefix="gispad_")
+    gefunden = []
+    for archiv in archive:
+        hat, wurzel = archiv_befund(archiv)
+        if not hat:
+            continue
+        name = os.path.basename(archiv)
+        while True:                      # "Export.gdb.zip" -> "Export"
+            name, endung = os.path.splitext(name)
+            if not endung:
+                break
+        # Liegen die Tabellendateien in der Archivwurzel, muss der
+        # Zielordner die Endung tragen - der Treiber verlangt sie am Namen.
+        anhang = ".gdb" if wurzel else ""
+        basis = os.path.join(temp, name)
+        unter = basis + anhang
+        # Jedes Archiv in ein eigenes Unterverzeichnis: zwei Exporte
+        # gleichen Namens wuerden einander sonst ueberschreiben.
+        nr = 1
+        while os.path.exists(unter):
+            unter = f"{basis}_{nr}{anhang}"
+            nr += 1
+        entpacke_archiv(archiv, ziel=unter, melde=melde)
+        gefunden.extend(x for x in finde_geodatabases(unter, tiefe=2)
+                        if x not in gefunden)
+    if not gefunden:
+        raeume_auf(temp)
+        return [], None
+    return gefunden, temp
 
 
 def layer_namen(ds):
