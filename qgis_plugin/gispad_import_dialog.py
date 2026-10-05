@@ -21,9 +21,12 @@ from qgis.core import QgsProject, QgsVectorLayer
 
 try:
     from qgis_new_project_plugin.core.gispad_klassen import OBJEKTKLASSEN
+    from qgis_new_project_plugin.core.gispad import (
+        hat_gdb_tabellen, raeume_auf)
     from qgis_new_project_plugin.workers.gispad_worker import GispadWorker
 except ImportError:
     from .core.gispad_klassen import OBJEKTKLASSEN
+    from .core.gispad import hat_gdb_tabellen, raeume_auf
     from .workers.gispad_worker import GispadWorker
 
 
@@ -35,6 +38,8 @@ class GispadImportDialog(QDialog):
         self.resize(760, 620)
         self._worker = None
         self._analyse = None
+        self._temp = None       # ausgepacktes Archiv, am Ende zu entfernen
+        self._quelle = ""       # was gewählt wurde (für die Namensvorschläge)
         self._build_ui()
 
     # ── Oberfläche ──────────────────────────────────────────────────────────
@@ -43,7 +48,8 @@ class GispadImportDialog(QDialog):
 
         hinweis = QLabel(
             "Übernimmt die Daten aus einem GISPAD-Export (File-Geodatabase) "
-            "in ein GeoPackage.\nGISPAD selbst wird dafür nicht benötigt.")
+            "in ein GeoPackage.\nGISPAD selbst wird dafür nicht benötigt. "
+            "Gepackte Exporte (ZIP) gehen auch.")
         hinweis.setWordWrap(True)
         hinweis.setStyleSheet("color: #444;")
         lo.addWidget(hinweis)
@@ -54,12 +60,23 @@ class GispadImportDialog(QDialog):
         z = QHBoxLayout()
         self.pfad_edit = QLineEdit()
         self.pfad_edit.setPlaceholderText(
-            "Ordner des Exports (endet auf .gdb)")
+            "Ordner des Exports oder ZIP-Archiv")
         self.pfad_edit.setReadOnly(True)
-        btn = QPushButton("Durchsuchen …")
-        btn.clicked.connect(self._waehle_gdb)
+        # Zwei Knöpfe, weil Qt zwei Dialoge hat: ein Ordnerdialog zeigt
+        # keine Dateien an, ein Dateidialog nimmt keinen Ordner. Ein
+        # gepackter Export ist im Ordnerdialog also unsichtbar – genau das
+        # hat in der Praxis zum Fehlschlag geführt.
+        self.btn_ordner = QPushButton("Ordner …")
+        self.btn_ordner.setToolTip(
+            "Den ausgepackten Export wählen – oder den Ordner, in dem er "
+            "liegt.")
+        self.btn_ordner.clicked.connect(self._waehle_ordner)
+        self.btn_zip = QPushButton("ZIP-Datei …")
+        self.btn_zip.setToolTip("Einen gepackten Export wählen.")
+        self.btn_zip.clicked.connect(self._waehle_archiv)
         z.addWidget(self.pfad_edit, 1)
-        z.addWidget(btn)
+        z.addWidget(self.btn_ordner)
+        z.addWidget(self.btn_zip)
         l1.addLayout(z)
         self.befund_label = QLabel("Noch kein Export gewählt.")
         self.befund_label.setWordWrap(True)
@@ -132,38 +149,109 @@ class GispadImportDialog(QDialog):
         self.log.ensureCursorVisible()
 
     # ── Schritt 1: Export wählen und sichten ────────────────────────────────
-    def _waehle_gdb(self):
+    def _waehle_ordner(self):
         pfad = QFileDialog.getExistingDirectory(
-            self, "GISPAD-Export wählen (Ordner *.gdb)", "")
-        if not pfad:
-            return
-        # Hat jemand IN den Ordner navigiert, ist der .gdb-Ordner gemeint.
-        gdb = self._gdb_wurzel(pfad) or pfad
-        if not gdb.lower().rstrip("/\\").endswith(".gdb"):
-            QMessageBox.warning(
-                self, "Kein GISPAD-Export",
-                "Der gewählte Ordner endet nicht auf „.gdb“.\n\n"
-                "Ein GISPAD-Export ist der Ordner selbst (z. B. "
-                "„GispadExport.gdb“) – nicht der Ordner darüber.")
-            return
-        self.pfad_edit.setText(gdb)
-        self.befund_label.setText("Sichte den Export …")
+            self, "GISPAD-Export wählen (Ordner)", self._quelle or "")
+        if pfad:
+            self._erschliesse_quelle(pfad)
+
+    def _waehle_archiv(self):
+        pfad, _ = QFileDialog.getOpenFileName(
+            self, "Gepackten GISPAD-Export wählen", self._quelle or "",
+            # Auch „.gdb“ im Filter: der Windows-Explorer blendet bekannte
+            # Endungen aus, deshalb heißt ein Archiv auf der Platte oft
+            # scheinbar „Export.gdb“, obwohl „Export.gdb.zip“ dasteht.
+            "Gepackte Exporte (*.zip *.gdb *.gdb.zip);;Alle Dateien (*)")
+        if pfad:
+            self._erschliesse_quelle(pfad)
+
+    def _erschliesse_quelle(self, pfad):
+        """
+        Aus der Auswahl die Geodatabase bestimmen.
+
+        Erkannt wird durch ÖFFNEN, nicht am Namen. Gesucht wird im gewählten
+        Ordner, im Pfad darüber (falls jemand hineinnavigiert ist) und eine
+        Ebene darunter; gepackte Exporte werden dabei ausgepackt. Das läuft
+        im Hintergrund, weil ein großes Archiv Zeit braucht.
+        """
+        self._raeume_temp_auf()
+        self._quelle = pfad
+        self.pfad_edit.setText(pfad)
+        self.befund_label.setText("Sehe nach, was darin liegt …")
         self.box2.setEnabled(False)
         self.box3.setEnabled(False)
         self.start_btn.setEnabled(False)
         self.log.clear()
+        self._starte_worker("erschliessen", {"quelle": pfad})
+
+    def _nach_erschliessen(self, ergebnis):
+        gdbs = ergebnis["gdbs"]
+        self._temp = ergebnis["temp"]
+        if not gdbs:
+            self._melde_nichts_gefunden()
+            return
+        if len(gdbs) == 1:
+            gdb = gdbs[0]
+        else:
+            from qgis.PyQt.QtWidgets import QInputDialog
+            # Namen eindeutig machen: zwei Exporte können gleich heißen und
+            # nur im Ordner darüber auseinandergehen.
+            namen = []
+            for t in gdbs:
+                name = os.path.basename(t)
+                if sum(1 for x in gdbs
+                       if os.path.basename(x) == name) > 1:
+                    name = os.path.join(
+                        os.path.basename(os.path.dirname(t)), name)
+                namen.append(name)
+            name, ok = QInputDialog.getItem(
+                self, "Geodatabase wählen",
+                "Es wurden mehrere Geodatabases gefunden.\n"
+                "Welche soll übernommen werden?", namen, 0, False)
+            if not ok:
+                self.befund_label.setText("Noch kein Export gewählt.")
+                self.start_btn.setEnabled(False)
+                return
+            gdb = gdbs[namen.index(name)]
+
+        self.pfad_edit.setText(gdb)
+        if self._temp:
+            self._sage(f"Gepackter Export – ausgepackt nach:\n   {gdb}\n"
+                       "Der ausgepackte Stand wird beim Schließen des "
+                       "Fensters wieder entfernt;\ndas GeoPackage bleibt.\n")
+        self.befund_label.setText("Sichte den Export …")
         self._starte_worker("analyse", {"gdb": gdb})
 
-    @staticmethod
-    def _gdb_wurzel(pfad):
-        """Oberster .gdb-Ordner im Pfad, oder None. Beide Trennzeichen."""
-        if not pfad:
-            return None
-        teile = pfad.replace("\\", "/").split("/")
-        for i, t in enumerate(teile):
-            if t.lower().endswith(".gdb"):
-                return pfad[:len("/".join(teile[:i + 1]))]
-        return None
+    def _melde_nichts_gefunden(self):
+        """Keine Geodatabase - mit dem Hinweis, der zum Befund passt."""
+        pfad = self._quelle
+        name = os.path.basename(pfad.rstrip("/" + os.sep)) or pfad
+        self.befund_label.setText("Noch kein Export gewählt.")
+        self.pfad_edit.setText("")
+        self.start_btn.setEnabled(False)
+        if hat_gdb_tabellen(pfad):
+            # Der Export liegt vor, nur der Ordnername passt nicht. Das
+            # verlangt der GDAL-Treiber, nicht das Plugin.
+            QMessageBox.warning(
+                self, "Ordner umbenennen",
+                f"In „{name}“ liegen die Dateien einer File-Geodatabase, "
+                "aber der Ordnername endet nicht auf „.gdb“.\n\n"
+                "Darauf besteht der Lesetreiber von QGIS. Benennen Sie den "
+                f"Ordner in „{name}.gdb“ um und wählen Sie ihn erneut.")
+            return
+        QMessageBox.warning(
+            self, "Keine Geodatabase gefunden",
+            f"In „{name}“ ist kein GISPAD-Export zu finden.\n\n"
+            "Gesucht wurde im gewählten Ordner, im Ordner darüber und eine "
+            "Ebene darunter – ausgepackt wie gepackt (ZIP).\n\n"
+            "Ein GISPAD-Export ist entweder ein ORDNER mit vielen Dateien "
+            "darin (meist auf „.gdb“ endend) oder ein ZIP-Archiv davon. "
+            "Liegt er gepackt vor, nehmen Sie den Knopf „ZIP-Datei …“ – im "
+            "Ordnerdialog sind Dateien nicht zu sehen.\n\n"
+            "Zu beachten: Der Windows-Explorer blendet bekannte Endungen "
+            "aus. Was dort „Export.gdb“ heißt und in der Spalte „Typ“ als "
+            "ZIP-Archiv steht, ist in Wahrheit „Export.gdb.zip“ – also eine "
+            "Datei, kein Ordner.")
 
     def _zeige_analyse(self, erg):
         self._analyse = erg
@@ -220,7 +308,18 @@ class GispadImportDialog(QDialog):
         gdb = self.pfad_edit.text().strip()
         if not gdb:
             return
-        ordner = os.path.dirname(gdb.rstrip("/\\"))
+        # Der Ordner kommt von der AUSWAHL, nicht von der Geodatabase: bei
+        # einem gepackten Export liegt die im temporären Ordner, und dort
+        # hätte das Ergebnis nichts verloren - es würde beim Schließen des
+        # Fensters mit entfernt.
+        quelle = self._quelle or gdb
+        if self._temp:
+            # Gepackter Export: neben das Archiv bzw. in den gewählten
+            # Ordner, nicht in den temporären.
+            ordner = (quelle if os.path.isdir(quelle)
+                      else os.path.dirname(quelle))
+        else:
+            ordner = os.path.dirname(gdb.rstrip("/\\"))
         name = os.path.splitext(os.path.basename(gdb.rstrip("/\\")))[0]
         zusatz = "Sicherung" if self.rb_alles.isChecked() else (
             self.klasse_combo.currentData() or "Fachdaten")
@@ -269,6 +368,10 @@ class GispadImportDialog(QDialog):
         self.balken.setVisible(True)
         self.balken.setValue(0)
         self.start_btn.setEnabled(False)
+        # Während eines Arbeitsgangs keine neue Quelle wählen: dabei würde
+        # der ausgepackte Stand unter dem laufenden Lesen weggeräumt.
+        self.btn_ordner.setEnabled(False)
+        self.btn_zip.setEnabled(False)
         self._auftrag = auftrag
         self._ziel = config.get("ziel")
         self._worker = GispadWorker(auftrag, config, self)
@@ -284,13 +387,21 @@ class GispadImportDialog(QDialog):
 
     def _fertig(self, erfolg, fehler, ergebnis):
         self.balken.setVisible(False)
-        self.start_btn.setEnabled(True)
+        # Nur wenn eine Geodatabase feststeht - sonst führte „Übernehmen“
+        # auf einen leeren Pfad.
+        self.start_btn.setEnabled(bool(self.pfad_edit.text().strip()))
+        self.btn_ordner.setEnabled(True)
+        self.btn_zip.setEnabled(True)
         if not erfolg:
             self._sage("\nFehlgeschlagen:\n" + fehler)
             QMessageBox.critical(
                 self, "Übernahme fehlgeschlagen",
                 fehler.split("\n")[0] +
                 "\n\nEinzelheiten stehen im Protokoll unten.")
+            return
+
+        if self._auftrag == "erschliessen":
+            self._nach_erschliessen(ergebnis)
             return
 
         if self._auftrag == "analyse":
@@ -317,6 +428,49 @@ class GispadImportDialog(QDialog):
         QMessageBox.information(
             self, "Fertig",
             f"{gesamt} Datensätze übernommen.\n\n{self._ziel}")
+
+    # ── Aufräumen ───────────────────────────────────────────────────────────
+    def _raeume_temp_auf(self):
+        """
+        Den ausgepackten Stand eines Archivs entfernen.
+
+        Der liegt im Temp-Verzeichnis und kann bei einer grossen Kartierung
+        mehrere Gigabyte gross sein. Liegengelassen fiele das erst auf,
+        wenn die Platte voll ist. Das Ergebnis - das GeoPackage - liegt
+        woanders und bleibt.
+        """
+        if self._temp:
+            raeume_auf(self._temp)
+            self._temp = None
+
+    def _laeuft_noch(self):
+        """
+        Laeuft gerade ein Arbeitsgang? Dann nicht schliessen.
+
+        Zwei Gruende: der ausgepackte Stand wuerde unter einem laufenden
+        Lesevorgang weggeraeumt, und ein noch laufender QThread, dessen
+        Fenster verschwindet, bringt QGIS zum Absturz.
+        """
+        if self._worker is not None and self._worker.isRunning():
+            QMessageBox.information(
+                self, "Noch nicht fertig",
+                "Der Vorgang läuft noch. Bitte warten Sie, bis er "
+                "abgeschlossen ist.")
+            return True
+        return False
+
+    def closeEvent(self, ereignis):
+        if self._laeuft_noch():
+            ereignis.ignore()
+            return
+        self._raeume_temp_auf()
+        super().closeEvent(ereignis)
+
+    def reject(self):
+        if self._laeuft_noch():
+            return
+        self._raeume_temp_auf()
+        super().reject()
 
     def _lade_in_qgis(self, gpkg, geschrieben):
         """

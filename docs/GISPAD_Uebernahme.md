@@ -18,8 +18,16 @@ erst in zweiter Linie eine Arbeitserleichterung.
 
 Der Dialog führt in drei Schritten:
 
-1. **Export wählen** — den Ordner, der auf `.gdb` endet. Das Plugin sieht
-   selbst nach, was darin steckt, und zeigt es an.
+1. **Export wählen** — zwei Knöpfe: *Ordner …* für einen ausgepackten
+   Export, *ZIP-Datei …* für einen gepackten. Beide sind nötig, weil Qt
+   zwei Dateidialoge hat: Im Ordnerdialog sind Dateien nicht zu sehen, im
+   Dateidialog keine Ordner.
+
+   Erkannt wird der Export durch *Öffnen*, nicht am Namen. Gesucht wird im
+   gewählten Ordner, im Ordner darüber (falls man hineinnavigiert ist) und
+   eine Ebene darunter — ausgepackt wie gepackt; bei mehreren Treffern
+   fragt das Plugin nach. Das Plugin sieht dann selbst nach, was darin
+   steckt, und zeigt es an.
 2. **Was übernommen wird** — voreingestellt ist *Alles sichern*. Die
    fachliche Auswahl einer Objektklasse ist die Zusatzoption, nicht
    umgekehrt: Was jetzt nicht herausgeholt wird, ist später nicht mehr
@@ -29,10 +37,37 @@ Der Dialog führt in drei Schritten:
 
 Die Übernahme läuft im Hintergrund, QGIS bleibt bedienbar.
 
+### Gepackte Exporte
+
+Eine File-Geodatabase ist ein Ordner mit hunderten Dateien. Wer sie
+weitergibt, packt sie — und beim Verschicken bleibt es oft dabei: Auf der
+Platte liegt dann ein ZIP-Archiv, kein Ordner. Das Plugin packt es selbst
+aus (in einen temporären Ordner, der beim Schließen des Fensters wieder
+entfernt wird; das GeoPackage bleibt natürlich).
+
+Zwei Dinge, die in der Praxis Zeit gekostet haben:
+
+* **Der Windows-Explorer blendet bekannte Endungen aus.** Was dort
+  `Export.gdb` heißt und in der Spalte *Typ* als ZIP-Archiv steht, ist in
+  Wahrheit `Export.gdb.zip` — eine Datei, kein Ordner. Im Ordnerdialog ist
+  sie deshalb unsichtbar. Darum der Knopf *ZIP-Datei …*; wer stattdessen
+  den Ordner wählt, in dem sie liegt, kommt ebenfalls zum Ziel: dort wird
+  mit gesucht.
+* **Der Lesetreiber besteht auf der Endung am Ordner.** `OpenFileGDB`
+  öffnet nur Ordner, deren Name auf `.gdb` endet. Ein ausgepackter, aber
+  umbenannter Export lässt sich nicht lesen — das Plugin erkennt diesen
+  Fall und sagt, dass umbenannt werden muss, statt „nichts gefunden" zu
+  melden. Beim eigenen Auspacken wird die Endung mit gesetzt, auch wenn
+  das Archiv die Tabellendateien ohne Ordner enthält.
+
 ## Für den Stapelbetrieb: die Kommandozeile
 
 Gleiche Logik, andere Oberfläche — etwa wenn mehrere Projektordner auf
 einmal gesichert werden:
+
+`--gdb` nimmt dasselbe an wie der Dialog: den `.gdb`-Ordner, einen Ordner
+darüber oder darunter, ein ZIP-Archiv des Exports oder einen Ordner mit
+solchen Archiven.
 
 ```bash
 # 1. Sichten: was steckt im Export, wie hängt es zusammen?

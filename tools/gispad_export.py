@@ -54,7 +54,7 @@ def plugin_verzeichnis(start):
 
 
 def lade_logik():
-    """core/gispad_klassen.py des Plugins laden, ohne QGIS."""
+    """core/gispad.py und core/gispad_klassen.py laden, ohne QGIS."""
     import importlib.util
     plugin = plugin_verzeichnis(__file__)
     if not plugin:
@@ -70,8 +70,34 @@ def lade_logik():
         spec.loader.exec_module(modul)
         return modul
 
-    hole("gispad")
-    return hole("gispad_klassen")
+    g = hole("gispad")
+    return g, hole("gispad_klassen")
+
+
+def bestimme_gdb(g, angabe):
+    """
+    Aus der Angabe auf der Kommandozeile die Geodatabase machen.
+
+    Angenommen wird ein Geodatabase-Ordner, ein Ordner darueber oder
+    darunter, ein ZIP-Archiv oder ein Ordner mit Archiven. Zurueck kommt
+    (gdb, temporaerer_ordner); der zweite Wert ist am Ende an
+    g.raeume_auf() zu uebergeben.
+    """
+    gdbs, temp = g.erschliesse(angabe, melde=lambda p, t: print(f"  {t}"))
+    if not gdbs:
+        if g.hat_gdb_tabellen(angabe):
+            sys.exit(f"In {angabe} liegen die Dateien einer "
+                     f"File-Geodatabase, aber der Ordnername endet nicht "
+                     f"auf .gdb.\n  Darauf besteht der OpenFileGDB-Treiber - "
+                     f"Ordner umbenennen und erneut versuchen.")
+        sys.exit(f"Keine File-Geodatabase gefunden: {angabe}\n"
+                 "  Gesucht wurde im Ordner selbst, darueber und eine Ebene "
+                 "darunter, ausgepackt wie gepackt (ZIP).")
+    if len(gdbs) > 1:
+        print("Mehrere Geodatabases gefunden - genommen wird die erste:")
+        for x in gdbs:
+            print(f"    {x}")
+    return gdbs[0], temp
 
 
 def modus_beziehungen(gk, gdb, bericht=None):
@@ -126,7 +152,9 @@ def main():
     ap = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--gdb", required=True, help="Ordner der *.gdb")
+    ap.add_argument("--gdb", required=True,
+                    help="Ordner der *.gdb, ein Ordner darueber oder ein "
+                         "ZIP-Archiv des Exports")
     ap.add_argument("--modus", default="fachlich",
                     choices=("beziehungen", "fachlich", "alles"))
     ap.add_argument("--klasse", default="BT",
@@ -136,33 +164,43 @@ def main():
     ap.add_argument("--ueberschreiben", action="store_true")
     args = ap.parse_args()
 
-    gk = lade_logik()
+    g, gk = lade_logik()
     if args.modus == "fachlich" and args.klasse not in gk.OBJEKTKLASSEN:
         sys.exit(f"Unbekannte Objektklasse: {args.klasse}  "
                  f"(moeglich: {', '.join(sorted(gk.OBJEKTKLASSEN))})")
 
-    print(f"Geodatabase: {os.path.basename(args.gdb.rstrip('/'))}\n")
+    if args.modus != "beziehungen":
+        if not args.out:
+            sys.exit("--out fehlt (Ziel-GeoPackage).")
+        if os.path.exists(args.out) and not args.ueberschreiben:
+            sys.exit(f"Zieldatei existiert schon: {args.out}\n"
+                     "  Mit --ueberschreiben neu erzeugen.")
+
+    gdb, temp = bestimme_gdb(g, args.gdb)
+    try:
+        return arbeite(g, gk, args, gdb)
+    finally:
+        # Ein ausgepacktes Archiv kann mehrere Gigabyte gross sein.
+        g.raeume_auf(temp)
+
+
+def arbeite(g, gk, args, gdb):
+    print(f"Geodatabase: {os.path.basename(gdb.rstrip('/'))}\n")
 
     if args.modus == "beziehungen":
-        modus_beziehungen(gk, args.gdb, args.bericht)
+        modus_beziehungen(gk, gdb, args.bericht)
         return 0
-
-    if not args.out:
-        sys.exit("--out fehlt (Ziel-GeoPackage).")
-    if os.path.exists(args.out) and not args.ueberschreiben:
-        sys.exit(f"Zieldatei existiert schon: {args.out}\n"
-                 "  Mit --ueberschreiben neu erzeugen.")
 
     def melde(p, t):
         print(f"  [{p:3}%] {t}")
 
     if args.modus == "alles":
         befunde = []
-        geschrieben = gk.exportiere_alles(args.gdb, args.out, melde,
+        geschrieben = gk.exportiere_alles(gdb, args.out, melde,
                                           befunde=befunde)
     else:
         geschrieben, befunde = gk.exportiere_fachlich(
-            args.gdb, args.klasse, args.out, melde=melde)
+            gdb, args.klasse, args.out, melde=melde)
 
     print(f"\nGeoPackage: {args.out}")
     for name, n in geschrieben.items():
