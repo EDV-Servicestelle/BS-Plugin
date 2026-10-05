@@ -18,6 +18,8 @@ Drei Betriebsarten:
                         Schritt bei einem unbekannten Export.
   --modus alles         Jede gefuellte Tabelle vollstaendig (Sicherung).
   --modus fachlich      Die fachliche Auswahl einer Objektklasse.
+  --modus kuratiert     Wie fachlich, aber auf einen schlanken, aufbereiteten
+                        Layer eingedampft (derzeit nur BT).
 
 Aufruf:
     python3 tools/gispad_export.py --gdb Export.gdb --modus beziehungen
@@ -156,7 +158,7 @@ def main():
                     help="Ordner der *.gdb, ein Ordner darueber oder ein "
                          "ZIP-Archiv des Exports")
     ap.add_argument("--modus", default="fachlich",
-                    choices=("beziehungen", "fachlich", "alles"))
+                    choices=("beziehungen", "fachlich", "alles", "kuratiert"))
     ap.add_argument("--klasse", default="BT",
                     help="Objektklasse fuer --modus fachlich (BT, BK, MAS)")
     ap.add_argument("--out", default=None, help="Ziel-GeoPackage")
@@ -200,7 +202,8 @@ def arbeite(g, gk, args, gdb):
                                           befunde=befunde)
     else:
         geschrieben, befunde = gk.exportiere_fachlich(
-            gdb, args.klasse, args.out, melde=melde)
+            gdb, args.klasse, args.out, melde=melde,
+            kuratiert=(args.modus == "kuratiert"))
 
     print(f"\nGeoPackage: {args.out}")
     for name, n in geschrieben.items():

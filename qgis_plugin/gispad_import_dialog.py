@@ -20,12 +20,13 @@ from qgis.PyQt.QtWidgets import (
 from qgis.core import QgsProject, QgsVectorLayer
 
 try:
-    from qgis_new_project_plugin.core.gispad_klassen import OBJEKTKLASSEN
+    from qgis_new_project_plugin.core.gispad_klassen import (
+        OBJEKTKLASSEN, KURATIERT)
     from qgis_new_project_plugin.core.gispad import (
         hat_gdb_tabellen, raeume_auf)
     from qgis_new_project_plugin.workers.gispad_worker import GispadWorker
 except ImportError:
-    from .core.gispad_klassen import OBJEKTKLASSEN
+    from .core.gispad_klassen import OBJEKTKLASSEN, KURATIERT
     from .core.gispad import hat_gdb_tabellen, raeume_auf
     from .workers.gispad_worker import GispadWorker
 
@@ -103,8 +104,20 @@ class GispadImportDialog(QDialog):
         self.klasse_combo.setEnabled(False)
         zk.addWidget(self.klasse_combo, 1)
         self.rb_fach.toggled.connect(self.klasse_combo.setEnabled)
+
+        self.rb_kur = QRadioButton(
+            "Kuratierter Biotoptypen-Layer (BT) – zum Weitergeben")
+        erl_kur = QLabel(
+            "Wenige Spalten mit sprechenden Namen: Kennung, Biotoptyp, "
+            "Fläche, Lebensraumtyp, § 62, Zusatzcodes. Ja/Nein statt 0/1, "
+            "und der Stil des LANUK liegt darauf.")
+        erl_kur.setWordWrap(True)
+        erl_kur.setStyleSheet("color: #666; margin-left: 20px;")
+
         l2.addWidget(self.rb_alles)
         l2.addWidget(erl)
+        l2.addWidget(self.rb_kur)
+        l2.addWidget(erl_kur)
         l2.addWidget(self.rb_fach)
         l2.addLayout(zk)
         lo.addWidget(self.box2)
@@ -297,7 +310,14 @@ class GispadImportDialog(QDialog):
                 "dort kommt alles mit.")
 
         self.rb_fach.setEnabled(bool(klassen))
-        if not klassen:
+        # Den kuratierten Layer gibt es nur fuer Objektklassen, fuer die ein
+        # Profil hinterlegt ist - derzeit BT.
+        kur_moeglich = bool(set(klassen) & set(KURATIERT))
+        self.rb_kur.setEnabled(kur_moeglich)
+        if not kur_moeglich:
+            self.rb_kur.setToolTip(
+                "Im Export sind keine Biotoptypen (BT) enthalten.")
+        if not klassen or (self.rb_kur.isChecked() and not kur_moeglich):
             self.rb_alles.setChecked(True)
         self.box2.setEnabled(True)
         self.box3.setEnabled(True)
@@ -321,8 +341,12 @@ class GispadImportDialog(QDialog):
         else:
             ordner = os.path.dirname(gdb.rstrip("/\\"))
         name = os.path.splitext(os.path.basename(gdb.rstrip("/\\")))[0]
-        zusatz = "Sicherung" if self.rb_alles.isChecked() else (
-            self.klasse_combo.currentData() or "Fachdaten")
+        if self.rb_alles.isChecked():
+            zusatz = "Sicherung"
+        elif self.rb_kur.isChecked():
+            zusatz = "BT_kuratiert"
+        else:
+            zusatz = self.klasse_combo.currentData() or "Fachdaten"
         self.ziel_edit.setText(os.path.join(ordner, f"{name}_{zusatz}.gpkg"))
 
     def _waehle_ziel(self):
@@ -357,6 +381,10 @@ class GispadImportDialog(QDialog):
         if self.rb_alles.isChecked():
             self._sage("Vollsicherung – alle Tabellen werden übernommen.\n")
             self._starte_worker("alles", {"gdb": gdb, "ziel": ziel})
+        elif self.rb_kur.isChecked():
+            self._sage("Kuratierter Biotoptypen-Layer (BT).\n")
+            self._starte_worker("kuratiert", {"gdb": gdb, "ziel": ziel,
+                                              "klasse": "BT"})
         else:
             klasse = self.klasse_combo.currentData()
             self._sage(f"Fachdaten der Objektklasse {klasse} "
