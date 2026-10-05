@@ -1,0 +1,1602 @@
+schluessel;bezeichnung;atom_id;mehrdeutig
+(Wieder-)Ansiedlung heimischer Pflanzenart (Artens);(Wieder-)Ansiedlung heimischer Pflanzenart (Artens);8065;0
+(Wieder-)Ansiedlung heimischer Tierart  (Artens);(Wieder-)Ansiedlung heimischer Tierart  (Artens);8067;0
+1. Mahd ab 01.07.;1. Mahd ab 01.07.;161701;0
+1. Mahd ab 15.06.;1. Mahd ab 15.06.;161699;0
+1. Mahd vor 01.05.;1. Mahd vor 01.05.;176841;0
+1. Mahd vor 01.06.;1. Mahd vor 01.06.;161694;0
+1. Mahd vor 01.07.;1. Mahd vor 01.07.;161696;0
+1. Mahd vor 15.05.;1. Mahd vor 15.05.;161693;0
+1. Mahd vor 15.06.;1. Mahd vor 15.06.;161695;0
+1. Mahd vor 15.07.;1. Mahd vor 15.07.;161698;0
+1. Mahd vor 15.09.;1. Mahd vor 15.09.;161702;0
+1.1;Altholz erhalten (Wald);167522;0
+1.10;Horst- und Höhlenbäume erhalten, sichern (Wald);154800;0
+1.11;lebensraumtypische Baumarten fördern (Wald);167552;0
+1.12;lebensraumtypische Gehölze aufforsten (Wald);167554;0
+1.13;Naturverjüngung lebensraumtypischer Gehölze fördern (Wald);167562;0
+1.14;Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Wald);167568;0
+1.15;nicht lebensraumtypische Gehölze entnehmen (Wald);167570;0
+1.16;Niederwaldartige Nutzung;154808;0
+1.16a;Mittelwaldartige Nutzung (Wald);167633;0
+1.17;Ringelung nicht lebensraumtypischer Bäume (Wald);167576;0
+1.18;Rückelinien markieren (Wald);167580;0
+1.19;Rückepferde einsetzen (Wald);167583;0
+1.2;Bestockungsgrad absenken (Wald);154795;0
+1.20;Seilzug einsetzen (Wald);7777;0
+1.21;Totholz erhalten (Wald);167589;0
+1.21a;Totholz entwickeln (Wald);167637;0
+1.22;vertikale und horizontale Strukturen fördern;15240;0
+1.23;Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Wald);15687;0
+1.24;Waldbeweidung (Wald);160831;0
+1.25;Waldrand anlegen (Wald);154650;0
+1.26;Waldrand pflegen;15270;0
+1.27;Erstaufforstung von Acker- und Grünlandflächen (Wald);8043;0
+1.28;Biotopbäume entwickeln (Wald);167631;0
+1.29;Lichtung anlegen (Wald);167632;0
+1.3;Bewirtschaftung einzelstammweise (Wald);154798;0
+1.30;Verlängerung der Umtriebszeiten (Wald);167642;0
+1.31;Waldbach/ Quelle freistellen (Wald);167645;0
+1.32;Waldinnensaum entwickeln (Wald);167652;0
+1.33;Waldwiese anlegen/entwickeln (Wald);167653;0
+1.34;Ankauf von Flächen (Wald);190774;0
+1.4;Bewirtschaftung femelartig (Wald);154799;0
+1.5;der natürlichen Entwicklung überlassen (Wald);154660;0
+1.6;Fehlbestockung in Sonderbiotopen vorzeitig entnehmen;15690;0
+1.7;Fehlstellen, Verlichtungen belassen (Wald);15273;0
+1.8;historische Waldbewirtschaftung;15268;0
+1.9;Biotopbäume erhalten, sichern (Wald) | Holzlagerplatz anlegen (Wald);168905;1
+10.1;Abfälle, Ablagerungen, Müll  entfernen;154485;0
+10.10;eingebrachte Pflanzen entfernen (um Be);153919;0
+10.11;eingebrachte Tiere entfernen (um Be);167528;0
+10.12;Einleitungen an Kanalisation anschliessen (um Be);23892;0
+10.13;fischereiliche Nutzung regeln (um Be);23893;0
+10.14;Fläche entsiegeln (um Be);23894;0
+10.15;Futtermieten entfernen;154589;0
+10.16;Geländesport lenken (um Be);167546;0
+10.17;Holzlagerplatz aufgeben (um Be);167548;0
+10.18;Kfz-Verkehr beschränken, regeln (um Be);16807;0
+10.19;Konkurrenzpflanzen beseitigen (um Be);15662;0
+10.2;abfischen (um Be);23890;0
+10.20;Kronenholzablagerungen entfernen;154600;0
+10.21;Leitung entfernen;15278;0
+10.22;Mähgut entfernen;15703;0
+10.23;Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (um Be);23895;0
+10.24;Neophyten beseitigen;154786;0
+10.25;nicht lebensraumtypische Gehölze entnehmen (um Be);23896;0
+10.26;Oberboden abschieben (um Be);23897;0
+10.27;Problempflanzen bekämpfen;154720;0
+10.28;Ringelung nicht lebensraumtypischer Bäume (um Be);23898;0
+10.29;Ringgraben anlegen (um Be);167578;0
+10.3;abschirmende Gehölze anlegen (um Be);154508;0
+10.30;Rückelinien markieren (um Be);23899;0
+10.31;Rückepferde einsetzen (um Be);23900;0
+10.32;Schilder aufstellen (um Be);15704;0
+10.33;Schlagreisig entfernen;154813;0
+10.34;Schnittgut entfernen;154604;0
+10.35;Schutzwall anlegen (um Be);154533;0
+10.36;Stockausschlag entfernen;154710;0
+10.37;Störende Einrichtungen, Elemente entfernen;15223;0
+10.38;verdämmende Gehölze entnehmen (um Be);23901;0
+10.39;Verkehr beruhigen (um Be);15693;0
+10.4;Abwassereinleitung unterbinden,  regeln (um Be);154486;0
+10.40;Viehtränke beseitigen, verlegen;154693;0
+10.41;Viehtränke einrichten (um Be);23902;0
+10.42;Viehunterstand  beseitigen,  verlegen (um Be);23903;0
+10.43;Viehunterstand einrichten (um Be);23904;0
+10.44;Wall anlegen (um Be);167603;0
+10.45;Weg abschirmen (um Be);167609;0
+10.46;Weg einziehen (um Be);154538;0
+10.47;Weg entsiegeln;15694;0
+10.48;Weg, Pfad sperren (um Be);167611;0
+10.49;Weg, Pfad verlegen (um Be);167613;0
+10.5;Ackerrandstreifen anlegen (um Be);23891;0
+10.50;Wege, Pfade einziehen oder rückbauen (um Be);154601;0
+10.51;Wintersport lenken (um Be);15288;0
+10.52;Zaun, Absperrung entfernen (um Be);167618;0
+10.6;Altlasten entfernen;154487;0
+10.7;Aufschüttungen beseitigen;154488;0
+10.8;Bauliche Anlagen entfernen (um Be);154489;0
+10.9;Bauschutt entfernen;154490;0
+11.1;abschirmende Gehölze anlegen (Artens);23905;0
+11.10;gefährdete Pflanzenart fördern;154759;0
+11.11;gefährdete Tierart fördern;15217;0
+11.12;Grünbrücke installieren;15244;0
+11.13;Habitat für Pflanzenart optimieren;15259;0
+11.14;Habitat für Tierart optimieren;15260;0
+11.15;Hochspannungsmasten gegen Vogelschlag sichern;15228;0
+11.16;Höhlen, Stollen erhalten, sichern (Artens);23910;0
+11.17;Horst- und Höhlenbäume erhalten, sichern (Artens);23911;0
+11.18;Konkurrenzpflanzen beseitigen (Artens);23912;0
+11.19;lebensraumtypische Baumarten fördern (Artens);23913;0
+11.2;Altholz erhalten (Artens);23906;0
+11.20;Nisthilfe anbringen, betreuen;154760;0
+11.21;Nisthilfe entfernen;154566;0
+11.22;Nistplatz-Schutzzone einrichten;15229;0
+11.23;Oberboden abschieben (Artens);23914;0
+11.24;Rettungsumsiedlung;154767;0
+11.25;Ruhezone einrichten;15230;0
+11.26;Schilder aufstellen (Artens);23915;0
+11.27;Schonzeit einrichten (Artens);167587;0
+11.28;Steinriegel, Lesesteinhaufen anlegen (Artens);23916;0
+11.29;Stollen absperren;15224;0
+11.3;Amphibien-Schutzanlage einrichten, optimieren;15653;0
+11.30;Totholz erhalten (Artens);23917;0
+11.31;Totholzhaufen anlegen;15212;0
+11.32;Trockenmauer anlegen (Artens);23918;0
+11.33;Trockenmauer wiederherstellen, optimieren (Artens);23919;0
+11.34;verdämmende Gehölze entnehmen (Artens);23920;0
+11.35;Wall anlegen (Artens);23921;0
+11.36;Zaun, Absperrung anlegen bzw. verlegen (Artens);167616;0
+11.37;Zaun, Absperrung entfernen (Artens);23922;0
+11.38;Zugang sicherstellen (Artens);15283;0
+11.39;Zugang verhindern (Artens);15284;0
+11.4;eingebrachte Pflanzen entfernen (Artens);23907;0
+11.40;(Wieder-)Ansiedlung heimischer Pflanzenart (Artens);8065;0
+11.41;(Wieder-)Ansiedlung heimischer Tierart  (Artens);8067;0
+11.42;Knotengitterzaun ersetzen (Artens);167662;0
+11.43;Hirschkäfer-Brutstätten anlegen (Artens);167663;0
+11.44;Kleintierdurchlass anlegen (Artens);167664;0
+11.45;Kleintierdurchlass optimieren (Artens);167666;0
+11.46;wildkatzengerechte Jungbestandspflege (Artens);167667;0
+11.47;wildkatzengerechte Holzernte (Artens);167669;0
+11.48;Wildkatzenwurfboxen anbringen (Artens);167671;0
+11.49;Wildzaun anlegen;167673;0
+11.49a;Wildzaun anlegen, Wildkatze (Artens);167674;0
+11.5;eingebrachte Tiere entfernen (Artens);23908;0
+11.50a;Wildzaun optimieren, Wildkatze (Artens);167676;0
+11.51;Windwurf- und Verjüngungsflächen wildkatzengerecht steuern;167678;0
+11.52;Zeitraum für Holzlagerplätze (Artens);167681;0
+11.53;Ankauf von Flächen (Artens);191481;0
+11.6;Fischschonbezirk einrichten (Artens);23909;0
+11.7;Fledermauskästen anbringen, betreuen;154758;0
+11.8;Fledermaus-Quartier sichern;154757;0
+11.9;Fledermaus-Zugang ermöglichen, sichern;15656;0
+12.1;abschirmende Gehölze anlegen (ErhoVer);23923;0
+12.10;Holzlagerplatz aufgeben (ErhoVer);23926;0
+12.11;Informations- und Hinweistafeln aufstellen;154520;0
+12.12;Kfz-Verkehr beschränken, regeln (ErhoVer);23927;0
+12.13;Leiteinrichtungen, Geländer, Markierungen einbauen, optimieren;154522;0
+12.14;Pufferzone anlegen;16797;0
+12.15;Ringgraben anlegen (ErhoVer);23928;0
+12.16;Schilder aufstellen (ErhoVer);23929;0
+12.17;Schilder entfernen;154500;0
+12.18;Schutzwall anlegen (ErhoVer);23930;0
+12.19;Strasse verlegen, sperren;15279;0
+12.2;Behinderten gerechte  Gestaltung;15232;0
+12.20;Verkehr beruhigen (ErhoVer);23931;0
+12.21;Wall anlegen (ErhoVer);23932;0
+12.22;Wanderwege markieren, einrichten;154529;0
+12.23;Wassersport lenken;15287;0
+12.24;Weg abschirmen (ErhoVer);23933;0
+12.25;Weg einziehen (ErhoVer);23934;0
+12.26;Weg, Pfad sperren (ErhoVer);23935;0
+12.27;Weg, Pfad verlegen (ErhoVer);23936;0
+12.28;Wege, Pfade anlegen;15281;0
+12.29;Wege, Pfade einziehen oder rückbauen (ErhoVer);23937;0
+12.3;Beobachtungspunkt einrichten;15233;0
+12.30;Wege, Pfade instandsetzen bzw. optimieren;15213;0
+12.31;Wintersport lenken (ErhoVer);23938;0
+12.32;Zaun, Absperrung anlegen bzw. verlegen (ErhoVer);23939;0
+12.33;Zaun, Absperrung entfernen (ErhoVer);23940;0
+12.34;Zugang sicherstellen (ErhoVer);23941;0
+12.35;Zugang verhindern (ErhoVer);23942;0
+12.36;Ankauf von Flächen (ErhoVer);191482;0
+12.4;Erholungseinrichtung anlegen;15234;0
+12.5;Erholungseinrichtung aufgeben;15272;0
+12.6;Erholungsverkehr lenken;15262;0
+12.7;Freizeitaktivitäten lenken;15691;0
+12.8;Geländesport lenken (ErhoVer);23924;0
+12.9;Holzlagerplatz anlegen (ErhoVer);23925;0
+13.1;Abwassereinleitung unterbinden,  regeln (Wasserh);23943;0
+13.10;Unterhaltung von Fliessgewässer optimieren (Wasserh);23945;0
+13.11;Unterhaltung von Gewässern unterlassen (Wasserh);23946;0
+13.12;Wasser einleiten, zuleiten;15670;0
+13.13;Wasserentnahme regeln, unterbinden;15263;0
+13.14;Wasserstand absenken;15276;0
+13.15;Wasserstand anheben;15277;0
+13.16;Wasserstand regeln (Wasserh);23947;0
+13.17;Wiedervernässung;16855;0
+13.18;Ankauf von Flächen (Wasserh);191483;0
+13.2;Drainagen verschliessen, entfernen;16811;0
+13.3;Einleitungen an Kanalisation anschliessen (Wasserh);23944;0
+13.4;Einleitungen verhindern;15689;0
+13.5;Entwässerungsgräben anstauen;15660;0
+13.6;Entwässerungsgräben verfüllen, schliessen;16815;0
+13.7;Grundwasserstand regeln;15665;0
+13.8;Klärteiche anlegen;15692;0
+13.9;Pflanzenkläranlage anlegen;15663;0
+14.1;Ansitzeinrichtung anlegen, umsetzen;154557;0
+14.10;Kirrungen regeln;15254;0
+14.11;Pirschweg aufgeben;15699;0
+14.12;Pirschweg festlegen;15255;0
+14.13;Schonzeit einrichten (Jagd);23950;0
+14.14;Wildacker extensiv bewirtschaften;15700;0
+14.15;Wildäsungsfläche extensiv bewirtschaften;15701;0
+14.16;Wilddichte reduzieren;154572;0
+14.17;Wildfütterung regeln;15706;0
+14.18;Ankauf von Flächen (Jagd);191484;0
+14.2;Ansitzeinrichtung entfernen;154556;0
+14.3;Bauliche Anlagen entfernen (Jagd);23948;0
+14.4;eingebrachte Tiere entfernen (Jagd);23949;0
+14.5;Fläche gattern;15671;0
+14.6;Jagdausübung beschränken;16806;0
+14.7;jagdliche Einrichtung anlegen;15285;0
+14.8;jagdliche Einrichtung entfernen;154561;0
+14.9;jagdliche Einrichtung verlegen;154563;0
+2.1;Alleebäume anpflanzen;15239;0
+2.10;Fehlstellen, Verlichtungen belassen (Gehö);23793;0
+2.11;Hecke anlegen, ergänzen;16801;0
+2.12;Hecken abschnittsweise auf den Stock setzen;15649;0
+2.13;Horst- und Höhlenbäume erhalten, sichern (Gehö);23794;0
+2.14;Kleingehölz anlegen;15673;0
+2.15;Kleingehölze pflegen;154829;0
+2.16;Kopfbäume anpflanzen;15678;0
+2.17;Kopfbaumpflege;16829;0
+2.18;lebensraumtypische Baumarten fördern (Gehö);23795;0
+2.19;lebensraumtypische Gehölze aufforsten (Gehö);23796;0
+2.2;Alleebaumpflege;15647;0
+2.20;Naturverjüngung lebensraumtypischer Gehölze fördern (Gehö);23797;0
+2.21;Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Gehö);23798;0
+2.22;nicht lebensraumtypische Gehölze entnehmen (Gehö);23799;0
+2.23;Obstbäume anpflanzen;15685;0
+2.24;Obstbaumpflege;16839;0
+2.25;Ringelung nicht lebensraumtypischer  Bäume (Gehö);23800;0
+2.26;Rückepferde einsetzen (Gehö);23801;0
+2.27;Seilzug einsetzen (Gehö);23802;0
+2.28;Totholz erhalten (Gehö);23803;0
+2.29;Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Gehö);23804;0
+2.3;Altholz erhalten (Gehoe);23374;0
+2.30;Waldbeweidung (Gehö);23805;0
+2.31;Waldrand anlegen (Gehö);23806;0
+2.32;Solitär/Hutebaum pflanzen (Gehö);167661;0
+2.33;Ankauf von Flächen (Gehö);190775;0
+2.34;Solitärbäume erhalten (Gehö);191565;0
+2.4;Benjes-Hecke anlegen;154633;0
+2.5;Bestockungsgrad absenken (Gehö);23789;0
+2.6;Bewirtschaftung einzelstammweise (Gehö);23790;0
+2.7;Bewirtschaftung femelartig (Gehö);23791;0
+2.8;der natürlichen Entwicklung überlassen (Gehö);23792;0
+2.9;Einzelbäume,  Baumgruppe pflegen;15214;0
+3.1;abbrennen, flämmen (Mo/Rö);167511;0
+3.10;Mahd (Mo/Rö);167515;0
+3.11;Moor renaturieren, optimieren;15220;0
+3.12;mulchen (Mo/Rö);167516;0
+3.13;nicht lebensraumtypische Gehölze entnehmen (Mo/Rö);23809;0
+3.14;Oberboden abschieben (Mo/Rö);167573;0
+3.15;Ringelung nicht lebensraumtypischer Bäume (Mo/Rö);23810;0
+3.16;Röhricht initial anpflanzen;154732;0
+3.17;Röhricht, Sumpf wiederherstellen, optimieren;15664;0
+3.18;Totholz erhalten (Mo/Rö);23811;0
+3.19;verdämmende Gehölze entnehmen (Mo/Rö);167595;0
+3.2;abplaggen, organische Bodenauflage entfernen (Mo, Rö);167517;0
+3.20;Wald in Offenlandbiotop umwandeln (Mo/Rö);15251;0
+3.21;Ankauf von Flächen (Mo/Rö);190776;0
+3.3;Altholz erhalten (Mo/Rö);23807;0
+3.4;ausmagern (Mo/Rö);167526;0
+3.5;Beweidung (Mo/Rö);167509;0
+3.6;der natürlichen Entwicklung überlassen (Mo/Rö);23808;0
+3.7;entkusseln, entbuschen (Mo/Rö);167508;0
+3.8;mähen oder beweiden (Mo/Rö);167558;0
+3.9;Mähen und Nachbeweidung (Mo/Rö);167560;0
+4.1;abbrennen, flämmen (Heide/TR);23812;0
+4.10;Mähen und Nachbeweidung (Heide/TR);23819;0
+4.11;Mahd (Heide/TR);23820;0
+4.12;mulchen (Heide/TR);23821;0
+4.13;nicht lebensraumtypische Gehölze entnehmen (Heide/TR);23822;0
+4.14;Oberboden abschieben (Heide/TR);23823;0
+4.15;Ringelung nicht lebensraumtypischer Bäume (Heide/TR);23824;0
+4.16;Totholz erhalten (Heide/TR);23825;0
+4.17;Trockenrasen anlegen, wiederherstellen;15226;0
+4.18;Trockenrasen optimieren;15264;0
+4.19;verdämmende Gehölze entnehmen (Heide/TR);23826;0
+4.2;abplaggen, organische Bodenauflage entfernen (Heide/TR);23813;0
+4.20;Wald in Heide umwandeln;154669;0
+4.21;Wald in Trockenrasen umwandeln (Heide/TR);7967;0
+4.22;Wald in Offenlandbiotop umwandeln (Heide/TR);7968;0
+4.23;Baumstubben fräsen (Heide/TR);8044;0
+4.24;Ganzjahresbeweidung (Heide/Tr);177512;0
+4.25;Ankauf von Flächen (Heide/TR);190777;0
+4.3;ausmagern (Heide/TR);23814;0
+4.4;Beweidung (Heide/TR);23815;0
+4.5;der natürlichen Entwicklung überlassen (Heide/TR);23816;0
+4.6;entkusseln, entbuschen (Heide/TR);23817;0
+4.7;Heide wiederherstellen, anlegen, optimieren;15249;0
+4.8;Heublumenansaat;15245;0
+4.9;mähen oder beweiden (Heide/TR);23818;0
+5.1;abbrennen, flämmen (Grünl);23829;0
+5.10;Mähen und Nachbeweidung (Grünl);23835;0
+5.11;Mahd (Grünl);23836;0
+5.12;mulchen (Grünl);23837;0
+5.13;Oberboden abschieben (Grünl);23838;0
+5.14;verdämmende Gehölze entnehmen (Grünl);23839;0
+5.15;Viehtränke einrichten (Grünl);167599;0
+5.16;Viehunterstand  beseitigen, verlegen (Grünl);167601;0
+5.17;Viehunterstand einrichten (Grünl);167602;0
+5.18;Wald in Grünland umwandeln;154668;0
+5.19;Weidepflege;154784;0
+5.2;Acker in Grünland umwandeln;15702;0
+5.20;Erhaltungsdüngung;7969;0
+5.21;Mahdgutübertragung;7970;0
+5.22;Baumstubben fräsen (Grünl);8045;0
+5.23;Weidezaun anlegen (Grünl);8050;0
+5.24;Weidezaun beseitigen, verlegen (Grünl);8051;0
+5.25;Weidezaun (alt) erhalten (Grünl);8052;0
+5.26;Ganzjahresbeweidung (Grünl);177511;0
+5.27;Ankauf von Flächen (Grünl);190778;0
+5.28;Altgras-/Brachestreifen anlegen;191793;0
+5.3;ausmagern (Grünl);23830;0
+5.4;Beweidung (Grünl);23831;0
+5.5;der natürlichen Entwicklung überlassen (Grünl);23832;0
+5.6;entkusseln, entbuschen (Grünl);23833;0
+5.7;Grünland anlegen, wiederherstellen;16843;0
+5.8;Grünlandnutzung extensivieren;160878;0
+5.9;mähen oder beweiden (Grünl);23834;0
+6.1;abfischen (Gewäs);167519;0
+6.10;Einleitungen an Kanalisation anschliessen (Gewäs);167532;0
+6.11;Entkrautung regeln;15659;0
+6.12;entkusseln, entbuschen (Gewäs);23844;0
+6.13;entschlammen;154715;0
+6.14;Fischaufstiegshilfe anlegen, optimieren;15243;0
+6.15;fischereiliche Nutzung regeln (Gewäs);167535;0
+6.16;Fischschonbezirk einrichten (Gewäs);167539;0
+6.17;Flachwasserzonen anlegen, optimieren;15661;0
+6.18;Fließgewässer renaturieren;154737;0
+6.19;Gewässer anbinden;154682;0
+6.2;abplaggen, organische Bodenauflage entfernen (Gewäs);23840;0
+6.20;Gewässer anlegen, verlegen, optimieren;15274;0
+6.21;Inseln einbringen;15235;0
+6.22;mähen oder beweiden (Gewäs);23845;0
+6.23;Mähen und Nachbeweidung (Gewäs);23847;0
+6.24;Mahd (Gewäs);23846;0
+6.25;mulchen (Gewäs);23848;0
+6.26;Oberboden abschieben (Gewäs);23849;0
+6.27;Quelle renaturieren, optimieren;15705;0
+6.28;Querbauwerk entnehmen;15221;0
+6.29;Sediment entnehmen;154717;0
+6.3;ausmagern (Gewäs);23841;0
+6.30;Sohlabsturz, Sohlschwelle entfernen;154694;0
+6.31;Sohlenbefestigung entfernen;154712;0
+6.32;Sohlgleite einbauen;154700;0
+6.33;Sohlgleite erneuern, verlegen;154725;0
+6.34;Steilufer anlegen, optimieren;154741;0
+6.35;Störelemente einbringen;154701;0
+6.36;Totholz einbringen;15686;0
+6.37;Ufer abflachen;154676;0
+6.38;Uferbefestigung entnehmen;154718;0
+6.39;Uferlinie verlängern, optimieren;15236;0
+6.4;beschattende Gehölze entfernen;15265;0
+6.40;Uferrandstreifen anlegen;154646;0
+6.41;Uferzone mit Gehölzen bepflanzen;15667;0
+6.42;Unterhaltung von Fliessgewässer optimieren (Gewäs);15275;0
+6.43;Unterhaltung von Gewässern unterlassen (Gewäs);15668;0
+6.44;verdämmende Gehölze entnehmen (Gewäs);23850;0
+6.45;Verrohrungen entfernen;154706;0
+6.46;Wasserbauliche Anlage entnehmen, verlegen, rückbauen, optimieren;154623;0
+6.47;Wasserstand regeln (Gewäs);167606;0
+6.48;Ankauf von Flächen (Gewäs) | Sekundäraue anlegen (Gewäs);190779;1
+6.49;Furt anlegen (Gewäs);8047;0
+6.5;Beweidung (Gewäs);23842;0
+6.50;Ufer beweiden (Gewäs);8048;0
+6.51;Quelle auszäunen (Gewäs);8049;0
+6.52;Uferbereiche absperren;154535;0
+6.53;Fischteichanlage extensivieren/stilllegen;168914;0
+6.6;Blänke anlegen, optimieren;154689;0
+6.7;Böschungen abschnittsweise mähen;15248;0
+6.8;der natürlichen Entwicklung überlassen (Gewäs);23843;0
+6.9;Durchgängigkeit wiederherstellen;15654;0
+7.1;abbrennen, flämmen (Pion,Fels);23851;0
+7.10;mähen oder beweiden (Pion,Fels);23857;0
+7.11;Mähen und Nachbeweidung (Pion,Fels);23858;0
+7.12;Mahd (Pion,Fels);23859;0
+7.13;Mauervegetation erhalten;16819;0
+7.14;mulchen (Pion,Fels);23860;0
+7.15;Oberboden abschieben (Pion,Fels);23861;0
+7.16;Steinriegel freistellen;15222;0
+7.17;Steinriegel, Lesesteinhaufen anlegen (Pion,Fels);154768;0
+7.18;Trockenmauer anlegen (Pion,Fels);167591;0
+7.19;Trockenmauer freistellen;15225;0
+7.2;abplaggen, organische Bodenauflage entfernen (Pion,Fels);23852;0
+7.20;Trockenmauer wiederherstellen, optimieren (Pion,Fels);15666;0
+7.21;verdämmende Gehölze entnehmen (Pion,Fels);23862;0
+7.22;Wald in Offenlandbiotop umwandeln (Pion,Fels);23863;0
+7.23;Ankauf von Flächen (Pion,Fels);190780;0
+7.3;ausmagern (Pion,Fels);23853;0
+7.4;Beweidung (Pion,Fels);23854;0
+7.5;der natürlichen Entwicklung überlassen (Pion,Fels);23855;0
+7.6;entkusseln, entbuschen (Pion,Fels);23856;0
+7.7;Felsen freistellen;15215;0
+7.8;Höhle absperren;15250;0
+7.9;Höhlen, Stollen erhalten, sichern (Pion,Fels);16825;0
+8.1;abbrennen, flämmen (landw Fl);23864;0
+8.10;Dächer, Gebäudewände begrünen;15252;0
+8.11;entkusseln, entbuschen (landw Fl);23869;0
+8.12;Fläche entsiegeln (landw Fl);167541;0
+8.13;Grünanlagenpflege extensivieren;15218;0
+8.14;Hohlweg erhalten, optimieren;15219;0
+8.15;mähen oder beweiden (landw Fl);23870;0
+8.16;Mähen und Nachbeweidung (landw Fl);23871;0
+8.17;Mahd (landw Fl);23872;0
+8.18;mulchen (landw Fl);23873;0
+8.19;Oberboden abschieben (landw Fl);23874;0
+8.2;abplaggen, organische Bodenauflage entfernen (landw Fl);23865;0
+8.20;Totholz erhalten (landw Fl);23875;0
+8.21;verdämmende Gehölze entnehmen (landw Fl);23876;0
+8.22;Wald in Offenlandbiotop umwandeln (landw Fl);23877;0
+8.23;Ankauf von Flächen (landw Fl);190781;0
+8.3;Acker extensiv bewirtschaften;15257;0
+8.4;Acker wiederherstellen, optimieren;15258;0
+8.5;Ackerrandstreifen anlegen (landw Fl);15241;0
+8.6;Ackerrandstreifen pflegen;15242;0
+8.7;Altholz erhalten (landw Fl);23866;0
+8.8;ausmagern (landw Fl);23867;0
+8.9;Beweidung (landw Fl);23868;0
+9.1;abbrennen, flämmen (Brache);23878;0
+9.10;mulchen (Brache);23887;0
+9.11;Oberboden abschieben (Brache);23888;0
+9.12;verdämmende Gehölze entnehmen (Brache);23889;0
+9.13;Wildkrautsaum anlegen;15247;0
+9.14;Ganzjahresbeweidung (Brache);177513;0
+9.15;Ankauf von Flächen (Brache);190782;0
+9.2;abplaggen, organische Bodenauflage entfernen (Brache);23879;0
+9.3;ausmagern (Brache);23880;0
+9.4;Beweidung (Brache);23881;0
+9.5;der natürlichen Entwicklung überlassen (Brache);23882;0
+9.6;entkusseln, entbuschen (Brache);23883;0
+9.7;mähen oder beweiden (Brache);23884;0
+9.8;Mähen und Nachbeweidung (Brache);23885;0
+9.9;Mahd (Brache);23886;0
+Abfischen der nicht einheimischen Fische;Abfischen der nicht einheimischen Fische;154550;0
+Abflachung der Ufer auf eine Neigung von 1:5 und flacher;Abflachung der Ufer auf eine Neigung von 1:5 und flacher;154677;0
+Abfälle, Ablagerungen, Müll  entfernen;Abfälle, Ablagerungen, Müll  entfernen;154485;0
+Abplaggen der Pflanzen-, und der humosen Oberbodenschicht;Abplaggen der Pflanzen-, und der humosen Oberbodenschicht;154774;0
+Abplaggen des Pflanzenaufwuchses und der humosen Oberbodenschicht;Abplaggen der Pflanzen-, und der humosen Oberbodenschicht;154774;0
+Abschluss von Bewirtschaftungsverträgen;Abschluss von Bewirtschaftungsverträgen;154288;0
+Absperrung der Pirschwege;Absperrung der Pirschwege;154569;0
+Absperrung eines Fledermaus-Quartiers;Absperrung eines Fledermaus-Quartiers;154756;0
+Absperrung, Auszäunung von Flächen;Absperrung, Auszäunung von Flächen;16796;0
+Abtragen aufgefüllten Materials;Abtragen aufgefüllten Materials;154679;0
+Abtragen der Oberbodenschicht;Abtragen der Oberbodenschicht;154680;0
+Abtrieb des Nadelholzbestandes und anschliessende weitständige Aufforstung mit bodenständigen Gehölzen;Nadelholzabtrieb, weitständige Aufforstung bodenst. Gehölze;154626;0
+Abwassereinleitung unterbinden,  regeln (Wasserh);Abwassereinleitung unterbinden,  regeln (Wasserh);23943;0
+Abwassereinleitung unterbinden,  regeln (um Be);Abwassereinleitung unterbinden,  regeln (um Be);154486;0
+Acker extensiv bewirtschaften;Acker extensiv bewirtschaften;15257;0
+Acker in Grünland umwandeln;Acker in Grünland umwandeln;15702;0
+Acker wiederherstellen, optimieren;Acker wiederherstellen, optimieren;15258;0
+Ackerrandstreifen anlegen (landw Fl);Ackerrandstreifen anlegen (landw Fl);15241;0
+Ackerrandstreifen anlegen (um Be);Ackerrandstreifen anlegen (um Be);23891;0
+Ackerrandstreifen pflegen;Ackerrandstreifen pflegen;15242;0
+Adm. Massnahmen;Adm. Massnahmen;154283;0
+Alleebaumpflege;Alleebaumpflege;15647;0
+Alleebäume anpflanzen;Alleebäume anpflanzen;15239;0
+Allg. Verbote;Allg. Verbote;154294;0
+Altgras-/Brachestreifen anlegen;Altgras-/Brachestreifen anlegen;191793;0
+Altholz erhalten;Altholz erhalten;16824;0
+Altholz erhalten (Artens);Altholz erhalten (Artens);23906;0
+Altholz erhalten (Gehoe);Altholz erhalten (Gehoe);23374;0
+Altholz erhalten (Mo/Rö);Altholz erhalten (Mo/Rö);23807;0
+Altholz erhalten (Wald);Altholz erhalten (Wald);167522;0
+Altholz erhalten (landw Fl);Altholz erhalten (landw Fl);23866;0
+Altlasten entfernen;Altlasten entfernen;154487;0
+Amphibien-Schutzanlage einrichten, optimieren;Amphibien-Schutzanlage einrichten, optimieren;15653;0
+Anbindung eines Bachlaufes;Anbindung eines Bachlaufes;154681;0
+Anhebung GW-stand durch Anlage regulierbarer Staueinrichtungen;Anhebung GW-stand durch Anlage regulierbarer Staueinrichtungen;154627;0
+Anhebung des GW-standes durch Anlage regulierbarer Staueinrichtungen;Anhebung GW-stand durch Anlage regulierbarer Staueinrichtungen;154627;0
+Anhebung des GW-standes durch Einbau von Sohlschwellen;Anhebung des GW-standes durch Einbau von Sohlschwellen;154628;0
+Anhebung des GW-standes durch Verfüllen von Gräben;Anhebung des GW-standes durch Verfüllen von Gräben;154630;0
+Anhebung des GW-standes durch Verschliessen von Dränagen;Anhebung des GW-standes durch Verschliessen von Dränagen;154631;0
+Anhebung des GW-standes durch Wassereinspeisung;Anhebung des GW-standes durch Wassereinspeisung;154632;0
+Anhebung des GW-standes durch fraktionierten Anstau von Gräben;Anhebung des GW-standes durch fraktionierten Anstau von Gräben;154629;0
+Anhebung des Grundwasserstandes;Anhebung des Grundwasserstandes;160871;0
+Ankauf von Flächen (Artens);Ankauf von Flächen (Artens);191481;0
+Ankauf von Flächen (Brache);Ankauf von Flächen (Brache);190782;0
+Ankauf von Flächen (ErhoVer);Ankauf von Flächen (ErhoVer);191482;0
+Ankauf von Flächen (Gehö);Ankauf von Flächen (Gehö);190775;0
+Ankauf von Flächen (Gewäs);Ankauf von Flächen (Gewäs);190779;0
+Ankauf von Flächen (Grünl);Ankauf von Flächen (Grünl);190778;0
+Ankauf von Flächen (Heide/TR);Ankauf von Flächen (Heide/TR);190777;0
+Ankauf von Flächen (Jagd);Ankauf von Flächen (Jagd);191484;0
+Ankauf von Flächen (Mo/Rö);Ankauf von Flächen (Mo/Rö);190776;0
+Ankauf von Flächen (Pion,Fels);Ankauf von Flächen (Pion,Fels);190780;0
+Ankauf von Flächen (Wald);Ankauf von Flächen (Wald);190774;0
+Ankauf von Flächen (Wasserh);Ankauf von Flächen (Wasserh);191483;0
+Ankauf von Flächen (landw Fl);Ankauf von Flächen (landw Fl);190781;0
+Ankauf von Flächen für die öffentliche Hand;Ankauf von Flächen für die öffentliche Hand;154286;0
+Anl., Betreuung v. Durchlassystem, Amph.schutzmassn. an Strassen;Anl., Betreuung v. Durchlassystem, Amph.schutzmassn. an Strassen;154753;0
+Anl., Betreuung v. Laichgewässer, Amph.schutzmassn. an Strassen;Anl., Betreuung v. Laichgewässer, Amph.schutzmassn. an Strassen;154751;0
+Anl., Betreuung v. Mobilzaun, Amph.schutzmassn. an Strassen;Anl., Betreuung v. Mobilzaun, Amph.schutzmassn. an Strassen;154752;0
+Anlage Röhricht d. Abschieben Oberboden bis in Grundwassernähe;Anlage Röhricht d. Abschieben Oberboden bis in Grundwassernähe;154691;0
+Anlage Waldmantel durch Pflanzung bodenständiger Sträucher;Anlage Waldmantel durch Pflanzung bodenständiger Sträucher;154634;0
+Anlage abschirmender Hecken;Anlage abschirmender Hecken;154509;0
+Anlage einer Sichtschutzpflanzung;Anlage einer Sichtschutzpflanzung;154534;0
+Anlage eines Artenschutzgewässers;Anlage eines Artenschutzgewässers;154755;0
+Anlage eines Kleingewässer;Anlage eines Kleingewässer;154690;0
+Anlage eines Röhrichtes;Anlage eines Röhrichtes;160872;0
+Anlage eines Röhrichtes durch Abschieben des Oberbodens bis in Grundwassernähe;Anlage Röhricht d. Abschieben Oberboden bis in Grundwassernähe;154691;0
+Anlage eines Waldmantels;Anlage eines Waldmantels;160873;0
+Anlage eines Waldmantels durch Pflanzung bodenständiger Sträucher;Anlage Waldmantel durch Pflanzung bodenständiger Sträucher;154634;0
+Anlage und Betreuung einer stationären Anlage mit Durchlasssystemen im Rahmen von Amphibienschutzmassnahmen an Strassen;Anl., Betreuung v. Durchlassystem, Amph.schutzmassn. an Strassen;154753;0
+Anlage und Betreuung eines mobilen Zaunes im Rahmen von Amphibienschutzmassnahmen an Strassen;Anl., Betreuung v. Mobilzaun, Amph.schutzmassn. an Strassen;154752;0
+Anlage und Betreuung von Ersatz- und Zusatzlaichgewässern im Rahmen von Amphibienschutzmassnahmen an Strassen;Anl., Betreuung v. Laichgewässer, Amph.schutzmassn. an Strassen;154751;0
+Anlage vegetationsfreier Schlamm- und Sandufer;Anlage vegetationsfreier Schlamm- und Sandufer;15291;0
+Anlage von Biotopen;Anlage von Biotopen;16798;0
+Anlegen von Laubgehölzen;Anlegen von Laubgehölzen;16799;0
+Anlegung von Gewässern;Anlegung von Gewässern;16800;0
+Anpachtung von Flächen für die öffentliche Hand;Anpachtung von Flächen für die öffentliche Hand;154287;0
+Anpassung von Bewirtschaftungsverträgen;Anpassung von Bewirtschaftungsverträgen;154289;0
+Anpflanzung bodenständiger Gehölze;Anpflanzung bodenständiger Gehölze;154635;0
+Anpflanzung eines Feldgehölzes;Anpflanzung eines Feldgehölzes;154636;0
+Anpflanzung landschaftraumtypischer Obstbaumsorten;Anpflanzung landschaftraumtypischer Obstbaumsorten;154692;0
+Anschluss der Abwasserquelle an die Kanalisation;Anschluss der Abwasserquelle an die Kanalisation;154608;0
+Ansitzeinrichtung anlegen, umsetzen;Ansitzeinrichtung anlegen, umsetzen;154557;0
+Ansitzeinrichtung entfernen;Ansitzeinrichtung entfernen;154556;0
+Auenrenaturierung;Auenrenaturierung;15300;0
+Auf den Stock setzen;Auf den Stock setzen;154794;0
+Auf den Stock setzen, abschnittsweise;Auf den Stock setzen, abschnittsweise;154831;0
+Auf-den-Stock-setzen eines durchgewachsenen Niederwaldes unter Belassen von Assimilationstrieben;Durchgew. Niederwald auf-den-Stock-setzen (Erh. Assimil.trieben);154787;0
+Aufforsten des Wildackers;Aufforsten des Wildackers;154573;0
+Aufforstung mit bodenständigen Gehölzen;Aufforstung mit bodenständigen Gehölzen;154637;0
+Aufgabe der Nutzung des Sandfangs;Aufgabe der Nutzung des Sandfangs;154621;0
+Auflichten des Vorwaldes;Auflichten des Vorwaldes;154822;0
+Aufschüttungen beseitigen;Aufschüttungen beseitigen;154488;0
+Aufstellen und Umsetzen von Schildern;Aufstellen und Umsetzen von Schildern;154531;0
+Aufstellen von Hinweisschildern und Einzäunen besonders gefährdeter Bereiche, um das Sammeln zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (sammeln verhindern);154530;0
+Aufstellen von Hinweisschildern und Einzäunen besonders gefährdeter Bereiche, um das Zelten zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (Zelten verhindern);154542;0
+Aufstellen von Hinweisschildern und/oder Einzäunen besonders gefährdeter Bereiche, um das Motocross-Fahren zu unterbinden;Schilder aufstellen, Einzäunen (Motocrossfahren verhindern);154524;0
+Aufstellen von Hinweisschildern und/oder Einzäunen bzw. Absperren von Flächen, um das Befahren zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (befahren verhindern);154512;0
+Aufstellen von Hinweisschildern und/oder Einzäunen und/oder Absperren von Flächen, um das Feuer machen zu unterbinden;Schilder aufstellen, Einzäunen (Feuer machen verhindern);154518;0
+Aufstellen von Hinweisschildern und/oder Einzäunen und/oder Absperren von Flächen, um das lagern zu unterbinden;Schilder aufstellen, Absperren (Lagern verhindern);154521;0
+Aufstellen von Hinweisschildern und/oder Einzäunen von Flächen, um das Betreten zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (betreten verhindern);154516;0
+Aufstellen von Hinweisschildern und/oder Einzäunen von Gewässern, um das Baden zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (baden verhindern);154510;0
+Aufstellen von Hinweisschildern und/oder Einzäunen von Gewässern, um das Befahren zu untersagen und zu verhindern;Schilder aufstellen, Einzäunen (bootsfahren verhindern);154511;0
+Aufstellen von Hinweisschildern und/oder Einzäunen von betroffenen Flächen, um die Ausübung von Eissport zu unterbinden;Schilder aufstellen, Einzäunen (Eissport unterbinden);154517;0
+Aufstellen von Hinweisschildern, Einzäunen bes. gefährd. Bereiche, um das Mountainbike-Fahren ausserh. der Wege zu verhindern;Schilder aufstellen, Einzäunen (Mountainbiken verhindern);154525;0
+Aufstellen von Hinweisschildern, Einzäunen bes. gefährd. Beständen, um die Entnahme, Beschädigung von Pflanzen zu verhindern;Schilder aufstellen, Einzäunen (Pflanzenentnahme verhindern);154526;0
+Aufstellen von Hinweisschildern, Einzäunen und/oder Absperren der gefährdeten Zonen, um Wassersport zu unterbinden;Schilder aufstellen, Absperren (Wassersport unterbinden);154537;0
+Aufstellen von Hinweisschildern, Einzäunen und/oder Absperren von Flächen, um das Reiten zu untersagen und zu verhindern;Schilder aufstellen, Absperren (reiten verhindern);154527;0
+Aufstellen von Hinweisschildern, Einzäunen und/oder Absperren von Flächen, um das freilaufenlassen von Hunden zu verhindern;Schilder aufstellen, Absperren (freilaufen v. Hunden verhindern);154519;0
+Aufstellen von Hinweisschildern, die das freilaufenlassen von Hunden verbieten;Schilder aufstellen, Verbot freilaufenlassen von Hunden;154495;0
+Aufstellung von Hinweisschildern und/oder Sperrungen, um das Betreten besonders gekennzeichnete Wege zu unterbinden;Schilder aufstellen, Absperren (betreten unterbinden);154515;0
+Ausmagerung Grünlandfläche (mähen, abräumen, keine Düngung;Ausmagerung Grünlandfläche (mähen, abräumen, keine Düngung;154778;0
+Ausmagerung Grünlandfläche d. int. Beweidung u. keine Düngung;Ausmagerung Grünlandfläche d. int. Beweidung u. keine Düngung;154777;0
+Ausmagerung einer Grünlandfläche;Ausmagerung einer Grünlandfläche;160874;0
+Ausmagerung einer Grünlandfläche durch intensive Beweidung und keine Düngung;Ausmagerung Grünlandfläche d. int. Beweidung u. keine Düngung;154777;0
+Ausmagerung einer Grünlandfläche durch mehrmaliges mähen, Mahdgut abräumen und keine Düngung;Ausmagerung Grünlandfläche (mähen, abräumen, keine Düngung;154778;0
+Ausmähen von Gehölzanpflanzungen;Ausmähen von Gehölzanpflanzungen;154779;0
+Ausweisung von Pufferzonen mit besonderen Auflagen;Ausweisung von Pufferzonen mit besonderen Auflagen;154285;0
+Bauliche Anlagen entfernen (Jagd);Bauliche Anlagen entfernen (Jagd);23948;0
+Bauliche Anlagen entfernen (um Be);Bauliche Anlagen entfernen (um Be);154489;0
+Baumstubben fräsen (Grünl);Baumstubben fräsen (Grünl);8045;0
+Baumstubben fräsen (Heide/TR);Baumstubben fräsen (Heide/TR);8044;0
+Bauschutt entfernen;Bauschutt entfernen;154490;0
+Beeinträchtigunen und Gefährdungen;Beeinträchtigunen und Gefährdungen;15712;0
+Begründung eines Laubwaldes durch Erstaufforstung;Begründung eines Laubwaldes durch Erstaufforstung;154638;0
+Begründung eines Laubwaldes durch Naturverjünung;Begründung eines Laubwaldes durch Naturverjünung;154639;0
+Begründung eines Laubwaldes durch Voranbau;Begründung eines Laubwaldes durch Voranbau;154640;0
+Begründung eines Laubwaldes durch Wiederaufforstung;Begründung eines Laubwaldes durch Wiederaufforstung;154641;0
+Behinderten gerechte  Gestaltung;Behinderten gerechte  Gestaltung;15232;0
+Bekämpfung Adlerfarn, Aufforstung m. bodenständ. Grosspflanzen;Bekämpfung Adlerfarn, Aufforstung m. bodenständ. Grosspflanzen;154643;0
+Bekämpfung des Adlerfarnes durch Knüppeln;Bekämpfung des Adlerfarnes durch Knüppeln;154775;0
+Bekämpfung des Adlerfarnes durch mehrmaliges Mähen;Bekämpfung des Adlerfarnes durch mehrmaliges Mähen;154776;0
+Bekämpfung des Adlerfarnes durch mehrmaliges mähen;Bekämpfung des Adlerfarnes durch mehrmaliges Mähen;154776;0
+Bekämpfung des Adlerfarns;Bekämpfung des Adlerfarns;154642;0
+Bekämpfung des Adlerfarns durch Aufforstung mit bodenständigen Grosspflanzen;Bekämpfung Adlerfarn, Aufforstung m. bodenständ. Grosspflanzen;154643;0
+Belassen von anfallendem liegenden und stehenden Totholz;Belassen von anfallendem liegenden und stehenden Totholz;154644;0
+Benjes-Hecke anlegen;Benjes-Hecke anlegen;154633;0
+Beobachtungspunkt einrichten;Beobachtungspunkt einrichten;15233;0
+Beschränkung der Düngung;Beschränkung der Düngung;16803;0
+Beschränkung der Fischereiausübung;Beschränkung der Fischereiausübung;16804;0
+Beschränkung der Freizeitaktivitäten;Beschränkung der Freizeitaktivitäten;16805;0
+Beseitigen gebietstyp. Störelemente, Uferanrisse n. Gew.-ausbau;Beseitigen gebietstyp. Störelemente, Uferanrisse n. Gew.-ausbau;154619;0
+Beseitigung Anlagen zur Wasserentnahme aus Fliessgewässer;Beseitigung Anlagen zur Wasserentnahme aus Fliessgewässer;154553;0
+Beseitigung Kühlwassereinleitung d. Verlegung, Verrieselung usw.;Beseitigung Kühlwassereinleitung d. Verlegung, Verrieselung usw.;154497;0
+Beseitigung der Abwasser-Einleitung;Beseitigung der Abwasser-Einleitung;154607;0
+Beseitigung der Anlagen zur Wasserentnahme aus dem Fliessgewässer;Beseitigung Anlagen zur Wasserentnahme aus Fliessgewässer;154553;0
+Beseitigung der Entenkojen;Beseitigung der Entenkojen;154559;0
+Beseitigung der Netze bzw. Überspannungen gegen Vogelfrass;Beseitigung der Netze bzw. Überspannungen gegen Vogelfrass;154549;0
+Beseitigung einer Kühlwassereinleitung durch Verlegung, Verrieselung oder Anschluss an die Kanalisation;Beseitigung Kühlwassereinleitung d. Verlegung, Verrieselung usw.;154497;0
+Beseitigung einer Quellfassung;Beseitigung einer Quellfassung;154708;0
+Beseitigung eines Durchlasses;Beseitigung eines Durchlasses;154709;0
+Beseitigung oder Verlegung von Leitungen, Zäunen oder Einfriedungen;Beseitigung, Verlegung von Leitungen, Zäunen o. Einfriedungen;154498;0
+Beseitigung und Rückbau v. Einrichtungen des Modellflugsports;Beseitigung und Rückbau v. Einrichtungen des Modellflugsports;154523;0
+Beseitigung und Rückbau von Anlagen und Einrichtungen des Modellflugsports;Beseitigung und Rückbau v. Einrichtungen des Modellflugsports;154523;0
+Beseitigung unerwünschter Pflanzen;Beseitigung unerwünschter Pflanzen;154788;0
+Beseitigung von Befestigungen und Einbau von gebietstypischen Störelementen bzw. Uferanrissen nach Gewässerausbau;Beseitigen gebietstyp. Störelemente, Uferanrisse n. Gew.-ausbau;154619;0
+Beseitigung von Buhnen;Beseitigung von Buhnen;15301;0
+Beseitigung von Einrichtungen für den Angelsport;Beseitigung von Einrichtungen für den Angelsport;154547;0
+Beseitigung von Erdaushub;Beseitigung von Erdaushub;154493;0
+Beseitigung von Futterresten nach Zufütterung;Beseitigung von Futterresten nach Zufütterung;154592;0
+Beseitigung von Gehölzaufwuchs;Beseitigung von Gehölzaufwuchs;154783;0
+Beseitigung von Gehölzen;Beseitigung von Gehölzen;16813;0
+Beseitigung von Müll;Beseitigung von Müll;16809;0
+Beseitigung von Schlagabraum;Beseitigung von Schlagabraum;154603;0
+Beseitigung von Schutt;Beseitigung von Schutt;154501;0
+Beseitigung von Wildfütterungsanlagen;Beseitigung von Wildfütterungsanlagen;154577;0
+Beseitigung von aufgefülltem Material;Beseitigung von aufgefülltem Material;154645;0
+Beseitigung von baulichen Anlagen;Beseitigung von baulichen Anlagen;16808;0
+Beseitigung von verdämmenden Gehölzen;Beseitigung von verdämmenden Gehölzen;154696;0
+Beseitigung von verdämmenden Neophyten;Beseitigung von verdämmenden Neophyten;154697;0
+Beseitigung von verdämmenden Pflanzen;Beseitigung von verdämmenden Pflanzen;154698;0
+Beseitigung, Verlegung von Leitungen, Zäunen o. Einfriedungen;Beseitigung, Verlegung von Leitungen, Zäunen o. Einfriedungen;154498;0
+Bestimmung einer Restwassermenge;Bestimmung einer Restwassermenge;15302;0
+Bestockungsgrad absenken (Gehö);Bestockungsgrad absenken (Gehö);23789;0
+Bestockungsgrad absenken (Wald);Bestockungsgrad absenken (Wald);154795;0
+Betretungsverbot;Betretungsverbot;16810;0
+Beweidung;Beweidung;153100;0
+Beweidung (Brache);Beweidung (Brache);23881;0
+Beweidung (Gewäs);Beweidung (Gewäs);23842;0
+Beweidung (Grünl);Beweidung (Grünl);23831;0
+Beweidung (Heide/TR);Beweidung (Heide/TR);23815;0
+Beweidung (Mo/Rö);Beweidung (Mo/Rö);167509;0
+Beweidung (Pion,Fels);Beweidung (Pion,Fels);23854;0
+Beweidung (landw Fl);Beweidung (landw Fl);23868;0
+Bewirtschaftung des Wildackers im Sinne Biotop- und Artenschutz;Bewirtschaftung des Wildackers im Sinne Biotop- und Artenschutz;154574;0
+Bewirtschaftung des Wildackers im Sinne des Biotop- und Artenschutzes;Bewirtschaftung des Wildackers im Sinne Biotop- und Artenschutz;154574;0
+Bewirtschaftung einzelstammweise (Gehö);Bewirtschaftung einzelstammweise (Gehö);23790;0
+Bewirtschaftung einzelstammweise (Wald);Bewirtschaftung einzelstammweise (Wald);154798;0
+Bewirtschaftung femelartig (Gehö);Bewirtschaftung femelartig (Gehö);23791;0
+Bewirtschaftung femelartig (Wald);Bewirtschaftung femelartig (Wald);154799;0
+Biotopbäume entwickeln (Wald);Biotopbäume entwickeln (Wald);167631;0
+Biotopbäume erhalten, sichern (Wald);Biotopbäume erhalten, sichern (Wald);168905;0
+Blänke anlegen, optimieren;Blänke anlegen, optimieren;154689;0
+Böschungen abschnittsweise mähen;Böschungen abschnittsweise mähen;15248;0
+Drainagen verschliessen, entfernen;Drainagen verschliessen, entfernen;16811;0
+Durchgew. Niederwald auf-den-Stock-setzen (Erh. Assimil.trieben);Durchgew. Niederwald auf-den-Stock-setzen (Erh. Assimil.trieben);154787;0
+Durchgängigkeit wiederherstellen;Durchgängigkeit wiederherstellen;15654;0
+Dächer, Gebäudewände begrünen;Dächer, Gebäudewände begrünen;15252;0
+Einbau einer Grundschwelle;Einbau einer Grundschwelle;154699;0
+Einbau einer Schranke;Einbau einer Schranke;154532;0
+Einbau von Störsteinen;Einbau von Störsteinen;154702;0
+Einbau von erosionshemmenden Strukturen;Einbau von erosionshemmenden Strukturen;154620;0
+Eingrünung, Entfernung oder Verlegung eines Gebäudes;Eingrünung, Entfernung oder Verlegung eines Gebäudes;154494;0
+Einleitungen an Kanalisation anschliessen;Einleitungen an Kanalisation anschliessen;15688;0
+Einleitungen an Kanalisation anschliessen (Gewäs);Einleitungen an Kanalisation anschliessen (Gewäs);167532;0
+Einleitungen an Kanalisation anschliessen (Wasserh);Einleitungen an Kanalisation anschliessen (Wasserh);23944;0
+Einleitungen an Kanalisation anschliessen (um Be);Einleitungen an Kanalisation anschliessen (um Be);23892;0
+Einleitungen verhindern;Einleitungen verhindern;15689;0
+Einrichtungen des Wasser-, Eis- und Luftsportes sind zurückzubauen;Rückbau v. Einrichtungen des Wasser-, Eis- und Luftsportes;154536;0
+Einsaat;Einsaat;160876;0
+Einsaat mit standortgerechter Grünland-Einsaatmischung;Einsaat mit standortgerechter Grünland-Einsaatmischung;154704;0
+Einsaat von Grünlandstandardmischung nach Abtrieb;Einsaat von Grünlandstandardmischung nach Abtrieb;154647;0
+Einstellung der Bewirtschaftung;Einstellung der Bewirtschaftung;16812;0
+Einstellung der fischereiwirtschaftlichen Nutzung;Einstellung der fischereiwirtschaftlichen Nutzung;154548;0
+Einstellung der fischereiwirtschaftlichen Nutzung der Gewässer;Einstellung der fischereiwirtschaftlichen Nutzung;154548;0
+Einzelbäume,  Baumgruppe pflegen;Einzelbäume,  Baumgruppe pflegen;15214;0
+Einziehen, Entsiegeln oder Sperren von Wegen usw.;Einziehen, Entsiegeln oder Sperren von Wegen usw.;154506;0
+Einziehen, Entsiegeln oder Sperren von Wegen, Strassen oder Plätzen;Einziehen, Entsiegeln oder Sperren von Wegen usw.;154506;0
+Einzäunung;Einzäunung;160864;0
+Einzäunung oder Markierung einer Grenze mit Pfahlreihe zur Verhinderung der Beweidung von Rainen und Uferstreifen;Einzäunung zur Verhinderung Beweidung v. Rainen u. Uferstreifen;154587;0
+Einzäunung von Uferrandstreifen;Einzäunung von Uferrandstreifen;154705;0
+Einzäunung von Wald zur Verhinderung einer Beweidung;Einzäunung von Wald zur Verhinderung einer Beweidung;154586;0
+Einzäunung von gegenüber Beweidung empfindlichen Standorten;Einzäunung von gegenüber Beweidung empfindlichen Standorten;154585;0
+Einzäunung zur Verhinderung Beweidung v. Rainen u. Uferstreifen;Einzäunung zur Verhinderung Beweidung v. Rainen u. Uferstreifen;154587;0
+Entbuschen einer Fläche;Entbuschen einer Fläche;154707;0
+Entfernen von Drainagerohren;Entfernen von Drainagerohren;154721;0
+Entfernen von Einrichtungen zur Belüftung der Gewässer;Entfernen von Einrichtungen zur Belüftung der Gewässer;154546;0
+Entfernung der Einrichtungen zur Wildfütterung;Entfernung der Einrichtungen zur Wildfütterung;154578;0
+Entfernung der Fallen;Entfernung der Fallen;154560;0
+Entfernung der Futterreste im Bereich der Wildfütterung;Entfernung der Futterreste im Bereich der Wildfütterung;154579;0
+Entfernung der Futterreste im Bereich von Kirrungen;Entfernung der Futterreste im Bereich von Kirrungen;154564;0
+Entfernung der Lecksteine bzw. der baulichen Anlagen;Entfernung der Lecksteine bzw. der baulichen Anlagen;154565;0
+Entfernung von Buden, Verkaufsständen, Zelten oder Automaten;Entfernung von Buden, Verkaufsständen, Zelten oder Automaten;154492;0
+Entfernung von Müllablagerungen;Entfernung von Müllablagerungen;154499;0
+Entfernung von Stoffen und Gegenständen;Entfernung von Stoffen und Gegenständen;154503;0
+Entkrautung eines Gewässers;Entkrautung eines Gewässers;154711;0
+Entkrautung regeln;Entkrautung regeln;15659;0
+Entnahme aufgeforsteter Gehölze;Entnahme aufgeforsteter Gehölze;154596;0
+Entnahme ausgesetzer Tiere;Entnahme ausgesetzer Tiere;154558;0
+Entnahme der Gehölze im Bereich der Erstaufforstung;Entnahme der Gehölze im Bereich der Erstaufforstung;154598;0
+Entnahme der Gehölze im Bereich von Weihnachtsbaumkulteren;Entnahme der Gehölze im Bereich von Weihnachtsbaumkulteren;154602;0
+Entnahme nicht bodenst. Gehölze im Rahmen der forstl. Nutzung;Entnahme nicht bodenst. Gehölze im Rahmen der forstl. Nutzung;154648;0
+Entnahme nicht bodenständig-standortgerechter Gehölze;Entnahme nicht bodenständig-standortgerechter Gehölze;154595;0
+Entnahme nicht bodenständiger Gehölze;Entnahme nicht bodenständiger Gehölze;154807;0
+Entnahme nicht bodenständiger Gehölze im Rahmen der forstlichen Nutzung;Entnahme nicht bodenst. Gehölze im Rahmen der forstl. Nutzung;154648;0
+Entnahme nicht bodenständiger Gehölze nach Erreichen von verwertbaren Stamm-Dimensionen;Entnahme verwertbarer Stamm-Dimensionen nicht bodenst. Gehölze;154649;0
+Entnahme verwertbarer Stamm-Dimensionen nicht bodenst. Gehölze;Entnahme verwertbarer Stamm-Dimensionen nicht bodenst. Gehölze;154649;0
+Entnahme von Pflanzen;Entnahme von Pflanzen;154568;0
+Entnahme überalterter Gehölze aus einer Hecke bei Bedarf;Entnahme überalterter Gehölze aus einer Hecke bei Bedarf;154830;0
+Entschlammung;Entschlammung;16814;0
+Entschlammung, abschnittsweise;Entschlammung, abschnittsweise;16856;0
+Entw. amph.typischer Lebensräume, amph.schutzmassn. an Strassen;Entw. amph.typischer Lebensräume, amph.schutzmassn. an Strassen;154750;0
+Entwicklung eines Röhrichtes;Entwicklung eines Röhrichtes;154723;0
+Entwicklung und Sicherung von Uferrandstreifen;Entwicklung und Sicherung von Uferrandstreifen;154724;0
+Entwicklung von amphibientypischen Land- und Wasserlebensräumen im Rahmen von Amphibienschutzmassnahmen an Strassen;Entw. amph.typischer Lebensräume, amph.schutzmassn. an Strassen;154750;0
+Entwässerungsgräben anstauen;Entwässerungsgräben anstauen;15660;0
+Entwässerungsgräben verfüllen, schliessen;Entwässerungsgräben verfüllen, schliessen;16815;0
+Erhalt von Kolken;Erhalt von Kolken;15292;0
+Erhaltung 10 starker Bäumen des Oberstandes als Alt- u. Totholz;Erhaltung 10 starker Bäumen des Oberstandes als Alt- u. Totholz;154651;0
+Erhaltung der Gewässer;Erhaltung der Gewässer;16816;0
+Erhaltung der Landschaftsstrukturen;Erhaltung der Landschaftsstrukturen;16817;0
+Erhaltung der Laubholzbestockung;Erhaltung der Laubholzbestockung;16818;0
+Erhaltung der Überschwemmungsdynamik;Erhaltung der Überschwemmungsdynamik;16820;0
+Erhaltung des Kleinreliefs;Erhaltung des Kleinreliefs;16821;0
+Erhaltung des Wasserstandes;Erhaltung des Wasserstandes;16822;0
+Erhaltung kulturhistorischer Strukturen;Erhaltung kulturhistorischer Strukturen;16823;0
+Erhaltung von 10 starken Bäumen des Oberstandes als Alt- und Totholz;Erhaltung 10 starker Bäumen des Oberstandes als Alt- u. Totholz;154651;0
+Erhaltung von Steilwänden;Erhaltung von Steilwänden;16826;0
+Erhaltungsdüngung;Erhaltungsdüngung;7969;0
+Erholungseinrichtung anlegen;Erholungseinrichtung anlegen;15234;0
+Erholungseinrichtung aufgeben;Erholungseinrichtung aufgeben;15272;0
+Erholungsverkehr lenken;Erholungsverkehr lenken;15262;0
+Erhöhung der Umtriebszeiten;Erhöhung der Umtriebszeiten;15294;0
+Erhöhung des Altholzanteils;Erhöhung des Altholzanteils;154793;0
+Erhöhung des Laubholzanteils;Erhöhung des Laubholzanteils;16828;0
+Erhöhung des Laubwaldanteils;Erhöhung des Laubwaldanteils;154652;0
+Ersatz abgängiger Obstbäume;Ersatz abgängiger Obstbäume;154653;0
+Ersatz eines Stauwehres durch eine Sohlgleite;Ersatz eines Stauwehres durch eine Sohlgleite;154727;0
+Erstaufforstung;Erstaufforstung;154654;0
+Erstaufforstung von Acker- und Grünlandflächen (Wald);Erstaufforstung von Acker- und Grünlandflächen (Wald);8043;0
+Erweiterung eines Gewässers;Erweiterung eines Gewässers;154728;0
+Erziehungsschnitt für Alleebäume;Erziehungsschnitt für Alleebäume;154780;0
+Erziehungsschnitt für Kopfbäume;Erziehungsschnitt für Kopfbäume;154781;0
+Erziehungsschnitt für Obstbäume;Erziehungsschnitt für Obstbäume;154782;0
+Eutrophierung unterbinden;Eutrophierung unterbinden;153922;0
+Extensivierung, Erstpflege;Extensivierung, Erstpflege;154773;0
+Extensivierung, Pflege Grünland;Extensivierung, Pflege Grünland;161692;0
+Extensivierung, weitere Pflege Wald;Extensivierung, weitere Pflege Wald;154792;0
+Fehlbestockung in Sonderbiotopen vorzeitig entnehmen;Fehlbestockung in Sonderbiotopen vorzeitig entnehmen;15690;0
+Fehlstellen, Verlichtungen belassen (Gehö);Fehlstellen, Verlichtungen belassen (Gehö);23793;0
+Fehlstellen, Verlichtungen belassen (Wald);Fehlstellen, Verlichtungen belassen (Wald);15273;0
+Felsen freistellen;Felsen freistellen;15215;0
+Fischaufstiegshilfe anlegen, optimieren;Fischaufstiegshilfe anlegen, optimieren;15243;0
+Fischschonbezirk einrichten;Fischschonbezirk einrichten;15216;0
+Fischschonbezirk einrichten (Artens);Fischschonbezirk einrichten (Artens);23909;0
+Fischschonbezirk einrichten (Gewäs);Fischschonbezirk einrichten (Gewäs);167539;0
+Fischteichanlage extensivieren/stilllegen;Fischteichanlage extensivieren/stilllegen;168914;0
+Flachwasserzonen anlegen, optimieren;Flachwasserzonen anlegen, optimieren;15661;0
+Fledermaus-Quartier sichern;Fledermaus-Quartier sichern;154757;0
+Fledermaus-Zugang ermöglichen, sichern;Fledermaus-Zugang ermöglichen, sichern;15656;0
+Fledermauskästen anbringen, betreuen;Fledermauskästen anbringen, betreuen;154758;0
+Fließgewässer renaturieren;Fließgewässer renaturieren;154737;0
+Fläche entsiegeln;Fläche entsiegeln;154505;0
+Fläche entsiegeln (landw Fl);Fläche entsiegeln (landw Fl);167541;0
+Fläche entsiegeln (um Be);Fläche entsiegeln (um Be);23894;0
+Fläche gattern;Fläche gattern;15671;0
+Flächentausch;Flächentausch;154292;0
+Freistellen Wuchsort gef. Pflanzen v. verdämmenden Gehölzen;Freistellen Wuchsort gef. Pflanzen v. verdämmenden Gehölzen;154770;0
+Freistellen Wuchsort gef. Pflanzen v. verdämmenden Pflanzen;Freistellen Wuchsort gef. Pflanzen v. verdämmenden Pflanzen;154771;0
+Freistellen der Ufer von beschattenden Gehölzen;Freistellen der Ufer von beschattenden Gehölzen;154730;0
+Freistellen der Ufer von verdämmenden Gehölzen;Freistellen der Ufer von verdämmenden Gehölzen;154731;0
+Freistellen des Wuchsortes gefährdeter Pflanzenarten von verdämmenden Gehölzen;Freistellen Wuchsort gef. Pflanzen v. verdämmenden Gehölzen;154770;0
+Freistellen des Wuchsortes gefährdeter Pflanzenarten von verdämmenden Pflanzen;Freistellen Wuchsort gef. Pflanzen v. verdämmenden Pflanzen;154771;0
+Freizeitaktivitäten lenken;Freizeitaktivitäten lenken;15691;0
+Fräsen und Walzen;Fräsen und Walzen;154729;0
+Furt anlegen (Gewäs);Furt anlegen (Gewäs);8047;0
+Futtermieten entfernen;Futtermieten entfernen;154589;0
+Förderung bodenständiger Gehölze;Förderung bodenständiger Gehölze;154655;0
+Förderung der Naturverjüngung;Förderung der Naturverjüngung;154805;0
+Förderung der Naturverjüngung durch Gatterung;Förderung der Naturverjüngung durch Gatterung;154806;0
+Förderung von Nebenbaumarten, bestimmten Baumarten;Förderung von Nebenbaumarten, bestimmten Baumarten;15295;0
+Ganzjahresbeweidung (Brache);Ganzjahresbeweidung (Brache);177513;0
+Ganzjahresbeweidung (Grünl);Ganzjahresbeweidung (Grünl);177511;0
+Ganzjahresbeweidung (Heide/Tr);Ganzjahresbeweidung (Heide/Tr);177512;0
+Geländesport lenken;Geländesport lenken;15286;0
+Geländesport lenken (ErhoVer);Geländesport lenken (ErhoVer);23924;0
+Geländesport lenken (um Be);Geländesport lenken (um Be);167546;0
+Gewässer anbinden;Gewässer anbinden;154682;0
+Gewässer anlegen, verlegen, optimieren;Gewässer anlegen, verlegen, optimieren;15274;0
+Gewässervertiefung;Gewässervertiefung;153917;0
+Grabenpflege;Grabenpflege;171104;0
+Grabenpflege durch Beweidung;Grabenpflege durch Beweidung;177022;0
+Grabenpflege durch Sukzession;Grabenpflege durch Sukzession;177023;0
+Grabenpflege nicht erkennbar;Grabenpflege nicht erkennbar;177021;0
+Grabenpflege regelmässig, jährlich;Grabenpflege regelmässig, jährlich;177019;0
+Grabenpflege unregelmässig;Grabenpflege unregelmässig;177020;0
+Grubbern;Grubbern;171105;0
+Grundwasserstand regeln;Grundwasserstand regeln;15665;0
+Grünanlagenpflege extensivieren;Grünanlagenpflege extensivieren;15218;0
+Grünbrücke installieren;Grünbrücke installieren;15244;0
+Gründung Wallhecke (Anlage Erdwall u. Initialbepflanzung);Gründung Wallhecke (Anlage Erdwall u. Initialbepflanzung);154656;0
+Gründung einer Wallhecke durch Anlage eines Erwalles und gruppenweiser Initialbepflanzung mit bodenständigen Gehölzen;Gründung Wallhecke (Anlage Erdwall u. Initialbepflanzung);154656;0
+Grünland;Grünland;15708;0
+Grünland anlegen, wiederherstellen;Grünland anlegen, wiederherstellen;16843;0
+Grünlandnutzung beibehalten;Grünlandnutzung beibehalten;16802;0
+Grünlandnutzung extensivieren;Grünlandnutzung extensivieren;160878;0
+Habitat für Pflanzenart optimieren;Habitat für Pflanzenart optimieren;15259;0
+Habitat für Tierart optimieren;Habitat für Tierart optimieren;15260;0
+Hangparallele Ackernutzung auf hängigem Gelände;Hangparallele Ackernutzung auf hängigem Gelände;154583;0
+Hecke anlegen, ergänzen;Hecke anlegen, ergänzen;16801;0
+Hecken abschnittsweise auf den Stock setzen;Hecken abschnittsweise auf den Stock setzen;15649;0
+Heide wiederherstellen, anlegen, optimieren;Heide wiederherstellen, anlegen, optimieren;15249;0
+Herauspflegen bodenständiger Gehölze;Herauspflegen bodenständiger Gehölze;154796;0
+Herauspflegen von Zielstärkenbäumen;Herauspflegen von Zielstärkenbäumen;154826;0
+Herbizideinsatz;Herbizideinsatz;14443;0
+Heublumenansaat;Heublumenansaat;15245;0
+Hirschkäfer-Brutstätten anlegen (Artens);Hirschkäfer-Brutstätten anlegen (Artens);167663;0
+Hochspannungsmasten gegen Vogelschlag sichern;Hochspannungsmasten gegen Vogelschlag sichern;15228;0
+Hohlweg erhalten, optimieren;Hohlweg erhalten, optimieren;15219;0
+Holzlagerplatz anlegen (ErhoVer);Holzlagerplatz anlegen (ErhoVer);23925;0
+Holzlagerplatz anlegen (Wald);Holzlagerplatz anlegen (Wald);15253;0
+Holzlagerplatz aufgeben;Holzlagerplatz aufgeben;15672;0
+Holzlagerplatz aufgeben (ErhoVer);Holzlagerplatz aufgeben (ErhoVer);23926;0
+Holzlagerplatz aufgeben (um Be);Holzlagerplatz aufgeben (um Be);167548;0
+Horst- und Höhlenbäume erhalten, sichern (Artens);Horst- und Höhlenbäume erhalten, sichern (Artens);23911;0
+Horst- und Höhlenbäume erhalten, sichern (Gehö);Horst- und Höhlenbäume erhalten, sichern (Gehö);23794;0
+Horst- und Höhlenbäume erhalten, sichern (Wald);Horst- und Höhlenbäume erhalten, sichern (Wald);154800;0
+Höhle absperren;Höhle absperren;15250;0
+Höhlen, Stollen erhalten, sichern (Artens);Höhlen, Stollen erhalten, sichern (Artens);23910;0
+Höhlen, Stollen erhalten, sichern (Pion,Fels);Höhlen, Stollen erhalten, sichern (Pion,Fels);16825;0
+Informations- und Hinweistafeln aufstellen;Informations- und Hinweistafeln aufstellen;154520;0
+Initiierung der Mäanderbildung an einem Fliessgewässer;Initiierung der Mäanderbildung an einem Fliessgewässer;154733;0
+Inseln einbringen;Inseln einbringen;15235;0
+Jagdausübung beschränken;Jagdausübung beschränken;16806;0
+Keine Düngung oder Biozidanwendung im Bereich des Wildackers;Keine Düngung oder Biozidanwendung im Bereich des Wildackers;154575;0
+Keine tiefe Bodenbearbeitung;Keine tiefe Bodenbearbeitung;15293;0
+Kfz-Verkehr beschränken, regeln (ErhoVer);Kfz-Verkehr beschränken, regeln (ErhoVer);23927;0
+Kfz-Verkehr beschränken, regeln (um Be);Kfz-Verkehr beschränken, regeln (um Be);16807;0
+Kirrungen regeln;Kirrungen regeln;15254;0
+Kleingehölz anlegen;Kleingehölz anlegen;15673;0
+Kleingehölze pflegen;Kleingehölze pflegen;154829;0
+Kleingehölze, Hecken, Kopfbäume, Obstbäume;Kleingehölze, Hecken, Kopfbäume, Obstbäume;15289;0
+Kleintierdurchlass anlegen (Artens);Kleintierdurchlass anlegen (Artens);167664;0
+Kleintierdurchlass optimieren (Artens);Kleintierdurchlass optimieren (Artens);167666;0
+Klärteiche anlegen;Klärteiche anlegen;15692;0
+Klärung des Abwassers mit einer Pflanzenkläranlage;Klärung des Abwassers mit einer Pflanzenkläranlage;154610;0
+Knotengitterzaun ersetzen (Artens);Knotengitterzaun ersetzen (Artens);167662;0
+Knüppeln des Adlerfarns;Knüppeln des Adlerfarns;154657;0
+Konkurrenzpflanzen beseitigen (Artens);Konkurrenzpflanzen beseitigen (Artens);23912;0
+Konkurrenzpflanzen beseitigen (um Be);Konkurrenzpflanzen beseitigen (um Be);15662;0
+Kopfbaumpflege;Kopfbaumpflege;16829;0
+Kopfbäume anpflanzen;Kopfbäume anpflanzen;15678;0
+Kronenholzablagerungen entfernen;Kronenholzablagerungen entfernen;154600;0
+LB-Ausweisung;LB-Ausweisung;16830;0
+LB-Ausweisung-Teilfläche;LB-Ausweisung-Teilfläche;16831;0
+LSG-Ausweisung;LSG-Ausweisung;16832;0
+LSG-Erweiterung;LSG-Erweiterung;16833;0
+Leiteinrichtungen, Geländer, Markierungen einbauen, optimieren;Leiteinrichtungen, Geländer, Markierungen einbauen, optimieren;154522;0
+Leitung entfernen;Leitung entfernen;15278;0
+Lenkung Erholungsverkehr, Erschliessung;Lenkung Erholungsverkehr, Erschliessung;15714;0
+Lichtung anlegen (Wald);Lichtung anlegen (Wald);167632;0
+Luftsportarten lenken;Luftsportarten lenken;15299;0
+Läuterung;Läuterung;154803;0
+Mahd;Mahd;2783;0
+Mahd (Brache);Mahd (Brache);23886;0
+Mahd (Gewäs);Mahd (Gewäs);23846;0
+Mahd (Grünl);Mahd (Grünl);23836;0
+Mahd (Heide/TR);Mahd (Heide/TR);23820;0
+Mahd (Mo/Rö);Mahd (Mo/Rö);167515;0
+Mahd (Pion,Fels);Mahd (Pion,Fels);23859;0
+Mahd (landw Fl);Mahd (landw Fl);23872;0
+Mahd im langjährigem Rhythmus (Pflegemahd);Mahd im langjährigem Rhythmus (Pflegemahd);176850;0
+Mahdgutübertragung;Mahdgutübertragung;7970;0
+Markierung des Uferrandstreifens mit Weidepfählen;Markierung des Uferrandstreifens mit Weidepfählen;154734;0
+Massnahmen-BK;Massnahmen-BK;154840;0
+Mauervegetation erhalten;Mauervegetation erhalten;16819;0
+Mehrmalige Mahd zur Beseitigung von Problemunkräutern;Mehrmalige Mahd zur Beseitigung von Problemunkräutern;154789;0
+Mehrmalige scharfe Durchforstung;Mehrmalige scharfe Durchforstung;154797;0
+Minimierung des Sedimenteintrages;Minimierung des Sedimenteintrages;15303;0
+Mittelwaldartige Bewirtschaftung;Mittelwaldartige Bewirtschaftung;15296;0
+Mittelwaldartige Nutzung (Wald);Mittelwaldartige Nutzung (Wald);167633;0
+Moor renaturieren, optimieren;Moor renaturieren, optimieren;15220;0
+Moore, Sümpfe, Röhrichte;Moore, Sümpfe, Röhrichte;15707;0
+Mähen und Nachbeweidung;Mähen und Nachbeweidung;15267;0
+Mähen und Nachbeweidung (Brache);Mähen und Nachbeweidung (Brache);23885;0
+Mähen und Nachbeweidung (Gewäs);Mähen und Nachbeweidung (Gewäs);23847;0
+Mähen und Nachbeweidung (Grünl);Mähen und Nachbeweidung (Grünl);23835;0
+Mähen und Nachbeweidung (Heide/TR);Mähen und Nachbeweidung (Heide/TR);23819;0
+Mähen und Nachbeweidung (Mo/Rö);Mähen und Nachbeweidung (Mo/Rö);167560;0
+Mähen und Nachbeweidung (Pion,Fels);Mähen und Nachbeweidung (Pion,Fels);23858;0
+Mähen und Nachbeweidung (landw Fl);Mähen und Nachbeweidung (landw Fl);23871;0
+Mähgut entfernen;Mähgut entfernen;15703;0
+ND-Ausweisung;ND-Ausweisung;16834;0
+ND-Ausweisung-Teilfläche;ND-Ausweisung-Teilfläche;16835;0
+NSG-Ausweisung / vertragliche Regelung;NSG-Ausweisung / vertragliche Regelung;16836;0
+NSG-Erweiterung / vertragliche Regelung;NSG-Erweiterung / vertragliche Regelung;16837;0
+Nachlichtung;Nachlichtung;154804;0
+Nadelholzabtrieb, weitständige Aufforstung bodenst. Gehölze;Nadelholzabtrieb, weitständige Aufforstung bodenst. Gehölze;154626;0
+Nat. Spontanbesiedlung n. Gehölzabtrieb mit anschl. Beweidung;Nat. Spontanbesiedlung n. Gehölzabtrieb mit anschl. Beweidung;154659;0
+Naturnahe Umgestaltung eines Gewässers nach Gewässerausbau;Naturnahe Umgestaltung eines Gewässers nach Gewässerausbau;154618;0
+Naturverjüngung lebensraumtypischer Gehölze fördern;Naturverjüngung lebensraumtypischer Gehölze fördern;15681;0
+Naturverjüngung lebensraumtypischer Gehölze fördern (Gehö);Naturverjüngung lebensraumtypischer Gehölze fördern (Gehö);23797;0
+Naturverjüngung lebensraumtypischer Gehölze fördern (Wald);Naturverjüngung lebensraumtypischer Gehölze fördern (Wald);167562;0
+Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen;Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen;15682;0
+Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Gehö);Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Gehö);23798;0
+Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Wald);Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (Wald);167568;0
+Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (um Be);Naturverjüngung nicht lebensraumtyp. Gehölze entnehmen (um Be);23895;0
+Natürliche Entwicklung der Vorwaldstadien;Natürliche Entwicklung der Vorwaldstadien;154823;0
+Natürliche Entwicklung einer Kalamitätsfläche;Natürliche Entwicklung einer Kalamitätsfläche;154802;0
+Natürliche Entwicklung einer Windwurffläche;Natürliche Entwicklung einer Windwurffläche;154825;0
+Natürliche Spontanbesiedlung einer Fläche;Natürliche Spontanbesiedlung einer Fläche;154735;0
+Natürliche Spontanbesiedlung nach Abtrieb der Gehölze mit anschliessender Beweidung;Nat. Spontanbesiedlung n. Gehölzabtrieb mit anschl. Beweidung;154659;0
+Natürliche Sukzession nach Abtrieb der Fehlbestockung;Natürliche Sukzession nach Abtrieb der Fehlbestockung;154661;0
+Natürliche Sukzession nach Ausmagerung des Standortes;Natürliche Sukzession nach Ausmagerung des Standortes;154662;0
+Neophyten beseitigen;Neophyten beseitigen;154786;0
+Niederwald abschnittsweise auf den Stock setzen;Niederwald abschnittsweise auf den Stock setzen;16838;0
+Niederwaldartige Nutzung;Niederwaldartige Nutzung;154808;0
+Nisthilfe anbringen, betreuen;Nisthilfe anbringen, betreuen;154760;0
+Nisthilfe entfernen;Nisthilfe entfernen;154566;0
+Nistplatz-Schutzzone einrichten;Nistplatz-Schutzzone einrichten;15229;0
+OEFS;OEFS;171192;0
+Oberboden abschieben;Oberboden abschieben;153930;0
+Oberboden abschieben (Artens);Oberboden abschieben (Artens);23914;0
+Oberboden abschieben (Brache);Oberboden abschieben (Brache);23888;0
+Oberboden abschieben (Gewäs);Oberboden abschieben (Gewäs);23849;0
+Oberboden abschieben (Grünl);Oberboden abschieben (Grünl);23838;0
+Oberboden abschieben (Heide/TR);Oberboden abschieben (Heide/TR);23823;0
+Oberboden abschieben (Mo/Rö);Oberboden abschieben (Mo/Rö);167573;0
+Oberboden abschieben (Pion,Fels);Oberboden abschieben (Pion,Fels);23861;0
+Oberboden abschieben (landw Fl);Oberboden abschieben (landw Fl);23874;0
+Oberboden abschieben (um Be);Oberboden abschieben (um Be);23897;0
+Oberboden abschieben zur Förderung gefährdeter Pflanzenart;Oberboden abschieben zur Förderung gefährdeter Pflanzenart;154766;0
+Obstbaumpflege;Obstbaumpflege;16839;0
+Obstbäume anpflanzen;Obstbäume anpflanzen;15685;0
+Optimierung, Artenschutzmassnahmen;Optimierung, Artenschutzmassnahmen;154749;0
+Optimierung, Sonstige-Biotoptypen;Optimierung, Sonstige-Biotoptypen;154674;0
+Optimierung, Wald-Kleingehölze;Optimierung, Wald-Kleingehölze;154625;0
+Pflanzenkläranlage anlegen;Pflanzenkläranlage anlegen;15663;0
+Pflege mit Herbizideinsatz;Pflege mit Herbizideinsatz;171405;0
+Pflege mit Herbizideinsatz nicht erkennbar / beurteilbar;Pflege mit Herbizideinsatz nicht erkennbar / beurteilbar;171408;0
+Pflege ohne Herbizideinsatz;Pflege ohne Herbizideinsatz;171406;0
+Pflege tlw. mit Herbizideinsatz;Pflege tlw. mit Herbizideinsatz;171407;0
+Pflege von Hecken;Pflege von Hecken;16840;0
+Pflegemassnahmen;Pflegemassnahmen;154293;0
+Pionier- und Felsbiotope;Pionier- und Felsbiotope;15709;0
+Pirschweg aufgeben;Pirschweg aufgeben;15699;0
+Pirschweg der natürlichen Entwicklung überlassen;Pirschweg der natürlichen Entwicklung überlassen;154570;0
+Pirschweg festlegen;Pirschweg festlegen;15255;0
+Problempflanzen bekämpfen;Problempflanzen bekämpfen;154720;0
+Pufferzone anlegen;Pufferzone anlegen;16797;0
+Quantiatives Abfischen der Satzfische;Quantiatives Abfischen der Satzfische;154552;0
+Quelle auszäunen (Gewäs);Quelle auszäunen (Gewäs);8049;0
+Quelle renaturieren, optimieren;Quelle renaturieren, optimieren;15705;0
+Querbauwerk entnehmen;Querbauwerk entnehmen;15221;0
+RL-Kartierung;RL-Kartierung;154131;0
+Reduzieren von Nisthilfen;Reduzieren von Nisthilfen;154765;0
+Reduzierung der Grabentiefe;Reduzierung der Grabentiefe;15304;0
+Reduzierung des Nutzfischbesatzes;Reduzierung des Nutzfischbesatzes;154551;0
+Renaturierung des Wasserhaushaltes;Renaturierung des Wasserhaushaltes;15305;0
+Rettungsumsiedlung;Rettungsumsiedlung;154767;0
+Ringelung alter Bäume;Ringelung alter Bäume;154809;0
+Ringelung nicht lebensraumtypischer  Bäume (Gehö);Ringelung nicht lebensraumtypischer  Bäume (Gehö);23800;0
+Ringelung nicht lebensraumtypischer Bäume;Ringelung nicht lebensraumtypischer Bäume;15269;0
+Ringelung nicht lebensraumtypischer Bäume (Heide/TR);Ringelung nicht lebensraumtypischer Bäume (Heide/TR);23824;0
+Ringelung nicht lebensraumtypischer Bäume (Mo/Rö);Ringelung nicht lebensraumtypischer Bäume (Mo/Rö);23810;0
+Ringelung nicht lebensraumtypischer Bäume (Wald);Ringelung nicht lebensraumtypischer Bäume (Wald);167576;0
+Ringelung nicht lebensraumtypischer Bäume (um Be);Ringelung nicht lebensraumtypischer Bäume (um Be);23898;0
+Ringelung von Bäumen zur Totholz-Entwicklung;Ringelung von Bäumen zur Totholz-Entwicklung;154769;0
+Ringgraben anlegen;Ringgraben anlegen;154528;0
+Ringgraben anlegen (ErhoVer);Ringgraben anlegen (ErhoVer);23928;0
+Ringgraben anlegen (um Be);Ringgraben anlegen (um Be);167578;0
+Ruhezone einrichten;Ruhezone einrichten;15230;0
+Röhricht initial anpflanzen;Röhricht initial anpflanzen;154732;0
+Röhricht, Sumpf wiederherstellen, optimieren;Röhricht, Sumpf wiederherstellen, optimieren;15664;0
+Rückbau Holzlagerplatz;Rückbau Holzlagerplatz;16842;0
+Rückbau Holzlagerplatzes, Entfernung des gelagerten Holzes;Rückbau Holzlagerplatzes, Entfernung des gelagerten Holzes;154599;0
+Rückbau der Pirschwege;Rückbau der Pirschwege;154571;0
+Rückbau des Holzlagerplatzes und Entfernen des gelagerten Holzes;Rückbau Holzlagerplatzes, Entfernung des gelagerten Holzes;154599;0
+Rückbau des Sandfangs;Rückbau des Sandfangs;154622;0
+Rückbau einer Verfüllung;Rückbau einer Verfüllung;154504;0
+Rückbau o. Verlegung  v. KFZ- o. Wohnwagenabstellplätzen;Rückbau o. Verlegung  v. KFZ- o. Wohnwagenabstellplätzen;154496;0
+Rückbau v. Einrichtungen des Wasser-, Eis- und Luftsportes;Rückbau v. Einrichtungen des Wasser-, Eis- und Luftsportes;154536;0
+Rückbau von jagdlichen Einrichtungen (bauliche Anlagen);Rückbau von jagdlichen Einrichtungen (bauliche Anlagen);154562;0
+Rückbau- oder Verlegung von Kraftfahrzeug- oder Wohnwagenabstellplätzen;Rückbau o. Verlegung  v. KFZ- o. Wohnwagenabstellplätzen;154496;0
+Rückelinien markieren;Rückelinien markieren;15256;0
+Rückelinien markieren (Wald);Rückelinien markieren (Wald);167580;0
+Rückelinien markieren (um Be);Rückelinien markieren (um Be);23899;0
+Rückepferde einsetzen;Rückepferde einsetzen;7776;0
+Rückepferde einsetzen (Gehö);Rückepferde einsetzen (Gehö);23801;0
+Rückepferde einsetzen (Wald);Rückepferde einsetzen (Wald);167583;0
+Rückepferde einsetzen (um Be);Rückepferde einsetzen (um Be);23900;0
+Rückführung in alte Gewässerlinien;Rückführung in alte Gewässerlinien;15306;0
+Rückschnitt überalterter Gehölze;Rückschnitt überalterter Gehölze;154814;0
+Saum/Femelhieb;Saum/Femelhieb;154810;0
+Saumhieb;Saumhieb;154811;0
+Schadensbehebung, Allgemein;Schadensbehebung, Allgemein;154484;0
+Schadensbehebung, Fischerei;Schadensbehebung, Fischerei;154545;0
+Schadensbehebung, Forstwirtschaft;Schadensbehebung, Forstwirtschaft;154594;0
+Schadensbehebung, Jagd;Schadensbehebung, Jagd;154555;0
+Schadensbehebung, Landwirtschaft;Schadensbehebung, Landwirtschaft;154581;0
+Schadensbehebung, Sport;Schadensbehebung, Sport;154507;0
+Schadensbehebung, Wasserbau;Schadensbehebung, Wasserbau;154606;0
+Schaffung von Uferanrissen;Schaffung von Uferanrissen;154738;0
+Schilder aufstellen (Artens);Schilder aufstellen (Artens);23915;0
+Schilder aufstellen (ErhoVer);Schilder aufstellen (ErhoVer);23929;0
+Schilder aufstellen (um Be);Schilder aufstellen (um Be);15704;0
+Schilder aufstellen, Absperren (Lagern verhindern);Schilder aufstellen, Absperren (Lagern verhindern);154521;0
+Schilder aufstellen, Absperren (Wassersport unterbinden);Schilder aufstellen, Absperren (Wassersport unterbinden);154537;0
+Schilder aufstellen, Absperren (betreten unterbinden);Schilder aufstellen, Absperren (betreten unterbinden);154515;0
+Schilder aufstellen, Absperren (freilaufen v. Hunden verhindern);Schilder aufstellen, Absperren (freilaufen v. Hunden verhindern);154519;0
+Schilder aufstellen, Absperren (reiten verhindern);Schilder aufstellen, Absperren (reiten verhindern);154527;0
+Schilder aufstellen, Einzäunen (Eissport unterbinden);Schilder aufstellen, Einzäunen (Eissport unterbinden);154517;0
+Schilder aufstellen, Einzäunen (Feuer machen verhindern);Schilder aufstellen, Einzäunen (Feuer machen verhindern);154518;0
+Schilder aufstellen, Einzäunen (Motocrossfahren verhindern);Schilder aufstellen, Einzäunen (Motocrossfahren verhindern);154524;0
+Schilder aufstellen, Einzäunen (Mountainbiken verhindern);Schilder aufstellen, Einzäunen (Mountainbiken verhindern);154525;0
+Schilder aufstellen, Einzäunen (Pflanzenentnahme verhindern);Schilder aufstellen, Einzäunen (Pflanzenentnahme verhindern);154526;0
+Schilder aufstellen, Einzäunen (Zelten verhindern);Schilder aufstellen, Einzäunen (Zelten verhindern);154542;0
+Schilder aufstellen, Einzäunen (baden verhindern);Schilder aufstellen, Einzäunen (baden verhindern);154510;0
+Schilder aufstellen, Einzäunen (befahren verhindern);Schilder aufstellen, Einzäunen (befahren verhindern);154512;0
+Schilder aufstellen, Einzäunen (betreten verhindern);Schilder aufstellen, Einzäunen (betreten verhindern);154516;0
+Schilder aufstellen, Einzäunen (bootsfahren verhindern);Schilder aufstellen, Einzäunen (bootsfahren verhindern);154511;0
+Schilder aufstellen, Einzäunen (sammeln verhindern);Schilder aufstellen, Einzäunen (sammeln verhindern);154530;0
+Schilder aufstellen, Verbot freilaufenlassen von Hunden;Schilder aufstellen, Verbot freilaufenlassen von Hunden;154495;0
+Schilder entfernen;Schilder entfernen;154500;0
+Schirmhieb;Schirmhieb;154812;0
+Schlagreisig entfernen;Schlagreisig entfernen;154813;0
+Schliessen und Anstau von Entwässerungseinrichtungen;Schliessen und Anstau von Entwässerungseinrichtungen;154588;0
+Schneitelung von Kopfbäumen;Schneitelung von Kopfbäumen;154832;0
+Schnittgut entfernen;Schnittgut entfernen;154604;0
+Schonzeit einrichten;Schonzeit einrichten;15231;0
+Schonzeit einrichten (Artens);Schonzeit einrichten (Artens);167587;0
+Schonzeit einrichten (Jagd);Schonzeit einrichten (Jagd);23950;0
+Schutzwall anlegen (ErhoVer);Schutzwall anlegen (ErhoVer);23930;0
+Schutzwall anlegen (um Be);Schutzwall anlegen (um Be);154533;0
+Sediment entnehmen;Sediment entnehmen;154717;0
+Seilzug einsetzen (Gehö);Seilzug einsetzen (Gehö);23802;0
+Seilzug einsetzen (Wald);Seilzug einsetzen (Wald);7777;0
+Sekundäraue anlegen (Gewäs);Sekundäraue anlegen (Gewäs);8046;0
+Sicherung der Ufer durch Bepflanzung;Sicherung der Ufer durch Bepflanzung;154739;0
+Sohlabsturz, Sohlschwelle entfernen;Sohlabsturz, Sohlschwelle entfernen;154694;0
+Sohlenbefestigung entfernen;Sohlenbefestigung entfernen;154712;0
+Sohlgleite einbauen;Sohlgleite einbauen;154700;0
+Sohlgleite erneuern, verlegen;Sohlgleite erneuern, verlegen;154725;0
+Solitär/Hutebaum pflanzen (Gehö);Solitär/Hutebaum pflanzen (Gehö);167661;0
+Solitärbäume erhalten (Gehö);Solitärbäume erhalten (Gehö);191565;0
+Sonst. Massn. z. Sanierung v. Schäden d. Angelsport, Fischerei;Sonst. Massn. z. Sanierung v. Schäden d. Angelsport, Fischerei;154554;0
+Sonst. Massn. z. Sanierung v. Schäden d. Sport-, Erh.-nutzung;Sonst. Massn. z. Sanierung v. Schäden d. Sport-, Erh.-nutzung;154544;0
+Sonst. Massn. z. Sanierung v. Schäden durch die Forstwirtschaft;Sonst. Massn. z. Sanierung v. Schäden durch die Forstwirtschaft;154605;0
+Sonst. Massn. z. Sanierung v. Schäden durch die Jagd entstanden;Sonst. Massn. z. Sanierung v. Schäden durch die Jagd entstanden;154580;0
+Sonst. Massn. z. Sanierung v. Schäden durch die Landwirtschaft;Sonst. Massn. z. Sanierung v. Schäden durch die Landwirtschaft;154593;0
+Sonst. Massnahmen zur Sanierung v. Schäden, Beeinträchtigungen;Sonst. Massnahmen zur Sanierung v. Schäden, Beeinträchtigungen;154502;0
+Sonst. ext. Bewirtschaftungs, Pflegemassnahmen f. Kleingehölze;Sonst. ext. Bewirtschaftungs, Pflegemassnahmen f. Kleingehölze;154839;0
+Sonstige Artenschutzmassnahmen;Sonstige Artenschutzmassnahmen;154772;0
+Sonstige Massnahmen an Gewässern bzw. Verlandungsbiotopen;Sonstige Massnahmen an Gewässern bzw. Verlandungsbiotopen;154740;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen;Sonst. Massnahmen zur Sanierung v. Schäden, Beeinträchtigungen;154502;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen, die durch Angelsport und Fischerei enstanden sind;Sonst. Massn. z. Sanierung v. Schäden d. Angelsport, Fischerei;154554;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen, die durch Sport- oder Erholungsnutzung enstanden sind;Sonst. Massn. z. Sanierung v. Schäden d. Sport-, Erh.-nutzung;154544;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen, die durch die Forstwirtschaft enstanden sind;Sonst. Massn. z. Sanierung v. Schäden durch die Forstwirtschaft;154605;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen, die durch die Jagd enstanden sind;Sonst. Massn. z. Sanierung v. Schäden durch die Jagd entstanden;154580;0
+Sonstige Massnahmen zur Sanierung von Schäden und Beeinträchtigungen, die durch die Landwirtschaft enstanden sind;Sonst. Massn. z. Sanierung v. Schäden durch die Landwirtschaft;154593;0
+Sonstige Verbote im Bereich Angelsport und Fischerei;Sonstige Verbote im Bereich Angelsport und Fischerei;154370;0
+Sonstige Verbote im Bereich der Forstwirtschaft;Sonstige Verbote im Bereich der Forstwirtschaft;154464;0
+Sonstige Verbote im Bereich der Jagd;Sonstige Verbote im Bereich der Jagd;154399;0
+Sonstige Verbote im Bereich der Landwirtschaft;Sonstige Verbote im Bereich der Landwirtschaft;154434;0
+Sonstige Verbote im Bereich des Wasserbaus;Sonstige Verbote im Bereich des Wasserbaus;154483;0
+Sonstige Verbote im Sport- und Erholungsbereich;Sonstige Verbote im Sport- und Erholungsbereich;154348;0
+Sonstige allgemeine Verbote;Sonstige allgemeine Verbote;154318;0
+Sonstige extensive Bewirtschaftungs- bzw. Pflegemassnahmen;Sonstige extensive Bewirtschaftungs- bzw. Pflegemassnahmen;154828;0
+Sonstige extensive Bewirtschaftungs- bzw. Pflegemassnahmen für Hecken, Kopfbäume und Gehölze;Sonst. ext. Bewirtschaftungs, Pflegemassnahmen f. Kleingehölze;154839;0
+Sperrung Wegen u. Flächen, Verhinderung KFZ-Verkehr;Sperrung Wegen u. Flächen, Verhinderung KFZ-Verkehr;154514;0
+Sperrung von Wegen und Flächen, um das Befahren mit KFZ zu verhindern;Sperrung Wegen u. Flächen, Verhinderung KFZ-Verkehr;154514;0
+Sperrung von Zugängen oder Brücken;Sperrung von Zugängen oder Brücken;154543;0
+Staudenfluren, Brachen, Ruderalbiotope;Staudenfluren, Brachen, Ruderalbiotope;15711;0
+Steckholzpflanzung von Kopfweiden;Steckholzpflanzung von Kopfweiden;154664;0
+Steilufer anlegen, optimieren;Steilufer anlegen, optimieren;154741;0
+Steinriegel freistellen;Steinriegel freistellen;15222;0
+Steinriegel, Lesesteinhaufen anlegen (Artens);Steinriegel, Lesesteinhaufen anlegen (Artens);23916;0
+Steinriegel, Lesesteinhaufen anlegen (Pion,Fels);Steinriegel, Lesesteinhaufen anlegen (Pion,Fels);154768;0
+Steuerung Jagdliche Nutzung;Steuerung Jagdliche Nutzung;15716;0
+Steuerung Wasserhaushalt;Steuerung Wasserhaushalt;15715;0
+Stockausschlag entfernen;Stockausschlag entfernen;154710;0
+Stollen absperren;Stollen absperren;15224;0
+Strasse verlegen, sperren;Strasse verlegen, sperren;15279;0
+Störelemente einbringen;Störelemente einbringen;154701;0
+Störende Einrichtungen, Elemente entfernen;Störende Einrichtungen, Elemente entfernen;15223;0
+Teilentschlammung;Teilentschlammung;153932;0
+Totholz einbringen;Totholz einbringen;15686;0
+Totholz entwickeln (Wald);Totholz entwickeln (Wald);167637;0
+Totholz erhalten;Totholz erhalten;16827;0
+Totholz erhalten (Artens);Totholz erhalten (Artens);23917;0
+Totholz erhalten (Gehö);Totholz erhalten (Gehö);23803;0
+Totholz erhalten (Heide/TR);Totholz erhalten (Heide/TR);23825;0
+Totholz erhalten (Mo/Rö);Totholz erhalten (Mo/Rö);23811;0
+Totholz erhalten (Wald);Totholz erhalten (Wald);167589;0
+Totholz erhalten (landw Fl);Totholz erhalten (landw Fl);23875;0
+Totholzhaufen anlegen;Totholzhaufen anlegen;15212;0
+Trockenmauer anlegen;Trockenmauer anlegen;15246;0
+Trockenmauer anlegen (Artens);Trockenmauer anlegen (Artens);23918;0
+Trockenmauer anlegen (Pion,Fels);Trockenmauer anlegen (Pion,Fels);167591;0
+Trockenmauer freistellen;Trockenmauer freistellen;15225;0
+Trockenmauer wiederherstellen, optimieren (Artens);Trockenmauer wiederherstellen, optimieren (Artens);23919;0
+Trockenmauer wiederherstellen, optimieren (Pion,Fels);Trockenmauer wiederherstellen, optimieren (Pion,Fels);15666;0
+Trockenrasen anlegen, wiederherstellen;Trockenrasen anlegen, wiederherstellen;15226;0
+Trockenrasen optimieren;Trockenrasen optimieren;15264;0
+Ufer abflachen;Ufer abflachen;154676;0
+Ufer beweiden (Gewäs);Ufer beweiden (Gewäs);8048;0
+Uferbefestigung entnehmen;Uferbefestigung entnehmen;154718;0
+Uferbereiche absperren;Uferbereiche absperren;154535;0
+Uferlinie verlängern, optimieren;Uferlinie verlängern, optimieren;15236;0
+Uferrandstreifen anlegen;Uferrandstreifen anlegen;154646;0
+Uferzone mit Gehölzen bepflanzen;Uferzone mit Gehölzen bepflanzen;15667;0
+Umbauen von Nisthilfen;Umbauen von Nisthilfen;154762;0
+Umgestaltung;Umgestaltung;154743;0
+Umsiedlung im Rahmen von Amphibienschutzmassnahmen an Strassen;Umsiedlung im Rahmen von Amphibienschutzmassnahmen an Strassen;154754;0
+Umsiedlungsmassnahmen im Rahmen von Amphibienschutzmassnahmen an Strassen;Umsiedlung im Rahmen von Amphibienschutzmassnahmen an Strassen;154754;0
+Umwandeln eines Wildackers in Grünland;Umwandeln eines Wildackers in Grünland;154576;0
+Umwandlung in Acker;Umwandlung in Acker;160880;0
+Umwandlung in heimisch bodenständigen Gehölzbestand;Umwandlung in heimisch bodenständigen Gehölzbestand;16844;0
+Umwandlung von Acker;Umwandlung von Acker;154582;0
+Umwandlung von Acker in der Aue;Umwandlung von Acker in der Aue;154584;0
+Umwandlung von Nadelwald in bodenständigen Wald;Umwandlung von Nadelwald in bodenständigen Wald;154665;0
+Umwandlung von Nadelwald in ein Offenlandbiotop;Umwandlung von Nadelwald in ein Offenlandbiotop;154666;0
+Umwandlung von nicht bodenständigem Wald in bodenständigen Wald;Waldumwandlung nicht bodenständigen in bodenständigen Wald;154667;0
+Unterbau mit Buche;Unterbau mit Buche;154816;0
+Unterbau mit Eiche;Unterbau mit Eiche;154817;0
+Unterhaltung von Fliessgewässer optimieren (Gewäs);Unterhaltung von Fliessgewässer optimieren (Gewäs);15275;0
+Unterhaltung von Fliessgewässer optimieren (Wasserh);Unterhaltung von Fliessgewässer optimieren (Wasserh);23945;0
+Unterhaltung von Gewässern unterlassen (Gewäs);Unterhaltung von Gewässern unterlassen (Gewäs);15668;0
+Unterhaltung von Gewässern unterlassen (Wasserh);Unterhaltung von Gewässern unterlassen (Wasserh);23946;0
+Vegetationskontrolle;Vegetationskontrolle;16845;0
+Verbesserung der Wasserqualität;Verbesserung der Wasserqualität;16846;0
+Verbot Anlage v. Netzen und Überspannungen gegen Vogelfrass;Verbot Anlage v. Netzen und Überspannungen gegen Vogelfrass;154366;0
+Verbot Aufforstung m. nicht bodenst.-standortgerechten Gehölzen;Verbot Aufforstung m. nicht bodenst.-standortgerechten Gehölzen;154439;0
+Verbot Betrieb o. Veränderung einer wasserbaulichen Anlage;Verbot Betrieb o. Veränderung einer wasserbaulichen Anlage;154478;0
+Verbot Betrieb v. Netzen und Überspannungen gegen Vogelfrass;Verbot Betrieb v. Netzen und Überspannungen gegen Vogelfrass;154367;0
+Verbot Feuer zu machen;Verbot Feuer zu machen;154335;0
+Verbot Veränderung jagdlicher Einrichtungen (baul. Anlagen);Verbot Veränderung jagdlicher Einrichtungen (baul. Anlagen);154380;0
+Verbot der Ablagerung von Müll;Verbot der Ablagerung von Müll;154312;0
+Verbot der Abtorfung;Verbot der Abtorfung;16847;0
+Verbot der Ackernutzung;Verbot der Ackernutzung;154401;0
+Verbot der Ackernutzung auf hängigem Gelände;Verbot der Ackernutzung auf hängigem Gelände;154402;0
+Verbot der Ackernutzung in der Aue;Verbot der Ackernutzung in der Aue;154403;0
+Verbot der Anbringung und Aufstellung von Nisthilfen;Verbot der Anbringung und Aufstellung von Nisthilfen;154385;0
+Verbot der Anbringung von Schildern oder Beschriftungen;Verbot der Anbringung von Schildern oder Beschriftungen;154317;0
+Verbot der Anlage eines Holzlagerplatzes;Verbot der Anlage eines Holzlagerplatzes;154447;0
+Verbot der Anlage eines Sandfangs;Verbot der Anlage eines Sandfangs;154476;0
+Verbot der Anlage eines Wildackers;Verbot der Anlage eines Wildackers;154393;0
+Verbot der Anlage und des Betriebes von Weihnachtsbaumkulturen;Verbot der Anlage und des Betriebes von Weihnachtsbaumkulturen;154463;0
+Verbot der Anlage v. Einrichtungen f. Wasser-, Eis- u. Luftsport;Verbot der Anlage v. Einrichtungen f. Wasser-, Eis- u. Luftsport;154345;0
+Verbot der Anlage v. KFZ- o. Wohnwagenabstellplätzen;Verbot der Anlage v. KFZ- o. Wohnwagenabstellplätzen;154307;0
+Verbot der Anlage von Einrichtungen für den Angelsport;Verbot der Anlage von Einrichtungen für den Angelsport;154358;0
+Verbot der Anlage von Einrichtungen für den Wasser-, Eis- und Luftsport;Verbot der Anlage v. Einrichtungen f. Wasser-, Eis- u. Luftsport;154345;0
+Verbot der Anlage von Futtermieten;Verbot der Anlage von Futtermieten;154422;0
+Verbot der Anlage von Gewässern;Verbot der Anlage von Gewässern;154470;0
+Verbot der Anlage von Kraftfahrzeug- oder Wohnwagenabstellplätzen;Verbot der Anlage v. KFZ- o. Wohnwagenabstellplätzen;154307;0
+Verbot der Anlage von Netzen und Überspannungen gegen Vogelfrass;Verbot Anlage v. Netzen und Überspannungen gegen Vogelfrass;154366;0
+Verbot der Anlage von Pirschwegen;Verbot der Anlage von Pirschwegen;154388;0
+Verbot der Anlage von Wegen, Strassen oder Plätzen;Verbot der Anlage von Wegen, Strassen oder Plätzen;154325;0
+Verbot der Anpflanzung nicht autochthoner Gehölze;Verbot der Anpflanzung nicht autochthoner Gehölze;15307;0
+Verbot der Anwendung von Bioziden;Verbot der Anwendung von Bioziden;154416;0
+Verbot der Anwendung von Desinfektionsmitteln in Gewässern;Verbot der Anwendung von Desinfektionsmitteln in Gewässern;154356;0
+Verbot der Anwendung von Düngemitteln;Verbot der Anwendung von Düngemitteln;154417;0
+Verbot der Anwendung von Kalk;Verbot der Anwendung von Kalk;154423;0
+Verbot der Anwendung von Klärschlamm;Verbot der Anwendung von Klärschlamm;154424;0
+Verbot der Anwendung von Medikamenten in Gewässern;Verbot der Anwendung von Medikamenten in Gewässern;154365;0
+Verbot der Anwendung von Pflanzenschutzmitteln;Verbot der Anwendung von Pflanzenschutzmitteln;154429;0
+Verbot der Aufforstung;Verbot der Aufforstung;154437;0
+Verbot der Aufforstung mit festgesetzten Baumarten;Verbot der Aufforstung mit festgesetzten Baumarten;154438;0
+Verbot der Aufforstung mit nicht bodenständig-standortgerecheten Gehölzen;Verbot Aufforstung m. nicht bodenst.-standortgerechten Gehölzen;154439;0
+Verbot der Aufstellung von Buden, Verkaufsständen usw.;Verbot der Aufstellung von Buden, Verkaufsständen usw.;154303;0
+Verbot der Aufstellung von Buden, Verkaufsständen, Zelte oder Automaten;Verbot der Aufstellung von Buden, Verkaufsständen usw.;154303;0
+Verbot der Ausbildung von Jagdhunden;Verbot der Ausbildung von Jagdhunden;154378;0
+Verbot der Befahrung der Flächen;Verbot der Befahrung der Flächen;154329;0
+Verbot der Befahrung des Waldbodens;Verbot der Befahrung des Waldbodens;154440;0
+Verbot der Befahrung von Gewässern;Verbot der Befahrung von Gewässern;154331;0
+Verbot der Befahrung von Wegen und Flächen mit KFZ;Verbot der Befahrung von Wegen und Flächen mit KFZ;154330;0
+Verbot der Belüftung von Gewässern;Verbot der Belüftung von Gewässern;154354;0
+Verbot der Beschädigung von Pflanzen;Verbot der Beschädigung von Pflanzen;154315;0
+Verbot der Beweidung des Grünlandes;Verbot der Beweidung des Grünlandes;154412;0
+Verbot der Beweidung empfindlicher Standorte;Verbot der Beweidung empfindlicher Standorte;154406;0
+Verbot der Beweidung im Wald;Verbot der Beweidung im Wald;154405;0
+Verbot der Beweidung mit bestimmte Tierarten;Verbot der Beweidung mit bestimmte Tierarten;154407;0
+Verbot der Beweidung mit mehr als 2 GVE pro ha;Verbot der Beweidung mit mehr als 2 GVE pro ha;154408;0
+Verbot der Beweidung vor festgelegtes Datum;Verbot der Beweidung vor festgelegtes Datum;154409;0
+Verbot der Beweidung vor festgelegtes Datum auf Mähweiden;Verbot der Beweidung vor festgelegtes Datum auf Mähweiden;154425;0
+Verbot der Bewirschaftung nach festgelegtes Datum;Verbot der Bewirschaftung nach festgelegtes Datum;154410;0
+Verbot der Bewirtschaftung als Wildacker;Verbot der Bewirtschaftung als Wildacker;154394;0
+Verbot der Bewirtschaftung der Raine;Verbot der Bewirtschaftung der Raine;154414;0
+Verbot der Bewirtschaftung der Uferstreifen;Verbot der Bewirtschaftung der Uferstreifen;154415;0
+Verbot der Bewirtschaftung vor festgelegtes Datum;Verbot der Bewirtschaftung vor festgelegtes Datum;154411;0
+Verbot der Biozid-Anwendung in Gewässern;Verbot der Biozid-Anwendung in Gewässern;154355;0
+Verbot der Bodenbearbeitung;Verbot der Bodenbearbeitung;154442;0
+Verbot der Durchführung von Abgrabungen;Verbot der Durchführung von Abgrabungen;154295;0
+Verbot der Durchführung von Aufschüttungen;Verbot der Durchführung von Aufschüttungen;154297;0
+Verbot der Durchführung von Verfüllungen;Verbot der Durchführung von Verfüllungen;154322;0
+Verbot der Düngung auf empfindlichen Standorten;Verbot der Düngung auf empfindlichen Standorten;154418;0
+Verbot der Düngung in Gewässern;Verbot der Düngung in Gewässern;154357;0
+Verbot der Düngung mit Gülle;Verbot der Düngung mit Gülle;154419;0
+Verbot der Düngung mit stickstoffhaltigen Düngemitteln;Verbot der Düngung mit stickstoffhaltigen Düngemitteln;154420;0
+Verbot der Einbringung und Betreibung von Entenkojen;Verbot der Einbringung und Betreibung von Entenkojen;154374;0
+Verbot der Einbringung und Betreibung von Fallen;Verbot der Einbringung und Betreibung von Fallen;154375;0
+Verbot der Einbringung von Lecksteinen;Verbot der Einbringung von Lecksteinen;154383;0
+Verbot der Einbringung von Pflanzen;Verbot der Einbringung von Pflanzen;154386;0
+Verbot der Einleitung von Abwasser;Verbot der Einleitung von Abwasser;154296;0
+Verbot der Einleitung von Kühlwasser;Verbot der Einleitung von Kühlwasser;154309;0
+Verbot der Einrichtung einer wasserbaulichen Anlage;Verbot der Einrichtung einer wasserbaulichen Anlage;154479;0
+Verbot der Entkrautung;Verbot der Entkrautung;154467;0
+Verbot der Entnahme und Beschädigung von Pflanzen;Verbot der Entnahme und Beschädigung von Pflanzen;154341;0
+Verbot der Entnahme von Boden;Verbot der Entnahme von Boden;154301;0
+Verbot der Entnahme von Gesteinen;Verbot der Entnahme von Gesteinen;154300;0
+Verbot der Entnahme von Horst- und Höhlenbäumen;Verbot der Entnahme von Horst- und Höhlenbäumen;154450;0
+Verbot der Entnahme von Pflanzen;Verbot der Entnahme von Pflanzen;154316;0
+Verbot der Entnahme von Tieren;Verbot der Entnahme von Tieren;154321;0
+Verbot der Entnahme von Totholz;Verbot der Entnahme von Totholz;154461;0
+Verbot der Entschlammung;Verbot der Entschlammung;154468;0
+Verbot der Entwässerung;Verbot der Entwässerung;154421;0
+Verbot der Errichtung baulicher Anlagen;Verbot der Errichtung baulicher Anlagen;154299;0
+Verbot der Errichtung jagdlicher Einrichtungen (baul. Anlagen);Verbot der Errichtung jagdlicher Einrichtungen (baul. Anlagen);154379;0
+Verbot der Errichtung jagdlicher Einrichtungen (bauliche Anlagen);Verbot der Errichtung jagdlicher Einrichtungen (baul. Anlagen);154379;0
+Verbot der Errichtung von Werbeanlagen;Verbot der Errichtung von Werbeanlagen;154326;0
+Verbot der Erstaufforstung;Verbot der Erstaufforstung;154445;0
+Verbot der Fütterung von Fischen;Verbot der Fütterung von Fischen;154363;0
+Verbot der Jagd auf festgelegte Tierarten;Verbot der Jagd auf festgelegte Tierarten;154376;0
+Verbot der Jagd in festgelegten Zonen;Verbot der Jagd in festgelegten Zonen;154377;0
+Verbot der Kalkung von Gewässern;Verbot der Kalkung von Gewässern;154364;0
+Verbot der Kompensationskalkung;Verbot der Kompensationskalkung;154454;0
+Verbot der Kompensationskalkung auf geschützten Flächen;Verbot der Kompensationskalkung auf geschützten Flächen;154455;0
+Verbot der Kronenholzablagerung;Verbot der Kronenholzablagerung;154456;0
+Verbot der Lagerung von Stoffen und Gegenständen;Verbot der Lagerung von Stoffen und Gegenständen;154319;0
+Verbot der Neuanlage von Wildfütterungen;Verbot der Neuanlage von Wildfütterungen;154398;0
+Verbot der Nutzung als Portionsweide;Verbot der Nutzung als Portionsweide;154413;0
+Verbot der Nutzung der Altholzbestände;Verbot der Nutzung der Altholzbestände;154436;0
+Verbot der Nutzung nicht genutzter Flächen;Verbot der Nutzung nicht genutzter Flächen;154313;0
+Verbot der Pirschjagd;Verbot der Pirschjagd;154387;0
+Verbot der Treibjagd;Verbot der Treibjagd;154391;0
+Verbot der Unterhaltung von Gewässern;Verbot der Unterhaltung von Gewässern;154472;0
+Verbot der Unterhaltung von Pirschwegen;Verbot der Unterhaltung von Pirschwegen;154389;0
+Verbot der Verabreichung von Medikamenten an das Wild;Verbot der Verabreichung von Medikamenten an das Wild;154384;0
+Verbot der Versiegelung von Wirtschaftswegen;Verbot der Versiegelung von Wirtschaftswegen;15271;0
+Verbot der Veränderung des Bodenreliefs;Verbot der Veränderung des Bodenreliefs;154302;0
+Verbot der Veränderung des Wasserchemismus;Verbot der Veränderung des Wasserchemismus;154323;0
+Verbot der Veränderung jagdlicher Einrichtungen (bauliche Anlagen);Verbot Veränderung jagdlicher Einrichtungen (baul. Anlagen);154380;0
+Verbot der Veränderung v. KFZ- o. Wohnwagenabstellplätzen;Verbot der Veränderung v. KFZ- o. Wohnwagenabstellplätzen;154308;0
+Verbot der Veränderung von Einrichtungen für den Angelsport;Verbot der Veränderung von Einrichtungen für den Angelsport;154359;0
+Verbot der Veränderung von Gewässern;Verbot der Veränderung von Gewässern;154471;0
+Verbot der Veränderung von Kraftfahrzeug- oder Wohnwagenabstellplätzen;Verbot der Veränderung v. KFZ- o. Wohnwagenabstellplätzen;154308;0
+Verbot der Veränderung von Wegen, Strassen oder Plätzen;Verbot der Veränderung von Wegen, Strassen oder Plätzen;154324;0
+Verbot der Veränderungen des Wasserstandes;Verbot der Veränderungen des Wasserstandes;154480;0
+Verbot der Wasserentnahme aus Fliessgewässern;Verbot der Wasserentnahme aus Fliessgewässern;154369;0
+Verbot der Zufütterung;Verbot der Zufütterung;154433;0
+Verbot der chem., mech. u. biol. Behandlung von Gewässern;Verbot der chem., mech. u. biol. Behandlung von Gewässern;154353;0
+Verbot der chemischen, mechanischen und biologischen Behandlung von Gewässern;Verbot der chem., mech. u. biol. Behandlung von Gewässern;154353;0
+Verbot der fischereiwirtschaftlichen Nutzung von Gewässern;Verbot der fischereiwirtschaftlichen Nutzung von Gewässern;154362;0
+Verbot der forstwirtschaftlichen Nutzung ausser der einzelstammweisen Entnahme;Verbot forstwirtschaftl. Nutzung ausser Einzelstammentnahme;154458;0
+Verbot der forstwirtschaftlichen Nutzung ausser der femelartigen Entnahme;Verbot forstwirtschaftl. Nutzung ausser femelartiger Entnahme;154459;0
+Verbot der forstwirtschaftlichen Nutzung ausser der saumartigen Entnahme;Verbot forstwirtschaftl. Nutzung ausser saumartiger Entnahme;154457;0
+Verbot der jagdlichen Nutzung in festgelegte Zeiträume;Verbot der jagdlichen Nutzung in festgelegte Zeiträume;154381;0
+Verbot der naturfernen Unterhaltung von Gewässern;Verbot der naturfernen Unterhaltung von Gewässern;154473;0
+Verbot der Änderung baulicher Anlagen;Verbot der Änderung baulicher Anlagen;154298;0
+Verbot der Änderung der Art oder der Intensität der Nutzung eines Wildackers;Verbot Änderung Art o. Intensität der Nutzung eines Wildackers;154392;0
+Verbot der Änderung von Leitungen, Zäunen und Einfriedungen;Verbot der Änderung von Leitungen, Zäunen und Einfriedungen;154310;0
+Verbot des Angelns;Verbot des Angelns;154350;0
+Verbot des Angelns in festgelegte Zeiträume;Verbot des Angelns in festgelegte Zeiträume;154351;0
+Verbot des Angelns vom Boot aus;Verbot des Angelns vom Boot aus;154352;0
+Verbot des Anzündens von Feuer;Verbot des Anzündens von Feuer;154305;0
+Verbot des Anzündens von Feür;Verbot des Anzündens von Feuer;154305;0
+Verbot des Aufstellens von Ansitzleitern;Verbot des Aufstellens von Ansitzleitern;154372;0
+Verbot des Ausbaus von Gewässern;Verbot des Ausbaus von Gewässern;154474;0
+Verbot des Aussetzens von Satzfischen;Verbot des Aussetzens von Satzfischen;154368;0
+Verbot des Aussetzens von Tieren;Verbot des Aussetzens von Tieren;154390;0
+Verbot des Badens;Verbot des Badens;154328;0
+Verbot des Baus von Leitungen, Zäunen und Einfriedungen;Verbot des Baus von Leitungen, Zäunen und Einfriedungen;154311;0
+Verbot des Befahrens empfindlicher Standorte;Verbot des Befahrens empfindlicher Standorte;154404;0
+Verbot des Betretens besonders gekennzeichneter Wege;Verbot des Betretens besonders gekennzeichneter Wege;154332;0
+Verbot des Betretens von Flächen;Verbot des Betretens von Flächen;154333;0
+Verbot des Betriebes oder der Veränderung einer wasserbaulichen Anlage;Verbot Betrieb o. Veränderung einer wasserbaulichen Anlage;154478;0
+Verbot des Betriebes oder der Veränderung eines Sandfangs;Verbot des Betriebes oder der Veränderung eines Sandfangs;154477;0
+Verbot des Betriebes und der Veränderung eines Holzlagerplatzes;Verbot des Betriebes und der Veränderung eines Holzlagerplatzes;154448;0
+Verbot des Betriebes von Netzen und Überspannungen gegen Vogelfrass;Verbot Betrieb v. Netzen und Überspannungen gegen Vogelfrass;154367;0
+Verbot des Betriebes von Wildfütterungen;Verbot des Betriebes von Wildfütterungen;154397;0
+Verbot des Einbringens von Pflanzen und Tieren;Verbot des Einbringens von Pflanzen und Tieren;154314;0
+Verbot des Einbringens von Stoffen und Gegenständen;Verbot des Einbringens von Stoffen und Gegenständen;154320;0
+Verbot des Eissportes;Verbot des Eissportes;154334;0
+Verbot des Holzrückens mit Fahrzeugen ausserhalb von Wegen;Verbot des Holzrückens mit Fahrzeugen ausserhalb von Wegen;154449;0
+Verbot des Lagerns;Verbot des Lagerns;154337;0
+Verbot des Modellflugsports;Verbot des Modellflugsports;154338;0
+Verbot des Motocross-Fahrens;Verbot des Motocross-Fahrens;154339;0
+Verbot des Mountainbike-Fahrens;Verbot des Mountainbike-Fahrens;154340;0
+Verbot des Mulchens;Verbot des Mulchens;154426;0
+Verbot des Pflegeumbruchs;Verbot des Pflegeumbruchs;154430;0
+Verbot des Reitens;Verbot des Reitens;154342;0
+Verbot des Sammelns von Pflanzen;Verbot des Sammelns von Pflanzen;154343;0
+Verbot des Sammelns von Tiere;Verbot des Sammelns von Tiere;154344;0
+Verbot des Umbruchs;Verbot des Umbruchs;154431;0
+Verbot des Unterschreitens der Mindestanstauhöhe;Verbot des Unterschreitens der Mindestanstauhöhe;154482;0
+Verbot des Veränderns und Umsetzens von Ansitzleitern;Verbot des Veränderns und Umsetzens von Ansitzleitern;154373;0
+Verbot des Walzens und Schleppens nach dem 15.3;Verbot des Walzens und Schleppens nach dem 15.3;154432;0
+Verbot des Wassersportes;Verbot des Wassersportes;154346;0
+Verbot des Wegeneu- und ausbaus;Verbot des Wegeneu- und ausbaus;154462;0
+Verbot des Zeltens;Verbot des Zeltens;154347;0
+Verbot des freilaufenlassens von Hunden;Verbot des freilaufenlassens von Hunden;154306;0
+Verbot des naturfernen Ausbaus von Gewässern;Verbot des naturfernen Ausbaus von Gewässern;154475;0
+Verbot eine Fischbrut auszusetzen;Verbot eine Fischbrut auszusetzen;154361;0
+Verbot eines höheren Anstaus;Verbot eines höheren Anstaus;154481;0
+Verbot forstwirtschaftl. Nutzung ausser Einzelstammentnahme;Verbot forstwirtschaftl. Nutzung ausser Einzelstammentnahme;154458;0
+Verbot forstwirtschaftl. Nutzung ausser femelartiger Entnahme;Verbot forstwirtschaftl. Nutzung ausser femelartiger Entnahme;154459;0
+Verbot forstwirtschaftl. Nutzung ausser saumartiger Entnahme;Verbot forstwirtschaftl. Nutzung ausser saumartiger Entnahme;154457;0
+Verbot jeglicher forstwirschaftlicher Nutzung;Verbot jeglicher forstwirschaftlicher Nutzung;154460;0
+Verbot von Entkrautungen;Verbot von Entkrautungen;154360;0
+Verbot von Kahlhieben grösser 0,3 ha;Verbot von Kahlhieben grösser 0,3 ha;154451;0
+Verbot von Kahlhieben grösser 1 ha;Verbot von Kahlhieben grösser 1 ha;154452;0
+Verbot von Kirrungen;Verbot von Kirrungen;154382;0
+Verbot von Nachsaaten;Verbot von Nachsaaten;154427;0
+Verbot von Nutzungsänderungen von Flächen;Verbot von Nutzungsänderungen von Flächen;154428;0
+Verbot von Wildfütterungen;Verbot von Wildfütterungen;154395;0
+Verbot von Wildfütterungen ausserhalb der Notzeiten;Verbot von Wildfütterungen ausserhalb der Notzeiten;154396;0
+Verbot von forstlichen Massnahmen zw. 15.3. und 15.8.;Verbot von forstlichen Massnahmen zw. 15.3. und 15.8.;154446;0
+Verbot von forstlichen Massnahmen zwischen dem 15.3. und dem 15.8.;Verbot von forstlichen Massnahmen zw. 15.3. und 15.8.;154446;0
+Verbot Änderung Art o. Intensität der Nutzung eines Wildackers;Verbot Änderung Art o. Intensität der Nutzung eines Wildackers;154392;0
+Verbote, Angelsport-Fischerei;Verbote, Angelsport-Fischerei;154349;0
+Verbote, Forstwirtschaft;Verbote, Forstwirtschaft;154435;0
+Verbote, Jagd;Verbote, Jagd;154371;0
+Verbote, Landwirtschaft;Verbote, Landwirtschaft;154400;0
+Verbote, Sport-Erholung;Verbote, Sport-Erholung;154327;0
+Verbote, Wasserbau;Verbote, Wasserbau;154465;0
+Verjüngung über lange Zeiträume;Verjüngung über lange Zeiträume;15297;0
+Verkehr beruhigen (ErhoVer);Verkehr beruhigen (ErhoVer);23931;0
+Verkehr beruhigen (um Be);Verkehr beruhigen (um Be);15693;0
+Verlegung des Gewässerlaufes in ein neues Bett;Verlegung des Gewässerlaufes in ein neues Bett;154744;0
+Verlegung des Gewässerlaufes in sein ehemaliges Bett;Verlegung des Gewässerlaufes in sein ehemaliges Bett;154745;0
+Verlängerung der Umtriebszeiten (Wald);Verlängerung der Umtriebszeiten (Wald);167642;0
+Vermeidung Bodenverdichtung;Vermeidung Bodenverdichtung;16848;0
+Vermeidung Eutrophierung;Vermeidung Eutrophierung;16849;0
+Vernetzung herstellen;Vernetzung herstellen;16850;0
+Verrieselung des Abwassers;Verrieselung des Abwassers;154609;0
+Verrohrungen entfernen;Verrohrungen entfernen;154706;0
+Verstopfen einer Dränage;Verstopfen einer Dränage;154746;0
+Vertragliche Regelungen für Ausgleichsleistungen;Vertragliche Regelungen für Ausgleichsleistungen;154290;0
+Vertragliche Regelungen für Entschädigungen;Vertragliche Regelungen für Entschädigungen;154291;0
+Verzicht auf Anlage von Gewässern;Verzicht auf Anlage von Gewässern;16851;0
+Veränderung Verbot Aufstellung von Buden, Zelte usw;Veränderung Verbot Aufstellung von Buden, Zelte usw;154304;0
+Veränderung Verbot der Aufstellung von Buden, Verkaufsständen, Zelte oder Automaten;Veränderung Verbot Aufstellung von Buden, Zelte usw;154304;0
+Veränderung des Wegenetzes;Veränderung des Wegenetzes;15298;0
+Viehtränke beseitigen, verlegen;Viehtränke beseitigen, verlegen;154693;0
+Viehtränke einrichten;Viehtränke einrichten;15237;0
+Viehtränke einrichten (Grünl);Viehtränke einrichten (Grünl);167599;0
+Viehtränke einrichten (um Be);Viehtränke einrichten (um Be);23902;0
+Viehunterstand  beseitigen,  verlegen (um Be);Viehunterstand  beseitigen,  verlegen (um Be);23903;0
+Viehunterstand  beseitigen, verlegen;Viehunterstand  beseitigen, verlegen;15227;0
+Viehunterstand  beseitigen, verlegen (Grünl);Viehunterstand  beseitigen, verlegen (Grünl);167601;0
+Viehunterstand einrichten;Viehunterstand einrichten;15238;0
+Viehunterstand einrichten (Grünl);Viehunterstand einrichten (Grünl);167602;0
+Viehunterstand einrichten (um Be);Viehunterstand einrichten (um Be);23904;0
+Voranbau mit Buche;Voranbau mit Buche;154820;0
+Voranbau mit Eiche;Voranbau mit Eiche;154819;0
+Voranbau mit bodenständigen Gehölzen;Voranbau mit bodenständigen Gehölzen;154670;0
+Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Gehö);Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Gehö);23804;0
+Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Wald);Voranbau, Unterbau mit lebensraumtypischen Gehölzen (Wald);15687;0
+Vorbereitungshieb;Vorbereitungshieb;154821;0
+Vorklärung des Abwassers mit einem Schönungsteich;Vorklärung des Abwassers mit einem Schönungsteich;154611;0
+Wald;Wald;16710;0
+Wald in Grünland umwandeln;Wald in Grünland umwandeln;154668;0
+Wald in Heide umwandeln;Wald in Heide umwandeln;154669;0
+Wald in Offenlandbiotop umwandeln (Heide/TR);Wald in Offenlandbiotop umwandeln (Heide/TR);7968;0
+Wald in Offenlandbiotop umwandeln (Mo/Rö);Wald in Offenlandbiotop umwandeln (Mo/Rö);15251;0
+Wald in Offenlandbiotop umwandeln (Pion,Fels);Wald in Offenlandbiotop umwandeln (Pion,Fels);23863;0
+Wald in Offenlandbiotop umwandeln (landw Fl);Wald in Offenlandbiotop umwandeln (landw Fl);23877;0
+Wald in Trockenrasen umwandeln (Heide/TR);Wald in Trockenrasen umwandeln (Heide/TR);7967;0
+Waldbach/ Quelle freistellen (Wald);Waldbach/ Quelle freistellen (Wald);167645;0
+Waldbeweidung (Gehö);Waldbeweidung (Gehö);23805;0
+Waldbeweidung (Wald);Waldbeweidung (Wald);160831;0
+Waldbeweidung mit sukzessiver Entnahme der Gehölze;Waldbeweidung mit sukzessiver Entnahme der Gehölze;154671;0
+Waldinnensaum entwickeln (Wald);Waldinnensaum entwickeln (Wald);167652;0
+Waldmantelentwicklung;Waldmantelentwicklung;16852;0
+Waldrand anlegen (Gehö);Waldrand anlegen (Gehö);23806;0
+Waldrand anlegen (Wald);Waldrand anlegen (Wald);154650;0
+Waldrand pflegen;Waldrand pflegen;15270;0
+Waldumwandlung nicht bodenständigen in bodenständigen Wald;Waldumwandlung nicht bodenständigen in bodenständigen Wald;154667;0
+Waldvermehrung im direkten Umfeld;Waldvermehrung im direkten Umfeld;176459;0
+Waldwiese anlegen/entwickeln (Wald);Waldwiese anlegen/entwickeln (Wald);167653;0
+Wall anlegen;Wall anlegen;15669;0
+Wall anlegen (Artens);Wall anlegen (Artens);23921;0
+Wall anlegen (ErhoVer);Wall anlegen (ErhoVer);23932;0
+Wall anlegen (um Be);Wall anlegen (um Be);167603;0
+Wanderwege markieren, einrichten;Wanderwege markieren, einrichten;154529;0
+Wasser einleiten, zuleiten;Wasser einleiten, zuleiten;15670;0
+Wasserbauliche Anlage entnehmen, verlegen, rückbauen, optimieren;Wasserbauliche Anlage entnehmen, verlegen, rückbauen, optimieren;154623;0
+Wasserentnahme regeln, unterbinden;Wasserentnahme regeln, unterbinden;15263;0
+Wassersport lenken;Wassersport lenken;15287;0
+Wasserstand absenken;Wasserstand absenken;15276;0
+Wasserstand anheben;Wasserstand anheben;15277;0
+Wasserstand regeln;Wasserstand regeln;16841;0
+Wasserstand regeln (Gewäs);Wasserstand regeln (Gewäs);167606;0
+Wasserstand regeln (Wasserh);Wasserstand regeln (Wasserh);23947;0
+Weg abschirmen;Weg abschirmen;15280;0
+Weg abschirmen (ErhoVer);Weg abschirmen (ErhoVer);23933;0
+Weg abschirmen (um Be);Weg abschirmen (um Be);167609;0
+Weg einziehen (ErhoVer);Weg einziehen (ErhoVer);23934;0
+Weg einziehen (um Be);Weg einziehen (um Be);154538;0
+Weg entsiegeln;Weg entsiegeln;15694;0
+Weg, Pfad sperren;Weg, Pfad sperren;154539;0
+Weg, Pfad sperren (ErhoVer);Weg, Pfad sperren (ErhoVer);23935;0
+Weg, Pfad sperren (um Be);Weg, Pfad sperren (um Be);167611;0
+Weg, Pfad verlegen;Weg, Pfad verlegen;154540;0
+Weg, Pfad verlegen (ErhoVer);Weg, Pfad verlegen (ErhoVer);23936;0
+Weg, Pfad verlegen (um Be);Weg, Pfad verlegen (um Be);167613;0
+Wege, Pfade anlegen;Wege, Pfade anlegen;15281;0
+Wege, Pfade einziehen oder rückbauen (ErhoVer);Wege, Pfade einziehen oder rückbauen (ErhoVer);23937;0
+Wege, Pfade einziehen oder rückbauen (um Be);Wege, Pfade einziehen oder rückbauen (um Be);154601;0
+Wege, Pfade instandsetzen bzw. optimieren;Wege, Pfade instandsetzen bzw. optimieren;15213;0
+Wegebau, Verbot Verwendung ortsfremdes Boden-, Steinmaterial;Wegebau, Verbot Verwendung ortsfremdes Boden-, Steinmaterial;15290;0
+Weidepflege;Weidepflege;154784;0
+Weidezaun (alt) erhalten (Grünl);Weidezaun (alt) erhalten (Grünl);8052;0
+Weidezaun anlegen (Grünl);Weidezaun anlegen (Grünl);8050;0
+Weidezaun beseitigen, verlegen (Grünl);Weidezaun beseitigen, verlegen (Grünl);8051;0
+Weitständige Aufforstung Kalamitätsfläche m. bodenst. Gehölz;Weitständige Aufforstung Kalamitätsfläche m. bodenst. Gehölz;154801;0
+Weitständige Aufforstung Windwurffläche mit bodenst. Gehölz;Weitständige Aufforstung Windwurffläche mit bodenst. Gehölz;154824;0
+Weitständige Aufforstung einer Kalamitätsfläche mit bodenständigem Gehölz;Weitständige Aufforstung Kalamitätsfläche m. bodenst. Gehölz;154801;0
+Weitständige Aufforstung einer Windwurffläche mit bodenständigem Gehölz;Weitständige Aufforstung Windwurffläche mit bodenst. Gehölz;154824;0
+Wiederaufnahme der ursprünglichen Nutzung auf einer Fläche nach Nutzungsänderung;Wiederaufnahme ursprünglicher Nutzung nach Nutzungsänderung;154590;0
+Wiederaufnahme der ursprünglichen Nutzung auf einer Fläche nach Umbruch;Wiederaufnahme ursprünglicher Nutzung nach Umbruch;154591;0
+Wiederaufnahme ursprünglicher Nutzung nach Nutzungsänderung;Wiederaufnahme ursprünglicher Nutzung nach Nutzungsänderung;154590;0
+Wiederaufnahme ursprünglicher Nutzung nach Umbruch;Wiederaufnahme ursprünglicher Nutzung nach Umbruch;154591;0
+Wiederherstellen von Nisthilfen;Wiederherstellen von Nisthilfen;154764;0
+Wiederherstellung d. urspr. Gew.-zustand n. naturf. Unterhaltung;Wiederherstellung d. urspr. Gew.-zustand n. naturf. Unterhaltung;154615;0
+Wiederherstellung d. urspr. Gewässerzustand n. Gew.unterhaltung;Wiederherstellung d. urspr. Gewässerzustand n. Gew.unterhaltung;154616;0
+Wiederherstellung d. urspr. Gewässerzustand n. Gew.veränderung;Wiederherstellung d. urspr. Gewässerzustand n. Gew.veränderung;154614;0
+Wiederherstellung d. urspr. Gewässerzustand n. Gewässerausbau;Wiederherstellung d. urspr. Gewässerzustand n. Gewässerausbau;154617;0
+Wiederherstellung d. urspr. Gewässerzustand nach Gewässeanlage;Wiederherstellung d. urspr. Gewässerzustand nach Gewässeanlage;154613;0
+Wiederherstellung des ursprünglichen Bodenreliefs;Wiederherstellung des ursprünglichen Bodenreliefs;16853;0
+Wiederherstellung des ursprünglichen Gewässerzustandes;Wiederherstellung des ursprünglichen Gewässerzustandes;160879;0
+Wiederherstellung des ursprünglichen Gewässerzustandes nach Anlage eines Gewässers;Wiederherstellung d. urspr. Gewässerzustand nach Gewässeanlage;154613;0
+Wiederherstellung des ursprünglichen Gewässerzustandes nach Gewässerausbau;Wiederherstellung d. urspr. Gewässerzustand n. Gewässerausbau;154617;0
+Wiederherstellung des ursprünglichen Gewässerzustandes nach Unterhaltung eines Gewässers;Wiederherstellung d. urspr. Gewässerzustand n. Gew.unterhaltung;154616;0
+Wiederherstellung des ursprünglichen Gewässerzustandes nach Veränderung eines Gewässers;Wiederherstellung d. urspr. Gewässerzustand n. Gew.veränderung;154614;0
+Wiederherstellung des ursprünglichen Gewässerzustandes nach naturferner Unterhaltung eines Gewässers;Wiederherstellung d. urspr. Gew.-zustand n. naturf. Unterhaltung;154615;0
+Wiederherstellung des ursprünglichen Wasserstandes;Wiederherstellung des ursprünglichen Wasserstandes;154624;0
+Wiederherstellung eines Offenlandbiotops durch Entfernen des Waldes;Wiederherstellung eines Offenlandbiotops durch Waldentfernung;154672;0
+Wiederherstellung eines Offenlandbiotops durch Waldentfernung;Wiederherstellung eines Offenlandbiotops durch Waldentfernung;154672;0
+Wiederherstellung von Biotopen;Wiederherstellung von Biotopen;16854;0
+Wiedervernässung;Wiedervernässung;16855;0
+Wildacker extensiv bewirtschaften;Wildacker extensiv bewirtschaften;15700;0
+Wilddichte reduzieren;Wilddichte reduzieren;154572;0
+Wildfütterung regeln;Wildfütterung regeln;15706;0
+Wildkatzenwurfboxen anbringen (Artens);Wildkatzenwurfboxen anbringen (Artens);167671;0
+Wildkrautsaum anlegen;Wildkrautsaum anlegen;15247;0
+Wildzaun anlegen;Wildzaun anlegen;167673;0
+Wildzaun anlegen, Wildkatze (Artens);Wildzaun anlegen, Wildkatze (Artens);167674;0
+Wildzaun optimieren, Wildkatze (Artens);Wildzaun optimieren, Wildkatze (Artens);167676;0
+Wildäsungsfläche extensiv bewirtschaften;Wildäsungsfläche extensiv bewirtschaften;15701;0
+Windwurf- und Verjüngungsflächen wildkatzengerecht steuern;Windwurf- und Verjüngungsflächen wildkatzengerecht steuern;167678;0
+Wintersport lenken (ErhoVer);Wintersport lenken (ErhoVer);23938;0
+Wintersport lenken (um Be);Wintersport lenken (um Be);15288;0
+Zaun, Abperrung anlegen bzw. verlegen;Zaun, Absperrung anlegen bzw. verlegen;154541;0
+Zaun, Absperrung anlegen bzw. verlegen;Zaun, Absperrung anlegen bzw. verlegen;154541;0
+Zaun, Absperrung anlegen bzw. verlegen (Artens);Zaun, Absperrung anlegen bzw. verlegen (Artens);167616;0
+Zaun, Absperrung anlegen bzw. verlegen (ErhoVer);Zaun, Absperrung anlegen bzw. verlegen (ErhoVer);23939;0
+Zaun, Absperrung entfernen;Zaun, Absperrung entfernen;15282;0
+Zaun, Absperrung entfernen (Artens);Zaun, Absperrung entfernen (Artens);23922;0
+Zaun, Absperrung entfernen (ErhoVer);Zaun, Absperrung entfernen (ErhoVer);23940;0
+Zaun, Absperrung entfernen (um Be);Zaun, Absperrung entfernen (um Be);167618;0
+Zeitraum für Holzlagerplätze (Artens);Zeitraum für Holzlagerplätze (Artens);167681;0
+Zugang sicherstellen (Artens);Zugang sicherstellen (Artens);15283;0
+Zugang sicherstellen (ErhoVer);Zugang sicherstellen (ErhoVer);23941;0
+Zugang verhindern (Artens);Zugang verhindern (Artens);15284;0
+Zugang verhindern (ErhoVer);Zugang verhindern (ErhoVer);23942;0
+Zurückbauen einer Furt;Zurückbauen einer Furt;154748;0
+Zurückdrängen nicht bodenständiger Gehölze;Zurückdrängen nicht bodenständiger Gehölze;154827;0
+abbrennen, flämmen;abbrennen, flämmen;154785;0
+abbrennen, flämmen (Brache);abbrennen, flämmen (Brache);23878;0
+abbrennen, flämmen (Grünl);abbrennen, flämmen (Grünl);23829;0
+abbrennen, flämmen (Heide/TR);abbrennen, flämmen (Heide/TR);23812;0
+abbrennen, flämmen (Mo/Rö);abbrennen, flämmen (Mo/Rö);167511;0
+abbrennen, flämmen (Pion,Fels);abbrennen, flämmen (Pion,Fels);23851;0
+abbrennen, flämmen (landw Fl);abbrennen, flämmen (landw Fl);23864;0
+abfischen;abfischen;154675;0
+abfischen (Gewäs);abfischen (Gewäs);167519;0
+abfischen (um Be);abfischen (um Be);23890;0
+abplaggen, organische Bodenauflage entfernen;abplaggen, organische Bodenauflage entfernen;154736;0
+abplaggen, organische Bodenauflage entfernen (Brache);abplaggen, organische Bodenauflage entfernen (Brache);23879;0
+abplaggen, organische Bodenauflage entfernen (Gewäs);abplaggen, organische Bodenauflage entfernen (Gewäs);23840;0
+abplaggen, organische Bodenauflage entfernen (Heide/TR);abplaggen, organische Bodenauflage entfernen (Heide/TR);23813;0
+abplaggen, organische Bodenauflage entfernen (Mo, Rö);abplaggen, organische Bodenauflage entfernen (Mo, Rö);167517;0
+abplaggen, organische Bodenauflage entfernen (Pion,Fels);abplaggen, organische Bodenauflage entfernen (Pion,Fels);23852;0
+abplaggen, organische Bodenauflage entfernen (landw Fl);abplaggen, organische Bodenauflage entfernen (landw Fl);23865;0
+abschirmende Gehölze anlegen (Artens);abschirmende Gehölze anlegen (Artens);23905;0
+abschirmende Gehölze anlegen (ErhoVer);abschirmende Gehölze anlegen (ErhoVer);23923;0
+abschirmende Gehölze anlegen (um Be);abschirmende Gehölze anlegen (um Be);154508;0
+ausmagern;ausmagern;15658;0
+ausmagern (Brache);ausmagern (Brache);23880;0
+ausmagern (Gewäs);ausmagern (Gewäs);23841;0
+ausmagern (Grünl);ausmagern (Grünl);23830;0
+ausmagern (Heide/TR);ausmagern (Heide/TR);23814;0
+ausmagern (Mo/Rö);ausmagern (Mo/Rö);167526;0
+ausmagern (Pion,Fels);ausmagern (Pion,Fels);23853;0
+ausmagern (landw Fl);ausmagern (landw Fl);23867;0
+beschattende Gehölze entfernen;beschattende Gehölze entfernen;15265;0
+der Sukzession überlassen;der Sukzession überlassen;16857;0
+der natürlichen Entwicklung überlassen (Brache);der natürlichen Entwicklung überlassen (Brache);23882;0
+der natürlichen Entwicklung überlassen (Gehö);der natürlichen Entwicklung überlassen (Gehö);23792;0
+der natürlichen Entwicklung überlassen (Gewäs);der natürlichen Entwicklung überlassen (Gewäs);23843;0
+der natürlichen Entwicklung überlassen (Grünl);der natürlichen Entwicklung überlassen (Grünl);23832;0
+der natürlichen Entwicklung überlassen (Heide/TR);der natürlichen Entwicklung überlassen (Heide/TR);23816;0
+der natürlichen Entwicklung überlassen (Mo/Rö);der natürlichen Entwicklung überlassen (Mo/Rö);23808;0
+der natürlichen Entwicklung überlassen (Pion,Fels);der natürlichen Entwicklung überlassen (Pion,Fels);23855;0
+der natürlichen Entwicklung überlassen (Wald);der natürlichen Entwicklung überlassen (Wald);154660;0
+dynamisches Altholzkonzept;dynamisches Altholzkonzept;16858;0
+eingebrachte Pflanzen entfernen (Artens);eingebrachte Pflanzen entfernen (Artens);23907;0
+eingebrachte Pflanzen entfernen (um Be);eingebrachte Pflanzen entfernen (um Be);153919;0
+eingebrachte Tiere entfernen;eingebrachte Tiere entfernen;153920;0
+eingebrachte Tiere entfernen (Artens);eingebrachte Tiere entfernen (Artens);23908;0
+eingebrachte Tiere entfernen (Jagd);eingebrachte Tiere entfernen (Jagd);23949;0
+eingebrachte Tiere entfernen (um Be);eingebrachte Tiere entfernen (um Be);167528;0
+entkusseln, entbuschen;entkusseln, entbuschen;171106;0
+entkusseln, entbuschen (Brache);entkusseln, entbuschen (Brache);23883;0
+entkusseln, entbuschen (Gewäs);entkusseln, entbuschen (Gewäs);23844;0
+entkusseln, entbuschen (Grünl);entkusseln, entbuschen (Grünl);23833;0
+entkusseln, entbuschen (Heide/TR);entkusseln, entbuschen (Heide/TR);23817;0
+entkusseln, entbuschen (Mo/Rö);entkusseln, entbuschen (Mo/Rö);167508;0
+entkusseln, entbuschen (Pion,Fels);entkusseln, entbuschen (Pion,Fels);23856;0
+entkusseln, entbuschen (landw Fl);entkusseln, entbuschen (landw Fl);23869;0
+entschlammen;entschlammen;154715;0
+extensive Beweidung;extensive Beweidung;160877;0
+extensive Grünlandbewirtschaftung, Beweidung;extensive Grünlandbewirtschaftung, Beweidung;16859;0
+extensive Grünlandbewirtschaftung, Mahd;extensive Grünlandbewirtschaftung, Mahd;16860;0
+extensivere Gewässernutzung;extensivere Gewässernutzung;153914;0
+extensivere Gewässerunterhaltung;extensivere Gewässerunterhaltung;153925;0
+fischereiliche Nutzung regeln;fischereiliche Nutzung regeln;15695;0
+fischereiliche Nutzung regeln (Gewäs);fischereiliche Nutzung regeln (Gewäs);167535;0
+fischereiliche Nutzung regeln (um Be);fischereiliche Nutzung regeln (um Be);23893;0
+gefährdete Pflanzenart fördern;gefährdete Pflanzenart fördern;154759;0
+gefährdete Tierart fördern;gefährdete Tierart fördern;15217;0
+historische Waldbewirtschaftung;historische Waldbewirtschaftung;15268;0
+ja;ja;14444;0
+jagdliche Einrichtung anlegen;jagdliche Einrichtung anlegen;15285;0
+jagdliche Einrichtung entfernen;jagdliche Einrichtung entfernen;154561;0
+jagdliche Einrichtung verlegen;jagdliche Einrichtung verlegen;154563;0
+jährliche Mahd;jährliche Mahd;176849;0
+kein Ausbau von Quellen;kein Ausbau von Quellen;16861;0
+kein Gewässeraufstau;kein Gewässeraufstau;16862;0
+kein Gewässerausbau;kein Gewässerausbau;16863;0
+kein Kahlschlag;kein Kahlschlag;16864;0
+kein Umbruch;kein Umbruch;16865;0
+keine Abwassereinleitung;keine Abwassereinleitung;16866;0
+keine Aufforstung;keine Aufforstung;16867;0
+keine Beweidung;keine Beweidung;16868;0
+keine Biozidanwendung;keine Biozidanwendung;16869;0
+keine Bodenversiegelung;keine Bodenversiegelung;16870;0
+keine Düngung;keine Düngung;16871;0
+keine Eindeichung;keine Eindeichung;16872;0
+keine Entwässerung;keine Entwässerung;16873;0
+keine Fischteichanlage;keine Fischteichanlage;16874;0
+keine Mahd;keine Mahd;176848;0
+keine Massnahme nötig;keine Massnahme nötig;16875;0
+keine Pflege;keine Pflege;171404;0
+keine erkennbare Pflege;keine erkennbare Pflege;171108;0
+keine jährliche Mahd;keine jährliche Mahd;161705;0
+keine wegebaulichen Massnahmen;keine wegebaulichen Massnahmen;16876;0
+landwirtschafliche und gärtnerische Nutzflächen;landwirtschafliche und gärtnerische Nutzflächen;15710;0
+lebensraumtypische Baumarten fördern;lebensraumtypische Baumarten fördern;15679;0
+lebensraumtypische Baumarten fördern (Artens);lebensraumtypische Baumarten fördern (Artens);23913;0
+lebensraumtypische Baumarten fördern (Gehö);lebensraumtypische Baumarten fördern (Gehö);23795;0
+lebensraumtypische Baumarten fördern (Wald);lebensraumtypische Baumarten fördern (Wald);167552;0
+lebensraumtypische Gehölze aufforsten;lebensraumtypische Gehölze aufforsten;15680;0
+lebensraumtypische Gehölze aufforsten (Gehö);lebensraumtypische Gehölze aufforsten (Gehö);23796;0
+lebensraumtypische Gehölze aufforsten (Wald);lebensraumtypische Gehölze aufforsten (Wald);167554;0
+mehrmalige und scharfe Durchforstung;mehrmalige und scharfe Durchforstung;154658;0
+mulchen;mulchen;160785;0
+mulchen (Brache);mulchen (Brache);23887;0
+mulchen (Gewäs);mulchen (Gewäs);23848;0
+mulchen (Grünl);mulchen (Grünl);23837;0
+mulchen (Heide/TR);mulchen (Heide/TR);23821;0
+mulchen (Mo/Rö);mulchen (Mo/Rö);167516;0
+mulchen (Pion,Fels);mulchen (Pion,Fels);23860;0
+mulchen (landw Fl);mulchen (landw Fl);23873;0
+mähen oder beweiden;mähen oder beweiden;15266;0
+mähen oder beweiden (Brache);mähen oder beweiden (Brache);23884;0
+mähen oder beweiden (Gewäs);mähen oder beweiden (Gewäs);23845;0
+mähen oder beweiden (Grünl);mähen oder beweiden (Grünl);23834;0
+mähen oder beweiden (Heide/TR);mähen oder beweiden (Heide/TR);23818;0
+mähen oder beweiden (Mo/Rö);mähen oder beweiden (Mo/Rö);167558;0
+mähen oder beweiden (Pion,Fels);mähen oder beweiden (Pion,Fels);23857;0
+mähen oder beweiden (landw Fl);mähen oder beweiden (landw Fl);23870;0
+mähen und Nachbeweidung;Mähen und Nachbeweidung;15267;0
+naturnahe Gewässergestaltung;naturnahe Gewässergestaltung;16877;0
+naturnahe Waldbewirtschaftung;naturnahe Waldbewirtschaftung;16878;0
+nein;nein;14445;0
+nicht beurteilbar;nicht beurteilbar;153097;0
+nicht lebensraumtypische Gehölze entnehmen;nicht lebensraumtypische Gehölze entnehmen;15684;0
+nicht lebensraumtypische Gehölze entnehmen (Gehö);nicht lebensraumtypische Gehölze entnehmen (Gehö);23799;0
+nicht lebensraumtypische Gehölze entnehmen (Heide/TR);nicht lebensraumtypische Gehölze entnehmen (Heide/TR);23822;0
+nicht lebensraumtypische Gehölze entnehmen (Mo/Rö);nicht lebensraumtypische Gehölze entnehmen (Mo/Rö);23809;0
+nicht lebensraumtypische Gehölze entnehmen (Wald);nicht lebensraumtypische Gehölze entnehmen (Wald);167570;0
+nicht lebensraumtypische Gehölze entnehmen (um Be);nicht lebensraumtypische Gehölze entnehmen (um Be);23896;0
+nur Nachmahd ab 15.09. (Pflegemahd);nur Nachmahd ab 15.09. (Pflegemahd);161704;0
+sonstige Massnahme (siehe Anmerkungen);sonstige Massnahme (siehe Anmerkungen);191789;0
+spezielle Artenschutzmaßnahmen;spezielle Artenschutzmaßnahmen;15713;0
+teilweise;teilweise;14446;0
+tägliche bis wöchentliche Mahd;tägliche bis wöchentliche Mahd;161703;0
+verdämmende Gehölze entnehmen;verdämmende Gehölze entnehmen;154818;0
+verdämmende Gehölze entnehmen (Artens);verdämmende Gehölze entnehmen (Artens);23920;0
+verdämmende Gehölze entnehmen (Brache);verdämmende Gehölze entnehmen (Brache);23889;0
+verdämmende Gehölze entnehmen (Gewäs);verdämmende Gehölze entnehmen (Gewäs);23850;0
+verdämmende Gehölze entnehmen (Grünl);verdämmende Gehölze entnehmen (Grünl);23839;0
+verdämmende Gehölze entnehmen (Heide/TR);verdämmende Gehölze entnehmen (Heide/TR);23826;0
+verdämmende Gehölze entnehmen (Mo/Rö);verdämmende Gehölze entnehmen (Mo/Rö);167595;0
+verdämmende Gehölze entnehmen (Pion,Fels);verdämmende Gehölze entnehmen (Pion,Fels);23862;0
+verdämmende Gehölze entnehmen (landw Fl);verdämmende Gehölze entnehmen (landw Fl);23876;0
+verdämmende Gehölze entnehmen (um Be);verdämmende Gehölze entnehmen (um Be);23901;0
+vertikale und horizontale Strukturen fördern;vertikale und horizontale Strukturen fördern;15240;0
+weiterhin keine Bewirtschaftung;weiterhin keine Bewirtschaftung;16879;0
+wildkatzengerechte Holzernte (Artens);wildkatzengerechte Holzernte (Artens);167669;0
+wildkatzengerechte Jungbestandspflege (Artens);wildkatzengerechte Jungbestandspflege (Artens);167667;0
+Überhälter im Bestand belassen;Überhälter im Bestand belassen;154815;0

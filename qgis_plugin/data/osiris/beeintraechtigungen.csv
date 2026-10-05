@@ -1,0 +1,731 @@
+schluessel;bezeichnung;atom_id;mehrdeutig
+*;teilweise Überschneidung;135271;0
++;eingeschlossen (Natura 2000-Geb. umschliesst  Schutzgeb.) | positiv;109794;1
+-;negativ | umfassend (Schutzgebiet grösser als Natura 2000 Gebiet);109795;1
+/;angrenzend;135274;0
+0;neutral;109796;0
+1;Land- und Forstwirtschaft;133684;0
+100;Landwirtschaftliche Nutzung;133685;0
+101;Änderung der Nutzungsart;133686;0
+102;Mahd;133687;0
+110;Pestizideinsatz;133688;0
+120;Düngung;133689;0
+130;Bewässerung;133690;0
+140;Beweidung;133691;0
+141;Aufgabe der Beweidung;133692;0
+150;Flurbereinigung in landwirtschaftlich genutzten Gebieten;133693;0
+151;Beseitigung von Hecken und Feldgehölzen;133694;0
+160;Forstwirtschaftliche Nutzung;133695;0
+161;Anpflanzung;133696;0
+162;Anpflanzung nicht autochthoner Arten;133697;0
+163;Neuaufforstung, Wiederbewaldung;133698;0
+164;Einschlag, Auslichten;133699;0
+165;Vernichtung der Kraut- oder Strauchschicht (Forstwirtschaft);133700;0
+166;Beseitigung von Tot- und Altholz;133701;0
+167;Abholzung ohne Wiederaufforstung;133702;0
+170;Viehzucht;133703;0
+180;Abbrennen, Flämmen;133704;0
+190;Sonstige land- und forstwirtschaftliche Aktivitäten;133705;0
+2;Fischerei, Jagd, Entnahme von Arten;133706;0
+200;Fischzucht, Aquakultur;133707;0
+210;Berufsfischerei;133708;0
+211;Stationäre Fischerei (Reusen, Stellnetze);133709;0
+212;Schleppnetzfischerei;133710;0
+213;Treibnetzfischrei (marin);133711;0
+220;Angelsport, Angeln;133712;0
+221;Angelsport: Köder-Sammeln (Ausgraben);133713;0
+230;Jagd;133714;0
+240;Entnahme wildlebender Tiere;133715;0
+241;Sammeln von Insekten, Reptilien, Amphibien usw.;133716;0
+242;Ausnehmen/Entfernen von Nestern;133717;0
+243;Fallenstellen, Vergiftung, Wilderei;133718;0
+244;Sonstige Formen der Entnahme von Tieren;133719;0
+250;Entnahme von Pflanzen;133720;0
+251;Absammeln seltener Pflanzen;133721;0
+290;Sonst. Aktivitäten d. Fischerei, Jagd / Entnahme v. Arten;133722;0
+3;Abbau von Rohstoffen (Abgrabungen);133723;0
+300;Sand- und Kiesabbau;133724;0
+301;Sand- und Kiesgruben;133725;0
+302;Abbau von Stränden;133726;0
+310;Torfabbau;133727;0
+311;Handtorfstiche;133728;0
+312;Industrieller Torfabbau;133729;0
+320;Erkundung und Förderung von Erdöl und -gas;133730;0
+330;Bergbau;133731;0
+331;Tagebau (z.B. Kohleabbau u.ä.);133732;0
+332;Untertagebau;133733;0
+340;Saline (Salzbergwerk);133734;0
+3416;Lembruch;149566;0
+3417;Wagenfeld;149567;0
+3418;Bahrenborstel;149568;0
+350;Lehm- und Tongruben;133735;0
+3511;Freren;149578;0
+3512;Voltlage;149579;0
+3515;Hunteburg;149582;0
+3516;Lemförde;149583;0
+3517;Rahden;149584;0
+3518;Diepenau;149585;0
+3519;Uchte Süd;149586;0
+3520;Loccum;149587;0
+3610;Salzbergen;149592;0
+3611;Hopsten;149593;0
+3612;Mettingen;149594;0
+3613;Westerkappeln;149595;0
+3614;Wallenhorst;149596;0
+3615;Bohmte;149597;0
+3616;Preussisch Oldendorf;149598;0
+3617;Lübbecke;149599;0
+3618;Hille;149600;0
+3619;Petershagen;149601;0
+3620;Niedernwöhren;149602;0
+3707;-----;149605;0
+3708;Gronau (Westfalen);149606;0
+3709;Ochtrup;149607;0
+3710;Rheine;149608;0
+3711;Hörstel;149609;0
+3712;Ibbenbüren;149610;0
+3713;Hasbergen;149611;0
+3714;Osnabrück;149612;0
+3715;Bissendorf;149613;0
+3716;Melle;149614;0
+3717;Kirchlengern;149615;0
+3718;Bad Öynhausen;149616;0
+3719;Minden;149617;0
+3720;Bückeburg;149618;0
+3806;-----;149621;0
+3807;Alstätte;149622;0
+3808;Heek;149623;0
+3809;Metelen;149624;0
+3810;Steinfurt;149625;0
+3811;Emsdetten;149626;0
+3812;Ladbergen;149627;0
+3813;Lengerich;149628;0
+3814;Bad Iburg;149629;0
+3815;Dissen am Teutoburger Wald;149630;0
+3816;Spenge;149631;0
+3817;Bünde;149632;0
+3818;Herford;149633;0
+3819;Vlotho;149634;0
+3820;Rinteln;149635;0
+390;Sonstige Bergbau-/ Abbauaktivitäten;133736;0
+3906;Vreden;149638;0
+3907;Ottenstein;149639;0
+3908;Ahaus;149640;0
+3909;Horstmar;149641;0
+3910;Altenberge;149642;0
+3911;Greven;149643;0
+3912;Westbevern;149644;0
+3913;Ostbevern;149645;0
+3914;Versmold;149646;0
+3915;Bockhorst;149647;0
+3916;Halle (Westfalen);149648;0
+3917;Bielefeld;149649;0
+3918;Bad Salzuflen;149650;0
+3919;Lemgo;149651;0
+3920;Extertal;149652;0
+3921;Aerzen;149653;0
+4;Siedlung, Industrie, Deponien usw.;133737;0
+400;Siedlungsgebiete, Urbanisation;133738;0
+4002;-----;149655;0
+4003;-----;149656;0
+4005;-----;149657;0
+4006;Öding;149658;0
+4007;Stadtlohn;149659;0
+4008;Gescher;149660;0
+4009;Coesfeld;149661;0
+401;geschlossene Bebauung;133739;0
+4010;Nottuln;149662;0
+4012;Telgte;149664;0
+4013;Warendorf;149665;0
+4014;Sassenberg;149666;0
+4015;Harsewinkel;149667;0
+4016;Gütersloh;149668;0
+4017;Brackwede;149669;0
+4018;Lage;149670;0
+4019;Detmold;149671;0
+402;lockere Bebauung;133740;0
+4020;Blomberg;149672;0
+4021;Bad Pyrmont;149673;0
+4022;Ottenstein;149674;0
+403;Zersiedlung (Streusiedlung);133741;0
+404;andere Siedlungsformen;133742;0
+410;Industrie- und Gewerbegebiete;133743;0
+4101;-----;149675;0
+4102;Elten;149676;0
+4103;Emmerich;149677;0
+4104;Isselburg;149678;0
+4105;Bocholt;149679;0
+4106;Rhede;149680;0
+4107;Borken;149681;0
+4108;Reken;149682;0
+4109;Dülmen;149683;0
+411;Produktionsstätten (Fabriken);133744;0
+4110;Senden;149684;0
+4111;Ottmarsbocholt;149685;0
+4112;Sendenhorst;149686;0
+4113;Enniger;149687;0
+4114;Oelde;149688;0
+4115;Rheda-Wiedenbrück;149689;0
+4116;Rietberg;149690;0
+4117;Verl;149691;0
+4118;Die Senne;149692;0
+4119;Horn-Bad Meinberg;149693;0
+412;Industrielager;133745;0
+4120;Steinheim;149694;0
+4121;Schieder-Schwalenberg;149695;0
+4122;Holzminden;149696;0
+419;Sonstige Industrie- und Gewerbeflächen;133746;0
+420;Deponien;133747;0
+4201;-----;149697;0
+4202;Kleve;149698;0
+4203;Kalkar;149699;0
+4204;Rees;149700;0
+4205;Hamminkeln;149701;0
+4206;Brünen;149702;0
+4207;Raesfeld;149703;0
+4208;Wulfen;149704;0
+4209;Haltern;149705;0
+421;Hausmülldeponie;133748;0
+4210;Lüdinghausen;149706;0
+4211;Ascheberg;149707;0
+4212;Drensteinfurt;149708;0
+4213;Ahlen;149709;0
+4214;Beckum;149710;0
+4215;Wadersloh;149711;0
+4216;Mastholte;149712;0
+4217;Delbrück;149713;0
+4218;Paderborn;149714;0
+4219;Altenbeken;149715;0
+422;Industriemülldeponie;133749;0
+4220;Bad Driburg;149716;0
+4221;Brakel;149717;0
+4222;Höxter;149718;0
+423;Bauschutt- u. sonstige Feststoffdeponien / inerte Mat.;133750;0
+424;Andere Deponien;133751;0
+430;landwirtschaftliche Gebäude;133752;0
+4302;Goch;149719;0
+4303;Uedem;149720;0
+4304;Xanten;149721;0
+4305;Wesel;149722;0
+4306;Hünxe;149723;0
+4307;Dorsten;149724;0
+4308;Marl;149725;0
+4309;Recklinghausen;149726;0
+4310;Datteln;149727;0
+4311;Lünen;149728;0
+4312;Hamm;149729;0
+4313;Welver;149730;0
+4314;Lippetal;149731;0
+4315;Benninghausen;149732;0
+4316;Lippstadt;149733;0
+4317;Geseke;149734;0
+4318;Borchen;149735;0
+4319;Lichtenau;149736;0
+4320;Willebadessen;149737;0
+4321;Borgholz;149738;0
+4322;Bad Karlshafen;149739;0
+440;Lagerhaltung, Speicher;133753;0
+4402;-----;149740;0
+4403;Geldern;149741;0
+4404;Issum;149742;0
+4405;Rheinberg;149743;0
+4406;Dinslaken;149744;0
+4407;Bottrop;149745;0
+4408;Gelsenkirchen;149746;0
+4409;Herne;149747;0
+4410;Dortmund;149748;0
+4411;Kamen;149749;0
+4412;Unna;149750;0
+4413;Werl;149751;0
+4414;Soest;149752;0
+4415;Anröchte;149753;0
+4416;Effeln;149754;0
+4417;Büren;149755;0
+4418;Wünnenberg;149756;0
+4419;Kleinenberg;149757;0
+4420;Peckelsheim;149758;0
+4421;Borgentreich;149759;0
+4422;Trendelburg;149760;0
+4503;Straelen;149761;0
+4504;Kerken;149762;0
+4505;Moers;149763;0
+4506;Duisburg;149764;0
+4507;Mülheim an der Ruhr;149765;0
+4508;Essen;149766;0
+4509;Bochum;149767;0
+4510;Witten;149768;0
+4511;Schwerte;149769;0
+4512;Menden (Sauerland);149770;0
+4513;Neheim-Hüsten;149771;0
+4514;Möhnesee;149772;0
+4515;Hirschberg;149773;0
+4516;Warstein;149774;0
+4517;Alme;149775;0
+4518;Madfeld;149776;0
+4519;Marsberg;149777;0
+4520;Warburg;149778;0
+4521;Liebenau;149779;0
+4602;-----;149781;0
+4603;Nettetal;149782;0
+4604;Kempen;149783;0
+4605;Krefeld;149784;0
+4606;Düsseldorf-Kaiserswerth;149785;0
+4607;Heiligenhaus;149786;0
+4608;Velbert;149787;0
+4609;Hattingen;149788;0
+4610;Hagen;149789;0
+4611;Hagen-Hohenlimburg;149790;0
+4612;Iserlohn;149791;0
+4613;Balve;149792;0
+4614;Arnsberg;149793;0
+4615;Meschede;149794;0
+4616;Olsberg;149795;0
+4617;Brilon;149796;0
+4618;Adorf;149797;0
+4619;Mengeringhausen;149798;0
+4702;Elmpt;149802;0
+4703;Schwalmtal;149803;0
+4704;Viersen;149804;0
+4705;Willich;149805;0
+4706;Düsseldorf;149806;0
+4707;Mettmann;149807;0
+4708;Wuppertal-Elberfeld;149808;0
+4709;Wuppertal-Barmen;149809;0
+4710;Radevormwald;149810;0
+4711;Lüdenscheid;149811;0
+4712;Altena;149812;0
+4713;Plettenberg;149813;0
+4714;Endorf;149814;0
+4715;Eslohe (Sauerland);149815;0
+4716;Bödefeld;149816;0
+4717;Niedersfeld;149817;0
+4718;Goddelsheim;149818;0
+4802;Wassenberg;149823;0
+4803;Wegberg;149824;0
+4804;Mönchengladbach;149825;0
+4805;Korschenbroich;149826;0
+4806;Neuss;149827;0
+4807;Hilden;149828;0
+4808;Solingen;149829;0
+4809;Remscheid;149830;0
+4810;Wipperfürth;149831;0
+4811;Meinerzhagen;149832;0
+4812;Herscheid;149833;0
+4813;Attendorn;149834;0
+4814;Lennestadt;149835;0
+4815;Schmallenberg;149836;0
+4816;Girkhausen;149837;0
+4817;Winterberg;149838;0
+4818;Medebach;149839;0
+490;Sonst. Siedlungs-, gewerbl. o. industr. Aktivitäten;133754;0
+4901;Selfkant;149844;0
+4902;Heinsberg;149845;0
+4903;Erkelenz;149846;0
+4904;Titz;149847;0
+4905;Grevenbroich;149848;0
+4906;Pulheim;149849;0
+4907;Leverkusen;149850;0
+4908;Burscheid;149851;0
+4909;Kürten;149852;0
+4910;Lindlar;149853;0
+4911;Gummersbach;149854;0
+4912;Drolshagen;149855;0
+4913;Olpe;149856;0
+4914;Kirchhundem;149857;0
+4915;Wingeshausen;149858;0
+4916;Bad Berleburg;149859;0
+4917;Battenberg (Eder);149860;0
+4918;Frankenberg (Eder);149861;0
+5;Infrastruktur;133755;0
+500;Verkehrswege und -anlagen;133756;0
+5001;-----;149866;0
+5002;Geilenkirchen;149867;0
+5003;Linnich;149868;0
+5004;Jülich;149869;0
+5005;Bergheim;149870;0
+5006;Frechen;149871;0
+5007;Köln;149872;0
+5008;Köln-Mülheim;149873;0
+5009;Overath;149874;0
+501;Fuss- und Radwege;133757;0
+5010;Engelskirchen;149875;0
+5011;Wiehl;149876;0
+5012;Reichshof;149877;0
+5013;Kreuztal;149878;0
+5014;Hilchenbach;149879;0
+5015;Erndtebrück;149880;0
+5016;Bad Laasphe;149881;0
+5017;Biedenkopf;149882;0
+502;Strasse, Autobahn;133758;0
+503;Schienenverkehr;133759;0
+504;Hafenanlagen;133760;0
+505;Flughafen;133761;0
+506;Sportflugplatz, Helicopterlandeplatz;133762;0
+507;Brücke, Viadukt;133763;0
+508;Tunnel;133764;0
+509;Sonstige Verkehrstrassen;133765;0
+510;Energieleitungen;133766;0
+5101;-----;149888;0
+5102;Herzogenrath;149889;0
+5103;Eschweiler;149890;0
+5104;Düren;149891;0
+5105;Nörvenich;149892;0
+5106;Kerpen;149893;0
+5107;Brühl;149894;0
+5108;Köln-Porz;149895;0
+5109;Lohmar;149896;0
+511;Stromleitungen (Freileitungen);133767;0
+5110;Ruppichteroth;149897;0
+5111;Waldbroel;149898;0
+5112;Morsbach;149899;0
+5113;Freudenberg;149900;0
+5114;Siegen;149901;0
+5115;Ewersbach;149902;0
+5116;Eibelshausen;149903;0
+512;Rohrleitungen;133768;0
+513;Sonstige Energieversorgungsleitungen;133769;0
+520;Schiffahrt;133770;0
+5201;-----;149910;0
+5202;Aachen;149911;0
+5203;Stolberg (Rheinland);149912;0
+5204;Kreuzau;149913;0
+5205;Vettweiss;149914;0
+5206;Erp;149915;0
+5207;Bornheim;149916;0
+5208;Bonn;149917;0
+5209;Siegburg;149918;0
+5210;Eitorf;149919;0
+5211;Weyerbusch;149920;0
+5212;Wissen;149921;0
+5213;Betzdorf;149922;0
+5214;Burbach;149923;0
+5215;Dillenburg;149924;0
+530;Starke infrastrukturelle Erschliessung;133771;0
+5302;-----;149932;0
+5303;Roetgen;149933;0
+5304;Nideggen;149934;0
+5305;Zülpich;149935;0
+5306;Euskirchen;149936;0
+5307;Rheinbach;149937;0
+5308;Bonn-Bad Godesberg;149938;0
+5309;Königswinter;149939;0
+5310;Asbach;149940;0
+5314;Rennerod;149944;0
+5403;Monschau;149953;0
+5404;Schleiden;149954;0
+5405;Mechernich;149955;0
+5406;Bad Münstereifel;149956;0
+5407;Altenahr;149957;0
+5408;Bad Neuenahr-Ahrweiler;149958;0
+5503;-----;149973;0
+5504;Hellenthal;149974;0
+5505;Blankenheim;149975;0
+5506;Aremberg;149976;0
+5507;Hönningen;149977;0
+5604;Hallschlag;149994;0
+5605;Stadtkyll;149995;0
+5606;Üxheim;149996;0
+590;Andere Transport-, und Versorgungsarten;133772;0
+6;Freizeit und Tourismus;133773;0
+600;Sport- und Freizeiteinrichtungen;133774;0
+601;Golfplätze;133775;0
+602;Skianlagen (Pisten, Lifte usw.);133776;0
+603;Stadion;133777;0
+604;Rennbahn, Rennstrecke;133778;0
+605;Reitplatz, Pferderennbahn;133779;0
+606;Freizeitpark;133780;0
+607;Sportplatz;133781;0
+608;Camping- und Caravanplätze;133782;0
+609;Sonstige Sport- und Freizeiteinrichtungen;133783;0
+610;Besucherzentren;133784;0
+620;Sport und Freizeit (outdoor-Aktivitäten);133785;0
+621;Wassersport;133786;0
+622;Wandern, Reiten, Radfahren;133787;0
+623;Touristik mit motorisierten Fahrzeugen;133788;0
+624;Klettern, Bergsteigen, Höhlenerkundung;133789;0
+625;Segelflug, Paragleiten, Drachenflug, Ballonfahren u.ä.;133790;0
+626;Skisport abseits der Pisten;133791;0
+629;Sonstige outdoor-Aktivitäten;133792;0
+690;Sonstige Freizeit- und Tourismusaktivitäten;133793;0
+7;Umweltverschmutzung, menschl. Eingriffe u. Nutzungen;133794;0
+700;Umweltverschmutzung;133795;0
+701;Wasserverschmutzung;133796;0
+702;Luftverschmutzung;133797;0
+703;Bodenverschmutzung;133798;0
+709;Sonstige oder gemischte Formen der Verschmutzung;133799;0
+710;Lärmbelastung;133800;0
+720;Trittbelastung (Überlastung durch Besucher);133801;0
+730;Militärübungen;133802;0
+740;Vandalismus;133803;0
+790;Sonstige Umweltverschmutzungen;133804;0
+8;Anthrop. Eingriffe in den Wasserhaushalt;133805;0
+800;Landaufschüttung, Landgewinnung;133806;0
+801;Polderung;133807;0
+802;Landgewinnung durch Eindeichung;133808;0
+803;Verfüllen von Gewässern oder Feuchtgeb.;133809;0
+810;Drainage (Trockenlegung der Fläche);133810;0
+811;Entfernen von Vegetation zur Abflussverbesserung;133811;0
+820;Sedimenträumung, Ausbaggerung von Gewässern;133812;0
+830;Kanalisation, Ableitung von Oberflächenwasser;133813;0
+840;Überflutung, Überstauen;133814;0
+850;Änderung des hydrologischen Regimes und Funktionen;133815;0
+851;Veränderung der Meeresströmung;133816;0
+852;Veränderungen von Lauf und Struktur von Fliessgewässern;133817;0
+853;Wasserstandsregulierung;133818;0
+860;Schlamm- und Spülgutdeponien;133819;0
+870;Deiche, Aufschüttungen, künstl. Strände;133820;0
+871;Küstenschutzmassnahmen (Tetrapoden, Verbau);133821;0
+890;Sonst. Anthrop. Veränderungen im Wasserhaushalt;133822;0
+9;Natürliche Prozesse (biotische und abiotische);133823;0
+900;Erosion;133824;0
+910;Verschlammung, Verlandung;133825;0
+920;Austrocknung;133826;0
+930;Überflutung, Überstauung;133827;0
+940;Naturkatastrophen;133828;0
+941;Hochwasser, Überschwemmung;133829;0
+942;Lawinen;133830;0
+943;Bergsturz, Erdrutsche;133831;0
+944;Sturm, Wirbelsturm;133832;0
+945;Vulkanismus;133833;0
+946;Erdbeben;133834;0
+947;Sturmflut;133835;0
+948;Brand, Feuer (natürlich);133836;0
+949;Sonstige Naturkatastrophen;133837;0
+950;Natürliche Entwicklungen;133838;0
+951;Austrocknung/Anhäufung organischer Substanz;133839;0
+952;Eutrophierung (natürliche);133840;0
+953;Versauerung (natürliche);133841;0
+954;Einwanderung neuer Arten;133842;0
+960;Interspezifische Beziehungen bei Tierarten;133843;0
+961;Konkurrenz bei Tieren (z.B. Seemöwe/Seeschwalbe);133844;0
+962;Parasitismus bei Tieren;133845;0
+963;eingeschleppte Krankheiten bei Tieren;133846;0
+964;Eindringen von fremdem genet. Material (bei Tieren);133847;0
+965;Prädation;133848;0
+966;Konkurrenz mit eingeschleppten Arten;133849;0
+967;Konkurrenz mit Haustieren;133850;0
+969;Sonstige ungünstige Interaktionen bei Tieren;133851;0
+970;interspezifische Beziehungen bei Pflanzenarten;133852;0
+971;Konkurrenz bei Pflanzen;133853;0
+972;Parasitismus bei Pflanzen;133854;0
+973;Eingeschleppte Krankheiten bei Pflanzen;133855;0
+974;Eindringen von fremdem genet. Material (bei Pflanzen);133856;0
+975;Mangel an Bestäubern;133857;0
+976;Wildverbiss, Wildschäden;133858;0
+979;Sonst. O. gemischte Formen d. Beeinträchtigung d. Flora;133859;0
+990;Sonstige natürliche Prozesse;133860;0
+<;weniger als die angegebe Populationsgrösse;111931;0
+=;deckungsgleich | genaue Zählung der Populationsgrösse;111932;1
+>;mehr als die angegebe Populationsgrösse;111933;0
+A;Nationale Rote Liste | Population (beinahe) isoliert | SPA (BSG) EU-Vogelschutzgebiet, umfassender gesetzlicher Schutz über § 52 LNatSchG NRW sicher gestellt | hervorragende Repräsentativität | hoch | sehr gut (s. gut. Erh.zust., unabh. v.d. Wiederherst.mögl.k | sehr hoch;109748;1
+B;Endemische Art | FFH-Gebiet (nationale Liste) (ein Datenbogen) | Population nicht isoliert, am Rande des Verbreitungsgebiets | gut (gut. Erh.zust., W.herst. in kurz.- mittl.Zeitr. mögl.) | gute Repräsentativität | hoch | mittel;109749;1
+BGR;Biogenetisches Reservat;111949;0
+BSR;Biosphärenreservat;111950;0
+Bundesamt für Naturschutz;34;133894;0
+Bundesvermoegensverwaltung;128;149519;0
+C;Internationale Übereinkommen | Population nicht isoliert, innerhalb des Verbreitungsgebiets | VR (Vogelschutzrichtlinien)-Geb. entspricht FFH-Geb. (1 Db) | gering | mittel - schlecht (weniger gut erh., Wherstellung. schwierig | mittel bis gering | mittlere Repräsentativität;109751;1
+C3906;Gronau (Westf.);150013;0
+C3910;Rheine;150014;0
+C3914;Bielefeld;150015;0
+C3918;Minden;150016;0
+C4302;Bocholt;150017;0
+C4306;Recklinghausen;150018;0
+C4310;Münster;150019;0
+C4314;Gütersloh;150020;0
+C4318;Paderborn;150021;0
+C4702;Krefeld;150022;0
+C4706;Düsseldorf-Essen;150023;0
+C4710;Dortmund;150024;0
+C4714;Arnsberg;150025;0
+C5102;Mönchengladbach;150026;0
+C5106;Köln;150027;0
+C5110;Gummersbach;150028;0
+C5114;Siegen;150029;0
+C5502;Aachen;150030;0
+C5506;Bonn;150031;0
+COR;CORINE-Gebiet;111952;0
+D;Dia | Sonstiger Grund | VR-Geb., an FFH-Geb. angrenzend (2 getr. Datenbögen) | nicht signifikant;109767;1
+DE00;ungeschützt;111989;0
+DE01;Nationalpark;111983;0
+DE02;Naturschutzgebiet;111982;0
+DE03;Flächenhaftes Naturdenkmal;111965;0
+DE04;Geschützter Landschaftsbestandteil (BNatSchG);111976;0
+DE05;Naturpark;111981;0
+DE06;Artenschon- und Artenschutzgebiete (Landesgesetze);111945;0
+DE07;Landschaftsschutzgebiet;111978;0
+DE11;Waldschutzgebiet ohne forstliche Nutzung (z.B. Bannwald);111951;0
+DE12;Waldschutzgebiet mit eingeschränkter Nutzung (Schonwald);111986;0
+DE13;Schutzwald (Boden-, Erosion-, Lawinenschutzwald u. a.);111962;0
+DE21;im Eigentum einer Naturschutzorganisation;111980;0
+E;FFH-Gebiet, an VR-Gebiet angrenzend;135280;0
+EDG;Europadiplom-Gebiet;111953;0
+Ennepe-Ruhr-Kreis;126;144493;0
+Erftkreis;118;144485;0
+F;Foto | VR-Gebiet, das ein FFH-Gebiet enthält (2 Datenbögen);109768;1
+Forstamt Wesel;72;133932;0
+G;FFH-Gebiet, das Teilfläche eines VR-Gebietes ist | Graphik;109769;1
+GB;Geschützter Biotop;19643;0
+H;VR-Gebiet, das Teilfläche eines FFH-Gebietes ist (2 Db);135283;0
+Hochsauerlandkreis;85;133945;0
+I;FFH-Gebiet, das ein VR-Gebiet enthält;135284;0
+IUCN;International Union for the Conservation of Nature;19644;0
+J;VR-Geb., d. sich teilw. m. einem FFH-Geb. überschneidet;135285;0
+K;FFH-Geb., d. sich teilw. mit einem VR-Gebiet überschneidet | Karte;109770;1
+Kreis Aachen;74;133934;0
+Kreis Borken;75;133935;0
+Kreis Coesfeld;77;133937;0
+Kreis Düren;78;133938;0
+Kreis Euskirchen;81;133941;0
+Kreis Gütersloh;82;133942;0
+Kreis Heinsberg;84;133944;0
+Kreis Herford;121;144488;0
+Kreis Höxter;86;133946;0
+Kreis Kleve;87;133947;0
+Kreis Lippe;108;133968;0
+Kreis Mettmann;89;133949;0
+Kreis Minden-Lübbecke;90;133950;0
+Kreis Neuss;93;133953;0
+Kreis Olpe;127;144494;0
+Kreis Paderborn;95;133955;0
+Kreis Recklinghausen;96;133956;0
+Kreis Siegen-Wittgenstein;99;133959;0
+Kreis Soest;100;133960;0
+Kreis Steinfurt;102;133962;0
+Kreis Unna;103;133963;0
+Kreis Viersen;104;133964;0
+Kreis Warendorf;105;133965;0
+Kreis Wesel;106;133966;0
+L;Luftbild | VR-Geb.vorschlag (w. n. Anerkennung in Geb.typ A geändert);109771;1
+L3510;Freren;150032;0
+L3512;Bramsche;150033;0
+L3514;Damme;150034;0
+L3516;Rahden;150035;0
+L3518;Uchte;150036;0
+L3520;Rehburg-Loccum;150037;0
+L3708;Gronau (Westfalen);150038;0
+L3710;Rheine;150039;0
+L3712;Ibbenbüren;150040;0
+L3714;Osnabrück;150041;0
+L3716;Lübbecke;150042;0
+L3718;Minden;150043;0
+L3720;Stadthagen;150044;0
+L3906;Vreden;150045;0
+L3908;Ahaus;150046;0
+L3910;Steinfurt;150047;0
+L3912;Lengerich;150048;0
+L3914;Bad Iburg;150049;0
+L3916;Bielefeld;150050;0
+L3918;Herford;150051;0
+L3920;Rinteln;150052;0
+L4102;Emmerich;150053;0
+L4104;Bocholt;150054;0
+L4106;Borken;150055;0
+L4108;Coesfeld;150056;0
+L4110;Münster;150057;0
+L4112;Warendorf;150058;0
+L4114;Rheda-Wiedenbrück;150059;0
+L4116;Gütersloh;150060;0
+L4118;Detmold;150061;0
+L4120;Bad Pyrmont;150062;0
+L4122;Holzminden;150063;0
+L4302;Kleve;150064;0
+L4304;Wesel;150065;0
+L4306;Dorsten;150066;0
+L4308;Recklinghausen;150067;0
+L4310;Lünen;150068;0
+L4312;Hamm;150069;0
+L4314;Beckum;150070;0
+L4316;Lippstadt;150071;0
+L4318;Paderborn;150072;0
+L4320;Bad Driburg;150073;0
+L4322;Höxter;150074;0
+L4502;Geldern;150075;0
+L4504;Moers;150076;0
+L4506;Duisburg;150077;0
+L4508;Essen;150078;0
+L4510;Dortmund;150079;0
+L4512;Unna;150080;0
+L4514;Soest;150081;0
+L4516;Büren;150082;0
+L4518;Marsberg;150083;0
+L4520;Warburg;150084;0
+L4522;Münden;150085;0
+L4702;Nettetal;150086;0
+L4704;Krefeld;150087;0
+L4706;Düsseldorf;150088;0
+L4708;Wuppertal;150089;0
+L4710;Hagen;150090;0
+L4712;Iserlohn;150091;0
+L4714;Arnsberg;150092;0
+L4716;Brilon;150093;0
+L4718;Korbach;150094;0
+L4902;Heinsberg;150095;0
+L4904;Mönchengladbach;150096;0
+L4906;Neuss;150097;0
+L4908;Solingen;150098;0
+L4910;Gummersbach;150099;0
+L4912;Olpe;150100;0
+L4914;Schmallenberg;150101;0
+L4916;Bad Berleburg;150102;0
+L4918;Frankenberg (Eder);150103;0
+L5102;Geilenkirchen;150104;0
+L5104;Düren;150105;0
+L5106;Köln;150106;0
+L5108;Köln-Mülheim;150107;0
+L5110;Waldbröl;150108;0
+L5112;Freudenberg;150109;0
+L5114;Siegen;150110;0
+L5116;Biedenkopf;150111;0
+L5302;Aachen;150112;0
+L5304;Zülpich;150113;0
+L5306;Euskirchen;150114;0
+L5308;Bonn;150115;0
+L5310;Altenkirchen (Westerwald);150116;0
+L5312;Betzdorf;150117;0
+L5314;Dillenburg;150118;0
+L5502;Monschau;150119;0
+L5504;Schleiden;150120;0
+L5506;Bad Münstereifel;150121;0
+L5508;Bad Neuenahr-Ahrweiler;150122;0
+L5704;Prüm;150123;0
+L5706;Adenau;150124;0
+Landesanstalt f. Ökologie, Bodenordnung u. Forsten NRW;73;133933;0
+M;VR- u. FFH-Geb.vorschlag (w. n. Anerk. in Geb.typ C geänd.);135288;0
+Maerkischer Kreis;91;133951;0
+Ministerium f. Umwelt, Raumord. u. Landwirtschaft NRW;9;133869;0
+NRW;05000000;109787;0
+Oberbergischer Kreis;94;133954;0
+RAM;Feuchtgebiet internationaler Bedeutung (RAMSAR);111985;0
+Rhein-Sieg-Kreis;97;133957;0
+Rheinisch-Bergischer Kreis;98;133958;0
+S;Skizze;109772;0
+SPA;Vogelschutzgebiet besonderer Bedeutung (EG);111960;0
+Staatliche Vogelschutzwarte, BfN;62;133922;0
+Stadt Aachen;116;144483;0
+Stadt Bielefeld;120;144487;0
+Stadt Bochum;122;144489;0
+Stadt Bonn;109;133969;0
+Stadt Bottrop;76;133936;0
+Stadt Dortmund;123;144490;0
+Stadt Duisburg;110;133970;0
+Stadt Düsseldorf;79;133939;0
+Stadt Essen;80;133940;0
+Stadt Gelsenkirchen;119;144486;0
+Stadt Hagen;124;144491;0
+Stadt Hamm;83;133943;0
+Stadt Herne;125;144492;0
+Stadt Koeln;88;133948;0
+Stadt Krefeld;111;144478;0
+Stadt Leverkusen;117;144484;0
+Stadt Moenchengladbach;107;133967;0
+Stadt Mülheim an der Ruhr;112;144479;0
+Stadt Münster;92;133952;0
+Stadt Oberhausen;113;144480;0
+Stadt Remscheid;114;144481;0
+Stadt Solingen;101;133961;0
+Stadt Wuppertal;115;144482;0
+WNG;Weltnaturerbe-Gebiet;111990;0
+Z;Zeichnung;109773;0
+i;(inside) Aktivität, Belastungsq. l. innerhalb d. Geb.grenze;135152;0
+o;(outside) Belastung u. Nutzung l. ausserhalb d. Geb.grenze;135153;0
+~;Schätzung der Populationsgrösse;111934;0

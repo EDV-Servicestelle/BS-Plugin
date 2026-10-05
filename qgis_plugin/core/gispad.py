@@ -110,10 +110,15 @@ def lies(ds, name, mit_geometrie=False):
     defn = lyr.GetLayerDefn()
     felder = [defn.GetFieldDefn(i).GetName()
               for i in range(defn.GetFieldCount())]
+    # Ueber den INDEX lesen, nicht ueber den Namen: GetField(name) sucht den
+    # Feldnamen bei jedem einzelnen Wert linear in der Felddefinition. Bei
+    # Tabellen mit vielen Spalten (MASSN hat 43) und zehntausenden Zeilen
+    # macht das den Unterschied zwischen Sekunden und einer Minute.
+    nummern = list(enumerate(felder))
     zeilen, geoms = [], []
     lyr.ResetReading()
     for feat in lyr:
-        zeilen.append({f: feat.GetField(f) for f in felder})
+        zeilen.append({f: feat.GetField(i) for i, f in nummern})
         if mit_geometrie:
             g = feat.GetGeometryRef()
             geoms.append(g.ExportToWkb() if g else None)
@@ -154,7 +159,13 @@ def gefuellte_tabellen(ds):
 
 # ── Beziehungen ableiten ────────────────────────────────────────────────────
 
-def pruefe_elternschaft(kind_zeilen, eltern_zeilen):
+def pkey_index(zeilen):
+    """{PKEY: GISPADID} einer Tabelle."""
+    return {z["PKEY"]: z.get("GISPADID")
+            for z in zeilen if z.get("PKEY") is not None}
+
+
+def pruefe_elternschaft(kind_zeilen, eltern_zeilen, idx=None):
     """
     Pruefen, ob kind.FKEY auf eltern.PKEY zeigt.
 
@@ -164,9 +175,13 @@ def pruefe_elternschaft(kind_zeilen, eltern_zeilen):
     fuer dasselbe Objekt. Passt der ueber FKEY gefundene Elternsatz zu einem
     anderen Objekt, war der Treffer Zufall. Deshalb zaehlt nicht die
     Trefferquote, sondern die Widerspruchsfreiheit.
+
+    `idx` nimmt einen vorberechneten Schluesselindex entgegen. Ohne ihn
+    wuerde er bei jeder Paarprueffung neu aufgebaut - bei einem Dutzend
+    Tabellen sind das hunderte Durchlaeufe ueber dieselben Zeilen.
     """
-    idx = {z["PKEY"]: z.get("GISPADID")
-           for z in eltern_zeilen if z.get("PKEY") is not None}
+    if idx is None:
+        idx = pkey_index(eltern_zeilen)
     gleich = abweichend = ohne_ziel = 0
     for z in kind_zeilen:
         fk = z.get("FKEY")
@@ -179,17 +194,32 @@ def pruefe_elternschaft(kind_zeilen, eltern_zeilen):
     return gleich, abweichend, ohne_ziel
 
 
-def leite_beziehungen_ab(tabellen, toleranz=0):
+def leite_beziehungen_ab(tabellen, toleranz=None):
     """
     Zu jeder Tabelle mit FKEY den Elternteil bestimmen.
 
-    `tabellen` ist {name: zeilen}. `toleranz` erlaubt Zeilen ohne Ziel - das
-    ist der Normalfall, wenn eine Kindtabelle sich auf mehrere
-    Geometrie-Layer verteilt (BtypHtyp deckt Polygon UND Polyline ab).
+    `tabellen` ist {name: zeilen}. Ausgeschlossen wird ein Kandidat allein
+    durch WIDERSPRUECHE - also dadurch, dass der ueber FKEY gefundene
+    Elternsatz zu einem anderen Objekt gehoert (abweichende GISPADID).
 
-    Rueckgabe: {kind: {"eltern": name|None, "kandidaten": [...],
-                       "gleich":n, "ohne_ziel":n, "sicher":bool}}
+    Zeilen OHNE Ziel schliessen einen Kandidaten dagegen nicht aus. Das ist
+    der Normalfall, sobald ein Export mehrere Objektklassen enthaelt: eine
+    Sachtabelle wie BtypHtyp bedient dann BT- UND FFH-Objekte, und beim
+    Pruefen gegen die BT-Geometrie bleiben die FFH-Zeilen ohne Ziel. Eine
+    fruehere Fassung verlangte hier Null und verwarf deshalb den richtigen
+    Elternteil - die Fachspalten blieben stumm leer.
+
+    Gereiht wird nach wenigen offenen Zeilen, dann nach vielen Treffern;
+    `sicher` ist gesetzt, wenn der beste Kandidat den zweitbesten dabei
+    eindeutig schlaegt.
+
+    `toleranz` wird nur noch der Rueckwaertskompatibilitaet halber
+    entgegengenommen und nicht mehr ausgewertet.
     """
+    # Schluesselindex je Tabelle einmal aufbauen statt je Paarprueffung.
+    indizes = {name: pkey_index(zeilen) for name, zeilen in tabellen.items()
+               if zeilen and "PKEY" in zeilen[0]}
+
     ergebnis = {}
     for kind, krows in tabellen.items():
         if not krows or "FKEY" not in krows[0]:
@@ -198,18 +228,43 @@ def leite_beziehungen_ab(tabellen, toleranz=0):
         for eltern, erows in tabellen.items():
             if eltern == kind or not erows or "PKEY" not in erows[0]:
                 continue
-            gleich, abweichend, ohne_ziel = pruefe_elternschaft(krows, erows)
+            gleich, abweichend, ohne_ziel = pruefe_elternschaft(
+                krows, erows, indizes[eltern])
             # Ein einziger Widerspruch schliesst den Kandidaten aus.
-            if abweichend == 0 and gleich > 0 and ohne_ziel <= max(toleranz, 0):
+            if abweichend == 0 and gleich > 0:
                 kandidaten.append((eltern, gleich, ohne_ziel))
-        kandidaten.sort(key=lambda k: (-k[1], k[2]))
-        ergebnis[kind] = {
-            "eltern": kandidaten[0][0] if len(kandidaten) == 1 else None,
-            "kandidaten": kandidaten,
+        kandidaten.sort(key=lambda k: (k[2], -k[1]))
+        ergebnis[kind] = {"kandidaten": kandidaten}
+
+    # Gleichstand nach Tiefe aufloesen. Innerhalb EINES Objektes ist die
+    # GISPADID auf allen Ebenen gleich, deshalb bleibt eine hoehere Ebene
+    # widerspruchsfrei, obwohl sie nicht der direkte Elternteil ist: die
+    # Tierliste haengt an der Schichtung, passt rechnerisch aber auch zum
+    # Vegetationstyp darueber. Richtig ist die TIEFERE Ebene - die
+    # speziellere Zuordnung. Gemessen wird sie am vorlaeufigen Graphen.
+    vorlaeufig = {k: (v["kandidaten"][0][0] if v["kandidaten"] else None)
+                  for k, v in ergebnis.items()}
+
+    def tiefe(name, gesehen=None):
+        gesehen = gesehen or set()
+        if name in gesehen or name not in vorlaeufig or not vorlaeufig[name]:
+            return 0
+        return 1 + tiefe(vorlaeufig[name], gesehen | {name})
+
+    for kind, eintrag in ergebnis.items():
+        kandidaten = eintrag["kandidaten"]
+        if kandidaten:
+            kandidaten.sort(key=lambda k: (k[2], -tiefe(k[0]), -k[1]))
+        schluessel = [(k[2], -tiefe(k[0]), -k[1]) for k in kandidaten]
+        sicher = bool(kandidaten) and (
+            len(kandidaten) == 1 or schluessel[0] < schluessel[1])
+        krows = tabellen[kind]
+        eintrag.update({
+            "eltern": kandidaten[0][0] if sicher else None,
             "gleich": kandidaten[0][1] if kandidaten else 0,
             "ohne_ziel": kandidaten[0][2] if kandidaten else len(krows),
-            "sicher": len(kandidaten) == 1,
-        }
+            "sicher": sicher,
+        })
     return ergebnis
 
 
@@ -268,7 +323,7 @@ def beziehungen_mit_geometrie(ds, geom_layer, tabellen):
             gesammelt.extend(zeilen)
         if gesammelt:
             alle[gruppe] = gesammelt
-    return leite_beziehungen_ab(alle, toleranz=0)
+    return leite_beziehungen_ab(alle)
 
 
 def kette_nach_oben(beziehungen, start):

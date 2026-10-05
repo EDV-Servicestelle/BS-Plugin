@@ -23,10 +23,26 @@ import subprocess
 import sys
 
 #: BaseList_ID -> Dateiname. Namen laut Tabelle `Baselist` der OSIRIS-Datenbank.
+#: BaseList_ID -> (Dateiname, Bezeichnung, beidseitig)
+#
+#: `beidseitig` deckt den Sonderfall der Massnahmenliste ab. In den uebrigen
+#: Listen steht der Schluessel im ShortName und der Klartext im LongName
+#: ("CA4" -> "Flutrasen"). In Liste 15 ist es umgekehrt und ausserdem
+#: uneinheitlich: bei rund 40 Prozent der Eintraege steht die MAKO-Nummer im
+#: LongName ("Seilzug einsetzen (Wald)" -> "1.20"), beim Rest wiederholt der
+#: LongName nur den Text. Welche Form in MASSN.MASSN landet, liess sich
+#: mangels Daten nicht pruefen - deshalb werden beide Formen als Schluessel
+#: aufgenommen, die auf denselben Klartext zeigen. Eine Richtung zu raten
+#: waere schlechter als beide zu bedienen.
 LISTEN = {
-    "13": ("biotoptypen.csv",     "13_Biotoptypen"),
-    "14": ("zusatzcodes.csv",     "14_Zusatzcodes"),
-    "19": ("lebensraumtypen.csv", "Lebensraumtypen"),
+    # Liste 2 traegt die EU-Codes der Beeintraechtigungen aus dem
+    # Natura-2000-Standarddatenbogen (230 = Jagd, 720 = Trittbelastung).
+    # GISPAD legt sie in GEFAEHRD.Gef_Code ab.
+    "2":  ("beeintraechtigungen.csv", "Natura2000",  False),
+    "13": ("biotoptypen.csv",     "13_Biotoptypen",  False),
+    "14": ("zusatzcodes.csv",     "14_Zusatzcodes",  False),
+    "15": ("massnahmen.csv",      "Massnahmen_MAKO", True),
+    "19": ("lebensraumtypen.csv", "Lebensraumtypen", False),
 }
 
 
@@ -81,7 +97,7 @@ def main():
     print(f"  Atom-Tabelle: {len(atome)} Zeilen")
 
     os.makedirs(args.out, exist_ok=True)
-    for bl, (datei, bezeichnung) in sorted(LISTEN.items()):
+    for bl, (datei, bezeichnung, beidseitig) in sorted(LISTEN.items()):
         zeilen = [a for a in atome if a.get("BaseList_ID") == bl]
         # Nach Schluessel sortieren: stabile Reihenfolge, damit eine neue
         # OSIRIS-Fassung einen lesbaren Diff erzeugt statt einer Umwaelzung.
@@ -97,10 +113,21 @@ def main():
         je_schluessel = {}
         for a in zeilen:
             sn = (a.get("ShortName") or "").strip()
+            ln = (a.get("LongName") or "").strip()
+            aid = a.get("Atom_ID") or ""
             if not sn:
                 continue
-            je_schluessel.setdefault(sn, []).append(
-                ((a.get("LongName") or "").strip(), a.get("Atom_ID") or ""))
+            if beidseitig:
+                # Hier traegt der ShortName den Klartext. Als Schluessel
+                # dienen die MAKO-Nummer (sofern vorhanden) UND der Text.
+                text = sn
+                schluessel = {sn}
+                if ln and ln != sn:
+                    schluessel.add(ln)
+                for k in schluessel:
+                    je_schluessel.setdefault(k, []).append((text, aid))
+            else:
+                je_schluessel.setdefault(sn, []).append((ln, aid))
 
         pfad = os.path.join(args.out, datei)
         zusammengefasst = mehrdeutig = ohne_text = 0
