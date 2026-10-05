@@ -47,7 +47,7 @@ python3 tools/gispad_export.py --gdb Export.gdb --modus fachlich \
     --klasse BT --out BT.gpkg
 ```
 
-Objektklassen: `BT` (Biotoptypen), `BK` (Biotopkataster), `MAS` (Maßnahmen).
+Objektklassen: `BT` (Biotoptypen), `BK` (Biotopkataster), `FFH` (FFH-Gebiete), `MAS` (Maßnahmen).
 
 **Bei einem unbekannten Export immer mit `--modus beziehungen` anfangen.**
 
@@ -129,6 +129,37 @@ Mehrdeutige Schlüssel sind markiert (Spalte `mehrdeutig`) und tragen alle
 Lesarten: `AV1` ist in der Biotoptypen-Liste sowohl „Ausbreitungskorridor,
 Vernetzungsachse" als auch „Waldmantel". Das soll auffallen statt
 stillschweigend zu einer willkürlichen Bedeutung zu werden.
+
+## Verträglich mit dem LANUK-Konverter
+
+Die ersten Felder tragen bewusst die Namen, die der LANUK-Konverter vergibt:
+
+| Objektklasse | Felder wie beim LANUK-Konverter |
+| --- | --- |
+| BT | `KENNUNG`, `BT_CODE`, `FL_HA`, `GISPADID` |
+| FFH | `KENNUNG`, `OBJBEZ`, `GISPADID` |
+
+Damit lässt sich das mitgelieferte `BIOTOP_v2020_polygon.qml` **ohne jede
+Änderung** auf das Ergebnis legen — es kategorisiert über `BT_CODE`.
+
+Gegen die Ausgabe des offiziellen Konverters geprüft: `KENNUNG`, `BT_CODE`
+und `FL_HA` stimmten bei **allen 681 Objekten** eines Testdatensatzes überein,
+ebenso die FFH-Gebietsangaben. Ein Unterschied bleibt bewusst: Der
+LANUK-Konverter lässt Objekte **ohne Biotoptyp weg** (78 von 759 im Test),
+hier bleiben sie erhalten — eine Sicherung soll nichts verlieren.
+
+## Gefährdung und Beeinträchtigung
+
+Die Tabelle `GEFAEHRD` bedient zwei Ebenen, unterschieden allein dadurch,
+woran sie hängt:
+
+| hängt an | Bedeutung | Feld |
+| --- | --- | --- |
+| Gebietsobjekt (FFH) | Gefährdung des **ganzen Gebiets** | `Gef_Code` (EU-Codes des Natura-2000-Standarddatenbogens) |
+| Biotopfläche (BT) | Beeinträchtigung **der Fläche** | `GEFAEHRD` (Referenzlisten-Klartext) |
+
+Im Testdatensatz war die Trennung vollständig: 27 Zeilen am Gebiet trugen nur
+`Gef_Code`, 2 Zeilen an Flächen nur `GEFAEHRD`.
 
 ## Was BT übernimmt
 

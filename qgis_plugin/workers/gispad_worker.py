@@ -34,9 +34,11 @@ class GispadWorker(QThread):
                 ergebnis = analysiere(cfg["gdb"], melde)
                 self.fertig.emit(True, "", ergebnis)
             elif self.auftrag == "alles":
-                geschrieben = exportiere_alles(cfg["gdb"], cfg["ziel"], melde)
+                befunde = []
+                geschrieben = exportiere_alles(cfg["gdb"], cfg["ziel"], melde,
+                                               befunde=befunde)
                 self.fertig.emit(True, "", {"geschrieben": geschrieben,
-                                            "befunde": []})
+                                            "befunde": befunde})
             else:
                 geschrieben, befunde = exportiere_fachlich(
                     cfg["gdb"], cfg["klasse"], cfg["ziel"], melde=melde)

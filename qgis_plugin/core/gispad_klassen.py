@@ -64,11 +64,19 @@ OBJEKTKLASSEN = {
     "BT": {
         "name": "Biotoptypen",
         "geometrie": ("BT_Polygon", "BT_Polyline", "BT_Point"),
+        # Die ersten vier Felder tragen BEWUSST die Namen, die der
+        # LANUK-Konverter vergibt (KENNUNG, BT_CODE, FL_HA, GISPADID).
+        # Damit laesst sich das mitgelieferte QML "BIOTOP_v2020_polygon.qml"
+        # ohne jede Aenderung auf das Ergebnis legen - es kategorisiert ueber
+        # BT_CODE. Gegen die Ausgabe des offiziellen Konverters geprueft:
+        # KENNUNG, BT_CODE und FL_HA stimmten bei allen 681 Objekten eines
+        # Testdatensatzes ueberein.
         "kopf": [
-            ("Kennung",   "geom",     "KENNUNG",     "str"),
-            ("Gispad_ID", "geom",     "GISPADID",    "int"),
+            ("KENNUNG",   "geom",     "KENNUNG",     "str"),
+            ("BT_CODE",   "BtypHtyp", "Biotoptyp",   "str"),
+            ("FL_HA",     "geom",     "FLAECHE",     "real"),
+            ("GISPADID",  "geom",     "GISPADID",    "int"),
             ("Objektbez", "geom",     "OBJBEZ",      "str"),
-            ("Biotoptyp", "BtypHtyp", "Biotoptyp",   "str"),
             # LR-Typ steht in OEKOTYP, nicht in den FFH_*-Feldern
             # (DV-Verfahrensbeschreibung BT V2020a, S. 4).
             ("LR_Typ",    "BtypHtyp", "Oekotyp",     "str"),
@@ -79,9 +87,20 @@ OBJEKTKLASSEN = {
         "sammeln": [
             ("Zusatzcodes",      "Zusatzcodes", "Zusatzcode", ", "),
             ("Zusatz_Bemerkung", "Zusatzcodes", "Bemerkung",  "; "),
+            # Beeintraechtigung der EINZELFLAECHE. Die Tabelle GEFAEHRD
+            # bedient zwei Ebenen, unterschieden nur dadurch, woran sie
+            # haengt: am Gebietsobjekt die Gefaehrdung des ganzen Gebiets
+            # (Feld Gef_Code, EU-Codes des Natura-2000-Standarddatenbogens),
+            # an der Biotopflaeche deren Beeintraechtigung (Feld GEFAEHRD,
+            # Referenzlisten-Klartext). In einem Testdatensatz war die
+            # Trennung vollstaendig: 27 Zeilen am Gebiet trugen nur
+            # Gef_Code, 2 Zeilen an Flaechen nur GEFAEHRD.
+            # Hier zaehlt deshalb GEFAEHRD - Gef_Code gehoert ins
+            # Gebietsprofil, nicht hierher.
+            ("Beeintraechtigung", "GEFAEHRD", "GEFAEHRD", "; "),
         ],
         "klartext": {
-            "Biotoptyp_Text":   ("Biotoptyp",   "biotoptypen.csv"),
+            "BT_TEXT":          ("BT_CODE",     "biotoptypen.csv"),
             "LR_Typ_Text":      ("LR_Typ",      "lebensraumtypen.csv"),
             "Zusatzcodes_Text": ("Zusatzcodes", "zusatzcodes.csv"),
         },
@@ -99,6 +118,34 @@ OBJEKTKLASSEN = {
         ],
         "sammeln": [],
         "klartext": {},
+        "abgeleitet": {},
+    },
+    "FFH": {
+        "name": "FFH-Gebiete",
+        # Der LANUK-Konverter schreibt je Gebiet einen eigenen Layer
+        # (FFH_DE-4305-301) mit KENNUNG, OBJBEZ und GISPADID. Diese drei
+        # Namen werden uebernommen; die uebrigen Felder kommen hinzu.
+        "geometrie": ("FFH",),
+        "kopf": [
+            ("KENNUNG",     "geom", "KENNUNG",          "str"),
+            ("OBJBEZ",      "geom", "OBJBEZ",           "str"),
+            ("GISPADID",    "geom", "GISPADID",         "int"),
+            ("FL_HA",       "geom", "FLAECHE",          "real"),
+            ("Objektbeschr", "geom", "OBJBESCHR",       "str"),
+            ("Schutzziel",  "geom", "SCHUTZZIEL",       "str"),
+            ("Entwicklungsziel", "geom", "ENTWICKLUNGSZIEL", "str"),
+        ],
+        # Gefaehrdung des GANZEN Gebiets - im Gegensatz zur
+        # Beeintraechtigung der Einzelflaeche im BT-Profil. Dieselbe Tabelle
+        # GEFAEHRD, aber das andere Feld: hier der EU-Code aus dem
+        # Natura-2000-Standarddatenbogen, dort der Referenzlisten-Klartext.
+        "sammeln": [
+            ("Gefaehrdung",      "GEFAEHRD", "Gef_Code",   ", "),
+            ("Gef_Intensitaet",  "GEFAEHRD", "Gef_Intens", ", "),
+        ],
+        "klartext": {
+            "Gefaehrdung_Text": ("Gefaehrdung", "beeintraechtigungen.csv"),
+        },
         "abgeleitet": {},
     },
     "MAS": {
@@ -141,6 +188,26 @@ ABGELEITET = {"lr_art": lr_art}
 
 def _nichts(_p=0, _t=""):
     pass
+
+
+#: Feldnamen, die erfahrungsgemaess personenbezogene Angaben tragen.
+#: Die DV-Verfahrensbeschreibung BT (V2020a, S. 27) haelt ausdruecklich fest,
+#: dass solche Angaben nicht an die Landesdatenbank gehen duerfen. Die
+#: Vollsicherung nimmt sie bewusst MIT - sie soll nichts verlieren - meldet
+#: aber, wo sie stehen, damit die Datei nicht unbesehen weitergereicht wird.
+PERSONENBEZOGEN = ("ansprechpartner", "email", "e_mail", "anschrift",
+                   "betreuer", "adresse", "telefon", "bearbeiter", "name")
+
+
+def pruefe_personenbezug(tabelle, spalten, zeilen):
+    """Namen der Felder, die belegt sind und nach Personenbezug aussehen."""
+    treffer = []
+    for feld, _typ in spalten:
+        if feld.lower() not in PERSONENBEZOGEN:
+            continue
+        if any(z.get(feld) not in (None, "") for _i, z in zeilen):
+            treffer.append(feld)
+    return treffer
 
 
 # ── Analyse ─────────────────────────────────────────────────────────────────
@@ -201,11 +268,36 @@ def analysiere(gdb, melde=_nichts):
 
 # ── Hierarchie aufloesen ────────────────────────────────────────────────────
 
-def _pfad_von_oben(beziehungen, ziel, wurzel):
-    kette = kette_nach_oben(beziehungen, ziel)
-    if wurzel not in kette:
+def _pfad_von_oben(beziehungen, ziel, wurzel, gesehen=None):
+    """
+    Weg von `wurzel` hinab zu `ziel`, oder None.
+
+    Gesucht wird ueber ALLE widerspruchsfreien Kandidaten, nicht nur ueber
+    den bestbewerteten Elternteil. Eine Sachtabelle kann naemlich an
+    mehreren Objektklassen zugleich haengen: GEFAEHRD traegt am Gebiet die
+    Gefaehrdung des ganzen Gebiets und an der Einzelflaeche deren
+    Beeintraechtigung. Wuerde nur der haeufigste Elternteil zaehlen, fiele
+    die seltenere Ebene stumm weg - in einem Testdatensatz waeren das 2 von
+    29 Zeilen gewesen.
+    """
+    gesehen = gesehen or set()
+    if ziel in gesehen:
         return None
-    return list(reversed(kette[:kette.index(wurzel)]))
+    eintrag = beziehungen.get(ziel) or {}
+    kandidaten = [k for k, _g, _o in eintrag.get("kandidaten", [])]
+    # Den bestbewerteten Elternteil zuerst pruefen, damit das Ergebnis bei
+    # mehreren moeglichen Wegen stabil bleibt.
+    bester = eintrag.get("eltern")
+    if bester in kandidaten:
+        kandidaten = [bester] + [k for k in kandidaten if k != bester]
+    for kandidat in kandidaten:
+        if kandidat == wurzel:
+            return [ziel]
+        oben = _pfad_von_oben(beziehungen, kandidat, wurzel,
+                              gesehen | {ziel})
+        if oben is not None:
+            return oben + [ziel]
+    return None
 
 
 def _zeilen_zu_objekt(pfad, index, start_pkey):
@@ -310,10 +402,19 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
                     roh = zs[0].get(feld) if zs else None
                 if typ == "bool":
                     satz[zielspalte] = als_bool(roh)
-                elif typ == "int":
+                elif typ in ("int", "real"):
+                    # Zahlen koennen in der Geodatabase als Text stehen
+                    # (GK_RW traegt sogar ein angehaengtes Komma), deshalb
+                    # wird umgewandelt statt verlassen. Laesst sich ein Wert
+                    # nicht lesen, wird er NULL - nicht 0, sonst waere eine
+                    # fehlende Flaechenangabe spaeter von einer Flaeche der
+                    # Groesse null nicht mehr zu unterscheiden.
+                    wandeln = int if typ == "int" else float
                     try:
-                        satz[zielspalte] = (int(roh)
-                                            if roh not in (None, "") else None)
+                        satz[zielspalte] = (
+                            wandeln(str(roh).strip().rstrip(",").replace(
+                                ",", "."))
+                            if roh not in (None, "") else None)
                     except (TypeError, ValueError):
                         satz[zielspalte] = None
                 else:
@@ -342,7 +443,7 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
 
 # ── Vollsicherung ───────────────────────────────────────────────────────────
 
-def exportiere_alles(gdb, ziel, melde=_nichts):
+def exportiere_alles(gdb, ziel, melde=_nichts, befunde=None):
     """
     Jede gefuellte Tabelle vollstaendig uebernehmen.
 
@@ -360,6 +461,7 @@ def exportiere_alles(gdb, ziel, melde=_nichts):
     vorhanden = gefuellte_tabellen(ds)
 
     bloecke = []
+    gelesen = {}          # jede Tabelle nur EINMAL von der Platte holen
     gesamt = max(len(vorhanden), 1)
     for nr, (name, n) in enumerate(sorted(vorhanden.items())):
         melde(10 + int(60 * nr / gesamt), f"Lese {name} ({n}) …")
@@ -375,20 +477,22 @@ def exportiere_alles(gdb, ziel, melde=_nichts):
             typ = {ogr.OFTInteger: "int", ogr.OFTInteger64: "int",
                    ogr.OFTReal: "real"}.get(fd.GetType(), "str")
             spalten.append((fd.GetName(), typ))
+        saetze = list(enumerate(zeilen))
+        if befunde is not None:
+            pb = pruefe_personenbezug(name, spalten, saetze)
+            if pb:
+                befunde.append(
+                    f"{name}: enth\u00e4lt personenbezogene Angaben "
+                    f"({', '.join(pb)}). Vor einer Weitergabe pr\u00fcfen.")
+        gelesen[name] = zeilen
         bloecke.append((name, lyr.GetGeomType() if hat_geom else 100,
                         lyr.GetSpatialRef() if hat_geom else None,
-                        spalten, list(enumerate(zeilen)), geoms))
+                        spalten, saetze, geoms))
 
     melde(75, "Leite Beziehungen ab …")
     geo = [n for n in vorhanden
            if ds.GetLayerByName(n).GetGeomType() != 100]
-    sach = {}
-    for n in vorhanden:
-        if n in geo:
-            continue
-        zeilen, _ = lies(ds, n)
-        if zeilen:
-            sach[n] = zeilen
+    sach = {n: z for n, z in gelesen.items() if n not in geo and z}
     bez = beziehungen_mit_geometrie(ds, geo, sach)
     bz_spalten = [("tabelle", "str"), ("eltern", "str"), ("zeilen", "int"),
                   ("befund", "str"), ("kette", "str")]

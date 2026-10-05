@@ -157,8 +157,9 @@ def main():
         print(f"  [{p:3}%] {t}")
 
     if args.modus == "alles":
-        geschrieben = gk.exportiere_alles(args.gdb, args.out, melde)
         befunde = []
+        geschrieben = gk.exportiere_alles(args.gdb, args.out, melde,
+                                          befunde=befunde)
     else:
         geschrieben, befunde = gk.exportiere_fachlich(
             args.gdb, args.klasse, args.out, melde=melde)
