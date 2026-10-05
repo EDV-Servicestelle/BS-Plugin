@@ -23,7 +23,8 @@ import os
 _NAMEN = ("oeffne", "lies", "gefuellte_tabellen",
           "beziehungen_mit_geometrie", "geometrie_gruppe",
           "kette_nach_oben", "lies_referenzliste", "loese_auf", "als_bool",
-          "gruppiere_nach_fkey", "aggregiere", "ogr_modul", "LISTEN_DIR")
+          "gruppiere_nach_fkey", "aggregiere", "ogr_modul", "LISTEN_DIR",
+          "stil_datei", "setze_vorgabestil")
 
 _gispad = None
 for _versuch in ("qgis_new_project_plugin.core.gispad", ".gispad", "gispad"):
@@ -42,7 +43,8 @@ if _gispad is None:
 (oeffne, lies, gefuellte_tabellen, beziehungen_mit_geometrie,
  geometrie_gruppe, kette_nach_oben, lies_referenzliste, loese_auf,
  als_bool, gruppiere_nach_fkey, aggregiere, ogr_modul,
- LISTEN_DIR) = (getattr(_gispad, _n) for _n in _NAMEN)
+ LISTEN_DIR, stil_datei,
+ setze_vorgabestil) = (getattr(_gispad, _n) for _n in _NAMEN)
 
 
 # ── Objektklassen ───────────────────────────────────────────────────────────
@@ -105,6 +107,15 @@ OBJEKTKLASSEN = {
             "Zusatzcodes_Text": ("Zusatzcodes", "zusatzcodes.csv"),
         },
         "abgeleitet": {"LR_Art": "lr_art"},
+        # Layerstil, der nach der Uebernahme als Vorgabe im GeoPackage
+        # hinterlegt wird: Zielayer -> QML in data/gispad.
+        #
+        # Es ist das Original des LANUK ("BIOTOP_v2020_polygon.qml"),
+        # unveraendert: Es kategorisiert ueber BT_CODE und beschriftet aus
+        # KENNUNG und BT_CODE - alles Felder, die oben genau so heissen.
+        # Nur der Polygonlayer bekommt ihn; auf Linien oder Punkte gelegt
+        # waere ein Flaechenstil wirkungslos.
+        "stil": {"BT_Polygon": "BIOTOP_v2020_polygon.qml"},
     },
     "BK": {
         "name": "Biotopkataster",
@@ -437,8 +448,34 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts):
 
     melde(85, "Schreibe GeoPackage …")
     geschrieben = _schreibe(ziel, bloecke)
+    _setze_stile(ziel, profil, geschrieben, befunde, melde)
     melde(100, "Fertig.")
     return geschrieben, befunde
+
+
+def _setze_stile(ziel, profil, geschrieben, befunde, melde=_nichts):
+    """
+    Die mitgelieferten Layerstile als Vorgabe ins GeoPackage schreiben.
+
+    Fehlt eine Stildatei oder scheitert das Schreiben, ist das ein Befund und
+    kein Abbruch: Die Daten sind dann uebernommen und nur ungestylt - und bei
+    einer Notfallsicherung sind die Daten das, worauf es ankommt.
+    """
+    stile = profil.get("stil") or {}
+    for layer, datei in sorted(stile.items()):
+        if layer not in geschrieben:
+            continue
+        pfad = stil_datei(datei)
+        if not pfad:
+            befunde.append(f"Layerstil {datei} fehlt im Plugin – "
+                           f"{layer} bleibt ungestylt.")
+            continue
+        try:
+            melde(95, f"Lege Layerstil auf {layer} …")
+            setze_vorgabestil(ziel, layer, pfad, stilname="LANUK",
+                              beschreibung="Stil des LANUK, unveraendert")
+        except Exception as e:                       # noqa: BLE001
+            befunde.append(f"Layerstil {datei} nicht gesetzt ({e}).")
 
 
 # ── Vollsicherung ───────────────────────────────────────────────────────────

@@ -66,6 +66,9 @@ SCHLUESSELSPALTEN = ("GISPADID", "PKEY", "SKEY", "FKEY")
 _PLUGIN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LISTEN_DIR = os.path.join(_PLUGIN_DIR, "data", "osiris")
 
+#: Mitgelieferte Layerstile (QML) fuer die Ergebnisse der Uebernahme.
+STILE_DIR = os.path.join(_PLUGIN_DIR, "data", "gispad")
+
 
 # ── GDAL ────────────────────────────────────────────────────────────────────
 
@@ -643,6 +646,68 @@ def loese_auf(wert, liste, trenner=", "):
     teile = [t.strip() for t in str(wert).split(",")]
     aus = [liste.get(t) or f"{t} (?)" for t in teile if t]
     return trenner.join(aus) if aus else None
+
+
+# ── Layerstil ins GeoPackage ────────────────────────────────────────────────
+#
+# Der Stil wird in die Tabelle `layer_styles` des GeoPackages geschrieben,
+# nicht als QML daneben gelegt. Zwei Gruende: QGIS nimmt den Vorgabestil beim
+# Laden von dort selbst, ohne Zutun - und er bleibt an den Daten, wenn die
+# Datei weitergegeben wird. Eine lose QML-Datei neben dem GeoPackage geht auf
+# diesem Weg verloren.
+
+_LAYER_STYLES_DDL = """
+CREATE TABLE IF NOT EXISTS layer_styles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_table_catalog TEXT, f_table_schema TEXT, f_table_name TEXT,
+    f_geometry_column TEXT, styleName TEXT, styleQML TEXT, styleSLD TEXT,
+    useAsDefault INTEGER, description TEXT, owner TEXT, ui TEXT,
+    update_time TEXT)
+"""
+
+
+def stil_datei(name):
+    """Pfad eines mitgelieferten Stils, oder None wenn er fehlt."""
+    pfad = os.path.join(STILE_DIR, name)
+    return pfad if os.path.isfile(pfad) else None
+
+
+def setze_vorgabestil(gpkg, layer, qml_pfad, stilname="LANUK",
+                      beschreibung=""):
+    """
+    Ein QML als Vorgabestil eines Layers im GeoPackage hinterlegen.
+
+    Geschrieben wird mit sqlite3 aus der Standardbibliothek - GDAL bietet
+    dafuer keinen Weg, und QGIS wird hier bewusst nicht vorausgesetzt, damit
+    die Kommandozeile dasselbe Ergebnis liefert wie der Dialog.
+    """
+    import sqlite3
+    import datetime
+
+    with open(qml_pfad, encoding="utf-8") as fh:
+        qml = fh.read()
+    con = sqlite3.connect(gpkg)
+    try:
+        con.execute(_LAYER_STYLES_DDL)
+        # Den Namen der Geometriespalte nicht raten, sondern nachsehen.
+        zeile = con.execute(
+            "SELECT column_name FROM gpkg_geometry_columns "
+            "WHERE table_name = ?", (layer,)).fetchone()
+        geom = zeile[0] if zeile else "geom"
+        con.execute("DELETE FROM layer_styles "
+                    "WHERE f_table_name = ? AND styleName = ?",
+                    (layer, stilname))
+        con.execute(
+            "INSERT INTO layer_styles ("
+            "  f_table_catalog, f_table_schema, f_table_name,"
+            "  f_geometry_column, styleName, styleQML, styleSLD,"
+            "  useAsDefault, description, owner, ui, update_time)"
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            ("", "", layer, geom, stilname, qml, "", 1, beschreibung, "",
+             None, datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")))
+        con.commit()
+    finally:
+        con.close()
 
 
 # ── kleine Helfer ───────────────────────────────────────────────────────────

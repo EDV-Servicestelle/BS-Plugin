@@ -37,6 +37,33 @@ Der Dialog führt in drei Schritten:
 
 Die Übernahme läuft im Hintergrund, QGIS bleibt bedienbar.
 
+### Darstellung
+
+Die Fachauswahl der Objektklasse **BT** bringt den Layerstil des LANUK mit:
+`BIOTOP_v2020_polygon.qml`, das Original, unverändert. Es liegt im Plugin
+unter `data/gispad/` und wird nach der Übernahme als *Vorgabestil* in die
+Tabelle `layer_styles` des erzeugten GeoPackages geschrieben. QGIS nimmt ihn
+beim Laden von dort selbst — es ist nichts anzuklicken.
+
+Der Stil steckt bewusst *im* GeoPackage und liegt nicht als QML daneben: So
+bleibt er an den Daten, wenn die Datei weitergegeben oder verschoben wird.
+
+Dass er ohne Anpassung greift, ist kein Zufall, sondern der Grund für die
+Feldnamen der Übernahme: Der Stil kategorisiert über `BT_CODE` und
+beschriftet aus `KENNUNG` und `BT_CODE`. In einem Testdatensatz waren alle
+91 vorkommenden `BT_CODE`-Werte von den 1811 Kategorien des Stils abgedeckt.
+
+Zwei Einschränkungen, beide beabsichtigt:
+
+* Nur der **Polygonlayer** bekommt ihn. Ein Flächenstil auf Linien oder
+  Punkten wäre wirkungslos.
+* Die **Vollsicherung bleibt ungestylt.** Sie führt die GISPAD-Rohfelder und
+  kennt kein `BT_CODE` — ein darauf kategorisierender Stil fände nichts.
+
+Fehlt die Stildatei im Plugin, gibt es einen Hinweis im Protokoll und keinen
+Abbruch: Die Daten sind dann übernommen und nur ungestylt, und bei einer
+Notfallsicherung zählen die Daten.
+
 ### Gepackte Exporte
 
 Eine File-Geodatabase ist ein Ordner mit hunderten Dateien. Wer sie
