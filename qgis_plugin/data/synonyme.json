@@ -1,5 +1,5 @@
 {
-  "_kommentar": "Artname-Synonymtabelle fuer den FT-Altdaten-Importer. Format: 'quell_artname_normalisiert': 'suchterm_im_referenzkataster'. Alle Schluessel in Kleinbuchstaben, ohne fuehrende/nachfolgende Leerzeichen. Umlaute koennen als ae/oe/ue ODER als ä/ö/ü eingetragen werden. Der Suchterm muss im NRW-Referenzkataster (Referenzen.gpkg) vorkommen. | Stand 2026-10-07: Ziele gegen Referenzen.gpkg geprüft; Arten, die dort fehlen, sind nicht mehr auf eine andere Art umgelenkt, sondern entfernt – sie laufen in Fund_Fehlend auf.",
+  "_kommentar": "Artname-Synonymtabelle fuer den FT-Altdaten-Importer. Format: 'quell_artname_normalisiert': 'suchterm_im_referenzkataster'. Alle Schluessel in Kleinbuchstaben, ohne fuehrende/nachfolgende Leerzeichen. Umlaute koennen als ae/oe/ue ODER als ä/ö/ü eingetragen werden. Der Suchterm muss im NRW-Referenzkataster (Referenzen.gpkg) vorkommen. | Stand 2026-10-07: Ziele gegen Referenzen.gpkg geprüft; Arten, die dort fehlen, sind nicht mehr auf eine andere Art umgelenkt, sondern entfernt – sie laufen in Fund_Fehlend auf. Ebenso entfernt sind Eintraege, die eine ausdruecklich unbestimmte oder hybride Angabe auf eine einzelne reine Art verengen wuerden. Zielnamen muessen taxonomische Eintraege sein; die oekologischen Sammelbegriffe des Referenzkatasters (Gilden wie \"Amphibien\", \"Molche\", \"Bodenbrueter\") sind keine Arten und liegen unter keiner Artengruppe.",
   "synonyme": {
     "Saeugetiere": {
       "wildschwein": "sus scrofa",
@@ -38,9 +38,7 @@
     },
     "Amphibien_Reptilien": {
       "braunfrosch": "rana spec.",
-      "molch unbestimmt": "molche",
       "frosch unbestimmt": "rana spec.",
-      "amphibien unbestimmt": "amphibien",
       "braunfrosch unbestimmt": "rana spec."
     },
     "Voegel": {
@@ -54,7 +52,6 @@
       "grossen brachvogel": "numenius arquata",
       "kleiner brachvogel": "numenius phaeopus",
       "regenbrachvogel": "numenius phaeopus",
-      "graugans-hybride": "anser anser",
       "blässralle": "fulica atra",
       "teichhuhn": "gallinula chloropus",
       "ziegenmelker": "caprimulgus europaeus",
@@ -113,12 +110,9 @@
       "baummarder": "martes martes",
       "gruenfrosch": "rana esculenta-synklepton",
       "grünfrosch": "rana esculenta-synklepton",
-      "kanadagans-hybride": "branta canadensis",
-      "stockenten-hybride": "anas platyrhynchos",
-      "stockente-hybride": "anas platyrhynchos",
       "ralle": "rallus aquaticus",
       "rohrammer": "emberiza schoeniclus",
-      "schilfrohrsaenger": "acrocephalus scirpaceus",
+      "schilfrohrsaenger": "acrocephalus schoenobaenus",
       "teichrohrsaenger": "acrocephalus scirpaceus",
       "drosselrohrsaenger": "acrocephalus arundinaceus",
       "argiope bruennechi": "argiope bruennichi",
