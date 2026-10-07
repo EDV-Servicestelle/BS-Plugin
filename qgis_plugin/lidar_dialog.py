@@ -15,7 +15,7 @@ from qgis.PyQt.QtWidgets import (
 from qgis.core import (
     QgsProject, QgsCoordinateReferenceSystem,
     QgsCoordinateTransform, QgsCoordinateTransformContext,
-    QgsVectorLayer, QgsWkbTypes,
+    QgsVectorLayer, QgsWkbTypes, QgsGeometry,
 )
 
 WGS84 = QgsCoordinateReferenceSystem("EPSG:4326")
@@ -90,7 +90,27 @@ class LidarDialog(QDialog):
         lyr_btn.clicked.connect(self._load_layer_extent)
         lyr_row.addWidget(self.extent_layer_combo)
         lyr_row.addWidget(lyr_btn)
-        bf.addRow("", lyr_row)
+        bf.addRow("Abgrenzung:", lyr_row)
+
+        opt_row = QHBoxLayout()
+        self.clip_cb = QCheckBox("auf Geometrie zuschneiden")
+        self.clip_cb.setToolTip(
+            "Statt nur der rechteckigen Ausdehnung wird das Ergebnis auf die "
+            "tatsächliche Fläche des Layers beschnitten "
+            "(z. B. Untersuchungsgebiet, Schutzgebiet).")
+        self.sel_only_cb = QCheckBox("nur ausgewählte Objekte")
+        self.sel_only_cb.setToolTip(
+            "Nur die im Layer selektierten Objekte als Abgrenzung verwenden.")
+        opt_row.addWidget(self.clip_cb)
+        opt_row.addWidget(self.sel_only_cb)
+        opt_row.addStretch(1)
+        bf.addRow("", opt_row)
+        self.clip_lbl = QLabel("")
+        self.clip_lbl.setStyleSheet("color:gray;font-size:11px;")
+        bf.addRow("", self.clip_lbl)
+        for _cb in (self.clip_cb, self.sel_only_cb):
+            _cb.toggled.connect(lambda *_: self._build_clip_geometry(
+                self.extent_layer_combo.currentData()))
 
         self.est_lbl = QLabel("")
         self.est_lbl.setStyleSheet("color:gray;font-size:11px;")
@@ -322,8 +342,53 @@ class LidarDialog(QDialog):
             self.lat_max.setValue(min(52.6, e.yMaximum()))
             self._update_estimate()
             self._log(f"Ausdehnung von '{lyr.name()}' übernommen.")
+            self._build_clip_geometry(lyr)
         except Exception as ex:
             self._log(f"⚠ Layer-Ausdehnung: {ex}")
+
+    def _build_clip_geometry(self, lyr):
+        """
+        Ermittelt die Abgrenzungs-Geometrie (Vereinigung) in EPSG:25832.
+        Wird nur genutzt, wenn 'auf Geometrie zuschneiden' aktiv ist.
+        """
+        self._clip_wkt = None
+        self.clip_lbl.setText("")
+        if not self.clip_cb.isChecked() or lyr is None:
+            return
+        if not isinstance(lyr, QgsVectorLayer):
+            self._log("⚠ Zuschnitt: nur Vektorlayer möglich – Ausdehnung wird genutzt.")
+            return
+        if QgsWkbTypes.geometryType(lyr.wkbType()) != QgsWkbTypes.PolygonGeometry:
+            self._log("⚠ Zuschnitt: Layer enthält keine Polygone – "
+                      "Ausdehnung wird genutzt.")
+            return
+        try:
+            feats = (lyr.getSelectedFeatures() if self.sel_only_cb.isChecked()
+                     else lyr.getFeatures())
+            geoms = [f.geometry() for f in feats
+                     if f.geometry() and not f.geometry().isEmpty()]
+            if not geoms:
+                self._log("⚠ Zuschnitt: keine Geometrien gefunden"
+                          + (" (Auswahl leer)." if self.sel_only_cb.isChecked() else "."))
+                return
+            union = QgsGeometry.unaryUnion(geoms)
+            if union is None or union.isEmpty():
+                self._log("⚠ Zuschnitt: Geometrien konnten nicht vereinigt werden.")
+                return
+            if lyr.crs() != UTM32:
+                tr = QgsCoordinateTransform(lyr.crs(), UTM32,
+                                            QgsCoordinateTransformContext())
+                union.transform(tr)
+            self._clip_wkt = union.asWkt()
+            self.clip_lbl.setText(
+                "Abgrenzung aktiv: %d Objekt(e) aus „%s“%s"
+                % (len(geoms), lyr.name(),
+                   " (Auswahl)" if self.sel_only_cb.isChecked() else ""))
+            self._log(f"Zuschnitt-Geometrie aus '{lyr.name()}' übernommen "
+                      f"({len(geoms)} Objekt(e)).")
+        except Exception as ex:
+            self._clip_wkt = None
+            self._log(f"⚠ Zuschnitt-Geometrie: {ex}")
 
     def _load_canvas_extent(self):
         """Liest aktuellen Kartenausschnitt (wird auch live nachgeführt)."""
@@ -426,6 +491,7 @@ class LidarDialog(QDialog):
             "tin_sw_layer":     self.sw_combo.currentData(),   # stehende Gewässer
             "tin_fw_layer":     self.fw_combo.currentData(),   # Fließgewässer
             "tin_bld_layer":    self.bld_combo.currentData(),  # Gebäude LOD-2
+            "clip_wkt":         getattr(self, "_clip_wkt", None),
         }
         self.start_btn.setEnabled(False)
         self.bar.setRange(0,100); self.bar.setValue(0); self.bar.setVisible(True)

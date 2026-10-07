@@ -50,7 +50,7 @@ FORM_LAYOUTS = {
                 {
                     "name":   "Optionalen Angaben",
                     "fields": ["Anzahl", "Zaehleinheit", "Status",
-                               "Stadium", "Geschlecht", "Fundort", "Bemerkung"],
+                               "Stadium", "Fundort", "Bemerkung"],
                 },
                 {
                     "name":   "Stammdaten",
@@ -58,18 +58,13 @@ FORM_LAYOUTS = {
                 },
                 {
                     "name":   "Systemdaten",
-                    "fields": ["Kennung", "Eingabedatum", "Aenderungsdatum",
+                    "fields": ["Kennung", "Aenderungsdatum",
                                "Utm_east", "Utm_north"],
                 },
             ],
             "hidden":   ["fid"],
-            # fid zusaetzlich schreibgeschuetzt: 'hidden' entfernt das Feld nur
-            # aus dem Formular, in der Attributtabelle waere es sonst weiterhin
-            # editierbar - ein versehentlich geaenderter Primaerschluessel
-            # zerreisst die Verknuepfung zu Anhaengen und Altdatenbezuegen.
-            "readonly": ["fid", "Artname_deutsch", "Artname_wiss",
-                         "Kennung", "Utm_east", "Utm_north",
-                         "Eingabedatum", "Aenderungsdatum"],
+            "readonly": ["Artname_deutsch", "Artname_wiss",
+                         "Kennung", "Utm_east", "Utm_north", "Aenderungsdatum"],
         },
     },
     "biotopbaum": {
@@ -234,13 +229,7 @@ def apply_form_layout(layer: QgsVectorLayer, layout_def: dict):
         root.addChildElement(tab_more)
 
     # Auto-Felder als schreibgeschützt markieren (werden per Expression befüllt)
-    readonly_fields = list(layout_def.get("readonly", []))
-    # Der Primaerschluessel wird in JEDER Fachschale schreibgeschuetzt:
-    # 'hidden' blendet fid nur im Formular aus, in der Attributtabelle bliebe
-    # es sonst editierbar.
-    if "fid" not in [f.lower() for f in readonly_fields]:
-        readonly_fields.append("fid")
-
+    readonly_fields = layout_def.get("readonly", [])
     fields_obj = layer.fields()
     for fname in readonly_fields:
         idx = fields_obj.indexFromName(fname)

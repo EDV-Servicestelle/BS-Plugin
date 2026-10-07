@@ -794,21 +794,6 @@ class PageExportAndUpload(QWizardPage):
         cl.addLayout(row3)
         cloud_box.setLayout(cl)
 
-        # ── Projekt nach Abschluss oeffnen ──────────────────────────────────
-        qf_box = QGroupBox("Nach Abschluss")
-        qf_lo  = QVBoxLayout()
-
-        self.open_qgis_cb = QCheckBox(
-            "Projekt in QGIS öffnen (gespeicherte Fassung neu laden)")
-        self.open_qgis_cb.setChecked(True)
-        self.open_qgis_cb.setToolTip(
-            "Lädt das soeben gespeicherte Projekt aus dem Projektordner neu. "
-            "Damit arbeitet QGIS auf genau der Fassung mit relativen Pfaden, "
-            "die auch zu QFieldCloud hochgeladen wurde.")
-        qf_lo.addWidget(self.open_qgis_cb)
-
-        qf_box.setLayout(qf_lo)
-
         # ── Fortschritt & Log ────────────────────────────────────────────────
         self.run_btn  = QPushButton("Export & Upload starten")
         self.run_btn.clicked.connect(self._run)
@@ -822,7 +807,6 @@ class PageExportAndUpload(QWizardPage):
         layout = QVBoxLayout()
         layout.addWidget(gpkg_box)
         layout.addWidget(cloud_box)
-        layout.addWidget(qf_box)
         layout.addWidget(self.run_btn)
         layout.addWidget(self.progress)
         layout.addWidget(self.log)
@@ -854,7 +838,6 @@ class PageExportAndUpload(QWizardPage):
         self.run_btn.setEnabled(False)
         self.log.clear()
         self.progress.setValue(0)
-        self._cloud_url = ""      # URL des vorherigen Laufs verwerfen
 
         from qgis.core import QgsProject
 
@@ -878,16 +861,26 @@ class PageExportAndUpload(QWizardPage):
             gpkg_data = (fach_ref or {}).get("gpkg_data", {})
 
             self._log("Kopiere GeoPackages in Projektordner …")
+            # Datentabelle (geo_layers) projektspezifisch benennen, damit sich
+            # mehrere Projekte nicht gegenseitig überschreiben. Referenzlisten
+            # behalten ihren Namen, werden aber ebenfalls lokal ins Projekt gelegt.
+            import re as _re
+            _safe = (_re.sub(r"[^0-9A-Za-z_.\-]+", "_", (proj_name or "Projekt")).strip("_")
+                     or "Projekt")
             path_map  = {}   # {abs_src: abs_dst}
             for cat in ["geo_layers", "ref_layers", "border_layers"]:
                 for entry in gpkg_data.get(cat, []):
                     src = os.path.normpath(os.path.join(_PD, entry["gpkg"]))
                     if not os.path.isfile(src) or src in path_map:
                         continue
-                    dst = os.path.normpath(os.path.join(dest_dir, os.path.basename(src)))
+                    base = os.path.basename(src)
+                    if cat == "geo_layers":
+                        root, ext = os.path.splitext(base)
+                        base = f"{_safe}_{root}{ext}"   # z. B. MeinProjekt_Fundpunkte.gpkg
+                    dst = os.path.normpath(os.path.join(dest_dir, base))
                     _shutil.copy2(src, dst)
                     path_map[src] = dst
-                    self._log(f"  ✓ {os.path.basename(src)}")
+                    self._log(f"  ✓ {os.path.basename(src)} → {base}")
             self._log(f"  {len(path_map)} GPKG(s) kopiert.")
             self.progress.setValue(40)
 
@@ -908,7 +901,6 @@ class PageExportAndUpload(QWizardPage):
             except Exception:
                 WizardBuildLog.add_exception("relink_layers")
             relink_project_to_local_geopackages(project, path_map, project_path)
-            self._projekt_pfad = project_path      # fuer das Oeffnen in QField
             self._log(f"  Projekt gespeichert: {project_path}")
             self.progress.setValue(65)
 
@@ -954,8 +946,6 @@ class PageExportAndUpload(QWizardPage):
                 if ug_gpkg and os.path.isfile(ug_gpkg) and ug_gpkg not in upload_files:
                     upload_files.append(ug_gpkg)
                     self._log(f"  ✓ UG: {os.path.basename(ug_gpkg)}")
-
-                self._pruefe_nicht_paketierbare_layer(project)
                 self._uploader = QFieldCloudUploader(
                     username      = username,
                     password      = password,
@@ -972,47 +962,12 @@ class PageExportAndUpload(QWizardPage):
                 self.progress.setValue(100)
                 self._log("Fertig. (Kein Cloud-Upload gewählt)")
                 self.run_btn.setEnabled(True)
-                self._oeffne_in_qgis()
 
         except Exception as exc:
             import traceback
             self._log(f"FEHLER: {exc}")
             self._log(traceback.format_exc())
             self.run_btn.setEnabled(True)
-
-    def _pruefe_nicht_paketierbare_layer(self, project):
-        """
-        Meldet Layer, die nicht als Datei mitgehen koennen.
-
-        Uebernommen werden nur GeoPackage-Vektorlayer. WMS/WMTS-Hintergrund-
-        karten und direkt eingebundene PostGIS-Layer bleiben Online-Quellen und
-        sind im Gelaende ohne Internet- bzw. DB-Verbindung nicht verfuegbar.
-        """
-        from qgis.core import QgsVectorLayer
-        online, db = [], []
-        for lyr in project.mapLayers().values():
-            provider = ""
-            try:
-                provider = (lyr.dataProvider().name() or "").lower()
-            except Exception:
-                continue
-            if provider in ("wms", "wcs", "xyz", "arcgismapserver"):
-                online.append(lyr.name())
-            elif provider == "postgres":
-                db.append(lyr.name())
-            elif isinstance(lyr, QgsVectorLayer) and provider == "wfs":
-                online.append(lyr.name())
-
-        if online:
-            self._log(f"  ⚠ {len(online)} Online-Layer bleiben Online-Quellen "
-                      f"(kein Offline-Betrieb): {', '.join(online[:6])}"
-                      + (" …" if len(online) > 6 else ""))
-        if db:
-            self._log(f"  ⚠ {len(db)} PostGIS-Layer werden NICHT paketiert und "
-                      f"fehlen auf dem Gerät: {', '.join(db[:6])}"
-                      + (" …" if len(db) > 6 else ""))
-        if not online and not db:
-            self._log("  ✓ Alle Layer liegen als GeoPackage vor (offline-fähig).")
 
     def _on_upload_progress(self, pct: int, msg: str):
         self.progress.setValue(65 + int(pct * 0.35))
@@ -1023,50 +978,8 @@ class PageExportAndUpload(QWizardPage):
         self._log(f"  Cloud-URL: {url}")
         self.progress.setValue(100)
         self.run_btn.setEnabled(True)
-        self._cloud_url = url
         from qgis.utils import iface
         iface.messageBar().pushSuccess("QFieldCloud", f"Projekt verfügbar: {url}")
-
-        # Angelegtes Cloud-Projekt nach Abschluss in QGIS oeffnen
-        self._oeffne_in_qgis()
-
-    # ── Projekt in QGIS oeffnen ─────────────────────────────────────────────
-    def _oeffne_in_qgis(self):
-        """
-        Laedt das gespeicherte Projekt in QGIS neu.
-
-        Waehrend des Laufs arbeitet der Wizard auf QgsProject.instance(); die
-        Layerquellen werden erst beim Speichern auf die kopierten GeoPackages
-        und auf relative Pfade umgehaengt. Durch das erneute Laden aus dem
-        Projektordner arbeitet QGIS danach auf genau der Fassung, die auch zu
-        QFieldCloud hochgeladen wurde - nicht auf dem Zwischenstand im
-        Arbeitsspeicher.
-        """
-        if not self.open_qgis_cb.isChecked():
-            return
-        projekt = getattr(self, "_projekt_pfad", None)
-        if not projekt or not os.path.isfile(projekt):
-            self._log("  ⚠ QGIS: Projektdatei nicht gefunden – nicht geöffnet.")
-            return
-        try:
-            from qgis.PyQt.QtCore import QTimer
-            from qgis.utils import iface
-
-            def _laden():
-                try:
-                    iface.addProject(projekt)
-                    self._log(f"  ✓ Projekt in QGIS geöffnet: "
-                              f"{os.path.basename(projekt)}")
-                except Exception as exc:
-                    self._log(f"  ⚠ Projekt konnte in QGIS nicht geöffnet "
-                              f"werden: {exc}")
-
-            # Verzoegert starten, damit der laufende Signalaufruf und der
-            # Dialog zuerst abgearbeitet werden - ein Projektwechsel mitten
-            # im Signal kann QGIS sonst zum Absturz bringen.
-            QTimer.singleShot(0, _laden)
-        except Exception as exc:
-            self._log(f"  ⚠ Projekt konnte in QGIS nicht geöffnet werden: {exc}")
 
     def _on_upload_error(self, msg: str):
         self._log(f"Upload-Fehler: {msg}")

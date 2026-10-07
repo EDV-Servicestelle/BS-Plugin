@@ -75,7 +75,6 @@ FACHSCHALEN = {
         "schema":      "grundlagen",
         "ref_schema":  "grundlagen",
         "gpkgs": [
-            DATA_DIR / "Nutzung.gpkg",
             DATA_DIR / "untersuchungsgebiet.gpkg",
         ],
     },
@@ -289,8 +288,7 @@ class _SetupWorker(QThread):
                 "referenz" in gpkg_path.stem.lower()
                 or tbl.lower().startswith("referenzliste")
                 or tbl.lower() in ("arten", "artengruppen", "geschlecht",
-                                   "stadium", "status", "einheit",
-                                   "institution", "bewertung_erhaltungszustand")
+                                   "status", "einheit", "institution")
             )
             tgt = ref_sch if is_ref else schema
 

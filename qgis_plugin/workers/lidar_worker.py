@@ -21,10 +21,10 @@ except ImportError:
     _REQUESTS_OK = False
 
 try:
-    from qgis_new_project_plugin.core.lidar import (CLASS_GROUND, GRID_M, LAS_TILE_M, LAS_URL, WGS84, UTM32, _LASPY_OK, _GDAL_OK, _QGIS_OK, _wgs84_to_utm32, _las_tiles, _read_las_points, _points_to_grid, _fill_gaps, _aggregate_grid, _grid_to_features, _grid_to_features_numpy, _derive_products,
+    from qgis_new_project_plugin.core.lidar import (CLASS_GROUND, GRID_M, LAS_TILE_M, LAS_URL, WGS84, UTM32, _LASPY_OK, _GDAL_OK, _QGIS_OK, _wgs84_to_utm32, _las_tiles, _read_las_points, _points_to_grid, _clip_grid_to_wkt, _fill_gaps, _aggregate_grid, _grid_to_features, _grid_to_features_numpy, _derive_products,
     _NUMPY_OK, _PDAL_OK)
 except ImportError:
-    from ..core.lidar import (CLASS_GROUND, GRID_M, LAS_TILE_M, LAS_URL, WGS84, UTM32, _LASPY_OK, _GDAL_OK, _QGIS_OK, _wgs84_to_utm32, _las_tiles, _read_las_points, _points_to_grid, _fill_gaps, _aggregate_grid, _grid_to_features, _grid_to_features_numpy, _derive_products,
+    from ..core.lidar import (CLASS_GROUND, GRID_M, LAS_TILE_M, LAS_URL, WGS84, UTM32, _LASPY_OK, _GDAL_OK, _QGIS_OK, _wgs84_to_utm32, _las_tiles, _read_las_points, _points_to_grid, _clip_grid_to_wkt, _fill_gaps, _aggregate_grid, _grid_to_features, _grid_to_features_numpy, _derive_products,
     _NUMPY_OK, _PDAL_OK)
 # noop — *  # alle Core-Funktionen importieren
 
@@ -162,6 +162,19 @@ class _LidarWorker(QThread):
 
         self.progress.emit(76,
             f"  {len(all_grid):,} Rasterzellen (1×1 m) berechnet")
+
+        # ── Zuschnitt auf gewählte Abgrenzung (Layer-Geometrie) ──────────
+        clip_wkt = cfg.get("clip_wkt")
+        if clip_wkt:
+            self.progress.emit(77, "  Schneide auf gewählte Abgrenzung zu …")
+            all_grid, _removed = _clip_grid_to_wkt(
+                all_grid, clip_wkt, e_min, n_min, cfg.get("cell_size", 1.0),
+                _log=lambda m: self.progress.emit(-1, m))
+            if not all_grid:
+                self.finished.emit(False,
+                    "Nach dem Zuschnitt auf die Abgrenzung sind keine "
+                    "Rasterzellen übrig – Abgrenzung und Bereich prüfen.")
+                return
 
         # ── Lücken füllen (IDW) ──────────────────────────────────────────
         if cfg.get("fill_gaps", True) and all_grid:

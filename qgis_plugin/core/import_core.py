@@ -443,6 +443,50 @@ def search_arten(query, by="both", limit=20):
     return rows
 
 
+def _synonym_unscharf(syn_key: str):
+    """
+    Letzter Versuch, wenn ein Synonymziel nicht exakt in der Liste steht.
+
+    Gesucht wird nur noch am ANFANG des Namens, nicht mehr irgendwo darin,
+    und ein blosser Gattungsname wird nicht mehr still auf eine Art
+    verengt. Beides ist Erfahrung aus echten Daten:
+
+      * '%acrocephalus%' traf frueher auch 'Ocypus macrocephalus' - einen
+        Kurzfluegelkaefer. Weil die Reihenfolge nach Namenslaenge ging,
+        gewann der Kaefer gegen jeden Rohrsaenger.
+      * Ein Gattungsname ohne Art ('bufo', 'nyctalus') passt auf mehrere
+        Arten. Eine davon auszuwaehlen hiesse, eine Bestimmung zu
+        behaupten, die die Rohdaten nicht hergeben. Solche Faelle bleiben
+        offen und landen in Fund_Fehlend - dort entscheidet die Station.
+
+    Rueckgabe: Eintrag oder None.
+    """
+    if not syn_key or not os.path.isfile(_REF_GPKG):
+        return None
+    import sqlite3 as _sq
+    schluessel = syn_key.strip()
+    con = _sq.connect(_REF_GPKG)
+    try:
+        treffer = con.execute(
+            "SELECT entityid,term,Name_deutsch,parentid"
+            " FROM Arten WHERE parentid!='nan' AND"
+            " (lower(term) LIKE lower(?) OR lower(Name_deutsch) LIKE lower(?))"
+            " ORDER BY length(term) LIMIT 25",
+            (f"{schluessel}%", f"{schluessel}%")).fetchall()
+    finally:
+        con.close()
+    if not treffer:
+        return None
+    # Gattungsname (ein Wort) mit mehreren Arten darunter -> keine Auswahl.
+    if " " not in schluessel:
+        arten = {r[1] for r in treffer}
+        if len(arten) > 1:
+            return None
+    r = treffer[0]
+    return {"entityid": r[0], "term": r[1] or "",
+            "Name_deutsch": r[2] or "", "parentid": r[3] or ""}
+
+
 def _normalize(s: str) -> str:
     """Normalisiert Umlaute und Gross-/Kleinschreibung fuer den Lookup.
     Wandelt oe->ö, ae->ä, ue->ü und umgekehrt, damit beide Schreibweisen matchen.
@@ -635,24 +679,8 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                     if syn_key:
                         art_entry = (lookup.get(syn_key.lower())
                                      or lookup.get(_normalize(syn_key)))
-                        if not art_entry and os.path.isfile(_REF_GPKG):
-                            import sqlite3 as _sq_imp
-                            _cn = _sq_imp.connect(_REF_GPKG)
-                            _rw = _cn.execute(
-                                "SELECT entityid,term,Name_deutsch,parentid"
-                                " FROM Arten WHERE parentid!='nan' AND"
-                                " (lower(term) LIKE lower(?) OR"
-                                "  lower(Name_deutsch) LIKE lower(?))"
-                                " ORDER BY length(term) LIMIT 1",
-                                (f"%{syn_key}%", f"%{syn_key}%")
-                            ).fetchone()
-                            _cn.close()
-                            if _rw:
-                                art_entry = {
-                                    "entityid": _rw[0], "term": _rw[1] or "",
-                                    "Name_deutsch": _rw[2] or "",
-                                    "parentid": _rw[3] or "",
-                                }
+                        if not art_entry:
+                            art_entry = _synonym_unscharf(syn_key)
                 # Stufe 3: TF-IDF (Fallback fuer unbekannte Namen)
                 if not art_entry and _TFIDF_INDEX.built:
                     # Ensemble: TF-IDF + Levenshtein (Schwelle 0.30)

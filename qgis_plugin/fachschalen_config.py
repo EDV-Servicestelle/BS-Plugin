@@ -192,23 +192,28 @@ FACHSCHALEN = [
                 "filter": "", "use_completer": False, "completer_match_flags": 2,
                 "order_by_value": False, "allow_null": True, "nof_columns": 1,
             },
-            "pop_zustand": {
+            "Pop_zustand": {
                 "ref_table": "Bewertung_Erhaltungszustand", "key": "entityid", "value": "term",
                 "filter": "", "use_completer": False, "completer_match_flags": 2,
                 "order_by_value": False, "allow_null": True, "nof_columns": 1,
             },
-            "habitatqualitaet": {
+            "Habitatqualitaet": {
                 "ref_table": "Bewertung_Erhaltungszustand", "key": "entityid", "value": "term",
                 "filter": "", "use_completer": False, "completer_match_flags": 2,
                 "order_by_value": False, "allow_null": True, "nof_columns": 1,
             },
-            "pop_beeintraechtigung": {
+            "Pop_beeintraechtigung": {
                 "ref_table": "Bewertung_Erhaltungszustand", "key": "entityid", "value": "term",
                 "filter": "", "use_completer": False, "completer_match_flags": 2,
                 "order_by_value": False, "allow_null": True, "nof_columns": 1,
             },
-            "erhaltung_gesamt": {
+            "Erhaltung_gesamt": {
                 "ref_table": "Bewertung_Erhaltungszustand", "key": "entityid", "value": "term",
+                "filter": "", "use_completer": False, "completer_match_flags": 2,
+                "order_by_value": False, "allow_null": True, "nof_columns": 1,
+            },
+            "Genauigkeit": {
+                "ref_table": "Unschaerfe", "key": "entityid", "value": "term",
                 "filter": "", "use_completer": False, "completer_match_flags": 2,
                 "order_by_value": False, "allow_null": True, "nof_columns": 1,
             },
@@ -223,6 +228,7 @@ FACHSCHALEN = [
         # Reihenfolge entspricht dem Muster-QGZ (Referenzlisten-Gruppe)
         "ref_tables": [
             "Arten",
+            "Arten_Synonyme",
             "Artengruppen",
             "Einheit",
             "Geschlecht",
@@ -230,6 +236,7 @@ FACHSCHALEN = [
             "Institution",
             "Status",
             "Bewertung_Erhaltungszustand",
+            "Unschaerfe",
         ],
 
         # ── GeoPackage-Offline-Quellen ────────────────────────────────────────
@@ -244,6 +251,7 @@ FACHSCHALEN = [
             ],
             "ref_layers": [
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Arten"},
+                {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Arten_Synonyme"},
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Artengruppen"},
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Einheit"},
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Geschlecht"},
@@ -251,6 +259,7 @@ FACHSCHALEN = [
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Institution"},
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Status"},
                 {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Bewertung_Erhaltungszustand"},
+                {"gpkg": "data/fundpunkte_tiere/Referenzen.gpkg", "layername": "Unschaerfe"},
             ],
             # UG kommt ausschließlich über den UG-Dialog (kein Template hier).
             "border_layers": [],

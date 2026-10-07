@@ -150,15 +150,6 @@ def collect_and_copy_geopackages(
         filename = os.path.basename(src_path)
         dst_path = os.path.join(dest_dir, filename)
 
-        # Liegt die Quelle bereits im Zielordner (z. B. Grundlagen.gpkg, das
-        # direkt in den Projektordner geschrieben wurde), darf nicht auf sich
-        # selbst kopiert werden - shutil wirft sonst SameFileError.
-        if os.path.abspath(src_path) == os.path.abspath(dst_path):
-            if progress_cb:
-                progress_cb(i, f"  {filename} liegt bereits im Projektordner")
-            copied[src_path] = dst_path
-            continue
-
         if progress_cb:
             progress_cb(i, f"Kopiere {filename} …")
 

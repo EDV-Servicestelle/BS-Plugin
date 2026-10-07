@@ -1,20 +1,20 @@
 entityid;term;parentid;listitemid
-10;unbestimmt;0;10
-20;adult;0;20
-30;Eier;0;30
-40;Exuvien;0;40
-50;juvenil;0;50
-60;Köcher;0;60
-70;Königin;0;70
-80;Laich;0;80
-90;Larve;0;90
-100;Puppe;0;100
-110;Imago;0;110
-120;subadult;0;120
-130;Pullus / nicht-flügge;0;130
-140;1. KJ / diesjährig;0;140
-150;2. KJ / vorjährig;0;150
-160;3. KJ;0;160
-170;4. KJ;0;170
-180;5. KJ;0;180
-190;immatur;0;190
+153225;unbestimmt;0;203535
+153234;juvenil;0;203540
+153235;adult;0;203529
+153238;Laich;0;203533
+153242;Larve;0;203547
+153246;Exuvien;0;203586
+153247;Imago;0;203592
+153254;Puppe;0;203564
+161020;Eier;0;203571
+174558;Königin;0;203692
+174589;Köcher;0;203728
+900101;subadult;0;900101
+900102;Pullus / nicht-flügge;0;900102
+900103;1. KJ / diesjährig;0;900103
+900104;2. KJ / vorjährig;0;900104
+900105;3. KJ;0;900105
+900106;4. KJ;0;900106
+900107;5. KJ;0;900107
+900108;immatur;0;900108
