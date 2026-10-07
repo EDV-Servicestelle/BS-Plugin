@@ -1,9 +1,11 @@
 synonym_term;akzeptiert_entityid;parentid;art;quelle;erfasst_von;erfasst_am
+abendseglerartige;159256;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
 acker-hummel;107141;158763;Synonym;synonyme.json (Insekten_Hymenoptera);Erstbestand;
 admiral;107999;164691;Synonym;synonyme.json (Insekten_Lepidoptera);Erstbestand;
 admrial;107999;164691;Synonym;synonyme.json (Insekten_Lepidoptera);Erstbestand;
 aeshna isoceles;6831;162960;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 aglais io;107931;164691;Synonym;synonyme.json (Insekten_Lepidoptera);Erstbestand;
+alinda biplicata;6615;164830;Synonym;synonyme.json (Taxonomische_Umbenennungen);synonyme_in_gpkg;2026-10-07
 ambigolimax valentianus;160684;164830;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 ampfer-gruenwidderchen;108003;163213;Synonym;synonyme.json (Insekten_Lepidoptera);Erstbestand;
 ampfer-purpurspanner;6355;164283;Synonym;synonyme.json (Insekten_Lepidoptera);Erstbestand;
@@ -39,13 +41,13 @@ drosselrohrsaenger;103088;165844;Synonym;synonyme.json (Schreibvarianten_Tippfeh
 empsis tesselata;106397;166256;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 eratigena atrica;102831;165099;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 eriothrix rufomaculata;106406;166256;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
+erythromma lindenii;151985;162960;Synonym;synonyme.json (Taxonomische_Umbenennungen);synonyme_in_gpkg;2026-10-07
 feldhase;6530;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 frosch unbestimmt;159253;158512;Synonym;synonyme.json (Amphibien_Reptilien);Erstbestand;
+fuchs;152015;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
 gemeine wespe;107368;708822;Synonym;synonyme.json (Insekten_Hymenoptera);Erstbestand;
 gomphus flavipes;151993;162960;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 graphosoma italicum;106906;166104;Synonym;synonyme.json (Insekten_Hymenoptera);Erstbestand;
-graugans hybride;103000;165844;Synonym;synonyme.json (Voegel);Erstbestand;
-graugans-hybride;103000;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 grossen brachvogel;103125;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 grosser brachvogel;103125;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 grosses wiesel;6568;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
@@ -57,7 +59,6 @@ hase;6530;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 hasen;6530;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 hermelin;6568;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 iltis;6569;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-kanadagans-hybride;103001;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 kleiner brachvogel;103130;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 kleines wiesel;6571;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 limnaea stagnalis;6690;164830;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
@@ -70,18 +71,20 @@ myotis brandtii/mystacius;19042;163127;Synonym;synonyme.json (Saeugetiere) [korr
 myotis unbest;19042;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 myotis unbestimmt;19042;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 nachtschwalbe;103190;165844;Synonym;synonyme.json (Voegel);Erstbestand;
+nyctaloide;159256;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
+nyctalus unbest;159256;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
+nyctalus unbestimmt;159256;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
 pelophylax;151919;158512;Synonym;Nachtrag offene Suchterme;Erstbestand;
 phragmatibia fuliginosa;108129;163213;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 phylloptera horticola;162583;161165;Synonym;synonyme.json (Insekten_Kaefer);Erstbestand;
-pipistrellus unbest;6529;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-pipistrellus unbestimmt;6529;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-plecotus unbest;6512;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-plecotus unbestimmt;6512;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
+pipistrellus unbest;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
+pipistrellus unbestimmt;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
+plecotus unbest;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
+plecotus unbestimmt;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
 pseudochorthippus montanus;6920;158667;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 pseudochorthippus parallelus;6921;158667;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 pseudopantera maculata;6382;164283;Synonym;synonyme.json (Taxonomische_Umbenennungen);Erstbestand;
 ralle;103069;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
-rallen unbestimmt;103069;165844;Synonym;synonyme.json (Sonstige);Erstbestand;
 regenbrachvogel;103130;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 reh;6562;163127;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 rehe;6562;163127;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
@@ -89,14 +92,12 @@ roeseliana roeselii;6942;158667;Synonym;synonyme.json (Taxonomische_Umbenennunge
 rohrammer;102941;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 rothirsch;6563;163127;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 rotwild;6563;163127;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
+rotzahnspitzmaus;6537;163127;Synonym;synonyme.json (Saeugetiere);synonyme_in_gpkg;2026-10-07
 schermaus;6555;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 schilfrohrsaenger;103105;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler) [korrigiert];Erstbestand;
 schwarzwild;6564;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 steinmarder;6573;163127;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
-stockente-hybride;102968;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
-stockenten-hybride;102968;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 subcoccinella vigintiquatuorpunctata;162671;161165;Synonym;synonyme.json (Insekten_Kaefer);Erstbestand;
-tachina fera/magnicornis;106719;166256;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
 teichhuhn;103066;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 teichralle;103066;165844;Synonym;synonyme.json (Voegel);Erstbestand;
 teichrohrsaenger;103112;165844;Synonym;synonyme.json (Schreibvarianten_Tippfehler);Erstbestand;
@@ -106,10 +107,8 @@ volucella pellucens;106743;166256;Synonym;synonyme.json (Schreibvarianten_Tippfe
 vulpes;152015;163127;Synonym;Nachtrag offene Suchterme;Erstbestand;
 wasserfrosch unbestimmt;151919;158512;Synonym;Nachtrag offene Suchterme;Erstbestand;
 wiesel;6571;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-wiesel unbest;6571;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-wiesel unbestimmt;6571;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 wildschwein;6564;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
 wohlriechende wespe;107366;708822;Synonym;synonyme.json (Insekten_Hymenoptera);Erstbestand;
 ziegenmelker;103190;165844;Synonym;synonyme.json (Voegel);Erstbestand;
-zwergfledermaus unbest;6529;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
-zwergfledermaus unbestimmt;6529;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;
+zwergfledermaus unbest;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
+zwergfledermaus unbestimmt;159256;163127;Synonym;synonyme.json (Saeugetiere);Erstbestand;2026-10-07
