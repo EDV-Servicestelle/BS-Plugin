@@ -28,9 +28,9 @@ from qgis.core import (
 _PLUGIN_DIR = os.path.dirname(__file__)
 
 # Steuerfeld: Features mit aktivem Flag werden NICHT exportiert; das Feld selbst
-# wird NIE mitexportiert. (Frühere Bezeichnung des Feldes: AN_LANUK.)
-EXPORT_FLAG_FIELD   = "kein_Export"
-EXPORT_FLAG_ALIASES = ("kein_export", "an_lanuk")
+# wird NIE mitexportiert. (Frühere Bezeichnungen des Feldes: kein_Export, AN_LANUK.)
+EXPORT_FLAG_FIELD   = "Sensibel"
+EXPORT_FLAG_ALIASES = ("sensibel", "kein_export", "an_lanuk")
 
 
 def _fmt_val(val):
@@ -68,7 +68,7 @@ class FundpunkteExportDialog(QDialog):
         self._build_ui()
 
     def _resolve_flag_field(self, lyr):
-        """Findet das Steuerfeld (kein_Export bzw. altes AN_LANUK), case-insensitiv."""
+        """Findet das Steuerfeld (sensibel bzw. alt kein_Export/AN_LANUK), case-insensitiv."""
         if not lyr:
             return None
         for f in lyr.fields():
@@ -93,8 +93,8 @@ class FundpunkteExportDialog(QDialog):
             "Exportiert den Fund-Layer in verschiedene Formate.\n"
             "Artname_deutsch und Artname_wiss werden aus den Referenzlisten\n"
             "automatisch aufgelöst falls sie leer sind.\n"
-            "Hinweis: Das Feld »kein_Export« wird nie exportiert; Features mit\n"
-            "aktivem »kein_Export« werden vom Export ausgenommen."
+            "Hinweis: Das Feld »Sensibel« wird nie exportiert; Features mit\n"
+            "aktivem »Sensibel« werden vom Export ausgenommen."
         ))
 
         # ── Layer ────────────────────────────────────────────────────────────

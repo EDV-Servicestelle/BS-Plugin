@@ -230,6 +230,73 @@ class NewProjectWizard(QWizard):
                 self._trigger_nutzung_download(
                     project, root, (kreis_info[1], kreis_info[2]))
 
+        # ── GeoPackages projektlokal machen (Kopie + Umverlinkung + Speichern) ──
+        # Läuft bei JEDEM _build_project-Aufruf, damit auch der zweite Aufruf
+        # (Assistent-„OK") das Projekt nicht wieder auf die Plugin-GPKGs zieht.
+        # Verhindert, dass mehrere Projekte dieselben Dateien teilen/überschreiben.
+        if offline and (fachschale or {}).get("gpkg_data"):
+            try:
+                self._localize_project_gpkgs(project, fachschale)
+            except Exception:
+                from .debug_log import log_exc
+                log_exc("Wizard._localize_project_gpkgs")
+
+    def _localize_project_gpkgs(self, project, fachschale):
+        """
+        Kopiert alle vom Plugin geladenen GeoPackages in den Projektordner und
+        verlinkt Layer + ValueRelations auf die lokalen Kopien um. Die Datentabelle
+        (geo_layers) wird projektspezifisch benannt (z. B. MeinProjekt_Fundpunkte.gpkg),
+        die Referenzlisten bleiben unter ihrem Namen, liegen aber projektlokal.
+        Danach schreibt relink_project_to_local_geopackages() das Projekt.
+        """
+        import re as _re, shutil as _shutil
+        from .project_finalizer import relink_project_to_local_geopackages
+
+        gpkg_data = (fachschale or {}).get("gpkg_data") or {}
+        proj_folder = (self.field("gpkgPath") or self.field("projectFolder") or "").strip()
+        if not proj_folder or not os.path.isdir(proj_folder):
+            proj_folder = project.absolutePath() or ""
+        if not proj_folder or not os.path.isdir(proj_folder):
+            from .debug_log import log
+            log("Localize: kein gültiger Projektordner – übersprungen", "WARN", context="Wizard")
+            return
+
+        proj_name = self.field("projectName") or "Projekt"
+        safe = _re.sub(r"[^0-9A-Za-z_.\-]+", "_", proj_name).strip("_") or "Projekt"
+        project_path = os.path.normpath(os.path.join(proj_folder, f"{proj_name}.qgz"))
+
+        # Basenamen der Datentabellen (geo_layers) -> diese werden umbenannt
+        data_bases = {os.path.basename(e.get("gpkg", "")).lower()
+                      for e in gpkg_data.get("geo_layers", []) if e.get("gpkg")}
+
+        plugin_dir = os.path.normpath(_PLUGIN_DIR)
+        path_map = {}   # {plugin_gpkg_abs: projektlokaler_abs}
+        for layer in list(project.mapLayers().values()):
+            if not isinstance(layer, QgsVectorLayer):
+                continue
+            src = layer.source()
+            if "|layername=" not in src:
+                continue
+            gpkg_norm = os.path.normpath(src.split("|layername=")[0])
+            if not gpkg_norm.startswith(plugin_dir) or gpkg_norm in path_map:
+                continue
+            base = os.path.basename(gpkg_norm)
+            if base.lower() in data_bases:
+                root_, ext_ = os.path.splitext(base)
+                base = f"{safe}_{root_}{ext_}"
+            dst = os.path.normpath(os.path.join(proj_folder, base))
+            try:
+                _shutil.copy2(gpkg_norm, dst)
+                path_map[gpkg_norm] = dst
+            except Exception:
+                from .debug_log import log_exc
+                log_exc("Localize.copy")
+
+        if path_map:
+            from .debug_log import log
+            log(f"Localize: {len(path_map)} GPKG(s) -> {proj_folder}", context="Wizard")
+            relink_project_to_local_geopackages(project, path_map, project_path)
+
     def _detect_landkreis(self, extent, project):
         """Landkreis aus dem UG-Schwerpunkt ableiten (per WFS AX_Kreis)."""
         # Landkreis ausschließlich aus dem UG ableiten (keine manuelle Auswahl mehr).
@@ -285,10 +352,14 @@ class NewProjectWizard(QWizard):
         # Projektordner aus Wizard-Feld (Export-Seite) oder absolutePath
         # field("gpkgPath") = Exportordner aus letzter Wizard-Seite
         # field("projectFolder") = Projektordner aus erster Seite
-        # Denselben Pfad wie der DB-Zweig verwenden, damit WFS- und
-        # DB-Grundlagen in einer Datei landen und nur einmal je Lauf
-        # zurueckgesetzt wird.
-        gpkg_path = self._grundlagen_gpkg_pfad(project)
+        proj_path = (self.field("gpkgPath") or
+                     self.field("projectFolder") or "").strip()
+        if not proj_path:
+            proj_path = project.absolutePath()
+        if not proj_path:
+            import tempfile
+            proj_path = tempfile.mkdtemp(prefix="naturschutz_")
+        gpkg_path = os.path.join(proj_path, "Grundlagen.gpkg")
 
         grp = root.findGroup("Grundlagendaten") or root.addGroup("Grundlagendaten")
 
@@ -449,33 +520,6 @@ class NewProjectWizard(QWizard):
         self._nutzung_worker.done.connect(_on_nutzung_done)
         self._nutzung_worker.start()
 
-    def _grundlagen_gpkg_pfad(self, project) -> str:
-        """
-        Pfad fuer Grundlagen.gpkg im Projektordner.
-
-        Beim ersten Aufruf je Projektlauf wird eine vorhandene Datei entfernt,
-        damit sich Grundlagen aufeinanderfolgender Laeufe nicht aufsummieren
-        (_write_to_gpkg haengt an bestehende Layer an).
-        """
-        proj_path = (self.field("gpkgPath") or
-                     self.field("projectFolder") or "").strip()
-        if not proj_path:
-            proj_path = project.absolutePath()
-        if not proj_path:
-            import tempfile
-            proj_path = tempfile.mkdtemp(prefix="naturschutz_")
-        os.makedirs(proj_path, exist_ok=True)
-        pfad = os.path.join(proj_path, "Grundlagen.gpkg")
-
-        if not self.property("_grundlagenGpkgFrisch"):
-            if os.path.exists(pfad):
-                try:
-                    os.remove(pfad)
-                except OSError:
-                    pass          # in Benutzung: dann wird angehaengt
-            self.setProperty("_grundlagenGpkgFrisch", True)
-        return pfad
-
     def _load_from_grundlagen_db(self, project, root, extent, conn_params: dict, selected=None):
         """Lädt Schutzgebiete + ATKIS aus zentraler Grundlagen-DB per ST_Intersects."""
         from .grundlagen_db_dialog import fetch_from_grundlagen_db, GRUNDLAGEN_DIENSTE
@@ -516,12 +560,7 @@ class NewProjectWizard(QWizard):
             return
 
         crs = QgsCoordinateReferenceSystem("EPSG:25832")
-        # Grundlagen in den PROJEKTORDNER schreiben, nicht in das gemeinsame
-        # Temp-Verzeichnis: _write_to_gpkg haengt an vorhandene Layer an, sodass
-        # sich in einer geteilten Temp-Datei die Grundlagen mehrerer Projekte
-        # aufsummieren. Ausserdem wird die Datei nur so zuverlaessig mit in das
-        # Projektpaket bzw. zu QFieldCloud uebernommen.
-        gpkg = self._grundlagen_gpkg_pfad(project)
+        gpkg = os.path.join(tempfile.gettempdir(), "grundlagen_tmp.gpkg")
         grp  = root.findGroup("Grundlagendaten") or root.addGroup("Grundlagendaten")
 
         for key, feats in feats_by_key.items():
@@ -714,26 +753,6 @@ class NewProjectWizard(QWizard):
                 WizardBuildLog.add(f"ValueRelation {field_name}: {_vr_e}", "WARN")
 
     # ── Default-Werte für Felder setzen ──────────────────────────────────────
-    @staticmethod
-    def _schuetze_fid(layer: QgsVectorLayer):
-        """
-        Setzt das Feld fid schreibgeschuetzt und blendet es im Formular aus.
-
-        Ein versehentlich geaenderter Primaerschluessel zerreisst die
-        Verknuepfung zu Anhaengen, Relationen und Altdatenbezuegen; der Wert
-        wird ausschliesslich von der Datenbank vergeben.
-        """
-        try:
-            idx = layer.fields().indexFromName("fid")
-            if idx < 0:
-                return
-            cfg = layer.editFormConfig()
-            cfg.setReadOnly(idx, True)
-            layer.setEditFormConfig(cfg)
-            layer.setEditorWidgetSetup(idx, QgsEditorWidgetSetup("Hidden", {}))
-        except Exception:
-            pass          # Schutz ist optional, darf den Projektbau nie stoppen
-
     def _apply_default_values(self, layer: QgsVectorLayer, row: dict):
         """
         Setzt Default-Expressions für Felder eines Layers.
@@ -741,10 +760,6 @@ class NewProjectWizard(QWizard):
         aus der Geometrie befüllt. apply_on_update=True stellt sicher, dass
         die Werte bei jeder Geometrieänderung neu berechnet werden.
         """
-        # Primaerschluessel gegen versehentliches Bearbeiten schuetzen -
-        # unabhaengig davon, ob der Layer eine Stildatei mitbringt.
-        self._schuetze_fid(layer)
-
         defaults = row.get("default_values", {})
         if not defaults:
             return

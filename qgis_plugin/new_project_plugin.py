@@ -44,6 +44,7 @@ class NewProjectPlugin:
             ("QField-Export …",               self._qfield),
             ("─────────────────────────",     None),           # Trenner
             ("Fundpunkte – Altdaten importieren …", self._import),
+            ("Fundpunkte – Synonyme verwalten …",   self._synonyme),
             ("Fundpunkte – Zeitreihen-Diagramm …", self._trend),
             ("Fundpunkte – Papierreviere → Fundpunkte …", self._papierreviere_export),
             ("Fundpunkte – Export (CSV/XLSX/GPKG) …",   self._fundpunkte_export),
@@ -113,6 +114,10 @@ class NewProjectPlugin:
     def _import(self):
         from .fundpunkte_import_dialog import FundpunkteImportDialog
         FundpunkteImportDialog(self.iface.mainWindow()).exec()
+
+    def _synonyme(self):
+        from .synonyme_dialog import SynonymeDialog
+        SynonymeDialog(self.iface.mainWindow()).exec()
 
     def _trend(self):
         from .fundpunkte_trend_dialog import FundpunkteTrendDialog

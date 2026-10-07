@@ -7,8 +7,8 @@ Worker:       workers/import_worker.py
 
 Tabs:
   1 – Quelle        (Datei laden, Artname-Feld, Suchmodus)
-  2 – Feldmapping   (Quell- ↔ Zielfeld; Kennung/Eingabedatum automatisch)
-  3 – Feldwerte     (Institution, Status, Stadium, Geschlecht)
+  2 – Feldmapping   (Quell- ↔ Zielfeld)
+  3 – Feldwerte     (Institution, Status, Stadium)
   4 – Artnamen      (Scan, Debug-CSV)
   5 – Import        (Validierung, Import-Log)
 """
@@ -34,8 +34,7 @@ from qgis.core import (
 try:
     from qgis_new_project_plugin.core.import_core import (
         AUTO_FIELDS, GEO_FIELDS, DATE_FIELDS, SYSTEM_FIELDS,
-        UUID_FIELDS, NOW_FIELDS, PROTECTED_FIELDS,
-        COLOR_AUTO, COLOR_GEO, COLOR_DATE, COLOR_MAP, COLOR_UUID,
+        COLOR_AUTO, COLOR_GEO, COLOR_DATE, COLOR_MAP,
         _REF_GPKG, _NUTZUNG_GPKG, _NUTZUNG_TABLE, _NUTZUNG_FIELD,
         _TFIDF_INDEX, _KNN_INDEX, _CONTEXT, _SYNONYMS,
         _ARTEN_LOOKUP_CACHE, _ARTEN_LOOKUP_MODE,
@@ -54,8 +53,7 @@ try:
 except ImportError:
     from .core.import_core import (
         AUTO_FIELDS, GEO_FIELDS, DATE_FIELDS, SYSTEM_FIELDS,
-        UUID_FIELDS, NOW_FIELDS, PROTECTED_FIELDS,
-        COLOR_AUTO, COLOR_GEO, COLOR_DATE, COLOR_MAP, COLOR_UUID,
+        COLOR_AUTO, COLOR_GEO, COLOR_DATE, COLOR_MAP,
         _REF_GPKG, _NUTZUNG_GPKG, _NUTZUNG_TABLE, _NUTZUNG_FIELD,
         _TFIDF_INDEX, _KNN_INDEX, _CONTEXT, _SYNONYMS,
         _ARTEN_LOOKUP_CACHE, _ARTEN_LOOKUP_MODE,
@@ -289,7 +287,7 @@ class FundpunkteImportDialog(QDialog):
         fv_main.addLayout(fv_hdr)
         fv_main.addWidget(QLabel(
             "Ordnet Quellwerte den NRW-Standardwerten zu\n"
-            "(Institution, Status, Stadium, Geschlecht). Gültig für den Import."))
+            "(Institution, Status, Stadium). Gültig für den Import."))
         self._fv_scroll_layout = QVBoxLayout()
         self._fv_scroll_layout.addStretch()
         _fvw = QWidget(); _fvw.setLayout(self._fv_scroll_layout)
@@ -712,15 +710,12 @@ class FundpunkteImportDialog(QDialog):
             "fundort":           ("fundort","ort","location","lokalitaet","site"),
             "bemerkung":         ("bemerkung","anmerkung","comment","note"),
             "status":            ("status","verhalten"),
-            "stadium":           ("stadium",),
-            "geschlecht":        ("geschlecht","sex","gender"),
+            "stadium":           ("stadium","sex","geschlecht"),
             "anzahl":            ("anzahl","count","n","number"),
         }
         auto_map = {}
         sf_lower  = {sf.lower(): sf for sf in src_fields}
         for tf in tgt_fields:
-            if tf in PROTECTED_FIELDS:
-                continue  # nie automatisch auf ein Quellfeld legen
             tf_l = tf.lower()
             # 1. Exakter Treffer
             if tf_l in sf_lower:
@@ -740,10 +735,7 @@ class FundpunkteImportDialog(QDialog):
             self.map_tbl.setItem(row, 0, item0)
 
             # ── Kategorie bestimmen ────────────────────────────────────────
-            if tf in PROTECTED_FIELDS:
-                cat = "auto_fix"
-                bg  = COLOR_UUID
-            elif tf in AUTO_FIELDS:
+            if tf in AUTO_FIELDS:
                 cat = "auto_art"
                 bg  = COLOR_AUTO
             elif tf in GEO_FIELDS:
@@ -760,27 +752,7 @@ class FundpunkteImportDialog(QDialog):
 
             # ── Col 1: Modus-ComboBox ──────────────────────────────────────
             mode_combo = QComboBox()
-            if cat == "auto_fix":
-                # Wird beim Import immer automatisch gesetzt und darf
-                # nicht gemappt werden -> keine weiteren Modi anbieten
-                if tf in UUID_FIELDS:
-                    mode_combo.addItem("Auto (uuid) - nicht mappbar", "auto")
-                    mode_combo.setToolTip(
-                        "Die Kennung wird beim Import automatisch als UUID "
-                        "erzeugt und kann nicht aus der Quelle uebernommen "
-                        "werden. Eine vorhandene Quell-ID bleibt in der "
-                        "Tabelle Fund_Quellfelder erhalten.")
-                else:
-                    mode_combo.addItem(
-                        "Auto (aktuelles Datum) - nicht mappbar", "auto")
-                    mode_combo.setToolTip(
-                        f"{tf} wird automatisch auf den Zeitpunkt des "
-                        "Imports gesetzt (Systemfeld, NOT NULL) und kann "
-                        "nicht aus der Quelle uebernommen werden. Ein Datum "
-                        "aus den Altdaten gehoert in das Feld "
-                        "Beobachtungsdatum.")
-                mode_combo.setEnabled(False)
-            elif cat.startswith("auto"):
+            if cat.startswith("auto"):
                 mode_combo.addItem("Auto (wird gesetzt)", "auto")
                 mode_combo.addItem("Quellfeld",           "src")
                 mode_combo.addItem("Fixwert",             "fix")
@@ -815,10 +787,7 @@ class FundpunkteImportDialog(QDialog):
     def _update_value_widget(self, row, mode, tf, src_fields, auto_map=None):
         """Setzt das richtige Widget in Spalte 2 je nach Modus."""
         if mode == "auto" or mode == "skip":
-            item = QTableWidgetItem(
-                "uuid()" if tf in UUID_FIELDS
-                else "now()" if tf in NOW_FIELDS
-                else "—")
+            item = QTableWidgetItem("—")
             item.setFlags(Qt.ItemFlag.ItemIsEnabled)
             self.map_tbl.setItem(row, 2, item)
             self.map_tbl.removeCellWidget(row, 2)
@@ -1209,8 +1178,6 @@ class FundpunkteImportDialog(QDialog):
             mode       = mode_combo.currentData() if mode_combo else "skip"
             val_widget = self.map_tbl.cellWidget(row, 2)
 
-            if tf in PROTECTED_FIELDS:
-                continue  # Kennung/Eingabedatum: immer automatisch
             if mode == "auto" or mode == "skip":
                 continue  # wird automatisch gefüllt oder explizit weggelassen
 

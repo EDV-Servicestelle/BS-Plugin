@@ -1044,3 +1044,77 @@ def _grid_to_features_numpy(grid: dict,
 
 # ── Worker ────────────────────────────────────────────────────────────────────
 
+
+
+def _clip_grid_to_wkt(all_grid: dict, wkt: str,
+                      e_min: float, n_min: float, cell_m: float,
+                      _log=None) -> tuple:
+    """
+    Beschneidet ein Zellraster {(col,row): [z,...]} auf eine Polygon-Geometrie.
+
+    Anders als die Bounding Box begrenzt dies auf die *tatsächliche* Fläche
+    (z. B. Untersuchungsgebiet, Gemarkung, Schutzgebiet). Erwartet WKT in
+    EPSG:25832 (Projekt-CRS), passend zum Raster.
+
+    Rückgabe: (neues_grid, entfernte_zellen)
+    """
+    if not wkt or not all_grid:
+        return all_grid, 0
+
+    cols = max(k[0] for k in all_grid) + 1
+    rows = max(k[1] for k in all_grid) + 1
+    n_max = n_min + rows * cell_m
+
+    mask = None
+    # 1) Bevorzugt GDAL-Rasterisierung (schnell, eine Operation fürs ganze Gitter)
+    try:
+        from osgeo import gdal as _gd, ogr as _og, osr as _os
+        drv_r = _gd.GetDriverByName("MEM")
+        ds_r = drv_r.Create("", cols, rows, 1, _gd.GDT_Byte)
+        ds_r.SetGeoTransform((e_min, cell_m, 0, n_max, 0, -cell_m))
+        srs = _os.SpatialReference()
+        srs.ImportFromEPSG(25832)
+        ds_r.SetProjection(srs.ExportToWkt())
+
+        drv_v = _og.GetDriverByName("Memory")
+        ds_v = drv_v.CreateDataSource("clip")
+        lyr = ds_v.CreateLayer("clip", srs, _og.wkbPolygon)
+        feat = _og.Feature(lyr.GetLayerDefn())
+        feat.SetGeometry(_og.CreateGeometryFromWkt(wkt))
+        lyr.CreateFeature(feat)
+
+        _gd.RasterizeLayer(ds_r, [1], lyr, burn_values=[1])
+        mask = ds_r.GetRasterBand(1).ReadAsArray()
+        ds_r = ds_v = None
+    except Exception as e:
+        if _log:
+            _log(f"  Zuschnitt via GDAL nicht möglich ({e}) – nutze QGIS-Geometrie.")
+
+    keep = {}
+    if mask is not None:
+        for (col, row), z in all_grid.items():
+            r = rows - 1 - row          # GDAL zählt von oben, das Grid von unten
+            if 0 <= r < rows and 0 <= col < cols and mask[r, col]:
+                keep[(col, row)] = z
+    else:
+        # 2) Rückfallebene: Punkt-in-Polygon über die QGIS-Geometrie
+        try:
+            from qgis.core import QgsGeometry, QgsPointXY
+            geom = QgsGeometry.fromWkt(wkt)
+            eng = QgsGeometry.createGeometryEngine(geom.constGet())
+            eng.prepareGeometry()
+            for (col, row), z in all_grid.items():
+                e = e_min + (col + 0.5) * cell_m
+                n = n_min + (row + 0.5) * cell_m
+                if eng.intersects(QgsGeometry.fromPointXY(QgsPointXY(e, n)).constGet()):
+                    keep[(col, row)] = z
+        except Exception as e:
+            if _log:
+                _log(f"  ⚠ Zuschnitt nicht möglich: {e}")
+            return all_grid, 0
+
+    removed = len(all_grid) - len(keep)
+    if _log:
+        _log(f"  Zuschnitt auf Abgrenzung: {removed:,} Zellen entfernt, "
+             f"{len(keep):,} verbleiben.")
+    return keep, removed
