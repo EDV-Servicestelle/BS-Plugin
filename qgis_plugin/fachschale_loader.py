@@ -5,6 +5,7 @@ Fallback: fachschalen_config.py (fest verdrahtet aus Musterdaten).
 
 from qgis.PyQt.QtCore import QThread, pyqtSignal
 from .fachschalen_config import FACHSCHALEN
+from .pg_verbindung import connect as _pg_connect
 
 
 # ── Fachschalen-Liste ─────────────────────────────────────────────────────────
@@ -22,8 +23,7 @@ class FachschalenLoader(QThread):
 
     def run(self):
         try:
-            import psycopg2
-            conn = psycopg2.connect(**self.conn_params)
+            conn = _pg_connect(self.conn_params)
             cur  = conn.cursor()
             cur.execute("""
                 SELECT code, bezeichnung, schema_name, ref_schema
@@ -136,8 +136,7 @@ class FachschaleLayerLoader(QThread):
         """
         result = {}
         try:
-            import psycopg2
-            conn = psycopg2.connect(**self.conn_params)
+            conn = _pg_connect(self.conn_params)
             cur  = conn.cursor()
             cur.execute("""
                 SELECT LOWER(f_table_name), styleName, styleQML
@@ -159,8 +158,7 @@ class FachschaleLayerLoader(QThread):
     def _load_from_db(self):
         """Generischer DB-Loader für unbekannte Fachschalen."""
         try:
-            import psycopg2
-            conn = psycopg2.connect(**self.conn_params)
+            conn = _pg_connect(self.conn_params)
             cur  = conn.cursor()
             schema     = self.fachschale["schema_name"]
             ref_schema = self.fachschale["ref_schema"]

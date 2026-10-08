@@ -30,6 +30,10 @@ from .wizard_pages import (
     PageExportAndUpload,
 )
 from .fachschalen_config import NRW_WMS_LAYERS
+from .pg_verbindung import datenquelle as _pg_datenquelle, sql_text as _sql_text
+
+# Spalte, über die der Zeilenschutz (RLS) in der Fachdatenbank arbeitet
+PROJEKT_SPALTE = "Projekt_ID"
 _PLUGIN_DIR = os.path.dirname(__file__)
 
 
@@ -91,6 +95,10 @@ class NewProjectWizard(QWizard):
             QgsExpressionContextUtils.setProjectVariable(project, "kartierer",   kartierer_val)
         if institution_val and not institution_val.startswith("—"):
             QgsExpressionContextUtils.setProjectVariable(project, "institution", institution_val)
+        projekt_id = None if offline else self._projekt_id()
+        if projekt_id:
+            QgsExpressionContextUtils.setProjectVariable(project, "projekt_id", projekt_id)
+            log(f"Projekt_ID: {projekt_id}", context="Wizard")
         if fachschale:
             QgsExpressionContextUtils.setProjectVariable(project, "fachschale",      fachschale["code"])
             QgsExpressionContextUtils.setProjectVariable(project, "fachschale_name", fachschale["bezeichnung"])
@@ -147,6 +155,7 @@ class NewProjectWizard(QWizard):
                     self._apply_value_relations(lyr, r, ref_layer_map)
                     self._apply_default_values(lyr, r)
                     self._apply_extra_widgets(lyr, r)
+                    self._apply_projekt(lyr, projekt_id)
 
             # ── Grenzen-Layer der Fachschale (read-only) ──────────────────────
             # Hinweis: Fachschalen bringen KEIN Untersuchungsgebiet mehr mit –
@@ -182,7 +191,16 @@ class NewProjectWizard(QWizard):
         # Quelle: Datei ODER Layer von der Wizard-Seite (Fachschalen bringen
         # selbst KEIN UG mehr mit). Schreibt ein GeoPackage in den Projekt-
         # ordner, hängt den Layer in den Baum und setzt _ugExtent.
-        self._create_ug_layer(project, root, _captured_ug)
+        if not offline and projekt_id:
+            # Mit Fachdatenbank: UG zentral in gemeinsam.untersuchungsgebiet,
+            # dem Projekt zugeordnet und durch den Zeilenschutz geschützt.
+            # Schlägt das fehl (ältere DB, fehlende Rechte), bleibt es beim
+            # projektlokalen GeoPackage.
+            if not self._create_ug_layer_db(project, root, _captured_ug,
+                                            conn_params, projekt_id, fachschale):
+                self._create_ug_layer(project, root, _captured_ug)
+        else:
+            self._create_ug_layer(project, root, _captured_ug)
 
         # ── WMS/WMTS-Hintergrundkarten ────────────────────────────────────────
         wms_group = root.addGroup("WMS")
@@ -229,6 +247,15 @@ class NewProjectWizard(QWizard):
                     project, "landkreis_ags", kreis_info[1])
                 self._trigger_nutzung_download(
                     project, root, (kreis_info[1], kreis_info[2]))
+
+        # ── Sensible Layer aus der Datenbank (Exportseite, nur Dienstname) ───
+        exp_page = self.page(self.PAGE_EXPORT)
+        if exp_page is not None and hasattr(exp_page, "_sens_ergaenzen"):
+            try:
+                exp_page._sens_ergaenzen(project)
+            except Exception:
+                from .debug_log import log_exc
+                log_exc("Wizard._sens_ergaenzen")
 
         # ── GeoPackages projektlokal machen (Kopie + Umverlinkung + Speichern) ──
         # Läuft bei JEDEM _build_project-Aufruf, damit auch der zweite Aufruf
@@ -680,26 +707,45 @@ class NewProjectWizard(QWizard):
 
     # ── Layer aus PostGIS laden ───────────────────────────────────────────────
     def _load_postgis_layer(self, r: dict, conn_params: dict,
-                             apply_style: bool):
-        uri = QgsDataSourceUri()
-        uri.setConnection(
-            conn_params["host"],
-            str(conn_params["port"]),
-            conn_params["dbname"],
-            conn_params["user"],
-            conn_params["password"],
-        )
-        geom_col = r.get("geom_col") or ""
-        # PostgreSQL speichert ohne Quotes als lowercase (ogr2ogr -nln lowercase)
-        # PostgreSQL-Tabellen werden von ogr2ogr lowercase geschrieben
-        uri.setDataSource(r["schema"], r["table"].lower(), geom_col)
-
+                             apply_style: bool, filter_sql: str = ""):
+        # PostgreSQL-Tabellen werden von ogr2ogr lowercase geschrieben.
+        # Mit Dienst steht kein Passwort in der Layerquelle (pg_verbindung).
+        uri = _pg_datenquelle(conn_params, r["schema"], r["table"].lower(),
+                              r.get("geom_col") or "", filter_sql)
         # Anzeigename: ursprünglicher CamelCase-Name
         layer = QgsVectorLayer(uri.uri(False), r.get("label", r["table"]), "postgres")
         if not layer.isValid():
+            from .debug_log import log
+            log(f"PostGIS-Layer ungültig: {r['schema']}.{r['table'].lower()}",
+                "WARN", context="Wizard")
             return None
-
         return layer
+
+    # ── Projektbezug: Filter + Vorgabewert für die Projekt_ID ─────────────────
+    def _projekt_id(self):
+        page = self.page(self.PAGE_INFO)
+        return page.projekt_id() if page and hasattr(page, "projekt_id") else None
+
+    def _apply_projekt(self, layer: QgsVectorLayer, projekt_id):
+        """Zeigt nur Zeilen des gewählten Projekts und gibt neuen Zeilen dessen
+        Projekt_ID mit. Die Datenbank prüft das ohnehin (RLS); der Filter
+        sorgt dafür, dass jemand in mehreren Projekten nur das eine sieht,
+        der Vorgabewert dafür, dass neue Zeilen nicht abgewiesen werden.
+        Ohne Projekt (offline, Admin) bleibt der Layer unverändert."""
+        if not projekt_id or layer is None:
+            return
+        idx = layer.fields().indexFromName(PROJEKT_SPALTE)
+        if idx < 0:
+            return
+        layer.setSubsetString(f'"{PROJEKT_SPALTE}" = {_sql_text(projekt_id)}')
+        layer.setDefaultValueDefinition(idx, QgsDefaultValue("@projekt_id", False))
+        # Feld im Formular sichtbar, aber nicht änderbar
+        try:
+            cfg = layer.editFormConfig()
+            cfg.setReadOnly(idx, True)
+            layer.setEditFormConfig(cfg)
+        except Exception:
+            pass
 
     # ── ValueRelation-Widgets setzen ─────────────────────────────────────────
     def _apply_value_relations(self, layer: QgsVectorLayer,
@@ -875,11 +921,103 @@ class NewProjectWizard(QWizard):
         project.addMapLayer(ug, addToLegend=False)
         grp = root.findGroup("Grenzen") or root.addGroup("Grenzen")
         grp.insertLayer(0, ug)
+        self.setProperty("_ugGpkgPath", gpkg_path)
+        self._merke_ug(ug, project)
+        log(f"UG-Layer erstellt: {gpkg_path} ({ug.featureCount()} Feature(s))",
+            context="Wizard")
 
+    # ── UG in der Fachdatenbank (gemeinsam.untersuchungsgebiet) ──────────────
+    def _create_ug_layer_db(self, project, root, captured, conn_params,
+                            projekt_id, fachschale) -> bool:
+        """
+        Schreibt ein neu gewähltes UG in gemeinsam.untersuchungsgebiet
+        (MultiPolygon, EPSG:25832) mit Projekt_ID, Kennung, Bezeichnung
+        (Projektname) und Fachschale, und lädt den Layer gefiltert auf das
+        Projekt. Bereits vorhandene UGs des Projekts erscheinen ebenfalls.
+        Rückgabe False → Aufrufer nimmt das projektlokale GeoPackage.
+        """
+        from .debug_log import log
+        filt = f'"{PROJEKT_SPALTE}" = {_sql_text(projekt_id)}'
+        row = {"schema": "gemeinsam", "table": "untersuchungsgebiet",
+               "geom_col": "geom", "label": "Untersuchungsgebiet"}
+        ug = self._load_postgis_layer(row, conn_params, False, filt)
+        if ug is None:
+            log("UG-Tabelle gemeinsam.untersuchungsgebiet nicht nutzbar – "
+                "lege projektlokales GeoPackage an", "WARN", context="Wizard")
+            return False
+        fields = ug.fields()
+        if fields.indexFromName(PROJEKT_SPALTE) < 0:
+            log("gemeinsam.untersuchungsgebiet ohne Projekt_ID (noch nicht "
+                "geschützt) – lege projektlokales GeoPackage an", "WARN",
+                context="Wizard")
+            return False
+
+        mem, kennung = (captured if captured else (None, ""))
+        prov = ug.dataProvider()
+        # Nur einmal je Wizard-Lauf schreiben (der Aufbau kann zweimal laufen)
+        if self.property("_ugDbGespeichert"):
+            mem = None
+        if mem is not None and mem.isValid() and mem.featureCount() > 0:
+            ct = None
+            if mem.crs() != ug.crs():
+                ct = QgsCoordinateTransform(mem.crs(), ug.crs(), project)
+            werte = {
+                PROJEKT_SPALTE: projekt_id,
+                "kennung":      kennung or (self.field("projectName") or ""),
+                "bezeichnung":  self.field("projectName") or "",
+                "fachschale":   (fachschale or {}).get("code", ""),
+            }
+            neu = []
+            for f in mem.getFeatures():
+                g = QgsGeometry(f.geometry())
+                if g.isNull() or g.isEmpty():
+                    continue
+                if ct is not None:
+                    g.transform(ct)
+                g.convertToMultiType()
+                nf = QgsFeature(fields)
+                nf.setGeometry(g)
+                # gid, created_at: Vorgabe der Datenbank (nextval, now())
+                for i in range(fields.count()):
+                    klausel = prov.defaultValueClause(i)
+                    if klausel:
+                        nf.setAttribute(i, klausel)
+                for name, wert in werte.items():
+                    i = fields.indexFromName(name)
+                    if i >= 0:
+                        nf.setAttribute(i, wert)
+                neu.append(nf)
+            ok = prov.addFeatures(neu)[0] if neu else True
+            if not ok:
+                fehler = "; ".join(prov.errors()[-2:])
+                log(f"UG konnte nicht in die Datenbank geschrieben werden: "
+                    f"{fehler}", "WARN", context="Wizard")
+                return False
+            self.setProperty("_ugDbGespeichert", True)
+            prov.reloadData()
+            ug.reload()
+            log(f"UG in gemeinsam.untersuchungsgebiet gespeichert "
+                f"({len(neu)} Fläche(n), Projekt {projekt_id})", context="Wizard")
+
+        if ug.featureCount() == 0:
+            # Weder neu gewählt noch in der DB vorhanden → kein UG-Layer
+            return True
+
+        ug.setReadOnly(True)
+        project.addMapLayer(ug, addToLegend=False)
+        grp = root.findGroup("Grenzen") or root.addGroup("Grenzen")
+        grp.insertLayer(0, ug)
+        self._merke_ug(ug, project)
+        return True
+
+    def _merke_ug(self, ug, project):
+        """Extent und vereinigtes UG-Polygon (EPSG:25832) für den
+        Grundlagenabruf merken."""
+        from .debug_log import log
+        ug.updateExtents()
         ext = ug.extent()
         if ext and not ext.isEmpty():
             self.setProperty("_ugExtent", ext)
-        self.setProperty("_ugGpkgPath", gpkg_path)
 
         # UG-Polygon (vereinigt) in EPSG:25832 für das Clipping der
         # Grundlagendaten merken (siehe _load_from_grundlagen_db).
@@ -896,9 +1034,6 @@ class NewProjectWizard(QWizard):
         except Exception as _e:
             log(f"UG-WKT (25832) konnte nicht erzeugt werden: {_e}",
                 "WARN", context="Wizard")
-
-        log(f"UG-Layer erstellt: {gpkg_path} ({ug.featureCount()} Feature(s))",
-            context="Wizard")
 
         # ── QGIS-Relationen (Beziehungsmanager) setzen ───────────────────────────
     def _apply_relations(self, project: QgsProject, layer_map: dict, relations: list):

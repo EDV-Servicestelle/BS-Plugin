@@ -120,7 +120,9 @@ class _SetupWorker(QThread):
 
         # 2. Extensions
         self.progress.emit(5, "Aktiviere PostGIS …")
-        for ext in ("postgis", "postgis_topology", "fuzzystrmatch"):
+        # postgis_topology wird nicht gebraucht (und darf auf dem zentralen
+        # Server nur der Superuser anlegen).
+        for ext in ("postgis", "fuzzystrmatch"):
             self._sql(db, f"CREATE EXTENSION IF NOT EXISTS {ext}",
                       _pg, host, port, user, pw)
 
@@ -243,8 +245,12 @@ class _SetupWorker(QThread):
         self._repair_table_case(db, _pg, host, port, user, pw)
 
         # 7. Styles migrieren
-        self.progress.emit(90, "Migriere QGIS-Styles …")
+        self.progress.emit(88, "Migriere QGIS-Styles …")
         self._migrate_styles(schemas, db, _pg, host, port, user, pw)
+
+        # 8. Zeilenschutz (nur wenn die Datenbank das Rechtemodell hat)
+        self.progress.emit(94, "Zeilenschutz …")
+        self._schuetzen(schemas, db, _pg, host, port, user, pw)
 
         self.progress.emit(100, "✓ Fertig")
         self.finished.emit(True,
@@ -291,6 +297,15 @@ class _SetupWorker(QThread):
                                    "status", "einheit", "institution")
             )
             tgt = ref_sch if is_ref else schema
+
+            # Erfassungstabellen werden nie überschrieben: -overwrite würde
+            # die Tabelle samt Daten, Rechten und Zeilenschutz löschen.
+            # Referenzlisten dürfen erneuert werden.
+            if not is_ref and self._tabelle_existiert(
+                    tgt, tbl.lower(), db, _pg, host, port, user, pw):
+                self.progress.emit(-1,
+                    f"    = {tgt}.{tbl.lower()} besteht – Daten bleiben unverändert")
+                continue
 
             if tbl in geom_tables:
                 cmd = [
@@ -519,6 +534,78 @@ class _SetupWorker(QThread):
                     self.progress.emit(-1, f"  ✓ {n} Styles (GPKG) ← {gpkg_path.name}")
 
 
+
+    def _tabelle_existiert(self, schema, tbl, db, pg, host, port, user, pw) -> bool:
+        rows = self._query(db,
+            "SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace "
+            "WHERE n.nspname = %s AND c.relname = %s",
+            (schema, tbl), pg, host, port, user, pw)
+        return bool(rows)
+
+    def _schuetzen(self, schemas, db, pg, host, port, user, pw):
+        """Stellt die Erfassungstabellen der gewählten Fachschalen und
+        gemeinsam.untersuchungsgebiet unter Zeilenschutz (Projekt_ID).
+        Nur auf Datenbanken mit dem Rechtemodell (Schema verwaltung); auf
+        einer lokalen Testdatenbank ohne dieses Modell passiert nichts.
+        tabelle_schuetzen() ist wiederholbar."""
+        if not pg:
+            self.progress.emit(-1, "  Zeilenschutz übersprungen (psycopg2 fehlt)")
+            return
+        hat = self._query(db,
+            "SELECT to_regprocedure('verwaltung.tabelle_schuetzen(regclass,text,boolean)') IS NOT NULL",
+            None, pg, host, port, user, pw)
+        if not hat or not hat[0][0]:
+            self.progress.emit(-1, "  Kein Rechtemodell (verwaltung) – Zeilenschutz übersprungen")
+            return
+
+        from .fachschalen_config import FACHSCHALEN as _CFG
+        cfg = {f["code"]: f for f in _CFG}
+        ziele = []
+        for key in schemas:
+            fs = FACHSCHALEN[key]
+            for gl in cfg.get(fs["code"], {}).get("geo_layers", []):
+                ziele.append((fs["schema"], gl["table"].lower()))
+        ziele.append(("gemeinsam", "untersuchungsgebiet"))
+
+        for sch, tbl in ziele:
+            if not self._tabelle_existiert(sch, tbl, db, pg, host, port, user, pw):
+                continue
+            r = self._query(db, "SELECT verwaltung.tabelle_schuetzen(%s::regclass)",
+                            (f'"{sch}"."{tbl}"',), pg, host, port, user, pw,
+                            melden=True)
+            if r:
+                self.progress.emit(-1, f"  ✓ {r[0][0]}")
+
+        offen = self._query(db,
+            "SELECT schema || '.' || tabelle, befund FROM verwaltung.pruefen() "
+            "WHERE befund NOT IN ('geschuetzt', 'nur lesen') "
+            # bewusst gesperrt: Kontaktdaten, lesbar über karterer_liste
+            "AND (schema, tabelle) <> ('gemeinsam', 'karterer') ORDER BY 1",
+            None, pg, host, port, user, pw) or []
+        if offen:
+            self.progress.emit(-1, "  Noch nicht eingeordnet (verwaltung.pruefen()):")
+            for name, befund in offen:
+                self.progress.emit(-1, f"    {name}: {befund}")
+        else:
+            self.progress.emit(-1, "  ✓ alle Tabellen geschützt oder nur lesbar")
+
+    def _query(self, dbname, sql, params, pg, host, port, user, pw, melden=False):
+        """SELECT mit Ergebnis; bei Fehler None (mit melden=True im Protokoll)."""
+        if not pg:
+            return None
+        try:
+            con = pg.connect(host=host, port=port, dbname=dbname,
+                             user=user, password=pw)
+            con.autocommit = True
+            cur = con.cursor()
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+            con.close()
+            return rows
+        except Exception as e:
+            if melden:
+                self.progress.emit(-1, f"  ⚠ {str(e).splitlines()[0][:140]}")
+            return None
 
     def _sql(self, dbname, sql, pg, host, port, user, pw):
         if pg:
