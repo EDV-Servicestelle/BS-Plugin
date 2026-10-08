@@ -5,14 +5,15 @@ from qgis.PyQt.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QFormLayout, QTextEdit,
     QTableWidget, QTableWidgetItem, QHeaderView, QGroupBox,
     QCheckBox, QAbstractItemView, QProgressBar, QComboBox,
-    QSpinBox,
+    QSpinBox, QCompleter, QListWidget, QListWidgetItem,
 )
-from qgis.PyQt.QtCore import QThread, pyqtSignal
+from qgis.PyQt.QtCore import QThread, pyqtSignal, Qt
 from qgis.PyQt.QtGui import QColor
 from qgis.gui import QgsProjectionSelectionWidget, QgsMapLayerComboBox
 from qgis.core import QgsMapLayerProxyModel
 
 from .fachschale_loader import FachschalenLoader, FachschaleLayerLoader
+from .pg_verbindung import connect as _pg_connect
 from .project_finalizer import (
     collect_and_copy_geopackages,
     relink_project_to_local_geopackages,
@@ -125,6 +126,19 @@ class PageProjectInfo(QWizardPage):
             conn_row.addWidget(w)
         conn_row.addWidget(load_btn)
 
+        # Dienst aus pg_service.conf (empfohlen): Host/Port/DB/sslmode kommen
+        # dann aus der Dienstdatei, und ins Projekt wird kein Passwort
+        # geschrieben.
+        svc_row = QHBoxLayout()
+        self.fach_service = QLineEdit()
+        self.fach_service.setPlaceholderText(
+            "Dienst aus pg_service.conf, z. B. bs_fachdaten (empfohlen, optional)")
+        self.fach_service.setToolTip(
+            "Mit Dienst wird kein Passwort in die Projektdatei geschrieben.\n"
+            "Host/Port/Datenbank dürfen dann leer bleiben bzw. kommen aus dem Dienst.")
+        svc_row.addWidget(QLabel("Dienst:"))
+        svc_row.addWidget(self.fach_service)
+
         self.fach_combo = QComboBox()
         self.fach_combo.setEnabled(False)
         self.fach_combo.addItem("— bitte zuerst Verbindung laden —")
@@ -138,6 +152,7 @@ class PageProjectInfo(QWizardPage):
         offline_btn.clicked.connect(self._load_offline)
 
         fl.addLayout(conn_row)
+        fl.addLayout(svc_row)
         fl.addWidget(offline_btn)
         fl.addWidget(self.fach_combo)
         fl.addWidget(self.fach_status)
@@ -152,8 +167,19 @@ class PageProjectInfo(QWizardPage):
         self.institution_combo.setEditable(True)
         self.institution_combo.addItem("— bitte wählen —", None)
         self._populate_person_combos()
+
+        # Projekt (Projekt_ID) – nur mit Datenbank. Bestimmt, welche Zeilen
+        # das QGIS-Projekt zeigt und welche Projekt_ID neue Zeilen erhalten.
+        self.projekt_combo = QComboBox()
+        self.projekt_combo.addItem("— nur mit Datenbankverbindung —", None)
+        self.projekt_combo.setEnabled(False)
+        self.projekt_combo.currentIndexChanged.connect(
+            lambda _i: self.completeChanged.emit())
+        self._projekte_geladen = False
+
         vl.addRow("Kartierer:",   self.kartierer_edit)
         vl.addRow("Institution:", self.institution_combo)
+        vl.addRow("Projekt:",     self.projekt_combo)
         var_box.setLayout(vl)
         # Hinweis: Die frühere manuelle Landkreis-Auswahl (erster Versuch eines
         # Grundlagen-Abrufs) wurde entfernt. Verwaltungsgrenzen kommen jetzt
@@ -179,64 +205,107 @@ class PageProjectInfo(QWizardPage):
     # ── Slots ─────────────────────────────────────────────────────────────────
 
     def _populate_person_combos(self):
-        """Befüllt Institution + Karterer.
-        Quelle 1: PostGIS gemeinsam.institution / gemeinsam.karterer
-        Quelle 2: Fallback auf lokale Referenzlisten.gpkg (adressrollle).
-        """
-        # Versuche PostGIS-Verbindung (Host/Port aus Fachschalen-Eingabe)
-        if self._try_populate_from_postgis():
-            return
+        """Startbelegung ohne Datenbank: Institutionen aus der lokalen
+        Referenzliste. Mit Datenbank ersetzt _load_db_lists() die Listen
+        (Aufruf über „Laden“)."""
         self._populate_from_gpkg()
 
-    def _try_populate_from_postgis(self) -> bool:
-        """Befüllt Combos aus gemeinsam.institution + gemeinsam.karterer."""
+    def _load_db_lists(self) -> str:
+        """Liest nach „Laden“ aus der Datenbank:
+          * Projekte des angemeldeten Benutzers (verwaltung.projekt,
+            gefiltert über verwaltung.meine_projekte())
+          * Institutionen aus der LANUK-Referenzliste referenz.institution –
+            dieselben Begriffe ('term'), auf die das Fund-Formular über
+            @institution zugreift. gemeinsam.institution (Stationsdaten)
+            wird dafür bewusst NICHT verwendet.
+          * Kartierer aus gemeinsam.karterer_liste (Sicht ohne Kontaktdaten)
+        Jede Abfrage für sich: fehlt etwas (ältere Datenbank, fehlende
+        Rechte), bleibt die bisherige Liste stehen. Rückgabe: Kurzmeldung."""
         try:
-            import psycopg2
-            host = self.fach_host.text().strip()
-            port = self.fach_port.value()
-            db   = self.fach_db.text().strip()
-            user = self.fach_user.text().strip()
-            pw   = self.fach_pw.text() if hasattr(self, 'fach_pw') else ""
-            if not db:
-                return False
-            conn = psycopg2.connect(host=host, port=port, dbname=db,
-                                    user=user, password=pw, connect_timeout=3)
-            cur = conn.cursor()
-            # Institutionen
+            con = _pg_connect(self._conn_params(), timeout=5)
+        except Exception as e:
+            return f"keine Verbindung ({str(e).splitlines()[0][:80]})"
+        meldungen = []
+        cur = con.cursor()
+
+        # Projekte
+        self.projekt_combo.blockSignals(True)
+        self.projekt_combo.clear()
+        try:
             cur.execute("""
-                SELECT kuerzel, name FROM gemeinsam.institution
-                ORDER BY kuerzel
-            """)
-            inst_rows = cur.fetchall()
-            # Karterer
-            cur.execute("""
-                SELECT vorname || ' ' || nachname, email, institution_kuerzel
-                FROM gemeinsam.karterer
-                WHERE aktiv = TRUE
-                ORDER BY nachname, vorname
-            """)
-            kart_rows = cur.fetchall()
-            conn.close()
+                SELECT projekt_id, coalesce(bezeichnung, '')
+                  FROM verwaltung.projekt
+                 WHERE projekt_id = ANY (verwaltung.meine_projekte())
+                 ORDER BY projekt_id""")
+            projekte = cur.fetchall()
         except Exception:
-            return False
+            projekte = None
+        if projekte is None:
+            self.projekt_combo.addItem("— kein Projektverzeichnis in dieser Datenbank —", None)
+            self.projekt_combo.setEnabled(False)
+            self._projekte_geladen = False
+            meldungen.append("ohne Projektverzeichnis")
+        elif not projekte:
+            self.projekt_combo.addItem("— Benutzer ist keinem Projekt zugeordnet —", None)
+            self.projekt_combo.setEnabled(False)
+            self._projekte_geladen = False
+            meldungen.append("keine Projekte für diesen Benutzer")
+        else:
+            if len(projekte) > 1:
+                self.projekt_combo.addItem("— Projekt wählen —", None)
+            for pid, bez in projekte:
+                self.projekt_combo.addItem(f"{pid} – {bez}" if bez else pid, pid)
+            self.projekt_combo.setEnabled(True)
+            self._projekte_geladen = True
+            meldungen.append(f"{len(projekte)} Projekt(e)")
+        self.projekt_combo.blockSignals(False)
 
-        if not inst_rows:
-            return False
+        # Institutionen (LANUK-Referenzliste, nur Biologische Stationen)
+        try:
+            cur.execute("""
+                SELECT term FROM referenz.institution
+                 WHERE parentid::text IN ('552172', '552172.0')
+                 ORDER BY term""")
+            inst = [r[0] for r in cur.fetchall() if r[0]]
+        except Exception:
+            inst = []
+        if inst:
+            alt = self.institution_combo.currentText()
+            self.institution_combo.clear()
+            self.institution_combo.addItem("— bitte wählen —", None)
+            for t in inst:
+                self.institution_combo.addItem(t, t)
+            idx = self.institution_combo.findText(alt.split(" – ")[0].strip())
+            if idx >= 0:
+                self.institution_combo.setCurrentIndex(idx)
 
-        # Institution-Combo befüllen
-        for kuerzel, name in inst_rows:
-            label = f"{kuerzel} – {name}" if name and kuerzel != name else (name or kuerzel)
-            self.institution_combo.addItem(label, kuerzel)
+        # Kartierer: Vorschläge beim Tippen
+        try:
+            cur.execute("""
+                SELECT vorname || ' ' || nachname
+                  FROM gemeinsam.karterer_liste
+                 WHERE aktiv IS NOT FALSE
+                 ORDER BY nachname, vorname""")
+            namen = [r[0] for r in cur.fetchall() if r[0]]
+        except Exception:
+            namen = []
+        if namen:
+            comp = QCompleter(namen, self.kartierer_edit)
+            comp.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+            comp.setFilterMode(Qt.MatchFlag.MatchContains)
+            self.kartierer_edit.setCompleter(comp)
+            meldungen.append(f"{len(namen)} Kartierer")
 
-        # Kartierer-Combo befüllen (falls vorhanden)
-        if hasattr(self, 'kartierer_combo'):
-            for name, email, inst in kart_rows:
-                self.kartierer_combo.addItem(name, {"email": email, "institution": inst})
+        con.close()
+        self.completeChanged.emit()
+        return ", ".join(meldungen)
 
-        # Ersten Eintrag vorauswählen
-        if self.institution_combo.count() > 1:
-            self.institution_combo.setCurrentIndex(1)
-        return True
+    def projekt_id(self):
+        """Gewählte Projekt_ID oder None (offline / ohne Projekt)."""
+        wiz = self.wizard()
+        if wiz is not None and wiz.property("_offlineMode"):
+            return None
+        return self.projekt_combo.currentData()
 
     def _populate_from_gpkg(self):
         """Fallback: lädt Institutionen aus lokaler adressrollle-Tabelle."""
@@ -266,6 +335,7 @@ class PageProjectInfo(QWizardPage):
 
     def _conn_params(self) -> dict:
         return {
+            "service":  self.fach_service.text().strip(),
             "host":     self.fach_host.text().strip(),
             "port":     self.fach_port.value(),
             "dbname":   self.fach_db.text().strip(),
@@ -279,6 +349,9 @@ class PageProjectInfo(QWizardPage):
         wiz = self.wizard()
         if wiz:
             wiz.setProperty("_offlineMode", False)
+        listen = self._load_db_lists()
+        if listen:
+            self.fach_status.setText(f"Datenbank: {listen}")
         self._loader = FachschalenLoader(self._conn_params())
         self._loader.ready.connect(self._populate_combo)
         self._loader.error.connect(
@@ -295,6 +368,12 @@ class PageProjectInfo(QWizardPage):
         if wiz:
             wiz.setProperty("_offlineMode", True)
         self._populate_combo(FACHSCHALEN)
+        self.projekt_combo.blockSignals(True)
+        self.projekt_combo.clear()
+        self.projekt_combo.addItem("— offline: kein Projekt —", None)
+        self.projekt_combo.setEnabled(False)
+        self.projekt_combo.blockSignals(False)
+        self._projekte_geladen = False
         self.fach_status.setText("Offline-Modus: GeoPackage-Daten werden verwendet.")
 
     def _populate_combo(self, rows: list):
@@ -317,7 +396,11 @@ class PageProjectInfo(QWizardPage):
         name_ok   = bool(self.name_edit.text().strip())
         folder_ok = os.path.isdir(self.folder_edit.text().strip())
         fach_ok   = self.fach_combo.currentData() is not None
-        return name_ok and folder_ok and fach_ok
+        # Mit Projektverzeichnis muss ein Projekt gewählt sein – sonst
+        # bekämen neue Zeilen keine Projekt_ID und würden abgewiesen.
+        proj_ok   = (not self._projekte_geladen
+                     or self.projekt_combo.currentData() is not None)
+        return name_ok and folder_ok and fach_ok and proj_ok
 
     def validatePage(self):
         return self.isComplete()
@@ -695,6 +778,7 @@ class PageSummary(QWizardPage):
         # Nur den kurzname-Teil anzeigen
         kartierer   = kartierer.split(" – ")[0] if " – " in kartierer else kartierer
         institution = institution.split(" – ")[0] if " – " in institution else institution
+        projekt       = wiz.page(wiz.PAGE_INFO).projekt_id() or "– (keine Filterung)"
         fach          = wiz.property("_fachschale")
         fach_name     = fach["bezeichnung"] if fach else "–"
         pg_page       = wiz.page(wiz.PAGE_POSTGIS)
@@ -724,6 +808,7 @@ class PageSummary(QWizardPage):
             f"Projektvariablen:\n"
             f"  Kartierer      : {kartierer}\n"
             f"  Institution    : {institution}\n"
+            f"  Projekt_ID     : {projekt}\n"
             f"\n"
             f"Fachschalen-Layer ({len(geo_layers)}):\n{fmt(geo_layers)}\n"
             f"\n"
@@ -794,6 +879,9 @@ class PageExportAndUpload(QWizardPage):
         cl.addLayout(row3)
         cloud_box.setLayout(cl)
 
+        # ── Sensible Daten aus der Datenbank (per Secret in QFieldCloud) ─────
+        self.sens_box = self._build_sensibel_box()
+
         # ── Fortschritt & Log ────────────────────────────────────────────────
         self.run_btn  = QPushButton("Export & Upload starten")
         self.run_btn.clicked.connect(self._run)
@@ -807,6 +895,7 @@ class PageExportAndUpload(QWizardPage):
         layout = QVBoxLayout()
         layout.addWidget(gpkg_box)
         layout.addWidget(cloud_box)
+        layout.addWidget(self.sens_box)
         layout.addWidget(self.run_btn)
         layout.addWidget(self.progress)
         layout.addWidget(self.log)
@@ -820,6 +909,140 @@ class PageExportAndUpload(QWizardPage):
         folder = self.field("projectFolder")
         if folder:
             self.gpkg_edit.setText(folder)
+
+    # ── Sensible Daten ────────────────────────────────────────────────────────
+    def _build_sensibel_box(self):
+        """
+        Ergänzt das (GeoPackage-)Projekt um Layer aus einer sensiblen
+        Stations-Datenbank. In die Projektdatei kommt nur der Dienstname;
+        QFieldCloud holt Benutzer und Passwort beim Verpacken aus dem Secret
+        gleichen Namens (pg_service), am besten je Person. Benutzer und
+        Passwort hier dienen nur dem Abruf der Tabellenliste und dem Laden
+        in dieser QGIS-Sitzung – sie werden nirgends gespeichert.
+        """
+        from qgis.core import QgsSettings
+        box = QGroupBox("Sensible Daten aus der Datenbank (per Secret in QFieldCloud)")
+        box.setCheckable(True)
+        box.setChecked(False)
+        lo = QVBoxLayout()
+
+        hint = QLabel(
+            "Nur der Dienstname wird ins Projekt geschrieben. In QFieldCloud "
+            "muss es ein pg_service-Secret mit genau diesem Namen geben "
+            "(Benutzer + Passwort, möglichst je Person).")
+        hint.setWordWrap(True)
+        hint.setStyleSheet("color: gray; font-size: 11px;")
+
+        r1 = QHBoxLayout()
+        self.sens_service = QLineEdit(
+            QgsSettings().value("naturschutz/sensibel_dienst", "", type=str))
+        self.sens_service.setPlaceholderText("Dienst, z. B. bs_sensibel_wesel")
+        self.sens_user = QLineEdit()
+        self.sens_user.setPlaceholderText("Benutzer (p_…)")
+        self.sens_pw = QLineEdit()
+        self.sens_pw.setPlaceholderText("Passwort")
+        self.sens_pw.setEchoMode(QLineEdit.EchoMode.Password)
+        load = QPushButton("Tabellen laden")
+        load.clicked.connect(self._sens_laden)
+        for lbl, w in (("Dienst:", self.sens_service), ("User:", self.sens_user),
+                       ("PW:", self.sens_pw)):
+            r1.addWidget(QLabel(lbl))
+            r1.addWidget(w)
+        r1.addWidget(load)
+
+        self.sens_list = QListWidget()
+        self.sens_list.setMaximumHeight(110)
+        self.sens_status = QLabel("")
+        self.sens_status.setStyleSheet("color: gray; font-size: 11px;")
+
+        lo.addWidget(hint)
+        lo.addLayout(r1)
+        lo.addWidget(self.sens_list)
+        lo.addWidget(self.sens_status)
+        box.setLayout(lo)
+        return box
+
+    def _sens_params(self) -> dict:
+        return {"service":  self.sens_service.text().strip(),
+                "user":     self.sens_user.text().strip(),
+                "password": self.sens_pw.text()}
+
+    def _sens_laden(self):
+        """Tabellen der sensiblen Datenbank auflisten (ohne Systemschemata)."""
+        self.sens_list.clear()
+        p = self._sens_params()
+        if not p["service"]:
+            self.sens_status.setText("Bitte Dienstnamen eintragen.")
+            return
+        try:
+            con = _pg_connect(p, timeout=5)
+            cur = con.cursor()
+            cur.execute("""
+                SELECT t.table_schema, t.table_name,
+                       coalesce(g.f_geometry_column, ''), coalesce(g.type, 'Tabelle')
+                  FROM information_schema.tables t
+                  LEFT JOIN geometry_columns g
+                         ON g.f_table_schema = t.table_schema
+                        AND g.f_table_name   = t.table_name
+                 WHERE t.table_schema NOT IN ('pg_catalog', 'information_schema',
+                                              'public', 'topology', 'tiger')
+                   AND t.table_type IN ('BASE TABLE', 'VIEW')
+                 ORDER BY 1, 2""")
+            rows = cur.fetchall()
+            con.close()
+        except Exception as e:
+            self.sens_status.setText(f"Keine Verbindung: {str(e).splitlines()[0][:120]}")
+            return
+        for sch, tbl, geom, typ in rows:
+            it = QListWidgetItem(f"{sch}.{tbl}  [{typ}]")
+            it.setData(Qt.ItemDataRole.UserRole, (sch, tbl, geom))
+            it.setFlags(it.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+            it.setCheckState(Qt.CheckState.Checked)
+            self.sens_list.addItem(it)
+        self.sens_status.setText(
+            f"{len(rows)} Tabelle(n) – Auswahl wird beim Export als Gruppe "
+            f"„Sensible Daten“ ins Projekt übernommen."
+            if rows else "Keine lesbaren Tabellen (Zugang zur Datenbank?).")
+        try:
+            from qgis.core import QgsSettings
+            QgsSettings().setValue("naturschutz/sensibel_dienst", p["service"])
+        except Exception:
+            pass
+
+    def _sens_ergaenzen(self, project) -> int:
+        """Gewählte sensible Tabellen als PostGIS-Layer (nur Dienstname in der
+        Quelle) ins Projekt hängen und für QFieldCloud auf „Offline-
+        Bearbeitung“ stellen: QFieldCloud verpackt sie mit dem Secret und
+        spielt Änderungen später in die Datenbank zurück."""
+        if not self.sens_box.isChecked() or self.sens_list.count() == 0:
+            return 0
+        self._log("Ergänze sensible Daten aus der Datenbank …")
+        from qgis.core import QgsVectorLayer
+        from .pg_verbindung import datenquelle
+        p = self._sens_params()
+        root = project.layerTreeRoot()
+        grp = root.findGroup("Sensible Daten") or root.insertGroup(0, "Sensible Daten")
+        n = 0
+        for i in range(self.sens_list.count()):
+            it = self.sens_list.item(i)
+            if it.checkState() != Qt.CheckState.Checked:
+                continue
+            sch, tbl, geom = it.data(Qt.ItemDataRole.UserRole)
+            uri = datenquelle(p, sch, tbl, geom)
+            lyr = QgsVectorLayer(uri.uri(False), tbl, "postgres")
+            if not lyr.isValid():
+                self._log(f"  ⚠ {sch}.{tbl}: Layer nicht ladbar (Dienst/Zugang prüfen)")
+                continue
+            # Packaging für QFieldCloud und für die Kabelvariante
+            lyr.setCustomProperty("QFieldSync/cloud_action", "offline")
+            lyr.setCustomProperty("QFieldSync/action", "offline")
+            project.addMapLayer(lyr, addToLegend=False)
+            grp.addLayer(lyr)
+            n += 1
+            self._log(f"  ✓ Sensibel: {sch}.{tbl} (Dienst {p['service']})")
+        if n == 0 and grp.children() == []:
+            root.removeChildNode(grp)
+        return n
 
     def _browse_gpkg(self):
         folder = QFileDialog.getExistingDirectory(self, "Projektordner wählen")
@@ -891,6 +1114,18 @@ class PageExportAndUpload(QWizardPage):
                 wiz_ref._build_project()
             project = QgsProject.instance()
             self.progress.setValue(55)
+
+            # 2b. Sensible Layer wurden in _build_project ergänzt (dort, damit
+            #     auch der zweite Aufbau beim Abschließen sie wieder enthält)
+            if self.sens_box.isChecked():
+                n_sens = sum(1 for l in project.mapLayers().values()
+                        if l.providerType() == "postgres"
+                        and l.customProperty("QFieldSync/cloud_action") == "offline")
+                if n_sens and self.cloud_cb.isChecked():
+                    self._log(f"  Hinweis: In QFieldCloud ein pg_service-Secret "
+                              f"„{self.sens_service.text().strip()}“ anlegen "
+                              f"(je Person zugeordnet), sonst fehlen diese "
+                              f"Layer im Paket.")
 
             # 3. Projekt mit lokalen Pfaden speichern
             self._log("Speichere QGIS-Projekt …")
