@@ -59,6 +59,7 @@ class NewProjectPlugin:
             ("GBIF Artvorkommen …",            self._gbif),
             ("Ornitho.de Import …",             self._ornitho),
             ("─────────────────────────",         None),
+            ("Personen meiner Station …",         self._personen),
             ("PostGIS-Datenbank einrichten …",    self._postgis_setup),
             ("─────────────────────────",         None),
             ("Grundlagen-DB verwalten …",         self._grundlagen_db),
@@ -138,6 +139,10 @@ class NewProjectPlugin:
     def _ornitho(self):
         from .ornitho_import_dialog import OrnithoImportDialog
         OrnithoImportDialog(self.iface.mainWindow()).exec()
+
+    def _personen(self):
+        from .personen_dialog import PersonenDialog
+        PersonenDialog(self.iface.mainWindow()).exec()
 
     def _postgis_setup(self):
         from .postgis_setup_dialog import PostgisSetupDialog

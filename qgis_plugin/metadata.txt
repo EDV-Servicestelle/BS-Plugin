@@ -1,7 +1,7 @@
 [general]
 name=NRW Naturschutz-Toolbox
 description=Werkzeuge für den Naturschutz in NRW: PostGIS-Datenbanksetup, Fachschalen-Wizard (PostGIS + GPKG), GBIF/Ornitho-Import, LOD-2 Gebäudemodell, ATKIS-Grundlagendaten, LiDAR-Analyse, Luftbild-COG, Hydroanalyse.
-version=2.8.5
+version=3.1.0
 qgisMinimumVersion=3.28
 qgisMaximumVersion=4.99
 supportsQt6=True
