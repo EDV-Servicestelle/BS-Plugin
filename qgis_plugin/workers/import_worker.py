@@ -342,6 +342,13 @@ class _ScanWorker(QThread):
 
 # ── Kontrollierte Vokabulare (Institution, Status, Stadium) ───────────────────
 _FIELD_VOCAB_CACHE: dict = {}
+# Feste Abfragen je Referenztabelle - kein zusammengesetztes SQL
+_VOCAB_SQL = {
+    "Status":      'SELECT listitemid, term FROM "Status"',
+    "Geschlecht":  'SELECT listitemid, term FROM "Geschlecht"',
+    "Einheit":     'SELECT listitemid, term FROM "Einheit"',
+    "Institution": 'SELECT listitemid, term FROM "Institution"',
+}
 
 def _build_field_vocab(table: str) -> dict:
     # kein "global": _FIELD_VOCAB_CACHE wird nur gelesen und mutiert
@@ -353,7 +360,11 @@ def _build_field_vocab(table: str) -> dict:
     try:
         con = _sq.connect(_REF_GPKG)
         cur = con.cursor()
-        cur.execute("SELECT listitemid, term FROM " + _q_ident(table))
+        abfrage = _VOCAB_SQL.get(table)
+        if abfrage is None:          # nur bekannte Referenztabellen
+            con.close()
+            return {}
+        cur.execute(abfrage)
         lookup = {}
         for listitemid, term in cur.fetchall():
             if term:

@@ -8,6 +8,7 @@ daraus ab statt jeden Dienst einzeln anzufragen.
 
 import os
 from pathlib import Path
+from .pg_verbindung import bezeichner_sql
 from datetime import datetime
 
 from qgis.PyQt.QtWidgets import (
@@ -93,7 +94,7 @@ class _UpdateWorker(QThread):
         # 1. DB + Extensions + Schemas
         self.progress.emit(2, "Lege DB-Struktur an …")
         for ddl in [
-            f'CREATE DATABASE "{db}" ENCODING \'UTF8\'',
+            bezeichner_sql("CREATE DATABASE {d} ENCODING 'UTF8'", d=db),
         ]:
             self._sql("postgres", ddl, _pg, host, port, user, pw, ignore_errors=True)
 
@@ -173,13 +174,13 @@ class _UpdateWorker(QThread):
                 else:
                     # Index-Eintrag aktualisieren
                     self._sql(db,
-                        f"""INSERT INTO public.grundlagen_index
+                        """INSERT INTO public.grundlagen_index
                             (dienst_key, label, schema_name, bbox_wgs84, last_update, feature_count)
-                            VALUES ('{key}','{gd["label"]}','{schema}',
-                                    '{bbox}',NOW(),{len(features)})
+                            VALUES (%s, %s, %s, %s, NOW(), %s)
                             ON CONFLICT (dienst_key) DO UPDATE SET
-                              last_update=NOW(), feature_count={len(features)}""",
-                        _pg, host, port, user, pw)
+                              last_update = NOW(), feature_count = EXCLUDED.feature_count""",
+                        _pg, host, port, user, pw,
+                        params=(key, gd["label"], schema, str(bbox), len(features)))
                     self.progress.emit(-1, f"  ✓ {key}: {len(features)} Features")
             except Exception as e:
                 self.progress.emit(-1, f"  ✗ {key}: {e}")
@@ -240,13 +241,13 @@ class _UpdateWorker(QThread):
                         feats.append({"props": props, "wkt": wkt})
         return feats
 
-    def _sql(self, dbname, sql, pg, host, port, user, pw, ignore_errors=False):
-        if pg:
+    def _sql(self, dbname, sql, pg, host, port, user, pw, ignore_errors=False, params=None):
+        if pg and sql is not None:
             try:
                 con = pg.connect(host=host, port=port, dbname=dbname,
                                  user=user, password=pw)
                 con.autocommit = True
-                con.cursor().execute(sql)
+                con.cursor().execute(sql, params)
                 con.close()
             except Exception as e:
                 if not ignore_errors and "already exists" not in str(e).lower():
@@ -464,25 +465,25 @@ def fetch_from_grundlagen_db(conn_params: dict, bbox_25832,
                     # Auf das UG-Polygon clippen; ST_CollectionExtract behält
                     # die Dimension der Quelle (Polygon/Linie) und verwirft
                     # punktförmige Schnitt-Artefakte.
-                    cur.execute(f'''
+                    cur.execute(bezeichner_sql('''
                         SELECT gid,
                                ST_AsText(ST_CollectionExtract(
                                    ST_Intersection(
                                        geom, ST_MakeValid(ST_GeomFromText(%s, 25832))),
                                    ST_Dimension(geom) + 1)) AS wkt,
                                row_to_json(t)::text AS props
-                        FROM "{schema}"."{key}" t
+                        FROM {t} t
                         WHERE ST_Intersects(
                             geom, ST_MakeValid(ST_GeomFromText(%s, 25832)))
-                    ''', (ug_wkt, ug_wkt))
+                    ''', t=(schema, key)), (ug_wkt, ug_wkt))
                 else:
-                    cur.execute(f'''
+                    cur.execute(bezeichner_sql('''
                         SELECT gid, ST_AsText(geom) AS wkt,
                                row_to_json(t)::text AS props
-                        FROM "{schema}"."{key}" t
+                        FROM {t} t
                         WHERE ST_Intersects(geom,
                             ST_MakeEnvelope(%s,%s,%s,%s,25832))
-                    ''', (bbox_25832.xMinimum(), bbox_25832.yMinimum(),
+                    ''', t=(schema, key)), (bbox_25832.xMinimum(), bbox_25832.yMinimum(),
                           bbox_25832.xMaximum(), bbox_25832.yMaximum()))
                 rows = []
                 for r in cur.fetchall():

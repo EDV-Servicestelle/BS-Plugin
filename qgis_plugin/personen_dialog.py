@@ -156,6 +156,18 @@ def _zeit(t) -> str:
         return str(t)
 
 
+# ── SQL-Bausteine ────────────────────────────────────────────────────────
+try:
+    from psycopg2 import sql as _SQL
+except ImportError:          # ohne psycopg2 kein Verbindungsaufbau möglich
+    _SQL = None
+
+
+def _spalten(namen):
+    """Spaltenliste als sicher gequotete Bezeichner (nur feste Namen)."""
+    return _SQL.SQL(", ").join(_SQL.Identifier(n) for n in namen)
+
+
 # ── Qt-Teil ──────────────────────────────────────────────────────────────
 
 from qgis.PyQt.QtCore import Qt, QDate                              # noqa: E402
@@ -467,8 +479,9 @@ class PersonenDialog(QDialog):
             return
         try:
             with self.con.cursor() as c:
-                c.execute(f"SELECT {', '.join(SPALTEN)} FROM verwaltung.person "
-                          "WHERE station = %s ORDER BY nachname NULLS LAST, vorname, kuerzel",
+                c.execute(_SQL.SQL("SELECT {} FROM verwaltung.person WHERE station = %s "
+                                   "ORDER BY nachname NULLS LAST, vorname, kuerzel")
+                          .format(_spalten(SPALTEN)),
                           (self.station.currentText(),))
                 self.zeilen = [dict(zip(SPALTEN, z)) for z in c.fetchall()]
         except Exception as e:  # noqa: BLE001
@@ -573,7 +586,7 @@ class PersonenDialog(QDialog):
         self.an_btn.setEnabled(bool(z and not z["aktiv"]))
 
     # ── Schreiben ────────────────────────────────────────────────────────
-    def _ausfuehren(self, sql: str, args: tuple) -> int | None:
+    def _ausfuehren(self, sql, args: tuple) -> int | None:
         try:
             with self.con.cursor() as c:
                 c.execute(sql, args)
@@ -591,8 +604,8 @@ class PersonenDialog(QDialog):
                   "sensibel", "aktiv", "gueltig_bis", "bemerkung"]
         if self.edv:
             felder.append("cloud_rolle")
-        sql = (f"INSERT INTO verwaltung.person ({', '.join(felder)}) "
-               f"VALUES ({', '.join(['%s'] * len(felder))})")
+        sql = _SQL.SQL("INSERT INTO verwaltung.person ({}) VALUES ({})").format(
+            _spalten(felder), _SQL.SQL(", ").join(_SQL.Placeholder() * len(felder)))
         if self._ausfuehren(sql, tuple(w[f] for f in felder)) is not None:
             self._laden()
             self._waehle(w["kuerzel"])
@@ -609,8 +622,8 @@ class PersonenDialog(QDialog):
                   "aktiv", "gueltig_bis", "bemerkung"]
         if self.edv:
             felder.append("cloud_rolle")
-        sql = (f"UPDATE verwaltung.person SET {', '.join(f + ' = %s' for f in felder)} "
-               "WHERE kuerzel = %s")
+        sql = _SQL.SQL("UPDATE verwaltung.person SET {} WHERE kuerzel = %s").format(
+            _SQL.SQL(", ").join(_SQL.SQL("{} = %s").format(_SQL.Identifier(f)) for f in felder))
         n = self._ausfuehren(sql, tuple(w[f] for f in felder) + (z["kuerzel"],))
         if n == 0:
             QMessageBox.warning(self, "Nicht gespeichert",
@@ -634,11 +647,11 @@ class PersonenDialog(QDialog):
         if QMessageBox.question(self, "Personen meiner Station", frage) \
                 != QMessageBox.StandardButton.Yes:
             return
-        sql = "UPDATE verwaltung.person SET aktiv = %s"
         args: tuple = (aktiv,)
         if aktiv and z["gueltig_bis"] and z["gueltig_bis"] < dt.date.today():
-            sql += ", gueltig_bis = NULL"
-        sql += " WHERE kuerzel = %s"
+            sql = "UPDATE verwaltung.person SET aktiv = %s, gueltig_bis = NULL WHERE kuerzel = %s"
+        else:
+            sql = "UPDATE verwaltung.person SET aktiv = %s WHERE kuerzel = %s"
         if self._ausfuehren(sql, args + (z["kuerzel"],)) is not None:
             self._laden()
 
