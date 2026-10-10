@@ -119,3 +119,22 @@ def datenquelle(p: dict, schema: str, table: str, geom_col: str = "",
 def sql_text(wert: str) -> str:
     """Zeichenkette als SQL-Literal (für Layerfilter)."""
     return "'" + str(wert).replace("'", "''") + "'"
+
+
+def bezeichner_sql(vorlage: str, **namen):
+    """SQL mit sicher gequoteten Bezeichnern (Schema, Tabelle, Datenbank …).
+
+    Werte gehören nie hierher, sondern als Parameter an execute().
+    namen: Platzhalter -> Name oder Tupel (schema, tabelle).
+    Gibt None zurück, wenn psycopg2 fehlt (dann wird ohnehin nichts
+    ausgeführt).
+
+        bezeichner_sql('CREATE SCHEMA IF NOT EXISTS {s}', s='gemeinsam')
+    """
+    try:
+        from psycopg2 import sql
+    except ImportError:
+        return None
+    teile = {k: sql.Identifier(*v) if isinstance(v, tuple) else sql.Identifier(v)
+             for k, v in namen.items()}
+    return sql.SQL(vorlage).format(**teile)

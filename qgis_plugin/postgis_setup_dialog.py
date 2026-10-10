@@ -8,6 +8,7 @@ an, die der FachschalenLoader und der Fachschalen-Wizard verwenden.
 
 import os, sqlite3, subprocess, shutil
 from pathlib import Path
+from .pg_verbindung import bezeichner_sql
 
 # Alten .pyc-Cache löschen damit Änderungen sofort wirken
 try:
@@ -115,7 +116,8 @@ class _SetupWorker(QThread):
         # 1. Datenbank anlegen
         if create_db:
             self.progress.emit(2, f"Lege Datenbank '{db}' an …")
-            self._sql("postgres", f'CREATE DATABASE "{db}" ENCODING \'UTF8\'',
+            self._sql("postgres",
+                      bezeichner_sql("CREATE DATABASE {d} ENCODING 'UTF8'", d=db),
                       _pg, host, port, user, pw)
 
         # 2. Extensions
@@ -123,7 +125,7 @@ class _SetupWorker(QThread):
         # postgis_topology wird nicht gebraucht (und darf auf dem zentralen
         # Server nur der Superuser anlegen).
         for ext in ("postgis", "fuzzystrmatch"):
-            self._sql(db, f"CREATE EXTENSION IF NOT EXISTS {ext}",
+            self._sql(db, bezeichner_sql("CREATE EXTENSION IF NOT EXISTS {e}", e=ext),
                       _pg, host, port, user, pw)
 
         # 3. Fachschalen-Schemas + Ref-Schemas + gemeinsam
@@ -134,7 +136,7 @@ class _SetupWorker(QThread):
             all_schemas.add(fs["schema"])
             all_schemas.add(fs["ref_schema"])
         for sch in sorted(all_schemas):
-            self._sql(db, f'CREATE SCHEMA IF NOT EXISTS "{sch}"',
+            self._sql(db, bezeichner_sql("CREATE SCHEMA IF NOT EXISTS {s}", s=sch),
                       _pg, host, port, user, pw)
             self.progress.emit(-1, f"  Schema: {sch}")
 
@@ -153,17 +155,17 @@ class _SetupWorker(QThread):
 
         for key in schemas:
             fs = FACHSCHALEN[key]
-            self._sql(db, f"""
+            self._sql(db, """
                 INSERT INTO public.fachschalen_config
                     (code, bezeichnung, schema_name, ref_schema, aktiv)
-                    VALUES ('{fs["code"]}','{fs["bezeichnung"]}',
-                            '{fs["schema"]}','{fs["ref_schema"]}',TRUE)
+                    VALUES (%s, %s, %s, %s, TRUE)
                     ON CONFLICT (code) DO UPDATE SET
                         bezeichnung = EXCLUDED.bezeichnung,
                         schema_name = EXCLUDED.schema_name,
                         ref_schema  = EXCLUDED.ref_schema,
                         aktiv       = TRUE
-            """, _pg, host, port, user, pw)
+            """, _pg, host, port, user, pw,
+                params=(fs["code"], fs["bezeichnung"], fs["schema"], fs["ref_schema"]))
             self.progress.emit(-1,
                 f"  ✓ {fs['bezeichnung']} → schema={fs['schema']}, ref={fs['ref_schema']}")
 
@@ -382,10 +384,9 @@ class _SetupWorker(QThread):
                 if db_cols[lower] == orig:
                     continue   # schon korrekt benannt
                 try:
-                    cur.execute(
-                        f'ALTER TABLE "{schema}"."{tbl.lower()}" ' +
-                        f'RENAME COLUMN "{lower}" TO "{orig}"'
-                    )
+                    cur.execute(bezeichner_sql(
+                        "ALTER TABLE {t} RENAME COLUMN {alt} TO {neu}",
+                        t=(schema, tbl.lower()), alt=lower, neu=orig))
                 except Exception:
                     pass   # unkritisch – Spalte hat Sonderzeichen o.ä.
             conn.close()
@@ -413,8 +414,8 @@ class _SetupWorker(QThread):
                 cur.execute(find_sql)
                 rows = cur.fetchall()
                 for schema, tbl in rows:
-                    cur.execute(f'ALTER TABLE "{schema}"."{tbl}" '
-                                f'RENAME TO "{tbl.lower()}"')
+                    cur.execute(bezeichner_sql("ALTER TABLE {t} RENAME TO {neu}",
+                                               t=(schema, tbl), neu=tbl.lower()))
                     self.progress.emit(-1, f"  ↓ {schema}.{tbl} → {tbl.lower()}")
                 conn.close()
         except Exception as e:
@@ -466,8 +467,6 @@ class _SetupWorker(QThread):
             fs = FACHSCHALEN[key]
             schema = fs["schema"]
 
-            def esc(s): return (s or "").replace("'", "''")
-
             # 1. QML-Dateien aus data/<key>/*.qml (höchste Priorität)
             qml_dir = PLUGIN_DIR / "data" / key.replace("fundpunkte_tiere", "fundpunkte_tiere")
             if not qml_dir.exists():
@@ -482,16 +481,16 @@ class _SetupWorker(QThread):
                     qml_str = _clean_qml(qml_file.read_text(encoding="utf-8"))
                     tbl     = qml_file.stem.lower()
                     self._sql(db,
-                        f"DELETE FROM public.layer_styles "
-                        f"WHERE LOWER(f_table_schema)=LOWER('{schema}') "
-                        f"AND LOWER(f_table_name)='{tbl}'",
-                        pg, host, port, user, pw)
+                        "DELETE FROM public.layer_styles "
+                        "WHERE LOWER(f_table_schema) = LOWER(%s) "
+                        "AND LOWER(f_table_name) = %s",
+                        pg, host, port, user, pw, params=(schema, tbl))
                     self._sql(db,
-                        f"INSERT INTO public.layer_styles "
-                        f"(f_table_schema,f_table_name,styleName,styleQML,useAsDefault) "
-                        f"VALUES ('{schema}','{tbl}',"
-                        f"'{esc(qml_file.stem)}','{esc(qml_str)}',TRUE)",
-                        pg, host, port, user, pw)
+                        "INSERT INTO public.layer_styles "
+                        "(f_table_schema, f_table_name, styleName, styleQML, useAsDefault) "
+                        "VALUES (%s, %s, %s, %s, TRUE)",
+                        pg, host, port, user, pw,
+                        params=(schema, tbl, qml_file.stem, qml_str))
                     self.progress.emit(-1, f"  ✓ QML {schema}.{tbl} ← {qml_file.name}")
                 except Exception as _e:
                     self.progress.emit(-1, f"  ⚠ {qml_file.name}: {_e}")
@@ -518,17 +517,17 @@ class _SetupWorker(QThread):
                     qml = _clean_qml(r[2] or "")
                     # Nur wenn noch kein Style vorhanden
                     self._sql(db,
-                        f"INSERT INTO public.layer_styles "
-                        f"(f_table_schema,f_table_name,styleName,styleQML,"
-                        f"styleSLD,useAsDefault,description,owner) "
-                        f"SELECT '{schema}','{tbl}','{esc(r[1])}','{esc(qml)}',"
-                        f"'{esc(r[3])}',{'true' if r[4] else 'false'},"
-                        f"'{esc(r[5] or '')}','{esc(r[6] or '')}' "
-                        f"WHERE NOT EXISTS ("
-                        f"SELECT 1 FROM public.layer_styles "
-                        f"WHERE LOWER(f_table_schema)=LOWER('{schema}') "
-                        f"AND LOWER(f_table_name)='{tbl}')",
-                        pg, host, port, user, pw)
+                        "INSERT INTO public.layer_styles "
+                        "(f_table_schema, f_table_name, styleName, styleQML, "
+                        "styleSLD, useAsDefault, description, owner) "
+                        "SELECT %s, %s, %s, %s, %s, %s, %s, %s "
+                        "WHERE NOT EXISTS ("
+                        "SELECT 1 FROM public.layer_styles "
+                        "WHERE LOWER(f_table_schema) = LOWER(%s) "
+                        "AND LOWER(f_table_name) = %s)",
+                        pg, host, port, user, pw,
+                        params=(schema, tbl, r[1] or "", qml, r[3] or "", bool(r[4]),
+                                r[5] or "", r[6] or "", schema, tbl))
                     n += 1
                 if n:
                     self.progress.emit(-1, f"  ✓ {n} Styles (GPKG) ← {gpkg_path.name}")
@@ -607,13 +606,13 @@ class _SetupWorker(QThread):
                 self.progress.emit(-1, f"  ⚠ {str(e).splitlines()[0][:140]}")
             return None
 
-    def _sql(self, dbname, sql, pg, host, port, user, pw):
-        if pg:
+    def _sql(self, dbname, sql, pg, host, port, user, pw, params=None):
+        if pg and sql is not None:
             try:
                 con = pg.connect(host=host, port=port, dbname=dbname,
                                  user=user, password=pw)
                 con.autocommit = True
-                con.cursor().execute(sql)
+                con.cursor().execute(sql, params)
                 con.close()
             except Exception as e:
                 if "already exists" not in str(e).lower():
