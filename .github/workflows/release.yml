@@ -15,6 +15,13 @@ on:
   push:
     tags:
       - 'v*'
+  # Von Hand nachholen, falls der Lauf beim Spiegeln nicht angesprungen ist:
+  # Actions -> Release -> Run workflow -> Tag eintragen (z. B. v3.1.0)
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag, fuer den das Release gebaut wird (z. B. v3.1.0)'
+        required: true
 
 # Nur das noetigste Recht: Releases anlegen. Alles andere bleibt gesperrt.
 permissions:
@@ -24,17 +31,22 @@ jobs:
   paket:
     name: Plugin-Paket bauen und veroeffentlichen
     runs-on: ubuntu-latest
+    env:
+      # bei Tag-Push der Tag selbst, beim Nachholen der eingegebene Tag
+      TAG: ${{ inputs.tag || github.ref_name }}
 
     steps:
       - name: Quellcode holen
         uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.TAG }}
 
       - name: Paket bauen
         run: |
           mkdir -p dist
           # Die Version kommt aus GITHUB_REF_NAME (= der Tag), das Skript
           # wertet sie selbst aus und schreibt sie in die metadata.txt.
-          python3 tools/build_plugin_zip.py --plugin qgis_plugin --out dist
+          PLUGIN_VERSION="$TAG" python3 tools/build_plugin_zip.py --plugin qgis_plugin --out dist
           ls -l dist
 
       - name: Release anlegen
@@ -43,8 +55,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           DATEI=$(ls dist/*.zip | head -1)
-          gh release create "$GITHUB_REF_NAME" "$DATEI" \
-            --title "Fundpunkte Tiere $GITHUB_REF_NAME" \
+          gh release create "$TAG" "$DATEI" \
+            --title "Fundpunkte Tiere $TAG" \
             --notes "$(cat <<'HINWEIS'
           Plugin-Paket für QGIS.
 
