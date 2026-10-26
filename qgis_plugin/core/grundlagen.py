@@ -1014,33 +1014,217 @@ def _parse_wfs_gml(xml_bytes: bytes, cfg: dict) -> list[dict]:
 
 def _gml_to_wkt(geom_elem) -> str | None:
     """
-    Einfacher GML→WKT-Konverter für Polygone, MultiPolygone und Punkte.
+    GML→WKT-Konverter für Punkte, Linien und Flächen (GML 3.2 / NAS).
+
+    Linien (LineString, Curve mit mehreren LineStringSegments, MultiCurve)
+    werden als LINESTRING/MULTILINESTRING zurückgegeben, Flächen mit
+    Außen- und Innenringen (Inseln) als POLYGON/MULTIPOLYGON.
     Fallback: None.
     """
-    def _coords(coord_text: str) -> list:
-        nums = coord_text.split()
+    def _local(el):
+        return el.tag.split("}")[-1] if "}" in el.tag else el.tag
+
+    def _coords(el) -> list:
+        """Alle Koordinaten unterhalb von el (posList/coordinates/pos), in Reihenfolge."""
         pts = []
-        for i in range(0, len(nums) - 1, 2):
-            try:
-                pts.append((float(nums[i]), float(nums[i + 1])))
-            except ValueError:
-                pass
+        for sub in el.iter():
+            t = _local(sub)
+            if t not in ("posList", "coordinates", "pos") or not sub.text:
+                continue
+            txt = sub.text.strip()
+            if t == "coordinates":          # GML 2: "x,y x,y"
+                txt = txt.replace(",", " ")
+            dim = 2
+            for anc in (sub, el):
+                sd = anc.attrib.get("srsDimension")
+                if sd and sd.isdigit():
+                    dim = int(sd); break
+            nums = txt.split()
+            for i in range(0, len(nums) - dim + 1, dim):
+                try:
+                    p = (float(nums[i]), float(nums[i + 1]))
+                except ValueError:
+                    continue
+                if not pts or pts[-1] != p:     # Segmentstöße nicht doppeln
+                    pts.append(p)
         return pts
 
+    def _ring_str(pts):
+        if len(pts) > 2 and pts[0] != pts[-1]:
+            pts = pts + [pts[0]]
+        return "(" + ", ".join(f"{x} {y}" for x, y in pts) + ")"
+
+    def _polygon_rings(poly_el) -> list:
+        """[Außenring, Innenring, …] eines Polygon/PolygonPatch."""
+        rings = []
+        for sub in poly_el:
+            t = _local(sub)
+            if t in ("exterior", "outerBoundaryIs"):
+                rings.insert(0, _coords(sub))
+            elif t in ("interior", "innerBoundaryIs"):
+                rings.append(_coords(sub))
+        if not rings:                      # unbekannte Struktur → alles als Außenring
+            rings = [_coords(poly_el)]
+        return [r for r in rings if len(r) >= 3]
+
+    LINE_TAGS = ("LineString", "Curve", "LineStringSegment")
+    MLINE_TAGS = ("MultiCurve", "MultiLineString", "CompositeCurve")
+    POLY_TAGS = ("Polygon", "PolygonPatch", "Surface")
+    MPOLY_TAGS = ("MultiSurface", "MultiPolygon", "CompositeSurface")
+
     for elem in geom_elem.iter():
-        tag = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
-        if tag in ("posList", "coordinates") and elem.text:
-            pts = _coords(elem.text.strip())
-            if not pts:
+        tag = _local(elem)
+
+        if tag in MLINE_TAGS:
+            parts = []
+            for sub in elem.iter():
+                if _local(sub) in ("LineString", "Curve") :
+                    p = _coords(sub)
+                    if len(p) >= 2:
+                        parts.append(p)
+            # Curve innerhalb Curve nicht doppelt zählen
+            parts = [p for i, p in enumerate(parts) if p not in parts[:i]]
+            if tag == "CompositeCurve":
+                merged = []
+                for p in parts:
+                    merged.extend(p if not merged or merged[-1] != p[0] else p[1:])
+                parts = [merged] if len(merged) >= 2 else []
+            if not parts:
                 return None
-            # Polygon
-            ring = ", ".join(f"{x} {y}" for x, y in pts)
-            return f"POLYGON(({ring}))"
+            if len(parts) == 1:
+                return "LINESTRING" + _ring_str_open(parts[0])
+            return "MULTILINESTRING(" + ", ".join(_ring_str_open(p) for p in parts) + ")"
+
+        if tag in LINE_TAGS:
+            pts = _coords(elem)
+            if len(pts) < 2:
+                return None
+            return "LINESTRING" + _ring_str_open(pts)
+
+        if tag in MPOLY_TAGS:
+            polys = []
+            for sub in elem.iter():
+                if _local(sub) in ("Polygon", "PolygonPatch"):
+                    r = _polygon_rings(sub)
+                    if r:
+                        polys.append(r)
+            if not polys:
+                return None
+            if len(polys) == 1:
+                return "POLYGON(" + ", ".join(_ring_str(r) for r in polys[0]) + ")"
+            return "MULTIPOLYGON(" + ", ".join(
+                "(" + ", ".join(_ring_str(r) for r in rs) + ")" for rs in polys) + ")"
+
+        if tag in POLY_TAGS:
+            polys = []
+            patches = [s for s in elem.iter() if _local(s) == "PolygonPatch"]
+            for p in (patches or [elem]):
+                r = _polygon_rings(p)
+                if r:
+                    polys.append(r)
+            if not polys:
+                return None
+            if len(polys) == 1:
+                return "POLYGON(" + ", ".join(_ring_str(r) for r in polys[0]) + ")"
+            return "MULTIPOLYGON(" + ", ".join(
+                "(" + ", ".join(_ring_str(r) for r in rs) + ")" for rs in polys) + ")"
+
+        if tag == "Point":
+            pts = _coords(elem)
+            if pts:
+                return f"POINT({pts[0][0]} {pts[0][1]})"
+            return None
+
+    # Altes Verhalten als Rückfall: nackte posList ohne erkennbaren Typ
+    for elem in geom_elem.iter():
+        tag = _local(elem)
+        if tag in ("posList", "coordinates") and elem.text:
+            pts = _coords(elem)
+            if len(pts) >= 3:
+                return "POLYGON(" + _ring_str(pts) + ")"
         if tag == "pos" and elem.text:
             c = elem.text.strip().split()
             if len(c) >= 2:
                 return f"POINT({c[0]} {c[1]})"
     return None
+
+
+def _ring_str_open(pts) -> str:
+    """Koordinatenfolge als '(x y, x y, …)' ohne Ringschluss (für Linien)."""
+    return "(" + ", ".join(f"{x} {y}" for x, y in pts) + ")"
+
+
+def _wkt_rings(wkt: str) -> list:
+    """
+    Zerlegt WKT (POINT/LINESTRING/POLYGON und MULTI-Varianten) in
+    Teile → Ringe → [(x, y), …]. Typnamen werden vorher entfernt
+    (LINESTRING enthält ein 'E', das einfache Zahl-Regexe als Zahl lesen).
+    """
+    import re as _re
+    body = _re.sub(r"^[A-Za-z ]+", "", (wkt or "").strip())
+    if not body.startswith("("):
+        return []
+
+    def _parse(i):
+        """Liest ab '(' bis zur passenden ')' → Liste (Kinder) oder Koordinaten."""
+        children, token = [], ""
+        i += 1
+        while i < len(body):
+            ch = body[i]
+            if ch == "(":
+                child, i = _parse(i)
+                children.append(child)
+            elif ch == ")":
+                if token.strip():
+                    children.append(token)
+                return children, i
+            elif ch == ",":
+                if token.strip():
+                    children.append(token)
+                token = ""
+            else:
+                token += ch
+            i += 1
+        return children, i
+
+    tree, _ = _parse(0)
+
+    def _to_ring(lst):
+        out = []
+        for t in lst:
+            xy = t.split()
+            if len(xy) >= 2:
+                out.append((float(xy[0]), float(xy[1])))
+        return out
+
+    def _depth(x):
+        return 1 + _depth(x[0]) if isinstance(x, list) and x else 0
+
+    d = _depth(tree)
+    if d == 1:                       # LINESTRING / POINT: (x y, …)
+        return [[_to_ring(tree)]]
+    if d == 2:                       # POLYGON / MULTILINESTRING: ((…), (…))
+        if wkt.strip().upper().startswith("MULTILINESTRING"):
+            return [[_to_ring(r)] for r in tree]
+        return [[_to_ring(r) for r in tree]]
+    if d == 3:                       # MULTIPOLYGON: (((…)), ((…)))
+        return [[_to_ring(r) for r in poly] for poly in tree]
+    return []
+
+
+def _wkt_all_coords(wkt: str) -> list:
+    return [p for part in _wkt_rings(wkt) for ring in part for p in ring]
+
+
+def _wkt_exterior(wkt: str) -> list:
+    """Außenring des ersten (bzw. größten) Polygonteils."""
+    parts = _wkt_rings(wkt)
+    if not parts:
+        return []
+    def _a(r):
+        n = len(r)
+        return abs(sum(r[i][0]*r[(i+1) % n][1] - r[(i+1) % n][0]*r[i][1] for i in range(n))) / 2
+    return max((part[0] for part in parts if part), key=_a, default=[])
 
 
 # ── OGC-API-Abruf (Flurstücke) ────────────────────────────────────────────────
@@ -1966,21 +2150,25 @@ def _centerline_from_polygon_wkt(wkt: str, sample_dist_m: float = 75.0) -> str:
         from collections import deque as _deque
         import re as _re
 
-        # Koordinaten aus erstem Ring
-        clean = _re.sub(r'MULTI|POLYGON|\(|\)', ' ', wkt)
-        nums  = _re.findall(r'[-\d.eE+]+', clean)
-        if len(nums) < 6: return ""
-        coords = _np.array([(float(nums[i]), float(nums[i+1]))
-                            for i in range(0, len(nums)-1, 2)])
+        # Außenring des (größten) Polygonteils; Innenringe (Inseln) getrennt.
+        # Früher wurden alle Ringe aneinandergehängt → Sprungkanten.
+        parts = _wkt_rings(wkt)
+        exterior = _wkt_exterior(wkt)
+        if len(exterior) < 4: return ""
+        holes = [r for part in parts if part and part[0] == exterior
+                 for r in part[1:] if len(r) >= 4]
+        coords = _np.array(exterior)
 
-        # Randpunkte samplen
+        # Randpunkte samplen – Außenring UND Inselränder, damit das
+        # Skelett um Inseln herum durch die Flussarme läuft statt abzureißen
         pts = []
-        for i in range(len(coords)-1):
-            p0, p1 = coords[i], coords[i+1]
-            d = _np.linalg.norm(p1 - p0)
-            n = max(2, int(d / sample_dist_m))
-            for j in range(n):
-                pts.append(p0 + (p1 - p0) * j / n)
+        for ring in [coords] + [_np.array(h) for h in holes]:
+            for i in range(len(ring)-1):
+                p0, p1 = ring[i], ring[i+1]
+                d = _np.linalg.norm(p1 - p0)
+                n = max(2, int(d / sample_dist_m))
+                for j in range(n):
+                    pts.append(p0 + (p1 - p0) * j / n)
         pts = _np.array(pts)
         if len(pts) < 4: return ""
 
@@ -2007,6 +2195,7 @@ def _centerline_from_polygon_wkt(wkt: str, sample_dist_m: float = 75.0) -> str:
             v1 = vor.vertices[ridge[1]]
             mid = (v0 + v1) / 2
             if not _pip(mid[0], mid[1], coords): continue
+            if any(_pip(mid[0], mid[1], h) for h in holes): continue
 
             # ── Querkanten-Filter ────────────────────────────────────────
             # Eine Voronoi-Kante ist eine Querkante wenn ihre Länge
@@ -2033,6 +2222,7 @@ def _centerline_from_polygon_wkt(wkt: str, sample_dist_m: float = 75.0) -> str:
                 v1 = vor.vertices[ridge[1]]
                 mid = (v0 + v1) / 2
                 if not _pip(mid[0], mid[1], coords): continue
+                if any(_pip(mid[0], mid[1], h) for h in holes): continue
                 k0 = _rnd(v0); k1 = _rnd(v1)
                 if k0 == k1: continue
                 adj.setdefault(k0, set()).add(k1)
@@ -2169,205 +2359,97 @@ def _compute_missing_centerlines(
     """
     Berechnet fehlende Gewässermittelachsen aus AX_Fliessgewaesser-Polygonen.
 
-    Für jedes breite Fließgewässer-Polygon (area > min_area_m2) das keine
-    passende Mittelachse hat, wird eine Centerline via Voronoi berechnet.
+    Für jedes breite Fließgewässer-Polygon (Fläche > min_area_m2), in dem
+    keine AX_Gewaesserachse liegt, wird eine Centerline via Voronoi berechnet
+    und an Anfang/Ende an die nächstgelegene Gewässerachse angeschlossen.
 
     Gibt Liste von Feature-Dicts zurück (gleich wie _fetch_atkis_wfs).
     """
+    def _area(ring):
+        n = len(ring)
+        if n < 3:
+            return 0.0
+        return abs(sum(ring[i][0] * ring[(i+1) % n][1] -
+                       ring[(i+1) % n][0] * ring[i][1]
+                       for i in range(n))) / 2
+
+    def _pip(px, py, poly):
+        n, inside = len(poly), False
+        j = n - 1
+        for i in range(n):
+            xi, yi = poly[i]; xj, yj = poly[j]
+            if ((yi > py) != (yj > py) and
+                    px < (xj-xi)*(py-yi)/(yj-yi+1e-12)+xi):
+                inside = not inside
+            j = i
+        return inside
+
+    # Achsen einmal zerlegen: je Linienteil die Koordinatenfolge
+    achse_lines = []
+    for achse in achse_feats or []:
+        for part in _wkt_rings(achse.get("wkt", "")):
+            for line in part:
+                if len(line) >= 2:
+                    achse_lines.append(line)
+    achse_mids = [ln[len(ln) // 2] for ln in achse_lines]
+    achse_pts = [p for ln in achse_lines for p in ln]
+
+    def _nearest_axis_pt(x, y, max_d):
+        best, best_d = None, max_d
+        for ax, ay in achse_pts:
+            d = ((ax - x) ** 2 + (ay - y) ** 2) ** 0.5
+            if d < best_d:
+                best, best_d = (ax, ay), d
+        return best
+
     try:
-        import numpy as _np
-        import re as _re
-
-        def _polygon_area(wkt):
-            inner = _re.search(r"\(([^)]+)\)", wkt.replace("((", "(").replace("))", ")"))
-            if not inner:
-                return 0
-            nums = _re.findall(r"[-\d.eE+]+", inner.group(1))
-            coords = [(float(nums[i]), float(nums[i+1]))
-                      for i in range(0, len(nums)-1, 2)]
-            n = len(coords)
-            area = abs(sum(coords[i][0] * coords[(i+1)%n][1] -
-                           coords[(i+1)%n][0] * coords[i][1]
-                           for i in range(n))) / 2
-            return area
-
-        # Achsen-Mittelpunkte aus WFS für Überschneidungsprüfung
-        def _line_midpoints(wkt_line):
-            nums = _re.findall(r"[-\d.eE+]+", wkt_line.replace("(", " ").replace(")", " "))
-            coords = [(float(nums[i]), float(nums[i+1]))
-                      for i in range(0, len(nums)-2, 2)
-                      if i+1 < len(nums)]
-            if not coords: return []
-            # Mittelpunkt der Linie
-            mid_idx = len(coords)//2
-            return [coords[mid_idx]]
-
-        def _pip_simple(px, py, wkt_poly):
-            """Punkt-in-Polygon für WKT-String."""
-            nums = _re.findall(r"[-\d.eE+]+", wkt_poly.replace("(", " ").replace(")", " "))
-            poly = [(float(nums[i]), float(nums[i+1]))
-                    for i in range(0, len(nums)-2, 2)
-                    if i+1 < len(nums)]
-            if not poly: return False
-            n, inside = len(poly), False
-            j = n - 1
-            for i in range(n):
-                xi, yi = poly[i]; xj, yj = poly[j]
-                if ((yi > py) != (yj > py) and
-                        px < (xj-xi)*(py-yi)/(yj-yi+1e-12)+xi):
-                    inside = not inside
-                j = i
-            return inside
-
         new_feats = []
         for feat in fliessgewaesser_feats:
             wkt = feat.get("wkt", "")
             if "POLYGON" not in wkt.upper():
                 continue  # Nur Polygone (breite Gewässer)
-            area = _polygon_area(wkt)
-            if area < min_area_m2:
+            exterior = _wkt_exterior(wkt)
+            if _area(exterior) < min_area_m2:
                 continue  # Kleines Gewässer – hat WFS-Mittelachse
-            # Prüfe ob bereits eine WFS-Achse in diesem Polygon liegt
-            has_axis = False
-            for achse in achse_feats:
-                for mx, my in _line_midpoints(achse.get("wkt", "")):
-                    if _pip_simple(mx, my, wkt):
-                        has_axis = True; break
-                if has_axis: break
-            if has_axis:
-                continue   # WFS-Achse vorhanden → keine Centerline nötig
+            # Liegt bereits eine WFS-Achse in diesem Polygon?
+            if any(_pip(mx, my, exterior) for mx, my in achse_mids):
+                continue
             cl_wkt = _centerline_from_polygon_wkt(wkt, sample_dist_m)
             if not cl_wkt:
                 continue
-
-            # Snap: Centerline-Endpunkte an nächste AX_Gewaesserachse anhängen
-            # → nahtloser Übergang im Wechselbereich Linie↔Polygon
-            nums_cl = _re.findall(r"-?\d+\.?\d*(?:[eE][+-]?\d+)?", cl_wkt)
-            if "EMPTY" in cl_wkt.upper() or len(nums_cl) < 4:
+            path = _wkt_all_coords(cl_wkt)
+            if len(path) < 2:
                 continue
-            if len(nums_cl) >= 4:
-                # Erste und letzte Koordinate der Centerline
-                cx0, cy0 = float(nums_cl[0]), float(nums_cl[1])
-                cx1, cy1 = float(nums_cl[-2]), float(nums_cl[-1])
-                snap_dist = sample_dist_m * 3   # max. Snap-Radius
-                for achse in achse_feats:
-                    a_nums = _re.findall(r"[-\d.eE+]+", achse.get("wkt",""))
-                    if len(a_nums) < 4: continue
-                    # Nächster Punkt auf der Achse zu Centerline-Anfang
-                    for i in range(0, len(a_nums)-1, 2):
-                        ax, ay = float(a_nums[i]), float(a_nums[i+1])
-                        d0 = ((ax-cx0)**2+(ay-cy0)**2)**0.5
-                        d1 = ((ax-cx1)**2+(ay-cy1)**2)**0.5
-                        if d0 < snap_dist:
-                            # Verbindungssegment am Anfang einfügen
-                            cl_wkt = cl_wkt.replace(
-                                f"{cx0:.2f} {cy0:.2f}",
-                                f"{ax:.2f} {ay:.2f}, {cx0:.2f} {cy0:.2f}", 1)
-                            snap_dist = d0   # enger für weiteren Snap
-                        if d1 < snap_dist:
-                            # Verbindungssegment am Ende anhängen
-                            cl_wkt = cl_wkt[:cl_wkt.rfind(f"{cx1:.2f} {cy1:.2f}")] \
-                                     + f"{cx1:.2f} {cy1:.2f}, {ax:.2f} {ay:.2f})"
-                            snap_dist = d1
 
+            # Snap: Anfang und Ende an die jeweils nächste Gewässerachse
+            # anschließen → nahtloser Übergang Linie ↔ Polygon.
+            # (Früher per String-Ersetzung mit falschem Zahlenformat:
+            #  Anfang nie gesnappt, Ende ergab ungültiges WKT.)
+            snap_dist = sample_dist_m * 3
+            p0 = _nearest_axis_pt(path[0][0], path[0][1], snap_dist)
+            p1 = _nearest_axis_pt(path[-1][0], path[-1][1], snap_dist)
+            if p0 and p0 != path[0]:
+                path.insert(0, p0)
+            if p1 and p1 != path[-1] and p1 != path[0]:
+                path.append(p1)
+
+            props = feat.get("props", {}) or {}
             new_feats.append({
                 "props": {
-                    "gml_id":           feat["props"].get("gml_id", "") + "_cl",
-                    "nam":              feat["props"].get("nam", ""),
-                    "gewaesserkennzahl":feat["props"].get("gewaesserkennzahl", ""),
-                    "funktion":         feat["props"].get("funktion", ""),
-                    "widmung":          feat["props"].get("widmung", ""),
-                    "quelle":           "AX_Fliessgewaesser-Centerline",
+                    "gml_id":            (props.get("gml_id", "") or "") + "_cl",
+                    "nam":               props.get("nam", ""),
+                    "gewaesserkennzahl": props.get("gewaesserkennzahl", ""),
+                    "funktion":          props.get("funktion", ""),
+                    "widmung":           props.get("widmung", ""),
+                    "quelle":            "AX_Fliessgewaesser-Centerline",
                 },
-                "wkt": cl_wkt,
+                "wkt": "LINESTRING(" + ", ".join(
+                    f"{x:.2f} {y:.2f}" for x, y in path) + ")",
             })
         return new_feats
 
     except Exception as _e:
         raise RuntimeError(f"_compute_missing_centerlines Fehler: {_e}")
-
-
-
-def _fetch_atkis_wfs(cfg: dict, bbox_wgs84: tuple, timeout=90) -> list[dict]:
-    """ATKIS Basis-DLM WFS - adv: Typnamen, EPSG:25832."""
-    import io as _io
-
-    lon_min, lat_min, lon_max, lat_max = bbox_wgs84
-    e_min, n_min, e_max, n_max = _wgs84_to_utm32(lon_min, lat_min, lon_max, lat_max)
-    buf      = 50
-    srsname  = cfg.get("srsname", "EPSG:25832")
-    bbox_crs = f"{e_min-buf},{n_min-buf},{e_max+buf},{n_max+buf},{srsname}"
-    typenames = cfg.get("typenames") or [cfg.get("typename", "")]
-    ns_url    = cfg.get("ns", "http://www.adv-online.de/NAS/15/Anwendungsschema")
-    ns_prefix = typenames[0].split(":")[0] if typenames else "adv"
-    all_feats = []
-    debug_info = []   # Sammelt Diagnosedaten
-
-    for typename in typenames:
-        ns_prefix = typename.split(":")[0]
-
-        # WFS 2.0 mit NAMESPACES
-        params = {
-            "SERVICE":    "WFS",
-            "VERSION":    "2.0.0",
-            "REQUEST":    "GetFeature",
-            "TYPENAMES":  typename,
-            "BBOX":       bbox_crs,
-            "NAMESPACES": f"xmlns({ns_prefix},{ns_url})",
-            "COUNT":      "10000",
-        }
-        raw = b""
-        status = 0
-        try:
-            r = _requests.get(cfg["url"], params=params, timeout=timeout)
-            status = r.status_code
-            raw    = r.content
-        except Exception as _e:
-            debug_info.append(f"WFS2 {typename}: Verbindungsfehler {_e}")
-
-        if status == 200 and b"<" in raw[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]      = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            # GML vorhanden aber 0 Features geparst → Snippet für Diagnose
-            debug_info.append(
-                f"WFS2 {typename}: HTTP {status}, GML: {raw[:400].decode('utf-8','replace')}")
-        elif status != 200:
-            pass   # WFS 2.0 nicht unterstützt → WFS 1.1 Fallback
-        else:
-            pass   # Keine XML-Antwort
-
-        # Fallback WFS 1.1
-        params11 = {
-            "SERVICE": "WFS", "VERSION": "1.1.0", "REQUEST": "GetFeature",
-            "TYPENAME": typename, "BBOX": bbox_crs, "MAXFEATURES": "10000",
-        }
-        raw11 = b""; status11 = 0
-        try:
-            r11 = _requests.get(cfg["url"], params=params11, timeout=timeout)
-            status11 = r11.status_code; raw11 = r11.content
-        except Exception as _e:
-            debug_info.append(f"WFS1 {typename}: {_e}")
-        if status11 == 200 and b"<" in raw11[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]       = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw11, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            debug_info.append(
-                f"WFS1 {typename}: HTTP {status11}, GML: {raw11[:200].decode('utf-8','replace')}")
-
-    # 0 Features = normales Ergebnis wenn kein Vorkommen im Gebiet
-    return all_feats
-
-# ── Centerline aus Polygon (für breite Fließgewässer ohne Mittelachse) ─────────
-
 
 
 def _wgs84_bbox(lon_min, lat_min, lon_max, lat_max):
@@ -2833,171 +2915,6 @@ def _fetch_lod2(cfg, bbox_wgs84, out_gpkg, worker=None):
     ds.FlushCache(); ds = None
     _log(f"✓ {n_total} Gebäude → {out_gpkg}")
     return n_total
-
-
-
-def _fetch_atkis_wfs(cfg: dict, bbox_wgs84: tuple, timeout=90) -> list[dict]:
-    """ATKIS Basis-DLM WFS - adv: Typnamen, EPSG:25832."""
-    import io as _io
-
-    lon_min, lat_min, lon_max, lat_max = bbox_wgs84
-    e_min, n_min, e_max, n_max = _wgs84_to_utm32(lon_min, lat_min, lon_max, lat_max)
-    buf      = 50
-    srsname  = cfg.get("srsname", "EPSG:25832")
-    bbox_crs = f"{e_min-buf},{n_min-buf},{e_max+buf},{n_max+buf},{srsname}"
-    typenames = cfg.get("typenames") or [cfg.get("typename", "")]
-    ns_url    = cfg.get("ns", "http://www.adv-online.de/NAS/15/Anwendungsschema")
-    ns_prefix = typenames[0].split(":")[0] if typenames else "adv"
-    all_feats = []
-    debug_info = []   # Sammelt Diagnosedaten
-
-    for typename in typenames:
-        ns_prefix = typename.split(":")[0]
-
-        # WFS 2.0 mit NAMESPACES
-        params = {
-            "SERVICE":    "WFS",
-            "VERSION":    "2.0.0",
-            "REQUEST":    "GetFeature",
-            "TYPENAMES":  typename,
-            "BBOX":       bbox_crs,
-            "NAMESPACES": f"xmlns({ns_prefix},{ns_url})",
-            "COUNT":      "10000",
-        }
-        raw = b""
-        status = 0
-        try:
-            r = _requests.get(cfg["url"], params=params, timeout=timeout)
-            status = r.status_code
-            raw    = r.content
-        except Exception as _e:
-            debug_info.append(f"WFS2 {typename}: Verbindungsfehler {_e}")
-
-        if status == 200 and b"<" in raw[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]      = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            # GML vorhanden aber 0 Features geparst → Snippet für Diagnose
-            debug_info.append(
-                f"WFS2 {typename}: HTTP {status}, GML: {raw[:400].decode('utf-8','replace')}")
-        elif status != 200:
-            pass   # WFS 2.0 nicht unterstützt → WFS 1.1 Fallback
-        else:
-            pass   # Keine XML-Antwort
-
-        # Fallback WFS 1.1
-        params11 = {
-            "SERVICE": "WFS", "VERSION": "1.1.0", "REQUEST": "GetFeature",
-            "TYPENAME": typename, "BBOX": bbox_crs, "MAXFEATURES": "10000",
-        }
-        raw11 = b""; status11 = 0
-        try:
-            r11 = _requests.get(cfg["url"], params=params11, timeout=timeout)
-            status11 = r11.status_code; raw11 = r11.content
-        except Exception as _e:
-            debug_info.append(f"WFS1 {typename}: {_e}")
-        if status11 == 200 and b"<" in raw11[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]       = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw11, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            debug_info.append(
-                f"WFS1 {typename}: HTTP {status11}, GML: {raw11[:200].decode('utf-8','replace')}")
-
-    # 0 Features = normales Ergebnis wenn kein Vorkommen im Gebiet
-    return all_feats
-
-# ── Centerline aus Polygon (für breite Fließgewässer ohne Mittelachse) ─────────
-
-
-
-def _fetch_atkis_wfs(cfg: dict, bbox_wgs84: tuple, timeout=90) -> list[dict]:
-    """ATKIS Basis-DLM WFS - adv: Typnamen, EPSG:25832."""
-    import io as _io
-
-    lon_min, lat_min, lon_max, lat_max = bbox_wgs84
-    e_min, n_min, e_max, n_max = _wgs84_to_utm32(lon_min, lat_min, lon_max, lat_max)
-    buf      = 50
-    srsname  = cfg.get("srsname", "EPSG:25832")
-    bbox_crs = f"{e_min-buf},{n_min-buf},{e_max+buf},{n_max+buf},{srsname}"
-    typenames = cfg.get("typenames") or [cfg.get("typename", "")]
-    ns_url    = cfg.get("ns", "http://www.adv-online.de/NAS/15/Anwendungsschema")
-    ns_prefix = typenames[0].split(":")[0] if typenames else "adv"
-    all_feats = []
-    debug_info = []   # Sammelt Diagnosedaten
-
-    for typename in typenames:
-        ns_prefix = typename.split(":")[0]
-
-        # WFS 2.0 mit NAMESPACES
-        params = {
-            "SERVICE":    "WFS",
-            "VERSION":    "2.0.0",
-            "REQUEST":    "GetFeature",
-            "TYPENAMES":  typename,
-            "BBOX":       bbox_crs,
-            "NAMESPACES": f"xmlns({ns_prefix},{ns_url})",
-            "COUNT":      "10000",
-        }
-        raw = b""
-        status = 0
-        try:
-            r = _requests.get(cfg["url"], params=params, timeout=timeout)
-            status = r.status_code
-            raw    = r.content
-        except Exception as _e:
-            debug_info.append(f"WFS2 {typename}: Verbindungsfehler {_e}")
-
-        if status == 200 and b"<" in raw[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]      = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            # GML vorhanden aber 0 Features geparst → Snippet für Diagnose
-            debug_info.append(
-                f"WFS2 {typename}: HTTP {status}, GML: {raw[:400].decode('utf-8','replace')}")
-        elif status != 200:
-            pass   # WFS 2.0 nicht unterstützt → WFS 1.1 Fallback
-        else:
-            pass   # Keine XML-Antwort
-
-        # Fallback WFS 1.1
-        params11 = {
-            "SERVICE": "WFS", "VERSION": "1.1.0", "REQUEST": "GetFeature",
-            "TYPENAME": typename, "BBOX": bbox_crs, "MAXFEATURES": "10000",
-        }
-        raw11 = b""; status11 = 0
-        try:
-            r11 = _requests.get(cfg["url"], params=params11, timeout=timeout)
-            status11 = r11.status_code; raw11 = r11.content
-        except Exception as _e:
-            debug_info.append(f"WFS1 {typename}: {_e}")
-        if status11 == 200 and b"<" in raw11[:200]:
-            sub_cfg = dict(cfg)
-            sub_cfg["typename"]       = typename
-            sub_cfg["alt_localnames"] = [typename.split(":")[-1]]
-            feats = _parse_wfs_gml(raw11, sub_cfg)
-            if feats:
-                all_feats.extend(feats)
-                continue
-            debug_info.append(
-                f"WFS1 {typename}: HTTP {status11}, GML: {raw11[:200].decode('utf-8','replace')}")
-
-    # 0 Features = normales Ergebnis wenn kein Vorkommen im Gebiet
-    return all_feats
-
-# ── Centerline aus Polygon (für breite Fließgewässer ohne Mittelachse) ─────────
-
 
 
 def _fetch_dvg_geojson(cfg: dict, bbox_wgs84: tuple, timeout=90) -> list[dict]:
