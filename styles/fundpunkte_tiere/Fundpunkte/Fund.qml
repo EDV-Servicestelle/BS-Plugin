@@ -979,7 +979,15 @@
   <editforminitfilepath/>
   <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
-Synonym-Suche fuer das Feld 'Artname' (QGIS-Desktop).
+Formular-Initialisierung des Layers 'Fund' (QGIS-Desktop).
+
+Quelle: styles/fundpunkte_tiere/Fundpunkte/fund_form_init.py. Eingebettet
+in Fund.qml, fund.qml und layer_styles der Fundpunkte.gpkg mit
+tools/form_init_einbetten.py - dort nicht von Hand aendern.
+
+Enthaelt zwei Funktionen:
+1. Feldwerte festsetzen (Anpinnen), siehe Abschnitt weiter unten.
+2. Synonym-Suche fuer das Feld 'Artname':
 
 Sucht ueber akzeptierte Namen (Arten: term / Name_deutsch / anzeigename) UND
 ueber Synonyme (Arten_Synonyme.synonym_term), gefiltert nach der gewaehlten
@@ -1201,8 +1209,351 @@ class _EnterEater(QObject):
         return False
 
 
+# ============================================================================
+# Feldwerte festsetzen (Anpinnen), wie "Wert merken" in QField
+# ============================================================================
+#
+# Neben jedem editierbaren Feld steht beim Erfassen eine Stecknadel. Ist sie
+# gedrueckt, wird der Wert dieses Feldes in jeden neuen Fundpunkt uebernommen,
+# bis sie wieder geloest wird. Massgeblich ist der zuletzt gespeicherte Wert.
+#
+# - Festsetzungen gelten fuer die laufende QGIS-Sitzung und je Layer.
+# - Kaskade: Ein Feld, dessen Auswahlliste ueber current_value('X') gefiltert
+#   ist (z. B. Artname ueber Artengruppe), wird nur uebernommen, wenn X im neuen
+#   Fundpunkt denselben Wert hat wie beim Festsetzen.
+# - Uebernommene Werte durchlaufen die normale Pruefung (Pflichtfelder,
+#   Bedingungen); sie umgehen keine Validierung.
+# - QGIS 4.x bringt diese Funktion selbst mit (reuseLastValuePolicy). Ist sie
+#   fuer den Layer eingeschaltet, tritt dieser Teil zurueck.
+# - QField ignoriert den Init-Code; dort gibt es "Wert merken" von Haus aus.
+
+import re as _re
+import sys as _sys
+import types as _types
+
+_PIN_TAG = "FT-Anpinnen"
+_PIN_MODUL = "_ft_feldwerte_angepinnt"
+
+# Systemfelder und abgeleitete Felder werden nie festgesetzt
+PIN_AUSGESCHLOSSEN = {
+    "fid", "kennung", "utm_east", "utm_north", "aenderungsdatum",
+    "eingabedatum", "projekt_id", "artname_deutsch", "artname_wiss",
+}
+
+_CURRENT_VALUE = _re.compile(r"current_value\s*\(\s*'([^']+)'\s*\)", _re.I)
+
+_PIN_STIL = (
+    "QToolButton{border:1px solid transparent;border-radius:4px;"
+    "padding:1px;font-size:14px;}"
+    "QToolButton:checked{background:#ffe082;border:1px solid #c79a00;}"
+)
+
+
+def _plog(m):
+    try:
+        QgsMessageLog.logMessage(str(m), _PIN_TAG)
+    except Exception:
+        pass
+
+
+def _qt_enum(cls, scope, name):
+    """Qt-Aufzaehlungswert fuer PyQt5 (cls.name) und PyQt6 (cls.scope.name)."""
+    v = getattr(cls, name, None)
+    if v is None:
+        v = getattr(getattr(cls, scope), name)
+    return v
+
+
+def _pin_speicher(layer):
+    """-> {feldname: {"wert": ..., "kontext": {steuerfeld: wert}}} des Layers.
+
+    QGIS fuehrt den Init-Code bei jedem Oeffnen eines Formulars neu aus;
+    Modulvariablen wuerden dabei zurueckgesetzt. Der Speicher liegt deshalb
+    in einem eigenen Eintrag in sys.modules und lebt so lange wie QGIS."""
+    mod = _sys.modules.get(_PIN_MODUL)
+    if mod is None:
+        mod = _types.ModuleType(_PIN_MODUL)
+        mod.layer = {}
+        _sys.modules[_PIN_MODUL] = mod
+    return mod.layer.setdefault(layer.id(), {})
+
+
+def _norm(v):
+    return None if _is_empty(v) else str(v)
+
+
+def _steuerfelder(layer):
+    """-> {feld: [steuerfelder]} aus den Filterausdruecken der Auswahllisten."""
+    abh = {}
+    for i, f in enumerate(layer.fields()):
+        try:
+            cfg = layer.editorWidgetSetup(i).config() or {}
+        except Exception:
+            continue
+        quellen = _CURRENT_VALUE.findall(str(cfg.get("FilterExpression") or ""))
+        quellen = [q for q in quellen if q != f.name()]
+        if quellen:
+            abh[f.name()] = quellen
+    return abh
+
+
+def _pinbar(layer, name):
+    if name.lower() in PIN_AUSGESCHLOSSEN:
+        return False
+    idx = layer.fields().indexFromName(name)
+    if idx < 0:
+        return False
+    try:
+        if layer.editFormConfig().readOnly(idx):
+            return False
+    except Exception:
+        pass
+    return True
+
+
+def _nativ_aktiv(layer, namen):
+    """True, wenn QGIS (ab 4.0) die Stecknadel fuer diese Felder selbst zeigt."""
+    try:
+        from qgis.core import Qgis
+        nicht_erlaubt = Qgis.AttributeFormReuseLastValuePolicy.NotAllowed
+    except Exception:
+        return False
+    cfg = layer.editFormConfig()
+    for n in namen:
+        try:
+            idx = layer.fields().indexFromName(n)
+            if cfg.reuseLastValuePolicy(idx) != nicht_erlaubt:
+                return True
+        except Exception:
+            return False
+    return False
+
+
+def _edit_seite(w, grenze):
+    """Seite des Formularfelds, auf der das Eingabe-Widget liegt."""
+    child, p = w, w.parentWidget()
+    while p is not None and p is not grenze:
+        if isinstance(p, QStackedWidget):
+            return child
+        child, p = p, p.parentWidget()
+    return None
+
+
+def _feld_widgets(form, layer):
+    """-> [(feldname, seite)] fuer alle festsetzbaren Felder im Formular."""
+    try:
+        from qgis.gui import QgsAttributeFormEditorWidget
+    except Exception:
+        return []
+    out, gesehen = [], set()
+    for afw in form.findChildren(QgsAttributeFormEditorWidget):
+        try:
+            ww = afw.editorWidget()
+            name = ww.field().name()
+            w = ww.widget()
+        except Exception:
+            continue
+        if name in gesehen or w is None or not _pinbar(layer, name):
+            continue
+        seite = _edit_seite(w, afw)
+        if seite is None or not isinstance(seite.layout(), QBoxLayout):
+            continue
+        gesehen.add(name)
+        out.append((name, seite))
+    if not out:
+        # Rueckfall: Eingabe-Widgets tragen den Feldnamen als objectName
+        # (so findet auch die Synonymsuche das Feld 'Artname')
+        namen = {f.name() for f in layer.fields() if _pinbar(layer, f.name())}
+        for w in form.findChildren(QWidget):
+            name = w.objectName()
+            if name not in namen or name in gesehen:
+                continue
+            seite = _edit_seite(w, form)
+            if seite is None or not isinstance(seite.layout(), QBoxLayout):
+                continue
+            gesehen.add(name)
+            out.append((name, seite))
+    return out
+
+
+def _im_erfassungsmodus(form):
+    try:
+        from qgis.gui import QgsAttributeEditorContext
+        add = getattr(QgsAttributeEditorContext, "AddFeatureMode", None)
+        if add is None:
+            add = QgsAttributeEditorContext.Mode.AddFeatureMode
+        return form.mode() == add
+    except Exception:
+        return False
+
+
+def _formwert(form, name):
+    try:
+        return form.currentFormFeature()[name]
+    except Exception:
+        return None
+
+
+def _pins_einrichten(form, layer):
+    from qgis.PyQt.QtWidgets import (QToolButton, QGraphicsOpacityEffect,
+                                     QDialogButtonBox, QPushButton)
+    from qgis.PyQt.QtCore import QTimer
+
+    felder = _feld_widgets(form, layer)
+    if not felder:
+        _plog("Keine festsetzbaren Felder gefunden.")
+        return
+    if _nativ_aktiv(layer, [n for n, _ in felder]):
+        _plog(u"QGIS bietet \u201eWert merken\u201c selbst an \u2013 eigene Stecknadeln aus.")
+        return
+
+    speicher = _pin_speicher(layer)
+    steuer = _steuerfelder(layer)
+    alle_quellen = {q for qs in steuer.values() for q in qs}
+    reihenfolge = {f.name(): i for i, f in enumerate(layer.fields())}
+    knoepfe = {}
+    zustand = {"loesen": None}
+
+    def eintrag(name, wert_von):
+        return {"wert": wert_von(name),
+                "kontext": {q: _norm(wert_von(q))
+                            for q in steuer.get(name, [])}}
+
+    def darstellen(name):
+        b = knoepfe[name]
+        an = name in speicher
+        b.blockSignals(True)
+        b.setChecked(an)
+        b.blockSignals(False)
+        b.graphicsEffect().setOpacity(1.0 if an else 0.35)
+        if an:
+            b.setToolTip(u"Festgesetzt: Wert wird in jeden neuen Fundpunkt "
+                         u"\u00fcbernommen.\nKlicken zum L\u00f6sen.")
+        else:
+            b.setToolTip(u"Wert festsetzen: in jeden neuen Fundpunkt "
+                         u"\u00fcbernehmen, bis die Nadel gel\u00f6st wird.")
+
+    def loesen_text():
+        loesen = zustand["loesen"]
+        if loesen is None:
+            return
+        n = len(speicher)
+        loesen.setText(u"Festsetzungen l\u00f6sen (%d)" % n if n
+                       else u"Festsetzungen l\u00f6sen")
+        loesen.setEnabled(bool(n))
+
+    def umschalten(name, an):
+        if an:
+            speicher[name] = eintrag(name, lambda n: _formwert(form, n))
+            _plog("%s festgesetzt: %r" % (name, speicher[name]["wert"]))
+        else:
+            speicher.pop(name, None)
+            _plog(u"%s gel\u00f6st" % name)
+        darstellen(name)
+        loesen_text()
+
+    for name, seite in felder:
+        b = QToolButton()
+        b.setObjectName("ft_pin_" + name)
+        b.setText(u"\U0001F4CC")
+        b.setCheckable(True)
+        b.setAutoRaise(True)
+        b.setMinimumSize(30, 28)
+        b.setStyleSheet(_PIN_STIL)
+        b.setGraphicsEffect(QGraphicsOpacityEffect(b))
+        b.toggled.connect(lambda an, n=name: umschalten(n, an))
+        seite.layout().addWidget(b)
+        knoepfe[name] = b
+        darstellen(name)
+
+    bb = form.findChild(QDialogButtonBox)
+    if bb is not None:
+        loesen = QPushButton()
+        loesen.setObjectName("ft_pins_loesen")
+        loesen.setToolTip(u"Alle Stecknadeln dieses Layers l\u00f6sen")
+        bb.addButton(loesen, _qt_enum(QDialogButtonBox, "ButtonRole",
+                                      "ResetRole"))
+        zustand["loesen"] = loesen
+
+        def alle_loesen():
+            speicher.clear()
+            for n in knoepfe:
+                darstellen(n)
+            loesen_text()
+            _plog(u"Alle Festsetzungen gel\u00f6st")
+
+        loesen.clicked.connect(alle_loesen)
+        loesen_text()
+
+    def anwenden():
+        """Festgesetzte Werte in den neuen Fundpunkt schreiben."""
+        try:
+            if (not _im_erfassungsmodus(form)
+                    or form.property("ft_pins_angewendet")):
+                return
+        except RuntimeError:          # Formular schon geschlossen
+            return
+        form.setProperty("ft_pins_angewendet", True)
+        # Steuerfelder (z. B. Artengruppe) zuerst, dann die abhaengigen
+        namen = sorted(speicher,
+                       key=lambda n: (0 if n in alle_quellen else 1,
+                                      reihenfolge.get(n, 999)))
+        gesetzt, uebersprungen = [], []
+        for n in namen:
+            e = speicher[n]
+            if any(_norm(_formwert(form, q)) != e["kontext"].get(q)
+                   for q in steuer.get(n, [])):
+                uebersprungen.append(n)
+                continue
+            try:
+                form.changeAttribute(n, e["wert"])
+                gesetzt.append(n)
+            except Exception as ex:
+                _plog(u"\u00dcbernahme %s: %s" % (n, ex))
+        if namen:
+            _plog(u"\u00fcbernommen: %s; \u00fcbersprungen (Kaskade): %s"
+                  % (gesetzt, uebersprungen))
+
+    def sichtbarkeit(*_):
+        an = _im_erfassungsmodus(form)
+        for b in knoepfe.values():
+            b.setVisible(an)
+        if zustand["loesen"] is not None:
+            zustand["loesen"].setVisible(an)
+        if an:
+            # erst nach setFeature()/setMode() ausfuehren, sonst ueberschrieben
+            QTimer.singleShot(0, anwenden)
+
+    def gespeichert(feat):
+        if not _im_erfassungsmodus(form):
+            return
+        for n in list(speicher):
+            try:
+                speicher[n] = eintrag(n, lambda x: feat[x])
+            except Exception as ex:
+                _plog("Merken %s: %s" % (n, ex))
+
+    try:
+        form.modeChanged.connect(sichtbarkeit)
+    except Exception as ex:
+        _plog("modeChanged: %s" % ex)
+    try:
+        form.featureSaved.connect(gespeichert)
+    except Exception as ex:
+        _plog("featureSaved: %s" % ex)
+    sichtbarkeit()
+    _plog("Stecknadeln an %d Feldern, %d festgesetzt."
+          % (len(knoepfe), len(speicher)))
+
+
 def init(dialog, layer, feature):
     _log("init() aufgerufen")
+    try:
+        _form = _get_form(dialog)
+        if _form is not None and layer is not None:
+            _pins_einrichten(_form, layer)
+    except Exception as e:
+        _plog("Init-Fehler: %s" % e)
     try:
         form = _get_form(dialog)
         ref, syn = _layer(REF_LAYER), _layer(SYN_LAYER)
@@ -1213,7 +1564,7 @@ def init(dialog, layer, feature):
             _log("Ohne Layer 'Arten' bzw. Formular keine Synonymsuche.")
             return
         if syn is None:
-            _log("Layer 'Arten_Synonyme' fehlt – Suche laeuft ohne Synonyme.")
+            _log("Layer 'Arten_Synonyme' fehlt - Suche laeuft ohne Synonyme.")
 
         search_le = QLineEdit()
         search_le.setObjectName("Artname_synonymsuche")
@@ -1521,27 +1872,32 @@ def init(dialog, layer, feature):
     <field labelOnTop="0" name="Genauigkeit"/>
     <field labelOnTop="0" name="fid"/>
   </labelOnTop>
-  <reuseLastValue>
-    <field reuseLastValue="0" name="Sensibel"/>
-    <field reuseLastValue="0" name="Aenderungsdatum"/>
-    <field reuseLastValue="0" name="Anzahl"/>
-    <field reuseLastValue="0" name="Artengruppe"/>
-    <field reuseLastValue="0" name="Artname"/>
-    <field reuseLastValue="0" name="Bemerkung"/>
-    <field reuseLastValue="0" name="Beobachtungsdatum"/>
-    <field reuseLastValue="0" name="Fundort"/>
-    <field reuseLastValue="0" name="Institution"/>
-    <field reuseLastValue="0" name="Kartierer"/>
-    <field reuseLastValue="0" name="Kennung"/>
-    <field reuseLastValue="0" name="Stadium"/>
-    <field reuseLastValue="0" name="Geschlecht"/>
-    <field reuseLastValue="0" name="Status"/>
-    <field reuseLastValue="0" name="Utm_east"/>
-    <field reuseLastValue="0" name="Utm_north"/>
-    <field reuseLastValue="0" name="Zaehleinheit"/>
-    <field reuseLastValue="0" name="Genauigkeit"/>
-    <field reuseLastValue="0" name="fid"/>
-  </reuseLastValue>
+  <reuseLastValuePolicy>
+    <field name="Sensibel" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Aenderungsdatum" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Anzahl" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Artengruppe" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Artname" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Bemerkung" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Beobachtungsdatum" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Fundort" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Institution" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Kartierer" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Kennung" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Stadium" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Geschlecht" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Status" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Utm_east" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Utm_north" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Zaehleinheit" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Genauigkeit" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="fid" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Eingabedatum" reuseLastValuePolicy="NotAllowed"/>
+    <field name="Pop_zustand" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Habitatqualitaet" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Pop_beeintraechtigung" reuseLastValuePolicy="AllowedDefaultOff"/>
+    <field name="Erhaltung_gesamt" reuseLastValuePolicy="AllowedDefaultOff"/>
+  </reuseLastValuePolicy>
   <dataDefinedFieldProperties/>
   <widgets/>
   <previewExpression>"Artname"</previewExpression>
