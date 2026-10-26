@@ -9,7 +9,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QVariant
 try:
-    from qgis_new_project_plugin.core.grundlagen import (DIENSTE, _REQUESTS_OK, _GDAL_OK, _QGIS_OK, _fetch_wfs, _fetch_ogcapi, _fetch_ffh_lrt, _fetch_atkis_wfs, _fetch_dvg_geojson, _fetch_lod2_ogcapi, _write_to_gpkg, _fetch_lod2)
+    from qgis_new_project_plugin.core.grundlagen import (DIENSTE, _REQUESTS_OK, _GDAL_OK, _QGIS_OK, _fetch_wfs, _fetch_ogcapi, _fetch_ffh_lrt, _fetch_atkis_wfs, _fetch_dvg_geojson, _fetch_lod2_ogcapi, _write_to_gpkg, _fetch_lod2, _compute_missing_centerlines)
 except ImportError:
     from ..core.grundlagen import (DIENSTE, _REQUESTS_OK, _GDAL_OK, _QGIS_OK, _fetch_wfs, _fetch_ogcapi, _fetch_ffh_lrt, _fetch_atkis_wfs, _fetch_dvg_geojson, _fetch_lod2_ogcapi, _write_to_gpkg, _fetch_lod2, _compute_missing_centerlines)
 # noop — *
@@ -59,9 +59,8 @@ class _GrundlagenWorker(QThread):
 
         n_dienste = sum(1 for k, v in aktiv.items() if v)
         done = 0
-        self._fliess_feats = []
-        self._sw_feats     = []
-        self._achse_feats  = []   # leer wenn Achse nicht aktiv
+        self._fluss_poly_feats = []   # AX_Fliessgewaesser → Centerline-Berechnung
+        self._achse_feats      = []   # AX_Gewaesserachse (leer wenn nicht aktiv)
 
         for dienst_key, dienst_cfg in DIENSTE.items():
             if not aktiv.get(dienst_key, False):
@@ -146,17 +145,13 @@ class _GrundlagenWorker(QThread):
                 n = _write_to_gpkg(
                     gpkg_path, dienst_key,
                     features, dienst_cfg, crs)
-                role = dienst_cfg.get("breakline_role", "")
-                # Gewässerachse separat: für Centerline-Berechnung
+                # Für die Mittelachsen-Berechnung nur echte Fließgewässer-
+                # Polygone verwenden. Früher landeten über breakline_role
+                # auch Siedlungs- und Kanalflächen im Algorithmus.
                 if dienst_key == "atkis_gewaesserachse":
                     self._achse_feats = features
-                    # Achse auch als Fließgewässer-Breakline
-                    self._fliess_feats.extend(features)
-                elif role == "fliessgewaesser":
-                    self._fliess_feats.extend(features)
-                elif role == "stehendes_gewaesser":
-                    self._sw_feats.extend(features)  # alle stehenden inkl. Hafenbecken
-                if dienst_key == "atkis_gewaesserachse": self._achse_feats = features
+                elif dienst_key == "atkis_gewaesser_fliessend":
+                    self._fluss_poly_feats.extend(features)
 
                 self.progress.emit(-1,
                     f"  ✓ {n} Features → {dienst_key}")
@@ -180,11 +175,11 @@ class _GrundlagenWorker(QThread):
         _ml(f"Worker FERTIG → {gpkg_path}")
 
         # Centerlines für breite Fließgewässer ohne Mittelachse
-        if self._fliess_feats:
+        if self._fluss_poly_feats:
             self.progress.emit(95, "Berechne Centerlines (Rhein etc.) …")
             try:
                 cl_feats = _compute_missing_centerlines(
-                    self._fliess_feats, self._achse_feats)
+                    self._fluss_poly_feats, self._achse_feats)
             except Exception as _ce:
                 cl_feats = []
                 self.progress.emit(96, f"  ⚠ Centerline-Fehler: {_ce}")
@@ -192,9 +187,14 @@ class _GrundlagenWorker(QThread):
                 # Eigener Layer für berechnete Mittelachsen
                 cl_cfg = dict(DIENSTE["atkis_gewaesserachse"])
                 cl_cfg["label"] = "ATKIS – Berechnete Gewässermittelachsen"
-                _write_to_gpkg(gpkg_path, "atkis_gewaessermittelachse",
-                               cl_feats, cl_cfg, crs, append=False)
-                self.progress.emit(97, f"  + {len(cl_feats)} Centerlines → atkis_gewaessermittelachse")
+                n_cl = _write_to_gpkg(gpkg_path, "atkis_gewaessermittelachse",
+                                      cl_feats, cl_cfg, crs, append=False)
+                self.progress.emit(97, f"  + {n_cl} Centerlines → atkis_gewaessermittelachse")
+                cl_lyr = QgsVectorLayer(
+                    f"{gpkg_path}|layername=atkis_gewaessermittelachse",
+                    cl_cfg["label"], "ogr")
+                if cl_lyr.isValid():
+                    QgsProject.instance().addMapLayer(cl_lyr)
         self.progress.emit(100, "")
         self.finished.emit(True,
             f"✓ Grundlagendaten gespeichert → {gpkg_path}")
