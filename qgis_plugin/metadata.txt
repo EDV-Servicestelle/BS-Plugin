@@ -1,7 +1,7 @@
 [general]
 name=NRW Naturschutz-Toolbox
 description=Werkzeuge für den Naturschutz in NRW: PostGIS-Datenbanksetup, Fachschalen-Wizard (PostGIS + GPKG), GBIF/Ornitho-Import, LOD-2 Gebäudemodell, ATKIS-Grundlagendaten, LiDAR-Analyse, Luftbild-COG, Hydroanalyse.
-version=3.1.0
+version=3.3.0
 qgisMinimumVersion=3.28
 qgisMaximumVersion=4.99
 supportsQt6=True
@@ -28,3 +28,5 @@ about=
     8. NRW Luftbild → COG        – DOP vom WCS als COG GeoTIFF
     9. NRW LiDAR-Analyse         – LAZ, DTM, LOD-2 Gebäudemodell
    10. NRW Grundlagendaten       – Schutzgebiete, FFH, ATKIS (OGC-API/WFS)
+   11. MAKO-Produkte (Notlösung) – Maßnahmentabelle (ODT/PDF) und Ziel- und
+                                   Maßnahmenkarte aus GISPAD-Exporten (MAS)

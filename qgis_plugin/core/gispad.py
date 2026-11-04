@@ -710,6 +710,160 @@ def setze_vorgabestil(gpkg, layer, qml_pfad, stilname="LANUK",
         con.close()
 
 
+# ── Geometrie reparieren ────────────────────────────────────────────────────
+#
+# GISPAD liefert erfahrungsgemaess unsaubere Flaechen: Selbstueberschneidungen,
+# doppelte Stuetzpunkte, verdrehte Ringe. Fuer die Weiterverarbeitung
+# (Verschneidung, Flaechenberechnung, Schraffur in QGIS) muss das vorher
+# bereinigt sein. Zwei Schritte, beide nur mit OGR - QGIS wird nicht
+# vorausgesetzt, damit die Kommandozeile dasselbe Ergebnis liefert:
+#
+#   1. Reparieren: MakeValid, Rueckfall Buffer(0). Was dabei an Linien- oder
+#      Punktresten entsteht, faellt weg - es bleiben nur die Flaechenteile.
+#   2. Rechte-Hand-Regel: Aussenring im Uhrzeigersinn, Loecher gegen den
+#      Uhrzeigersinn (wie QgsGeometry.forceRHR()). Damit zeigt die Innenseite
+#      jedes Rings nach rechts, und Schraffuren und Randsymbole mit
+#      Versatz liegen einheitlich auf der Innenseite.
+
+def _ist_flaechig(geom):
+    ogr = ogr_modul()
+    t = ogr.GT_Flatten(geom.GetGeometryType())
+    return t in (ogr.wkbPolygon, ogr.wkbMultiPolygon, ogr.wkbCurvePolygon,
+                 ogr.wkbMultiSurface)
+
+
+def _ring_flaeche(punkte):
+    """Vorzeichenbehaftete Flaeche (Gausssche Trapezformel): > 0 = gegen
+    den Uhrzeigersinn."""
+    s = 0.0
+    for (x1, y1, *_r1), (x2, y2, *_r2) in zip(punkte, punkte[1:]):
+        s += x1 * y2 - x2 * y1
+    return s / 2.0
+
+
+def _ring_neu(ogr, punkte, umdrehen, mit_z):
+    ring = ogr.Geometry(ogr.wkbLinearRing)
+    for p in (reversed(punkte) if umdrehen else punkte):
+        if mit_z and len(p) > 2:
+            ring.AddPoint(p[0], p[1], p[2])
+        else:
+            ring.AddPoint_2D(p[0], p[1])
+    ring.CloseRings()
+    return ring
+
+
+def rechte_hand(geom):
+    """
+    Ringe einer (Multi)Polygon-Geometrie nach der Rechte-Hand-Regel
+    ausrichten. Rueckgabe: (MultiPolygon, geaendert).
+    """
+    ogr = ogr_modul()
+    mit_z = geom.GetCoordinateDimension() > 2
+    if ogr.GT_Flatten(geom.GetGeometryType()) == ogr.wkbPolygon:
+        polygone = [geom]
+    else:
+        polygone = [geom.GetGeometryRef(i)
+                    for i in range(geom.GetGeometryCount())]
+    aus = ogr.Geometry(ogr.wkbMultiPolygon)
+    geaendert = False
+    for poly in polygone:
+        neu = ogr.Geometry(ogr.wkbPolygon)
+        for ri in range(poly.GetGeometryCount()):
+            punkte = poly.GetGeometryRef(ri).GetPoints() or []
+            if len(punkte) < 4:
+                continue
+            a = _ring_flaeche(punkte)
+            if a == 0:
+                continue
+            # Aussenring (ri == 0) im Uhrzeigersinn, also a < 0;
+            # Loecher gegen den Uhrzeigersinn, also a > 0.
+            umdrehen = (a > 0) if ri == 0 else (a < 0)
+            geaendert = geaendert or umdrehen
+            neu.AddGeometry(_ring_neu(ogr, punkte, umdrehen, mit_z))
+        if neu.GetGeometryCount():
+            aus.AddGeometry(neu)
+    return aus, geaendert
+
+
+def _flaechenteile(ogr, geom, aus):
+    """Alle Polygone aus einer beliebig geschachtelten Sammlung holen."""
+    t = ogr.GT_Flatten(geom.GetGeometryType())
+    if t == ogr.wkbPolygon:
+        if not geom.IsEmpty() and geom.GetArea() > 0:
+            aus.AddGeometry(geom)
+    elif t in (ogr.wkbMultiPolygon, ogr.wkbGeometryCollection):
+        for i in range(geom.GetGeometryCount()):
+            _flaechenteile(ogr, geom.GetGeometryRef(i), aus)
+
+
+def repariere_flaeche(geom):
+    """
+    Eine Flaechengeometrie reparieren und nach der Rechte-Hand-Regel
+    ausrichten.
+
+    Rueckgabe: (geometrie, befund). geometrie ist ein MultiPolygon oder
+    None, wenn nach der Reparatur keine Flaeche uebrig bleibt. befund ist
+    None, 'repariert', 'ausgerichtet' oder 'leer'. Nicht-flaechige
+    Geometrien kommen unveraendert zurueck.
+    """
+    ogr = ogr_modul()
+    if geom is None or geom.IsEmpty() or not _ist_flaechig(geom):
+        return geom, None
+    g = geom.Clone()
+    if g.HasCurveGeometry():
+        g = g.GetLinearGeometry()
+    befund = None
+    if not g.IsValid():
+        befund = "repariert"
+        neu = None
+        for versuch in (lambda x: x.MakeValid(["METHOD=STRUCTURE"]),
+                        lambda x: x.MakeValid(),
+                        lambda x: x.Buffer(0)):
+            try:
+                neu = versuch(g)
+            except Exception:              # noqa: BLE001 - GDAL/GEOS-Fassung
+                neu = None
+            if neu is not None and not neu.IsEmpty():
+                break
+        if neu is None:
+            return None, "leer"
+        flaechen = ogr.Geometry(ogr.wkbMultiPolygon)
+        _flaechenteile(ogr, neu, flaechen)
+        if flaechen.IsEmpty():
+            return None, "leer"
+        g = flaechen
+    g, gedreht = rechte_hand(g)
+    if g.IsEmpty():
+        return None, "leer"
+    if gedreht and befund is None:
+        befund = "ausgerichtet"
+    return g, befund
+
+
+def repariere_wkb(wkb):
+    """Wie repariere_flaeche, aber fuer WKB. Rueckgabe: (wkb, befund)."""
+    if not wkb:
+        return wkb, None
+    ogr = ogr_modul()
+    g, befund = repariere_flaeche(ogr.CreateGeometryFromWkb(bytes(wkb)))
+    return (g.ExportToWkb() if g is not None else None), befund
+
+
+def befund_reparatur(name, zaehler):
+    """Zaehler {'repariert': n, ...} als lesbaren Befund, oder None."""
+    teile = []
+    if zaehler.get("repariert"):
+        teile.append(f"{zaehler['repariert']} ungültige Geometrie(n) "
+                     f"repariert")
+    if zaehler.get("leer"):
+        teile.append(f"{zaehler['leer']} Geometrie(n) ohne verbleibende "
+                     f"Fläche verworfen")
+    if zaehler.get("ausgerichtet"):
+        teile.append(f"{zaehler['ausgerichtet']} nach der "
+                     f"Rechte-Hand-Regel ausgerichtet")
+    return f"{name}: " + ", ".join(teile) + "." if teile else None
+
+
 # ── kleine Helfer ───────────────────────────────────────────────────────────
 
 def als_bool(wert):

@@ -50,6 +50,7 @@ class NewProjectPlugin:
             ("Fundpunkte – Export (CSV/XLSX/GPKG) …",   self._fundpunkte_export),
             ("─────────────────────────",     None),
             ("GISPAD-Export übernehmen …",     self._gispad),
+            ("MAKO-Produkte aus GISPAD-Export (Notlösung) …", self._mako),
             ("─────────────────────────",     None),
             ("NRW Luftbild → COG …",           self._luftbild),
             ("NRW LiDAR-Analyse …",            self._lidar),
@@ -76,6 +77,10 @@ class NewProjectPlugin:
     def _gispad(self):
         from .gispad_import_dialog import GispadImportDialog
         GispadImportDialog(self.iface.mainWindow()).exec()
+
+    def _mako(self):
+        from .mako_dialog import MakoDialog
+        MakoDialog(self.iface.mainWindow()).exec()
 
     def _papierreviere_export(self):
         dlg = PapierreviereExportDialog(self.iface.mainWindow())

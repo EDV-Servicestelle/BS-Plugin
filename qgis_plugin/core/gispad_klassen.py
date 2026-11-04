@@ -24,7 +24,8 @@ _NAMEN = ("oeffne", "lies", "gefuellte_tabellen",
           "beziehungen_mit_geometrie", "geometrie_gruppe",
           "kette_nach_oben", "lies_referenzliste", "loese_auf", "als_bool",
           "gruppiere_nach_fkey", "aggregiere", "ogr_modul", "LISTEN_DIR",
-          "stil_datei", "setze_vorgabestil")
+          "stil_datei", "setze_vorgabestil", "repariere_wkb",
+          "befund_reparatur")
 
 _gispad = None
 for _versuch in ("qgis_new_project_plugin.core.gispad", ".gispad", "gispad"):
@@ -44,7 +45,8 @@ if _gispad is None:
  geometrie_gruppe, kette_nach_oben, lies_referenzliste, loese_auf,
  als_bool, gruppiere_nach_fkey, aggregiere, ogr_modul,
  LISTEN_DIR, stil_datei,
- setze_vorgabestil) = (getattr(_gispad, _n) for _n in _NAMEN)
+ setze_vorgabestil, repariere_wkb,
+ befund_reparatur) = (getattr(_gispad, _n) for _n in _NAMEN)
 
 
 # ── Objektklassen ───────────────────────────────────────────────────────────
@@ -562,7 +564,7 @@ def exportiere_fachlich(gdb, klasse, ziel, listen_dir=None, melde=_nichts,
                         spalten, saetze, geoms))
 
     melde(85, "Schreibe GeoPackage …")
-    geschrieben = _schreibe(ziel, bloecke)
+    geschrieben = _schreibe(ziel, bloecke, befunde)
     _setze_stile(ziel, profil, geschrieben, befunde, melde)
     melde(100, "Fertig.")
     return geschrieben, befunde
@@ -665,14 +667,22 @@ def exportiere_alles(gdb, ziel, melde=_nichts, befunde=None):
         bloecke.append(("gispad_beziehungen", 100, None, bz_spalten, bz, []))
 
     melde(85, "Schreibe GeoPackage …")
-    geschrieben = _schreibe(ziel, bloecke)
+    geschrieben = _schreibe(ziel, bloecke, befunde)
     melde(100, "Fertig.")
     return geschrieben
 
 
 # ── Schreiben ───────────────────────────────────────────────────────────────
 
-def _schreibe(pfad, bloecke):
+def _schreibe(pfad, bloecke, befunde=None):
+    """
+    Bloecke ins GeoPackage schreiben.
+
+    Flaechen werden dabei repariert und nach der Rechte-Hand-Regel
+    ausgerichtet (siehe gispad.repariere_flaeche) - GISPAD liefert
+    erfahrungsgemaess unsaubere Geometrien. Was dabei geschieht, landet als
+    Befund in `befunde`, wenn die Liste uebergeben wird.
+    """
     ogr = ogr_modul()
     if os.path.exists(pfad):
         os.remove(pfad)
@@ -689,6 +699,25 @@ def _schreibe(pfad, bloecke):
         # Spalten kommen als (Feld, Typ) oder (Feld, Typ, Alias).
         spalten = [(s[0], s[1], s[2] if len(s) > 2 else None)
                    for s in spalten]
+        flaechig = wkb_typ != 100 and ogr.GT_Flatten(wkb_typ) in (
+            ogr.wkbPolygon, ogr.wkbMultiPolygon, ogr.wkbCurvePolygon,
+            ogr.wkbMultiSurface)
+        if flaechig:
+            # Die Reparatur liefert immer MultiPolygon - der Layertyp muss
+            # dazu passen, sonst lehnt der GPKG-Treiber Mehrteiler ab.
+            wkb_typ = ogr.wkbMultiPolygon
+            zaehler = {}
+            neu = []
+            for g in geoms:
+                g2, b = repariere_wkb(g)
+                if b:
+                    zaehler[b] = zaehler.get(b, 0) + 1
+                neu.append(g2)
+            geoms = neu
+            if befunde is not None:
+                txt = befund_reparatur(name, zaehler)
+                if txt:
+                    befunde.append(txt)
         lyr = ds.CreateLayer(name, srs,
                              wkb_typ if wkb_typ != 100 else ogr.wkbNone)
         for feld, typ, alias in spalten:
