@@ -45,7 +45,7 @@ Die zulässigen Werte werden im GeoPackage „Referenzlisten“ bereitgestellt (
 | Artengruppen | 41 | listitemid | term | Artengruppe | Steuert die Kaskade (Filter für Artname). |
 | Arten | 13291 | entityid | term | Artname | Gefiltert nach Artengruppe (parentid = current_value(Artengruppe)). |
 | Institution | 94 | entityid | term | Institution | – |
-| Einheit | 13 | entityid | term | Zaehleinheit | – |
+| Einheit | 14 | entityid | term | Zaehleinheit | – |
 | Status | 66 | entityid | term | Status | – |
 | Stadium | 19 | entityid | term | Stadium | Aus der bisherigen Kombiliste herausgelöst (Trennung Stadium/Geschlecht). |
 | Geschlecht | 4 | entityid | term | Geschlecht | Aus der bisherigen Kombiliste herausgelöst; enthält nur noch die Geschlechts-Werte (unbestimmt, Männchen, Weibchen, weibchenfarbig). |
