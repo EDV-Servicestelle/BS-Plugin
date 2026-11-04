@@ -6,6 +6,13 @@ Modulares QGIS-Plugin für den Naturschutz-Datentransfer in NRW. Acht integriert
 
 ## Changelog
 
+### v3.3.2 (November 2026)
+- QField-Projekte der Fachschale Fundpunkte Tiere enthalten jetzt die
+  Synonymsuche im Artname-Feld: „Artenname Synonym Search“ v0.5 von FeelGood
+  GeoSolutions, unverändert als `qfield_plugins/fundpunkte/synonymsuche.qml`.
+  Zwischenstand, die Abnahme steht noch aus. Sie sucht in `Arten` und
+  `Arten_Synonyme`, die Artsuche über den Button bleibt zusätzlich erhalten.
+
 ### v3.3.1 (November 2026)
 - Das Plugin heißt jetzt **BioSt-GIS** (vormals NRW Naturschutz-Toolbox). Der
   interne Plugin-Ordner bleibt, ein Update ersetzt die bisherige Installation.
