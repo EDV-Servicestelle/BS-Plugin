@@ -1,5 +1,5 @@
 /**
- * NRW Fundpunkte Tiere QField Plugin v1.86
+ * NRW Fundpunkte Tiere QField Plugin v1.87
  */
 import QtQuick
 import QtQuick.Controls
@@ -19,6 +19,18 @@ Item {
     property string activeGruppeId:   ""
     property string activeGruppeName: "Alle Gruppen"
     property bool   gruppenVisible:   false
+
+    // Synonymsuche im Artname-Feld (FeelGood GeoSolutions, unveraendert in
+    // synonymsuche.qml). QField laedt je Projekt nur eine gleichnamige QML-Datei,
+    // deshalb haengt sie hier. Schlaegt sie fehl, bleibt die Artsuche nutzbar.
+    Loader {
+        id: synonymsucheLoader
+        source: Qt.resolvedUrl("synonymsuche.qml")
+        onStatusChanged: {
+            if (status === Loader.Error)
+                iface.logMessage("[Fundpunkte] Synonymsuche konnte nicht geladen werden")
+        }
+    }
 
     Loader {
         id: pluginLoader
