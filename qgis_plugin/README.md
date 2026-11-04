@@ -6,6 +6,12 @@ Modulares QGIS-Plugin für den Naturschutz-Datentransfer in NRW. Acht integriert
 
 ## Changelog
 
+### v3.3.3 (November 2026)
+- Das QField-Plugin der Fundpunkte-Projekte ist jetzt nur noch die Synonymsuche
+  „Artenname Synonym Search“ v0.5 von FeelGood GeoSolutions, abgelegt als
+  `<Projektname>.qml`. Das bisherige Test-Plugin (Artsuche über den Button) ist
+  entfallen.
+
 ### v3.3.2 (November 2026)
 - QField-Projekte der Fachschale Fundpunkte Tiere enthalten jetzt die
   Synonymsuche im Artname-Feld: „Artenname Synonym Search“ v0.5 von FeelGood
