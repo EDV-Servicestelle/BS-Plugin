@@ -58,9 +58,12 @@ diese Schritte:
 
 Neue Projekte starten ohne Datensätze. Das Projekt arbeitet mit GeoPackages im Projektordner und braucht dafür keinen Server.
 Für den Upload brauchen Sie ein QFieldCloud-Konto. Bei der Fachschale Fundpunkte Tiere
-wird die Artsuche für QField mitgeliefert, auch mit Suche nach Synonymen direkt im
-Feld Artname. Die Synonymsuche ist ein Zwischenstand. Bestehende Projekte erhalten sie
-erst, wenn Sie **QField-Export …** erneut ausführen.
+wird die Synonymsuche für das Feld Artname in QField mitgeliefert. Sie findet Arten
+auch über andere Schreibweisen und alte Namen.
+
+Beim ersten Öffnen des Projekts fragt QField, ob das Plugin ausgeführt werden darf.
+Stimmen Sie zu, sonst bleibt die Suche aus. Die Synonymsuche ist ein Zwischenstand.
+Bestehende Projekte erhalten sie erst, wenn Sie **QField-Export …** erneut ausführen.
 
 > **Brutvogel:** Die Fachschale Brutvogel steht vorerst nicht zur Auswahl, weil sie
 > noch nicht sauber arbeitet. Der Menüpunkt zu den Papierrevieren gehört dazu.

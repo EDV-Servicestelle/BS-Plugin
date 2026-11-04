@@ -538,7 +538,7 @@ class QFieldProjectDialog(QDialog):
                               out_folder: str):
         """
         Kopiert das zum Fachschalen-Code passende QField-Plugin
-        neben die Projektdatei (main.qml → <proj_name>.qml, search.qml).
+        neben die Projektdatei (main.qml → <proj_name>.qml).
         QField aktiviert das Plugin automatisch da es gleichnamig ist.
         """
         rel_dir = self._PLUGIN_MAP.get(fach_code)
