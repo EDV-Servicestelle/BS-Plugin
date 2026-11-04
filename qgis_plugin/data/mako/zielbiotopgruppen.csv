@@ -1,0 +1,29 @@
+praefix;gruppe;farbe;quelle
+A;Laubwald;#67c710;REF_Biotope A (laubgrün hell)
+AF;nicht heimischer Laubwald;#baa100;REF_Biotope AF (oliv)
+AH;nicht heimischer Laubwald;#baa100;wie AF
+AN;nicht heimischer Laubwald;#baa100;wie AF
+AO;nicht heimischer Laubwald;#baa100;wie AF
+AJ;Nadelwald;#3d9576;REF_Biotope AJ (tannengrün)
+AK;Nadelwald;#3d9576;wie AJ
+AL;Nadelwald;#3d9576;wie AJ
+AS;Nadelwald;#3d9576;wie AJ
+AT;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;Schlagfluren
+B;Kleingehölze;#67c710;LYR ZIELBIOTOPGRUPPE (wie Laubwald)
+C;Moore, Sümpfe, Verlandungsbiotope;#ada4fe;REF_Biotope C
+D;Heiden, Trockenrasen;#f4a4fe;REF_Biotope D
+E;Grünland, Brachen;#e6fb9e;REF_Biotope E
+F;Gewässer;#a4f9fe;REF_Biotope F
+G;Gesteinsbiotope, Pionierstandorte;#d1d1d1;REF_Biotope G
+H;landwirtschaftl. und gärtn. Nutzflächen, Grünanlagen;#fdcfbd;REF_Biotope HA
+HB;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;Ackerbrachen
+HC;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;Raine
+HD;Siedlungsbereiche, Verkehrswege;#606060;Gleisanlagen
+HN;Siedlungsbereiche, Verkehrswege;#606060;Gebäude
+HT;Siedlungsbereiche, Verkehrswege;#606060;Hofplätze
+HV;Siedlungsbereiche, Verkehrswege;#606060;Plätze
+HW;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;Brachen
+K;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;REF_Biotope K (gelb), Farbe LYR
+L;Staudenfluren, Brachen, Ruderalfluren, Saum- und Verlichtungsgesellschaften;#fefe8c;wie K
+S;Siedlungsbereiche, Verkehrswege;#606060;LYR ZIELBIOTOPGRUPPE
+V;Siedlungsbereiche, Verkehrswege;#606060;LYR ZIELBIOTOPGRUPPE

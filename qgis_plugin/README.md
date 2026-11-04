@@ -6,6 +6,27 @@ Modulares QGIS-Plugin für den Naturschutz-Datentransfer in NRW. Acht integriert
 
 ## Changelog
 
+### v3.3.0 (Oktober 2026)
+- **MAKO-Produkte aus GISPAD-Export (Notlösung)** – neuer Menüpunkt. Ersetzt
+  den außer Betrieb befindlichen MAKO-Konverter des LANUK für dringende
+  Fälle: Maßnahmentabelle als ODT und PDF im Layout der LANUK-Eingabemaske,
+  Ziel- und Maßnahmenkarte als Drucklayout (A0, 97 × 59 cm, A1, 78 × 42 cm,
+  A3) mit Farben der Zielbiotopgruppen, zweizeiliger Beschriftung und
+  Legende nach Maßnahmengruppen, dazu ein GeoPackage mit den Kartenlayern
+  (Feldnamen wie der LANUK-Konverter).
+- Wald-Maßnahmenflächen werden gemeldet: Für Wald gelten Vorgaben von Wald
+  und Holz NRW, die gesondert abzustimmen sind.
+- Bestand (LRT, § 30/§ 42 mit ha) und Beeinträchtigungen werden durch
+  Verschneidung der Maßnahmenflächen mit den aktuellen BT-Flächen ermittelt;
+  die von GISPAD an der Maßnahmenfläche gespeicherten Bestandsangaben sind
+  dafür nicht verlässlich. Teilflächen inner-/außerhalb des FFH-Gebietes
+  über einen FFH-Layer aus dem Projekt.
+- **Geometrie-Reparatur für alle GISPAD-Übernahmen:** Flächen werden
+  repariert (MakeValid, Rückfall Buffer(0)) und nach der Rechte-Hand-Regel
+  ausgerichtet; die Anzahl steht in den Hinweisen.
+- Neue Referenzlisten unter `data/mako/` (aus `mas_referenzlisten_v2020a.xlsx`
+  des MAKO-Werkzeugkastens, Erzeugung mit `tools/mako_listen.py`).
+
 ### v1.87 (Mai 2026)
 - **PostGIS-Setup-Dialog**: Automatischer DB-Aufbau aus lokalen GPKGs inkl. Schemas, Styles und `public.fachschalen_config`; `_rename_cols_to_original` für CamelCase-Spaltennamen; QML-Feldnamen-Normalisierung mit Aliassen
 - **Fachschalen-Wizard PostGIS**: Institution/Karterer aus `gemeinsam.*`; case-insensitiver `ref_layer_map`-Lookup; Style-Loading aus `public.layer_styles`
@@ -119,6 +140,31 @@ D8-Fließrichtung, Akkumulation, Strahler-Ordnung, Abflusssenken aus DTM.
 Schutzgebiete (NSG, LSG, FFH, VSG, NTP …), FFH-Lebensraumtypen und Flurstücke via OGC-API / WFS NRW → GPKG.
 
 ---
+
+### 9 · MAKO-Produkte aus GISPAD-Export (Notlösung)
+Für dringende Fälle, solange der MAKO-Konverter des LANUK außer Betrieb ist.
+Eingabe ist ein GISPAD-Export als File-Geodatabase (Ordner oder ZIP) mit
+Maßnahmenflächen (MAS) und Biotoptypen (BT), für die Biotopbaum-Anzahl auch
+BAUM. Die FFH-Gebietsgrenze kommt aus einem Layer des Projekts (z. B. über
+„NRW Grundlagendaten abrufen“).
+
+Ergebnis im Ausgabeordner:
+- `Massnahmentabelle_<DE-Nr>.odt/.pdf` – je Einzelmaßnahme ein Block
+  (Nr. Fläche | Bestand | Entwicklungsziele | Maßnahmen), getrennt nach
+  innerhalb/außerhalb des FFH-Gebietes
+- `Massnahmenkarte_<DE-Nr>.pdf` und das Drucklayout „MAKO Ziel- und
+  Maßnahmenkarte“ im Projekt zum Nachbearbeiten
+- `MAKO_Kartenlayer.gpkg` mit `MAKO_Massnahmenflaechen`, `EinzelMassn_poly`,
+  `ZIEL_LRT_polygon`, `ZIEL_GB_polygon`, `FFH_Grenze` (Stile im GeoPackage)
+
+**Wald ist ein Sonderfall:** Für Wald-MAKOs gelten Vorgaben von Wald und
+Holz NRW. Die Notlösung bildet sie nicht nach; enthält der Export Wald-Ziele
+oder Wald-Maßnahmen, nennt der Dialog die betroffenen Flächen – Tabelle und
+Karte sind dafür gesondert abzustimmen.
+
+Korrekturen gehören wie beim LANUK-Konverter in die Daten, nicht in die
+Tabelle. Feldzuordnung: `claude/MAKO_Massnahmentabelle_Feldzuordnung.md` im
+Projekt BS_QGIS.
 
 ## Installation
 
