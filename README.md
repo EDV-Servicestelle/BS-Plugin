@@ -1,145 +1,175 @@
-# Fundpunkte Tiere — QGIS- und QField-Plugin
+# BioSt-GIS
 
-Werkzeuge der EDV-Servicestelle der Biologischen Stationen in NRW für die
-standardisierte Erfassung georeferenzierter Tierfundpunkte nach dem
-LANUK-Datenmodell „Fundpunkte Tiere“.
+QGIS-Plugin der Biologischen Stationen in NRW. Es legt fertige Erfassungsprojekte
+an, bringt sie nach QField und übernimmt Altdaten sowie GISPAD-Exporte.
+Entwickelt und gepflegt wird es von der EDV-Servicestelle der Biologischen Stationen.
 
-Das Paket umfasst das QGIS-Plugin zur Projektanlage und -pflege
-(Fachschalen-Wizard, Altdaten-Import, QFieldCloud-Export) sowie die
-QField-Projekt-Plugins für die mobile Erfassung.
+> **Früherer Name:** Bis Version 3.3.0 hieß das Plugin **NRW Naturschutz-Toolbox**.
+> Ältere Installationen zeigen diesen Namen, bis Sie aktualisieren.
 
-- **Lizenz:** GNU General Public License v3.0 (siehe `LICENSE`)
-- **Zielplattform:** QGIS 4.2 LTR (Qt6), QField 4.x, GeoPackage, EPSG:25832
+**[Aktuelle Version herunterladen](https://github.com/EDV-Servicestelle/BS-Plugin/releases/latest)**
 
-## Aufbau des Repositorys
+## Installation
 
-| Pfad | Inhalt |
+Sie brauchen die aktuelle QGIS-LTR-Version 3.x. Das Plugin läuft ab QGIS 3.28 und
+ist für QGIS 4 vorbereitet.
+
+1. Öffnen Sie die [aktuelle Version](https://github.com/EDV-Servicestelle/BS-Plugin/releases/latest)
+   und laden Sie unter **Assets** die Datei `qgis_new_project_plugin_v….zip` herunter.
+   Die Archive „Source code“ lassen sich nicht installieren.
+2. Wählen Sie in QGIS **Erweiterungen → Erweiterungen verwalten und installieren
+   → Aus ZIP installieren** und dann die heruntergeladene Datei.
+3. Starten Sie QGIS neu.
+
+Danach steht das Plugin unter **Erweiterungen → BioSt-GIS**.
+
+**Beim Öffnen eines Projekts fragt QGIS nach Makros.** Das Erfassungsformular
+enthält eingebetteten Python-Code, deshalb ist die Nachfrage normal. Lassen Sie
+die Makros zu, sonst fehlen Funktionen im Formular. Die Vorgabe ändern Sie unter
+**Einstellungen → Optionen → Allgemein → Makros aktivieren**.
+
+### Auf eine neue Version aktualisieren
+
+Installieren Sie die neue ZIP-Datei wie oben beschrieben über die alte Version und
+**schließen Sie QGIS danach einmal vollständig**. Sonst kann noch der alte
+Formularcode aktiv sein, und das Formular verhält sich unerwartet.
+
+Bestehende Projekte bleiben unverändert. Neue Werte in den Referenzlisten kommen
+deshalb nur in neu angelegte Projekte. Für bestehende Projekte wenden Sie sich an
+die EDV-Servicestelle.
+
+## Erste Schritte: ein Projekt anlegen
+
+Wählen Sie **Fachschalen-Wizard …**. Zur Auswahl stehen die Fachschalen
+**Fundpunkte Tiere** und **Biotopbaum**. Der Assistent führt durch
+diese Schritte:
+
+1. **Projektinformationen:** Name und Speicherort eingeben, dann auf
+   **Offline laden (ohne DB)** klicken und die Fachschale wählen. Die Felder für die
+   Datenbankverbindung lassen Sie dabei unbeachtet. Tragen Sie auch die
+   Projektvariablen ein.
+2. **Koordinatenreferenzsystem**
+3. **Untersuchungsgebiet:** kann übersprungen werden
+4. **Layer der Fachschale**
+5. **Grundlagendaten:** Quellen und Dienste für das Projekt
+6. **Zusammenfassung**
+7. **Export & QFieldCloud-Upload:** Layer als GeoPackage sichern, Projekt speichern
+   und auf Wunsch zu QFieldCloud übertragen
+
+Neue Projekte starten ohne Datensätze. Das Projekt arbeitet mit GeoPackages im Projektordner und braucht dafür keinen Server.
+Für den Upload brauchen Sie ein QFieldCloud-Konto. Bei der Fachschale Fundpunkte Tiere
+wird die passende Artsuche für QField mitgeliefert.
+
+> **Brutvogel:** Die Fachschale Brutvogel steht vorerst nicht zur Auswahl, weil sie
+> noch nicht sauber arbeitet. Der Menüpunkt zu den Papierrevieren gehört dazu.
+
+## Was Sie womit erledigen
+
+Alle Punkte liegen im Menü **Erweiterungen → BioSt-GIS**.
+
+| Aufgabe | Menüpunkt |
 | --- | --- |
-| `qgis_plugin/` | Quellcode des QGIS-Plugins samt QField-Projekt-Plugins |
-| `styles/` | Layerstile als QML-Textdateien, aus `layer_styles` exportiert |
-| `datamodel/` | Tabellenstrukturen als SQL-DDL |
-| `reflists/` | Referenzlisten als CSV |
-| `docs/` | Datenmodell (Anlage A), Leistungsbeschreibung, Änderungsprotokolle |
-| `tools/` | Hilfsskripte für Export, Paketbau und Referenzlisten |
+| Neues Erfassungsprojekt anlegen | Fachschalen-Wizard … |
+| Projekt für die Feldarbeit vorbereiten | QField-Export … |
+| Alte Funddaten übernehmen (SHP, GeoPackage, GeoJSON, CSV, Excel, ODS, KML) | Fundpunkte – Altdaten importieren … |
+| Eigene Schreibweisen und Artnamen ergänzen | Fundpunkte – Synonyme verwalten … |
+| Fundhäufigkeit über die Zeit darstellen | Fundpunkte – Zeitreihen-Diagramm … |
+| Fundpunkte ausgeben (CSV, XLSX, GeoPackage) | Fundpunkte – Export (CSV/XLSX/GPKG) … |
+| GISPAD-Daten sichern und übernehmen | GISPAD-Export übernehmen … |
+| Maßnahmentabelle und -karte aus GISPAD-Daten erzeugen | MAKO-Produkte aus GISPAD-Export (Notlösung) … |
+| Schutzgebiete, FFH-Lebensraumtypen, ATKIS und Flurstücke abrufen | NRW Grundlagendaten abrufen … |
+| Luftbilder als GeoTIFF laden | NRW Luftbild → COG … |
+| Geländemodell und Höhenlinien aus LiDAR erzeugen | NRW LiDAR-Analyse … |
+| Fließwege und Abflusssenken berechnen | Hydrologische Analyse … |
+| Artvorkommen aus GBIF oder Ornitho.de laden | GBIF Artvorkommen … / Ornitho.de Import … |
+| Personen der eigenen Station verwalten (nur Cloud-Admins) | Personen meiner Station … |
 
-### Warum Stile und Referenzlisten doppelt vorliegen
+Die Punkte **PostGIS-Datenbank einrichten …** und **Grundlagen-DB verwalten …** sind
+für die Datenbankverwaltung gedacht und im normalen Stationsbetrieb nicht nötig.
 
-Produktiv liegen die Layerstile in der Tabelle `layer_styles` **innerhalb** des
-GeoPackages — dort sind sie weder lesbar noch vergleichbar. Genau daraus sind
-wiederholt Abweichungen entstanden: ein Stil im GeoPackage geändert, die freie
-QML-Datei nicht nachgezogen, und das Formular verhielt sich in QGIS anders als
-in QField.
+## Fundpunkte erfassen
 
-Deshalb werden Stile, Tabellenstrukturen und Referenzlisten zusätzlich als
-Textdateien geführt. Sie sind die lesbare Fassung; Abweichungen werden zu
-sichtbaren Diffs und von der CI geprüft.
+**Werte festsetzen:** Mit der Stecknadel neben einem Feld im Formular übernehmen Sie
+dessen Wert in jeden neuen Fundpunkt, etwa Datum oder Kartierer. Ein festgesetzter
+Artname wird nur übernommen, wenn auch die Artengruppe passt.
 
-Nach jeder Änderung an einem GeoPackage:
+**Zähleinheit:** Wer eine Anzahl einträgt, muss auch die Zähleinheit angeben. Die
+Einheit „Brutpaare“ steht in Projekten bereit, die mit Version 3.3.0 oder neuer
+angelegt wurden.
 
-```bash
-python3 tools/export_from_gpkg.py --plugin qgis_plugin --out .
-```
+**Sensible Funde:** Fundpunkte mit gesetztem Feld `Sensibel` lässt der Menüpunkt
+**Fundpunkte – Export** aus. Prüfen Sie das Ergebnis trotzdem, bevor Sie Daten
+weitergeben.
 
-Prüfen, ohne zu schreiben (wie in der CI):
+## GISPAD-Daten übernehmen
 
-```bash
-python3 tools/export_from_gpkg.py --plugin qgis_plugin --out . --pruefen
-```
+GISPAD lässt sich nicht mehr dauerhaft sicher betreiben. Für die Übernahme brauchen
+Sie weder GISPAD noch ODBC-Treiber, sondern nur den Export als File-Geodatabase
+(Ordner oder ZIP).
 
-### Große Fachdaten
+1. Wählen Sie **GISPAD-Export übernehmen …** und dann den Export.
+2. Lassen Sie **Alles sichern** ausgewählt. Was jetzt nicht übernommen wird, kommt
+   später womöglich nicht mehr heraus.
+3. Prüfen Sie die Zieldatei und starten Sie die Übernahme. QGIS bleibt währenddessen
+   bedienbar.
 
-`Nutzung.gpkg` (103 MB) und `Grenzen1.gpkg` (11 MB) sind von der
-Versionsverwaltung ausgenommen und werden extern bereitgestellt. Git würde bei
-jeder Änderung eine vollständige neue Kopie speichern.
+Die Geometrien werden dabei repariert und einheitlich ausgerichtet. Die Anzahl der
+Reparaturen steht in den Hinweisen. Verwenden Sie für BK und MAS vorerst nur
+**Alles sichern**, die fachliche Auswahl ist für diese Klassen noch nicht an echten
+Exporten geprüft.
 
-## Paket bauen
+Details stehen in der [Beschreibung der GISPAD-Übernahme](docs/GISPAD_Uebernahme.md).
 
-```bash
-python3 tools/build_plugin_zip.py --plugin qgis_plugin --out dist
-```
+## MAKO-Produkte: nur für dringende Fälle
 
-Die Version kommt aus dem Git-Tag (z. B. `v2.7.8`) und wird in die
-`metadata.txt` des Pakets geschrieben, damit Dateiname und Plugin-Metadaten
-nicht auseinanderlaufen.
+Der MAKO-Konverter des LANUK ist außer Betrieb. Dieser Menüpunkt ist eine
+**Notlösung** dafür und ersetzt ihn nicht.
 
-## Referenzlisten aus den LANUK-Vorgaben erzeugen
+- **Eingabe:** GISPAD-Export mit Maßnahmenflächen (MAS) und Biotoptypen (BT), für die
+  Biotopbaum-Anzahl auch BAUM. Die FFH-Gebietsgrenze kommt aus einem Layer im Projekt,
+  zum Beispiel über **NRW Grundlagendaten abrufen …**.
+- **Ergebnis:** Maßnahmentabelle (ODT und PDF), Ziel- und Maßnahmenkarte (PDF und
+  Drucklayout im Projekt) sowie ein GeoPackage mit den Kartenlayern.
+- **Korrekturen** gehören in die Daten, nicht in die fertige Tabelle.
 
-```bash
-pip install odfpy
-python3 tools/build_reflisten_from_ods.py \
-    --ods     reflists/quellen/Refliste_FT_Entwicklung_2027.ods \
-    --vorlage qgis_plugin/data/fundpunkte_tiere/Referenzen.gpkg \
-    --out     Referenzen_neu.gpkg \
-    --bericht migration_bericht.csv
-```
+**Wald ist ein Sonderfall.** Für Wald gelten Vorgaben von Wald und Holz NRW, die das
+Plugin nicht abbildet. Enthält der Export Wald-Ziele oder Wald-Maßnahmen, nennt der
+Dialog die betroffenen Flächen. Tabelle und Karte müssen Sie dafür gesondert abstimmen.
 
-## Pipeline
+## Zusatzmodule
 
-| Job | Stufe | Zweck |
+Die meisten Funktionen laufen mit einer normalen QGIS-Installation. Fehlt ein Modul,
+installieren Sie es in der Python-Umgebung von QGIS (unter Windows in der
+**OSGeo4W Shell**):
+
+| Funktion | Modul | Befehl |
 | --- | --- | --- |
-| `secret_detection` | test | GitLab Secret Detection (Vorlage), prüft auch die Historie |
-| `semgrep-sast` u. a. | test | GitLab SAST (Vorlage) |
-| `quellen-synchron` | test | Textfassung == GeoPackage |
-| `codestil` | test | PEP 8 (Leistungsbeschreibung Abschnitt 6) |
-| `paket` | bauen | Plugin-ZIP, Version aus dem Git-Tag |
-| `release` | release | hängt das ZIP an ein GitLab-Release (nur bei Tags) |
+| LiDAR-Analyse | laspy | `python -m pip install "laspy[lazrs]"` |
+| Treffsichere Artnamen beim Altdaten-Import | scikit-learn | `python -m pip install scikit-learn` |
+| Hydrologische Analyse, Gewässermittellinien der Grundlagendaten | scipy | `python -m pip install scipy` |
 
-Veröffentlichung einer Version:
+## Hilfe und Fehler melden
 
-```bash
-git tag v2.7.8
-git push origin v2.7.8
-```
+Schreiben Sie an die EDV-Servicestelle: [blinn@bskw.de](mailto:blinn@bskw.de).
+Technische Fehler können Sie auch als
+[Issue auf GitHub](https://github.com/EDV-Servicestelle/BS-Plugin/issues) melden.
 
-Das Release entsteht automatisch, mit stabiler Download-URL für die Stationen.
-Ohne Tag wird das Paket zwar gebaut, verfällt aber nach zwei Wochen.
+Hilfreich sind diese Angaben:
 
-## Wo liegt das installierbare Plugin
+- Plugin-Version und QGIS-Version
+- der Menüpunkt und was Sie zuletzt getan haben
+- die Meldung aus dem Protokoll von QGIS (Sprechblasen-Symbol unten rechts), Reiter
+  „BioSt-GIS“
+- die Datei `naturschutz_debug.log` in Ihrem Benutzerordner
 
-Das fertige Paket hängt an den Releases — **nicht** die automatisch erzeugten
-„Source code"-Archive verwenden, die enthalten das gesamte Repository und
-lassen sich nicht als QGIS-Erweiterung installieren.
+> **GitHub ist öffentlich.** Stellen Sie dort keine Fundorte geschützter Arten,
+> personenbezogenen Daten, Projektdateien, Zugangsdaten oder Logdateien ein. Solche
+> Unterlagen schicken Sie direkt an die EDV-Servicestelle, Zugangsdaten aber nicht
+> per normaler E-Mail.
 
-| Ort | Erzeugt von |
-| --- | --- |
-| GitLab → Deploy → Releases | der GitLab-Pipeline (Job `release`) |
-| GitHub → Releases | GitHub Actions (`.github/workflows/release.yml`) |
+## Mitentwickeln und Lizenz
 
-Beide Seiten bauen mit demselben Skript (`tools/build_plugin_zip.py`) aus
-demselben Tag, erzeugen also dasselbe Paket.
+Aufbau des Repositorys, Paketbau und Abläufe stehen unter
+[Entwicklung und Repository](docs/ENTWICKLUNG_Repository.md).
 
-Installation in QGIS: Erweiterungen → Erweiterungen verwalten und installieren
-→ Aus ZIP installieren.
-
-## Hinweis zum GitHub-Spiegel
-
-GitHub ist ein **einseitiger Spiegel** des GitLab-Repositorys der
-EDV-Servicestelle. Gespiegelt wird nur `main` samt Tags.
-
-Pull Requests können dort nicht gemergt werden. Beiträge sind trotzdem
-willkommen — am besten als Issue oder als Patch; wir übernehmen sie ins
-GitLab, von wo sie zurück nach GitHub gespiegelt werden.
-
-## Mitarbeit
-
-Vor dem ersten Commit einmalig einrichten:
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-Damit laufen Zugangsdaten-Prüfung und Formatkontrollen schon lokal, nicht erst
-in der CI.
-
-## Hinweis zu schützenswerten Inhalten
-
-Dieses Repository ist für eine spätere öffentliche Bereitstellung vorgesehen.
-Zwei Dinge dürfen deshalb nicht hineingeraten:
-
-1. **Zugangsdaten** — Verbindungsparameter der Grundlagen-Datenbank,
-   QFieldCloud-Logins, interne Hostnamen. Sie gehören in die lokale
-   QGIS-Konfiguration, nicht in den Quellcode.
-2. **Artenschutzrechtlich sensible Funddaten** — Testprojekte dürfen keine
-   echten Fundorte streng geschützter Arten enthalten. Einmal gepusht, bleiben
-   sie über die Git-Historie abrufbar, auch nach einer späteren Löschung.
+Das Plugin steht unter der [GNU General Public License v3.0](LICENSE).

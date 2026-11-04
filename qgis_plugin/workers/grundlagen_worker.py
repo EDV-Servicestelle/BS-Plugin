@@ -51,7 +51,7 @@ class _GrundlagenWorker(QThread):
         # ggf. nicht zuverlässig verbunden ist).
         from qgis.core import QgsMessageLog as _QML
         def _ml(_m, _lvl=0):
-            try: _QML.logMessage(str(_m), "NRW Naturschutz", _lvl)
+            try: _QML.logMessage(str(_m), "BioSt-GIS", _lvl)
             except Exception: pass
         _ml(f"Worker START – aktive Dienste: "
             f"{[k for k, v in aktiv.items() if v]}; "

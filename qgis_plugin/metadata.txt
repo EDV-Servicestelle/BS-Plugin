@@ -1,7 +1,7 @@
 [general]
-name=NRW Naturschutz-Toolbox
+name=BioSt-GIS
 description=Werkzeuge für den Naturschutz in NRW: PostGIS-Datenbanksetup, Fachschalen-Wizard (PostGIS + GPKG), GBIF/Ornitho-Import, LOD-2 Gebäudemodell, ATKIS-Grundlagendaten, LiDAR-Analyse, Luftbild-COG, Hydroanalyse.
-version=3.3.0
+version=3.3.1
 qgisMinimumVersion=3.28
 qgisMaximumVersion=4.99
 supportsQt6=True
@@ -14,6 +14,8 @@ tags=naturschutz,fauna,lidar,hydro,nrw,brutvogel,fundpunkte,biotopbaum,schutzgeb
 experimental=False
 deprecated=False
 about=
+    Vormals NRW Naturschutz-Toolbox.
+
     Zehn integrierte Module für den Naturschutz in NRW:
 
     1. PostGIS-Setup             – Automatischer DB-Aufbau aus lokalen GPKGs

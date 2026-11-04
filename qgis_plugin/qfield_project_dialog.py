@@ -256,8 +256,10 @@ class QFieldProjectDialog(QDialog):
         fach_box = QGroupBox("Fachschale")
         fach_form = QFormLayout()
         self.fach_combo = QComboBox()
-        from .fachschalen_config import FACHSCHALEN
+        from .fachschalen_config import AUSGEBLENDETE_FACHSCHALEN, FACHSCHALEN
         for f in FACHSCHALEN:
+            if f["code"] in AUSGEBLENDETE_FACHSCHALEN:
+                continue
             self.fach_combo.addItem(f["bezeichnung"], f)
         fach_form.addRow("Fachschale:", self.fach_combo)
         fach_box.setLayout(fach_form)

@@ -45,7 +45,7 @@ class WizardBuildLog:
         cls._entries.append(entry)
         from qgis.core import QgsMessageLog
         lvl = 0 if level == "INFO" else (1 if level == "WARN" else 2)
-        QgsMessageLog.logMessage(msg, "NRW Naturschutz", lvl)
+        QgsMessageLog.logMessage(msg, "BioSt-GIS", lvl)
 
     @classmethod
     def add_exception(cls, context: str):
@@ -53,7 +53,7 @@ class WizardBuildLog:
         tb = _tb.format_exc()
         cls._entries.append(f"[ERROR] {context}:\n{tb}")
         from qgis.core import QgsMessageLog
-        QgsMessageLog.logMessage(f"{context}: {tb}", "NRW Naturschutz", 2)
+        QgsMessageLog.logMessage(f"{context}: {tb}", "BioSt-GIS", 2)
 
     @classmethod
     def show_if_errors(cls, parent=None):
@@ -379,7 +379,10 @@ class PageProjectInfo(QWizardPage):
     def _populate_combo(self, rows: list):
         self.fach_combo.clear()
         self.fach_combo.addItem("— Fachschale wählen —", None)
+        from .fachschalen_config import AUSGEBLENDETE_FACHSCHALEN
         for r in rows:
+            if r.get("code") in AUSGEBLENDETE_FACHSCHALEN:
+                continue
             self.fach_combo.addItem(r["bezeichnung"], r)
         self.fach_combo.setEnabled(True)
         self.completeChanged.emit()

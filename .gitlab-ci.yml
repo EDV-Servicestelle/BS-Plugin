@@ -100,7 +100,7 @@ release:
     - echo "Release $CI_COMMIT_TAG mit $PAKET_DATEI"
   release:
     tag_name: $CI_COMMIT_TAG
-    name: "Fundpunkte Tiere $CI_COMMIT_TAG"
+    name: "BioSt-GIS $CI_COMMIT_TAG"
     description: |
       Plugin-Paket für QGIS, erzeugt aus Tag $CI_COMMIT_TAG.
 

@@ -1,10 +1,20 @@
-# NRW Naturschutz-Toolbox – QGIS-Plugin (v1.87)
+# BioSt-GIS – QGIS-Plugin (v1.87)
 
 **Biologische Station Kreis Wesel e.V.** · [blinn@bskw.de](mailto:blinn@bskw.de)
 
 Modulares QGIS-Plugin für den Naturschutz-Datentransfer in NRW. Acht integrierte Werkzeuge für Artdaten-Import, LiDAR-Analyse, Luftbild, Hydroanalyse, Schutzgebiete und QField-Felderfassung.
 
 ## Changelog
+
+### v3.3.1 (November 2026)
+- Das Plugin heißt jetzt **BioSt-GIS** (vormals NRW Naturschutz-Toolbox). Der
+  interne Plugin-Ordner bleibt, ein Update ersetzt die bisherige Installation.
+- Die Vorlage `Fundpunkte.gpkg` enthält keine Datensätze mehr, neue
+  Fundpunkte-Projekte starten leer.
+- Auch die Biotopbaum-Vorlage enthält keine Datensätze mehr, und die
+  Mitarbeiterliste der Brutvogel-Vorlage ist leer.
+- Die Fachschale **Brutvogel** steht vorerst nicht mehr in der Auswahl, weil sie
+  noch nicht sauber arbeitet. Alles andere dazu bleibt vorbereitet.
 
 ### v3.3.0 (Oktober 2026)
 - **MAKO-Produkte aus GISPAD-Export (Notlösung)** – neuer Menüpunkt. Ersetzt
@@ -40,10 +50,10 @@ Modulares QGIS-Plugin für den Naturschutz-Datentransfer in NRW. Acht integriert
 
 ---
 
-## Menü: NRW Naturschutz-Toolbox
+## Menü: BioSt-GIS
 
 ```
-NRW Naturschutz-Toolbox
+BioSt-GIS
   Fachschalen-Wizard …
   QField-Export …
   ─────────────────────────────────────
@@ -281,5 +291,5 @@ Rotation bei 500 KB → naturschutz_debug.log.bak
 
 ### Meldungsprotokoll in QGIS
 ```
-Ansicht → Meldungsprotokoll → NRW Naturschutz
+Ansicht → Meldungsprotokoll → BioSt-GIS
 ```
