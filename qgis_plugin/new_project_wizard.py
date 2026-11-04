@@ -444,21 +444,21 @@ class NewProjectWizard(QWizard):
             from qgis.core import QgsMessageLog as _QML_p
             def _log_progress(_pct, _txt):
                 if _txt:
-                    _QML_p.logMessage(str(_txt), "NRW Naturschutz", 0)
+                    _QML_p.logMessage(str(_txt), "BioSt-GIS", 0)
             self._grundlagen_worker.progress.connect(_log_progress)
             self._grundlagen_worker.finished.connect(_on_done)
             self._grundlagen_worker.finished.connect(
                 lambda ok, msg: _QML_p.logMessage(f"fertig: {msg}",
-                                                  "NRW Naturschutz", 0))
+                                                  "BioSt-GIS", 0))
             _QML_p.logMessage(
                 f"WFS-Worker wird gestartet für: {ABRUF_DIENSTE} "
-                f"(gpkg={gpkg_path})", "NRW Naturschutz", 0)
+                f"(gpkg={gpkg_path})", "BioSt-GIS", 0)
             self._grundlagen_worker.start()   # asynchron!
 
         except Exception as _e:
             from qgis.core import QgsMessageLog
             QgsMessageLog.logMessage(
-                f"Grundlagenabruf: {_e}", "NRW Naturschutz", 2)
+                f"Grundlagenabruf: {_e}", "BioSt-GIS", 2)
 
     def _trigger_nutzung_download(self, project, root, kreis_data: tuple):
         """
@@ -508,7 +508,7 @@ class NewProjectWizard(QWizard):
         def _on_nutzung_done(tmp_path: str, fname: str):
             if not tmp_path:
                 QgsMessageLog.logMessage(
-                    "Nutzungsdaten: kein Download verfügbar", "NRW Naturschutz", 1)
+                    "Nutzungsdaten: kein Download verfügbar", "BioSt-GIS", 1)
                 return
             from qgis.core import QgsProject as _QP
             _proj = _QP.instance()
@@ -534,10 +534,10 @@ class NewProjectWizard(QWizard):
                         pass
                 _proj.setDirty(True)
                 QgsMessageLog.logMessage(
-                    f"Landnutzung geladen: {fname}", "NRW Naturschutz", 0)
+                    f"Landnutzung geladen: {fname}", "BioSt-GIS", 0)
             except Exception as _e:
                 QgsMessageLog.logMessage(
-                    f"Nutzungsdaten Fehler: {_e}", "NRW Naturschutz", 2)
+                    f"Nutzungsdaten Fehler: {_e}", "BioSt-GIS", 2)
 
         self._nutzung_worker = _NutzungWorker()
         try:
@@ -694,7 +694,7 @@ class NewProjectWizard(QWizard):
             from qgis.core import QgsMessageLog, Qgis
             QgsMessageLog.logMessage(
                 f"GPKG fehlt: {gpkg_abs}",
-                "NRW Naturschutz-Toolbox", Qgis.MessageLevel.Warning)
+                "BioSt-GIS", Qgis.MessageLevel.Warning)
             return None
 
         uri = f"{gpkg_abs}|layername={layername}"

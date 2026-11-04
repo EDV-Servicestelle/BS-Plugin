@@ -1,5 +1,5 @@
 """
-NRW Naturschutz-Toolbox – Plugin-Hauptdatei
+BioSt-GIS – Plugin-Hauptdatei
 ============================================
 Registriert alle Menüeinträge und verwaltet den Plugin-Lebenszyklus.
 Alle Imports sind lazy (erst beim Klick), damit QGIS schnell startet.
@@ -13,7 +13,7 @@ from .fundpunkte_export_dialog    import FundpunkteExportDialog
 class NewProjectPlugin:
     """Plugin-Klasse – wird von QGIS beim Laden instanziiert."""
 
-    MENU = "&NRW Naturschutz-Toolbox"
+    MENU = "&BioSt-GIS"
 
     def __init__(self, iface):
         self.iface = iface

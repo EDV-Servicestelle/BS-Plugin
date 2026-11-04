@@ -1,4 +1,4 @@
 """
-NRW Naturschutz-Toolbox – QThread-Worker
+BioSt-GIS – QThread-Worker
 Verbindet Core-Algorithmen mit Qt-Signalen.
 """

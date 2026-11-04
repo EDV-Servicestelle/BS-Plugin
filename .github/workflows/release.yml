@@ -44,7 +44,7 @@ jobs:
         run: |
           DATEI=$(ls dist/*.zip | head -1)
           gh release create "$GITHUB_REF_NAME" "$DATEI" \
-            --title "Fundpunkte Tiere $GITHUB_REF_NAME" \
+            --title "BioSt-GIS $GITHUB_REF_NAME" \
             --notes "$(cat <<'HINWEIS'
           Plugin-Paket für QGIS.
 

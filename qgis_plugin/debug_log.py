@@ -1,5 +1,5 @@
 """
-debug_log.py – Zentrales Debug-Logging für NRW Naturschutz-Toolbox
+debug_log.py – Zentrales Debug-Logging für BioSt-GIS
 ===================================================================
 Schreibt in ~/naturschutz_debug.log und ins QGIS-Meldungsprotokoll.
 Wird bei jedem Plugin-Start rotiert (max 500 KB).
@@ -64,7 +64,7 @@ def log_exc(context: str = ""):
 def _write_qgis(msg: str, level: str):
     from qgis.core import QgsMessageLog
     lvl = {"INFO": 0, "WARN": 1, "ERROR": 2}.get(level, 0)
-    QgsMessageLog.logMessage(msg, "NRW Naturschutz", lvl)
+    QgsMessageLog.logMessage(msg, "BioSt-GIS", lvl)
 
 
 def path() -> str:

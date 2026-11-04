@@ -152,7 +152,7 @@ class FachschaleLayerLoader(QThread):
         except Exception as _e:
             from qgis.core import QgsMessageLog
             QgsMessageLog.logMessage(
-                f"FachschalenLoader: {_e}", "NRW Naturschutz", 1)
+                f"FachschalenLoader: {_e}", "BioSt-GIS", 1)
         return result
 
     def _load_from_db(self):

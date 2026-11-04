@@ -1,4 +1,4 @@
-# NRW Naturschutz-Toolbox – Entwicklerhandbuch (v1.83)
+# BioSt-GIS – Entwicklerhandbuch (v1.83)
 
 **Biologische Station Kreis Wesel e.V.** · blinn@bskw.de
 

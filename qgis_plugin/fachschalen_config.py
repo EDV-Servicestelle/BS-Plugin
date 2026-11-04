@@ -697,3 +697,9 @@ def get_kreis_choices() -> list[tuple[str, tuple[str, str]]]:
     """Sortierte Liste (anzeigename, (ags8, url_name)) für ComboBox."""
     return sorted(NRW_KREISE.items())
 
+
+
+# In der Auswahl vorerst nicht angeboten: Die Brutvogel-Fachschale arbeitet noch
+# nicht sauber. Alles andere bleibt vorbereitet; zum Wiedereinschalten genuegt es,
+# den Code hier zu entfernen.
+AUSGEBLENDETE_FACHSCHALEN = {"brutvogel"}
