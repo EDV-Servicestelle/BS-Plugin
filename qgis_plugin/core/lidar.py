@@ -134,26 +134,12 @@ def _read_las_points(path: str, class_filter: int = None) -> np.ndarray:
         return _read_pdal(path, class_filter)
     # Letzter Fallback: nur unkomprimiertes LAS
     if path.lower().endswith(".laz"):
-        # Versuche laspy automatisch zu installieren
-        try:
-            import subprocess, sys
-            subprocess.run(
-                [sys.executable, "-m", "pip", "install",
-                 "laspy[lazrs]", "--quiet"],
-                timeout=60, check=True)
-            import laspy
-            return _read_laspy(path, class_filter)
-        except Exception:
-            pass
+        # Kein stiller pip-Aufruf mehr: unter Windows ist sys.executable die
+        # qgis-bin.exe, `sys.executable -m pip` startet dort QGIS statt pip.
         raise RuntimeError(
             "LAZ-Datei: weder laspy noch PDAL verfügbar.\n"
-            "Lösung A (empfohlen): OSGeo4W-Shell öffnen und eingeben:\n"
-            "  pip install laspy[lazrs]\n"
-            "  (Fallback falls kein Rust: pip install laspy laszip)\n"
-            "Lösung B: QGIS → Erweiterungen → Python-Konsole:\n"
-            "  import subprocess, sys\n"
-            "  subprocess.run([sys.executable, '-m', 'pip', 'install',"
-            "                 'laspy', 'lazrs-python'])")
+            "Fehlende Pakete installieren Sie über Erweiterungen → BioSt-GIS → "
+            "„Python-Pakete prüfen …“ (laspy, lazrs).")
     return _read_las_raw(path, class_filter)
 
 
@@ -180,9 +166,8 @@ def _read_laspy(path: str, class_filter: int = None) -> np.ndarray:
             # Letzter Ausweg: laspy ohne Komprimierung über temp-LAS
             raise RuntimeError(
                 f"LAZ-Backend fehlt: {_laz_err}\n"
-                "Lösung: In OSGeo4W-Shell ausführen:\n"
-                "  pip install laspy[lazrs]\n"
-                "  (Fallback: pip install laspy laszip)"
+                "Das Paket lazrs installieren Sie über Erweiterungen → BioSt-GIS → "
+                "„Python-Pakete prüfen …“."
             )
         raise  # anderer Fehler → weiterwerfen
 
@@ -620,7 +605,7 @@ def _tin_from_grid(cfg, base_path, arr, cols, rows,
         from scipy.ndimage import gaussian_filter as _gauss
         from scipy.interpolate import LinearNDInterpolator as _LinNDI
     except ImportError:
-        _log("  ⚠ scipy fehlt – TIN nicht möglich (pip install scipy)")
+        _log("  ⚠ scipy fehlt – TIN nicht möglich (QGIS-Installation prüfen)")
         return
 
     kernel = int(cfg.get("tin_gauss_kernel", 3))

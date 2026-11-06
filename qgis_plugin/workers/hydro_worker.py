@@ -52,9 +52,8 @@ class _HydroWorker(QThread):
         log(0, f"Beschleunigung: {_ACCEL}")
         if _ACCEL == "numpy":
             log(-1,
-                "  Tipp: pip install richdem   → 20–100× schneller\n"
-                "        pip install pysheds   → 5–30× schneller\n"
-                "        pip install numba     → 10–50× schneller (inkl. GPU)")
+                "  Tipp: Knopf „Beschleuniger installieren …“ oben im "
+                "Dialog\n        (numba, danach QGIS neu starten)")
         log(2, "Lese DTM …")
         if not _GDAL_OK:
             self.finished.emit(False, "GDAL nicht verfügbar."); return

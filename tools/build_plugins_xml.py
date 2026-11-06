@@ -99,6 +99,8 @@ def main():
         ("repository", md.get("repository", "")),
         ("tags", md.get("tags", "")),
         ("server", "False"),
+        # Von QGIS beim Installieren ausgewertet: installiert z. B. qpip mit
+        ("plugin_dependencies", md.get("plugin_dependencies", "")),
     ]
     zeilen = ['<?xml version="1.0" encoding="UTF-8"?>', "<plugins>",
               f"  <pyqgis_plugin name={quoteattr(md['name'])} "

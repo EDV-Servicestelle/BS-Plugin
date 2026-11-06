@@ -17,6 +17,7 @@ from qgis.PyQt.QtCore import Qt
 from qgis.core import QgsProject
 
 from .core.hydro import _ACCEL
+from .abhaengigkeiten import installieren, fehlende
 try:
     import requests as _req
     _REQUESTS_OK = True
@@ -40,6 +41,28 @@ class HydroDialog(QDialog):
         lo.addWidget(QLabel(
             "Berechnet aus einem DTM (COG GeoTIFF) hydrologische Grundlagendaten\n"
             "für die Planung von Renaturierungsmaßnahmen an Mooren und Gewässern."))
+
+        # ── Beschleunigung (optional) ─────────────────────────────────────────
+        # Die Analyse laeuft auch mit reinem numpy. numba beschleunigt vor
+        # allem das Senkenfuellen. pysheds/richdem werden bewusst NICHT
+        # angeboten: pysheds zieht rasterio mit eigener GDAL-Kopie nach, die
+        # unter Windows mit der GDAL von QGIS kollidiert.
+        accel_row = QHBoxLayout()
+        if _ACCEL == "numpy":
+            accel_lbl = QLabel(
+                "Beschleunigung: <b>keine</b> – große DTMs brauchen länger.")
+            self.accel_btn = QPushButton("Beschleuniger installieren …")
+            self.accel_btn.setToolTip(
+                "Installiert numba (ca. 50 MB) in Ihr QGIS-Profil.\n"
+                "Danach QGIS einmal neu starten.")
+            self.accel_btn.clicked.connect(self._accel_installieren)
+            accel_row.addWidget(accel_lbl)
+            accel_row.addStretch(1)
+            accel_row.addWidget(self.accel_btn)
+        else:
+            accel_row.addWidget(QLabel(f"Beschleunigung: <b>{_ACCEL}</b> ✓"))
+            accel_row.addStretch(1)
+        lo.addLayout(accel_row)
 
         tabs = QTabWidget()
 
@@ -187,6 +210,17 @@ class HydroDialog(QDialog):
             self, "Ausgabeordner wählen", self.out_edit.text())
         if d:
             self.out_edit.setText(d)
+
+    def _accel_installieren(self):
+        pakete = fehlende({"numba": "numba"})
+        if not pakete:
+            self._log("numba ist bereits installiert – bitte QGIS neu starten.")
+            return
+        if installieren(pakete, self, zweck="die beschleunigte Hydroanalyse"):
+            self.accel_btn.setEnabled(False)
+            self.accel_btn.setText("Installiert – QGIS neu starten")
+            self._log("✓ numba installiert. Nach dem Neustart von QGIS "
+                      "wird es automatisch genutzt.")
 
     def _log(self, msg):
         self.log.append(msg)

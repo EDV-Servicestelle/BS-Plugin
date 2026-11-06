@@ -336,7 +336,9 @@ class FundpunkteExportDialog(QDialog):
             import openpyxl
             from openpyxl.styles import Font, PatternFill, Alignment
         except ImportError:
-            self._log("⚠ openpyxl nicht installiert → pip install openpyxl")
+            self._log("⚠ openpyxl nicht installiert – Export als CSV. "
+                      "openpyxl über Erweiterungen → BioSt-GIS → "
+                      "„Python-Pakete prüfen …“ nachinstallieren.")
             self._export_csv(lyr, path.replace(".xlsx", ".csv"), feats, total, art_lookup)
             return
 
