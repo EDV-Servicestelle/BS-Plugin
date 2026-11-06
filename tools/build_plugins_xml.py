@@ -67,13 +67,17 @@ def main():
             sys.exit(f"metadata.txt im ZIP ohne '{pflicht}'")
 
     os.makedirs(args.out, exist_ok=True)
-    datei = os.path.basename(args.zip)
+    version = md["version"].strip()
+    # QGIS leitet die Plugin-ID aus dem Dateinamen ab (alles vor dem ersten
+    # Punkt) und erwartet einen gleichnamigen Ordner im ZIP. Deshalb heisst
+    # die Datei im Repository <ordner>.<version>.zip - wie im offiziellen
+    # QGIS-Repository -, unabhaengig vom Namen der Release-Datei.
+    datei = f"{ordner}.{version}.zip"
     shutil.copy2(args.zip, os.path.join(args.out, datei))
 
     base = args.base_url.rstrip("/")
     jetzt = datetime.datetime.now(datetime.timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ")
-    version = md["version"].strip()
 
     felder = [
         ("description", md.get("description", "")),
