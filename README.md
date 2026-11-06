@@ -14,6 +14,22 @@ Entwickelt und gepflegt wird es von der EDV-Servicestelle der Biologischen Stati
 Sie brauchen die aktuelle QGIS-LTR-Version 3.x. Das Plugin läuft ab QGIS 3.28 und
 ist für QGIS 4 vorbereitet.
 
+### Empfohlen: über das Plugin-Repository
+
+Tragen Sie die Adresse des Repositorys einmal in QGIS ein. Danach meldet QGIS neue
+Versionen selbst, und Sie aktualisieren mit einem Klick.
+
+1. Wählen Sie in QGIS **Erweiterungen → Erweiterungen verwalten und installieren
+   → Einstellungen** und dort **Hinzufügen …**.
+2. Name: `BioSt-GIS`, URL: `https://edv-servicestelle.github.io/BS-Plugin/plugins.xml`,
+   dann **OK**.
+3. Suchen Sie unter **Alle** nach „BioSt-GIS“ und klicken Sie auf **Installieren**.
+
+Wenn Sie das Plugin früher als ZIP installiert haben und es danach doppelt in der
+Liste steht, deinstallieren Sie den älteren Eintrag einmal.
+
+### Alternativ: als ZIP-Datei
+
 1. Öffnen Sie die [aktuelle Version](https://github.com/EDV-Servicestelle/BS-Plugin/releases/latest)
    und laden Sie unter **Assets** die Datei `qgis_new_project_plugin_v….zip` herunter.
    Die Archive „Source code“ lassen sich nicht installieren.
@@ -30,7 +46,8 @@ die Makros zu, sonst fehlen Funktionen im Formular. Die Vorgabe ändern Sie unte
 
 ### Auf eine neue Version aktualisieren
 
-Installieren Sie die neue ZIP-Datei wie oben beschrieben über die alte Version und
+Mit eingetragenem Repository zeigt QGIS neue Versionen unter **Aktualisierbar** an.
+Sonst installieren Sie die neue ZIP-Datei wie oben beschrieben über die alte Version und
 **schließen Sie QGIS danach einmal vollständig**. Sonst kann noch der alte
 Formularcode aktiv sein, und das Formular verhält sich unerwartet.
 
