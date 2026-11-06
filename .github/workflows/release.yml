@@ -1,6 +1,12 @@
 name: Release
 
-# Baut bei jedem Tag v* das Plugin-Paket und haengt es an ein GitHub-Release.
+# Baut bei jedem Tag v* das Plugin-Paket, haengt es an ein GitHub-Release und
+# veroeffentlicht es zusaetzlich als QGIS-Plugin-Repository auf GitHub Pages:
+#
+#     https://edv-servicestelle.github.io/BS-Plugin/plugins.xml
+#
+# Diese Adresse tragen die Stationen einmal in QGIS ein; danach meldet QGIS
+# neue Versionen selbst.
 #
 # Warum hier und nicht per Upload aus GitLab: GitHub Actions bekommt bei jedem
 # Lauf automatisch einen Token (github.token), der nur fuer dieses Repository
@@ -10,20 +16,37 @@ name: Release
 # Das Repository ist ein Spiegel von GitLab; diese Datei wird mituebertragen.
 # Gebaut wird mit demselben Skript wie in der GitLab-Pipeline, damit beide
 # Seiten dasselbe Paket erzeugen.
+#
+# Pages wird bewusst ueber ein Actions-Artefakt bereitgestellt und NICHT ueber
+# einen gh-pages-Branch: Der GitLab-Spiegel koennte einen Branch, den es in
+# GitLab nicht gibt, beim naechsten Abgleich wieder entfernen.
+#
+# Einmalig in GitHub einzustellen: Settings -> Pages -> Source: "GitHub Actions".
 
 on:
   push:
     tags:
       - 'v*'
+  # Von Hand startbar (Actions -> Release -> Run workflow): veroeffentlicht das
+  # juengste vorhandene Release erneut im Repository, ohne neues Release.
+  workflow_dispatch:
 
-# Nur das noetigste Recht: Releases anlegen. Alles andere bleibt gesperrt.
+# Voreinstellung: nur lesen. Die Jobs bekommen einzeln, was sie brauchen.
 permissions:
-  contents: write
+  contents: read
+
+# Nie zwei Pages-Veroeffentlichungen gleichzeitig.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   paket:
     name: Plugin-Paket bauen und veroeffentlichen
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # Release anlegen
 
     steps:
       - name: Quellcode holen
@@ -48,7 +71,13 @@ jobs:
             --notes "$(cat <<'HINWEIS'
           Plugin-Paket für QGIS.
 
-          **Installation**
+          **Installation über das Plugin-Repository (empfohlen)**
+          QGIS → Erweiterungen → Erweiterungen verwalten und installieren →
+          Einstellungen → Hinzufügen … → URL
+          `https://edv-servicestelle.github.io/BS-Plugin/plugins.xml`
+          Danach meldet QGIS neue Versionen selbst.
+
+          **Oder als ZIP**
           QGIS öffnen → Erweiterungen → Erweiterungen verwalten und
           installieren → Aus ZIP installieren → die angehängte Datei wählen.
 
@@ -57,3 +86,59 @@ jobs:
           QGIS-Erweiterung installieren.
           HINWEIS
           )"
+
+  repository:
+    name: QGIS-Plugin-Repository auf Pages veroeffentlichen
+    needs: paket
+    # Laeuft nach erfolgreichem Release - oder allein beim Handstart.
+    if: >-
+      always() &&
+      (needs.paket.result == 'success' ||
+       (github.event_name == 'workflow_dispatch' && needs.paket.result == 'skipped'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read    # Release-Datei herunterladen
+      pages: write      # auf Pages veroeffentlichen
+      id-token: write   # von deploy-pages verlangt
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Quellcode holen
+        uses: actions/checkout@v4
+
+      - name: Paket aus dem Release holen
+        # Genau die Datei, die am Release haengt - nicht neu bauen, damit
+        # Release und Repository byte-gleich sind.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p dist
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            gh release download "$GITHUB_REF_NAME" --pattern '*.zip' --dir dist
+          else
+            gh release download --pattern '*.zip' --dir dist   # juengstes Release
+          fi
+          ls -l dist
+
+      - name: Pages vorbereiten
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: plugins.xml erzeugen
+        env:
+          # Tatsaechliche Pages-Adresse von GitHub, nicht von Hand geschrieben.
+          BASIS: ${{ steps.pages.outputs.base_url }}
+        run: |
+          DATEI=$(ls dist/*.zip | head -1)
+          python3 tools/build_plugins_xml.py --zip "$DATEI" --out site \
+            --base-url "$BASIS"
+          cat site/plugins.xml
+          echo "Repository-Adresse fuer QGIS: $BASIS/plugins.xml" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
