@@ -64,6 +64,8 @@ class NewProjectPlugin:
             ("PostGIS-Datenbank einrichten …",    self._postgis_setup),
             ("─────────────────────────",         None),
             ("Grundlagen-DB verwalten …",         self._grundlagen_db),
+            ("─────────────────────────",         None),
+            ("Python-Pakete prüfen …",            self._pakete_pruefen),
         ]
         for label, slot in entries:
             act = QAction(label, self.iface.mainWindow())
@@ -73,6 +75,27 @@ class NewProjectPlugin:
                 act.triggered.connect(slot)
             self.iface.addPluginToMenu(self.MENU, act)
             self._actions.append(act)
+
+        # Standardpakete kurz nach dem Start pruefen (nicht im initGui
+        # selbst: dort ist das Hauptfenster evtl. noch nicht sichtbar)
+        from qgis.PyQt.QtCore import QTimer
+        QTimer.singleShot(4000, lambda: self._pakete_pruefen(still=True))
+
+    def _plugin_version(self):
+        import configparser as _cp
+        _meta = _cp.ConfigParser()
+        _meta.read(__file__.replace("new_project_plugin.py", "metadata.txt"),
+                   encoding="utf-8")
+        return _meta.get("general", "version", fallback="")
+
+    def _pakete_pruefen(self, still=False):
+        try:
+            from .abhaengigkeiten import standard_pruefen
+            standard_pruefen(self.iface.mainWindow(),
+                             version=self._plugin_version(), still=still)
+        except Exception:
+            from .debug_log import log_exc
+            log_exc("Python-Pakete pruefen")
 
     def _gispad(self):
         from .gispad_import_dialog import GispadImportDialog

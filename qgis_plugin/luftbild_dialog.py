@@ -45,7 +45,7 @@ class LuftbildDialog(QDialog):
         if not _GDAL_OK:
             self._log("⚠ GDAL nicht gefunden – Plugin aus QGIS/OSGeo4W starten.")
         if not _REQUESTS_OK:
-            self._log("⚠ requests fehlt: pip install requests")
+            self._log("⚠ requests fehlt – QGIS-Installation prüfen.")
 
     def _build_ui(self):
         lo = QVBoxLayout(self)

@@ -40,22 +40,22 @@ class LidarDialog(QDialog):
         self._check_deps()
 
     def _check_deps(self):
+        # laspy/lazrs kommen ueber requirements.txt (abhaengigkeiten.py), PDAL bringt QGIS
+        # unter Windows selbst mit (bin/pdal.exe).
+        from .abhaengigkeiten import HINWEIS
         if not _REQUESTS_OK:
-            self._log("⚠ requests fehlt: pip install requests")
+            self._log("⚠ requests fehlt – QGIS-Installation prüfen.")
         if not _LASPY_OK and not _PDAL_OK:
-            self._log("⚠ Weder laspy noch PDAL gefunden – LAZ-Dateien können NICHT gelesen werden!")
-            self._log("  → QGIS über OSGeo4W Shell starten (pdal ist dort im PATH)")
-            self._log("  → ODER: pip install laspy lazrs-python")
-            self._log("  → ODER: In QGIS Python-Konsole ausführen:")
-            self._log("     import subprocess, sys")
-            self._log("     subprocess.run([sys.executable, '-m', 'pip', 'install', 'laspy', 'lazrs-python'])")
+            self._log("⚠ Weder laspy noch PDAL gefunden – LAZ-Dateien "
+                      "können NICHT gelesen werden!")
+            self._log("  " + HINWEIS)
         elif not _LASPY_OK and _PDAL_OK:
-            self._log("ℹ laspy nicht installiert – nutze PDAL für LAZ-Lesen (langsamer)")
-            self._log("  Tipp: pip install laspy lazrs-python  (5× schneller)")
+            self._log("ℹ laspy nicht installiert – nutze PDAL (langsamer).")
+            self._log("  " + HINWEIS)
         elif _LASPY_OK:
             self._log("✓ laspy verfügbar – LAZ-Lesen aktiviert")
         if not _NUMPY_OK:
-            self._log("⚠ numpy fehlt: pip install numpy")
+            self._log("⚠ numpy fehlt – QGIS-Installation prüfen.")
 
     def _build_ui(self):
         lo = QVBoxLayout(self)

@@ -212,7 +212,7 @@ class GrundlagenDialog(QDialog):
 
     def _start(self):
         if not _REQUESTS_OK:
-            self._log("⚠ requests fehlt: pip install requests"); return
+            self._log("⚠ requests fehlt – QGIS-Installation prüfen."); return
         out = self.out_edit.text().strip()
         if not out:
             self._log("⚠ Ausgabedatei wählen."); return

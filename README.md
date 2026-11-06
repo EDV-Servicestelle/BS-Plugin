@@ -158,17 +158,24 @@ Der MAKO-Konverter des LANUK ist außer Betrieb. Dieser Menüpunkt ist eine
 Plugin nicht abbildet. Enthält der Export Wald-Ziele oder Wald-Maßnahmen, nennt der
 Dialog die betroffenen Flächen. Tabelle und Karte müssen Sie dafür gesondert abstimmen.
 
-## Zusatzmodule
+## Zusätzliche Python-Pakete
 
-Die meisten Funktionen laufen mit einer normalen QGIS-Installation. Fehlt ein Modul,
-installieren Sie es in der Python-Umgebung von QGIS (unter Windows in der
-**OSGeo4W Shell**):
+Einige Funktionen brauchen Python-Pakete, die QGIS nicht mitbringt. Die OSGeo4W
+Shell brauchen Sie dafür nicht: Kurz nach dem Start von QGIS prüft BioSt-GIS, ob
+etwas fehlt, und bietet die Installation an. Die Pakete kommen in Ihr QGIS-Profil,
+Administratorrechte sind nicht nötig. Danach starten Sie QGIS einmal neu.
 
-| Funktion | Modul | Befehl |
+| Funktion | Paket | Installation |
 | --- | --- | --- |
-| LiDAR-Analyse | laspy | `python -m pip install "laspy[lazrs]"` |
-| Treffsichere Artnamen beim Altdaten-Import | scikit-learn | `python -m pip install scikit-learn` |
-| Hydrologische Analyse, Gewässermittellinien der Grundlagendaten | scipy | `python -m pip install scipy` |
+| Treffsichere Artnamen beim Altdaten-Import | scikit-learn | automatisch angeboten |
+| Excel-Export und -Import | openpyxl | automatisch angeboten |
+| LiDAR-Analyse (LAZ lesen) | laspy, lazrs | automatisch angeboten |
+| Hydrologische Analyse, LiDAR-TIN, Gewässermittellinien | scipy | automatisch, falls QGIS es nicht mitbringt |
+| Schnellere Hydrologische Analyse (optional) | numba | Knopf **Beschleuniger installieren …** im Hydro-Dialog |
+
+Haben Sie das Angebot abgelehnt, holen Sie es über **Erweiterungen → BioSt-GIS →
+Python-Pakete prüfen …** nach. Installiert wird nur, was in QGIS wirklich fehlt;
+numpy, scipy und GDAL von QGIS bleiben unberührt.
 
 ## Hilfe und Fehler melden
 

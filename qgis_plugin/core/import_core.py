@@ -42,15 +42,17 @@ from qgis.core import (
 from datetime import date
 
 
-# numpy + sklearn – in OSGeo4W/QGIS vorhanden; bei Fehlen: Auto-Install
+# numpy + sklearn – sklearn steht in requirements.txt und wird beim Start angeboten;
+# fehlt es trotzdem, wird hier die Installation angeboten
 
 def _ensure_dependencies():
     missing = []
     try:
         import numpy  # noqa
     except ImportError as _e_np:
-        missing.append("numpy")
-        print(f"[FT-Import] numpy fehlt: {_e_np}")
+        # numpy gehoert zu QGIS selbst und wird nie nachinstalliert
+        print(f"[FT-Import] numpy fehlt - QGIS-Installation pruefen: {_e_np}")
+        return False
     try:
         import sklearn  # noqa
     except ImportError as _e_sk:
@@ -58,59 +60,13 @@ def _ensure_dependencies():
         print(f"[FT-Import] sklearn fehlt: {_e_sk}")
     if not missing:
         return True
-    from qgis.PyQt.QtWidgets import QMessageBox
-    reply = QMessageBox.question(
-        None, "Fehlende Bibliotheken",
-        f"Das Plugin benötigt: {', '.join(missing)}\n\n"
-        "Jetzt automatisch via pip installieren?",
-        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        QMessageBox.StandardButton.Yes,
-    )
-    if reply != QMessageBox.StandardButton.Yes:
-        return False
-    import sys
-    from qgis.PyQt.QtCore import QThread
-    from qgis.PyQt.QtCore import pyqtSignal as _pS2
-    from qgis.PyQt.QtWidgets import (QDialog as _QD2, QVBoxLayout as _QVL2,
-                                      QTextEdit as _QTE2, QLabel as _QL2,
-                                      QProgressBar as _QPB2, QPushButton as _QPB3)
-    class _PipWorker(QThread):
-        line_out = _pS2(str)
-        done     = _pS2(bool)
-        def __init__(self, pkgs): super().__init__(); self.pkgs = pkgs
-        def run(self):
-            import subprocess, sys
-            try:
-                # Argumentliste statt Kommandozeile, auf allen Systemen:
-                # Ohne shell=True gibt es keine Kommandozeile, die
-                # interpretiert werden koennte. Leerzeichen im Pfad sind
-                # dabei kein Problem - subprocess setzt die Anfuehrungs-
-                # zeichen unter Windows selbst (list2cmdline).
-                proc = subprocess.Popen(
-                    [sys.executable, "-m", "pip", "install",
-                     "--no-warn-script-location"] + self.pkgs,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT, text=True)
-                for line in proc.stdout: self.line_out.emit(line.rstrip())
-                proc.wait(); self.done.emit(proc.returncode == 0)
-            except Exception as e:
-                self.line_out.emit(f"Fehler: {e}"); self.done.emit(False)
-    dlg = _QD2(); dlg.setWindowTitle("Bibliotheken installieren …")
-    dlg.setMinimumWidth(500)
-    lo = _QVL2(dlg); lo.addWidget(_QL2(f"Installiere: {', '.join(missing)}"))
-    bar = _QPB2(); bar.setRange(0, 0); lo.addWidget(bar)
-    log = _QTE2(); log.setReadOnly(True); log.setFixedHeight(160); lo.addWidget(log)
-    dlg.setModal(True); dlg.show()
-    result = [False]
-    worker = _PipWorker(missing)
-    def on_line(t): log.append(t); log.verticalScrollBar().setValue(log.verticalScrollBar().maximum())
-    def on_done(ok):
-        result[0] = ok; bar.setRange(0, 1); bar.setValue(1)
-        log.append("\n✓ Fertig – bitte QGIS neu starten." if ok else "\n✗ Fehlgeschlagen.")
-        b = _QPB3("Schließen"); b.clicked.connect(dlg.accept); dlg.layout().addWidget(b)
-    worker.line_out.connect(on_line); worker.done.connect(on_done)
-    worker.start(); dlg.exec()
-    return result[0]
+    # Gemeinsamer Installer: richtige python.exe unter Windows, Ziel im
+    # QGIS-Profil (keine Adminrechte), QGIS-eigene Pakete festgelegt.
+    try:
+        from qgis_new_project_plugin.abhaengigkeiten import installieren
+    except ImportError:
+        from ..abhaengigkeiten import installieren
+    return installieren(missing, zweck="den Altdaten-Import")
 
 
 try:

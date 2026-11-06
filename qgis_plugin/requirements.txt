@@ -1,0 +1,19 @@
+# Python-Pakete, die BioSt-GIS zusaetzlich zu QGIS braucht.
+# abhaengigkeiten.py liest diese Datei beim Start von QGIS und bietet die
+# Installation an (auch: Erweiterungen -> BioSt-GIS -> Python-Pakete pruefen).
+# Installiert wird nur, was QGIS nicht selbst mitbringt - keine Doppelkopien.
+#
+# Pakete, die QGIS meist selbst mitbringt, duerfen hier stehen (z. B. scipy):
+# Sind sie vorhanden, wird nichts installiert. NIE eintragen: numpy und GDAL -
+# sie gehoeren zu QGIS und duerfen nicht ersetzt werden.
+#
+# Optionale Pakete fuer Spezialmodule (z. B. numba fuer Hydro) stehen nicht
+# hier, sondern werden im jeweiligen Modul per Knopf nachinstalliert.
+#
+# Format: <pip-Name><Versionsbereich>   # import: <Importname>  (falls anders)
+
+scikit-learn>=1.0      # import: sklearn  - Fundpunkte: Altdaten-Import
+openpyxl>=3.0          # Excel-Export und -Import
+laspy>=2.0             # LiDAR: LAZ-Dateien lesen
+lazrs>=0.5             # LiDAR: LAZ-Dekompression fuer laspy
+scipy>=1.5             # Hydro, LiDAR-TIN, Gewaessermittellinien (meist in QGIS)

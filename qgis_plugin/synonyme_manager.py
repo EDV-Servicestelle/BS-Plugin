@@ -428,7 +428,9 @@ def read_table(path):
             from openpyxl import load_workbook
         except ImportError:
             raise RuntimeError("Für XLSX wird 'openpyxl' benötigt – "
-                               "bitte CSV verwenden.")
+                               "bitte CSV verwenden oder openpyxl über "
+                               "Erweiterungen → BioSt-GIS → „Python-Pakete "
+                               "prüfen …“ nachinstallieren.")
         ws = load_workbook(path, read_only=True, data_only=True).active
         for r in ws.iter_rows(values_only=True):
             if r and any(x not in (None, "") for x in r[:2]):
