@@ -354,6 +354,43 @@ class NewProjectWizard(QWizard):
         except Exception: pass
         return None
 
+    def _grundlagen_gpkg_path(self, project):
+        """Grundlagen.gpkg im Projektordner (wird mit nach QField uebertragen)."""
+        proj_path = (self.field("gpkgPath") or
+                     self.field("projectFolder") or "").strip()
+        if not proj_path:
+            proj_path = project.absolutePath()
+        if not proj_path:
+            import tempfile
+            proj_path = tempfile.mkdtemp(prefix="naturschutz_")
+        return os.path.join(proj_path, "Grundlagen.gpkg")
+
+    def grundlagen_abwarten(self, timeout_s=300, log=None):
+        """
+        Wartet, bis die asynchronen Abrufe (Grundlagen-WFS, Landnutzung)
+        fertig sind und ihre Layer im Projekt haengen. Noetig vor dem
+        Speichern/Hochladen, sonst fehlen diese Layer im QField-Paket.
+        Gibt True zurueck, wenn alles rechtzeitig fertig wurde.
+        """
+        import time
+        from qgis.PyQt.QtCore import QCoreApplication
+        worker = [w for w in (getattr(self, "_grundlagen_worker", None),
+                              getattr(self, "_nutzung_worker", None)) if w]
+        if not any(w.isRunning() for w in worker):
+            QCoreApplication.processEvents()
+            return True
+        if log:
+            log("Warte auf Grundlagendaten …")
+        ende = time.time() + timeout_s
+        while any(w.isRunning() for w in worker) and time.time() < ende:
+            QCoreApplication.processEvents()
+            time.sleep(0.1)
+        # finished-Signale (queued) zustellen -> Layer werden eingehaengt
+        for _ in range(20):
+            QCoreApplication.processEvents()
+            time.sleep(0.02)
+        return not any(w.isRunning() for w in worker)
+
     def _trigger_grundlagen_nrw(self, project, root, extent, selected=None):
         """
         Startet den Grundlagendaten-Worker asynchron für NSG, LSG, FFH, FFH-LRT.
@@ -376,17 +413,7 @@ class NewProjectWizard(QWizard):
         bbox_wgs84 = (ext_wgs.xMinimum(), ext_wgs.yMinimum(),
                       ext_wgs.xMaximum(), ext_wgs.yMaximum())
 
-        # Projektordner aus Wizard-Feld (Export-Seite) oder absolutePath
-        # field("gpkgPath") = Exportordner aus letzter Wizard-Seite
-        # field("projectFolder") = Projektordner aus erster Seite
-        proj_path = (self.field("gpkgPath") or
-                     self.field("projectFolder") or "").strip()
-        if not proj_path:
-            proj_path = project.absolutePath()
-        if not proj_path:
-            import tempfile
-            proj_path = tempfile.mkdtemp(prefix="naturschutz_")
-        gpkg_path = os.path.join(proj_path, "Grundlagen.gpkg")
+        gpkg_path = self._grundlagen_gpkg_path(project)
 
         grp = root.findGroup("Grundlagendaten") or root.addGroup("Grundlagendaten")
 
@@ -471,6 +498,9 @@ class NewProjectWizard(QWizard):
         import tempfile, datetime
 
         ags, kname = kreis_data  # z.B. ("05170040", "wesel")
+        # In den Projektordner laden (nicht %TEMP%), damit die Landnutzung
+        # mit nach QField/QFieldCloud uebertragen wird.
+        ziel_ordner = os.path.dirname(self._grundlagen_gpkg_path(project))
 
         base = (
             "https://www.opengeodata.nrw.de/produkte/geobasis/lk/akt/"
@@ -486,7 +516,8 @@ class NewProjectWizard(QWizard):
                 prefix = dt.strftime("%Y%m")
                 fname  = f"{prefix}_gru_vereinf_{ags}_{kname}_epsg25832.gpkg"
                 url    = base + fname
-                tmp    = _os.path.join(tempfile.gettempdir(), fname)
+                tmp    = _os.path.join(ziel_ordner or tempfile.gettempdir(),
+                                       fname)
                 try:
                     req = urllib.request.urlopen(url, timeout=60)
                     if req.status == 200:
@@ -553,7 +584,6 @@ class NewProjectWizard(QWizard):
         from .core.grundlagen import DIENSTE, _write_to_gpkg
         from qgis.core import QgsVectorLayer, QgsCoordinateReferenceSystem
         from .debug_log import log
-        import tempfile
 
         ABRUF = selected if selected else [
             "nsg", "lsg", "ffh",
@@ -580,28 +610,37 @@ class NewProjectWizard(QWizard):
         wfs_keys = list(wfs_only)
         if db_keys and not any(feats_by_key.values()):
             wfs_keys += [k for k in db_keys if k in DIENSTE]
+
+        # DB-Ergebnisse ZUERST schreiben, danach den WFS-Worker starten: beide
+        # schreiben in dieselbe Grundlagen.gpkg, gleichzeitige Schreibzugriffe
+        # wuerden sich sperren.
+        # Ziel ist die Grundlagen.gpkg im Projektordner. Frueher landeten die
+        # DB-Layer in %TEMP%/grundlagen_tmp.gpkg: die Datei wurde nicht nach
+        # QFieldCloud uebertragen, von allen Projekten geteilt und per Append
+        # immer weiter befuellt (inkl. eines einmal falschen Geometrietyps).
+        if any(feats_by_key.values()):
+            crs  = QgsCoordinateReferenceSystem("EPSG:25832")
+            gpkg = self._grundlagen_gpkg_path(project)
+            for key, feats in feats_by_key.items():
+                if not feats or key not in DIENSTE:
+                    continue
+                try:
+                    _write_to_gpkg(gpkg, key, feats, DIENSTE[key], crs,
+                                   append=False)
+                    lbl = DIENSTE[key]["label"]
+                    lyr = QgsVectorLayer(f"{gpkg}|layername={key}", lbl, "ogr")
+                    if lyr.isValid() and lyr.featureCount() > 0:
+                        _gname = (DIENSTE[key].get("layer_group")
+                                  or "Grundlagendaten")
+                        _tgt = root.findGroup(_gname) or root.addGroup(_gname)
+                        project.addMapLayer(lyr, addToLegend=False)
+                        _tgt.addLayer(lyr)
+                except Exception:
+                    from .debug_log import log_exc
+                    log_exc(f"Grundlagen-DB {key}")
+
         if wfs_keys:
             self._trigger_grundlagen_nrw(project, root, extent, wfs_keys)
-
-        if not any(feats_by_key.values()):
-            return
-
-        crs = QgsCoordinateReferenceSystem("EPSG:25832")
-        gpkg = os.path.join(tempfile.gettempdir(), "grundlagen_tmp.gpkg")
-        grp  = root.findGroup("Grundlagendaten") or root.addGroup("Grundlagendaten")
-
-        for key, feats in feats_by_key.items():
-            if not feats or key not in DIENSTE:
-                continue
-            try:
-                _write_to_gpkg(gpkg, key, feats, DIENSTE[key], crs, append=True)
-                lbl = DIENSTE[key]["label"]
-                lyr = QgsVectorLayer(f"{gpkg}|layername={key}", lbl, "ogr")
-                if lyr.isValid() and lyr.featureCount() > 0:
-                    project.addMapLayer(lyr, addToLegend=False)
-                    grp.addLayer(lyr)
-            except Exception:
-                pass
 
     # ── Offline-Projektaufbau aus mitgelieferten GeoPackages ─────────────────
     def _build_project_gpkg(self, project, root, fachschale, gpkg_data):

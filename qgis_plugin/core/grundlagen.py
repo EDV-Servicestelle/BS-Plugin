@@ -1325,16 +1325,50 @@ def _write_to_gpkg(gpkg_path: str, layer_name: str,
         f.setAlias(alias)
         qfields.append(f)
 
-    # Geometrietyp aus WKT ableiten
-    geom_type = QgsWkbTypes.Type.MultiPolygon   # Default
-    for feat in features[:20]:
-        wkt = feat.get("wkt", "").upper()
-        if wkt.startswith("POINT"):
-            geom_type = QgsWkbTypes.Type.Point; break
-        elif "LINESTRING" in wkt or "MULTILINESTRING" in wkt:
-            geom_type = QgsWkbTypes.Type.MultiLineString; break
-        elif "POLYGON" in wkt:
-            geom_type = QgsWkbTypes.Type.MultiPolygon; break
+    # ── Geometrien aufbereiten und Geometrietyp bestimmen ────────────────────
+    # Frueher wurde der Typ aus dem WKT-Text der ersten 20 Features geraten
+    # ("POINT..." -> Punktlayer). Ein einzelner Punkt am Anfang machte so den
+    # ganzen Schutzgebiets-Layer zum Punktlayer, und die Flaechen gingen beim
+    # Schreiben verloren. Jetzt: Dimension jeder Geometrie bestimmen, die
+    # haeufigste gewinnt (bei Gleichstand die hoehere), alles auf denselben
+    # Multi-Typ bringen, Abweichler zaehlen statt still verlieren.
+    geoms = []          # [(QgsGeometry, item)]
+    dim_count = {0: 0, 1: 0, 2: 0}
+    for item in features:
+        g = QgsGeometry.fromWkt(item.get("wkt") or "")
+        if not g or g.isNull() or g.isEmpty():
+            continue
+        try:
+            if g.constGet().hasCurvedSegments():
+                g = QgsGeometry(g.constGet().segmentize())
+        except Exception:
+            pass
+        try:
+            d = int(g.constGet().dimension())
+        except Exception:
+            continue
+        if d in dim_count:
+            dim_count[d] += 1
+            geoms.append((g, item))
+    if not geoms:
+        return 0
+    ziel_dim = max(dim_count, key=lambda d: (dim_count[d], d))
+    mem_typ = {0: "MultiPoint", 1: "MultiLineString", 2: "MultiPolygon"}[ziel_dim]
+
+    def _auf_zieltyp(g):
+        """Nur Teile der Ziel-Dimension behalten, dann Multi-Typ."""
+        if int(g.constGet().dimension()) == ziel_dim and not g.isMultipart():
+            g2 = QgsGeometry(g)
+        else:
+            teile = [QgsGeometry(t.clone()) for t in g.constParts()
+                     if int(t.dimension()) == ziel_dim]
+            if not teile:
+                return None
+            g2 = QgsGeometry.collectGeometry(teile)
+        if g2 is None or g2.isEmpty():
+            return None
+        g2.convertToMultiType()
+        return g2
 
     # SaveVectorOptions korrekt verwenden
     opts = QgsVectorFileWriter.SaveVectorOptions()
@@ -1360,19 +1394,37 @@ def _write_to_gpkg(gpkg_path: str, layer_name: str,
     else:
         opts.actionOnExistingFile = QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer
 
-    # Temporären In-Memory-Layer als Quelle für writeAsVectorFormatV3
-    mem_uri = f"{'Point' if geom_type == QgsWkbTypes.Type.Point else 'MultiLineString' if geom_type == QgsWkbTypes.Type.MultiLineString else 'MultiPolygon'}?crs=EPSG:25832"
-    mem_lyr = QgsVectorLayer(mem_uri, layer_name, "memory")
+    # Beim Anhaengen: existierender Layer mit anderem Geometrietyp
+    # (z. B. aus einem frueheren fehlerhaften Lauf) wird ersetzt statt
+    # weiter falsch befuellt.
+    if (opts.actionOnExistingFile
+            == QgsVectorFileWriter.ActionOnExistingFile.AppendToLayerNoNewFields):
+        try:
+            _alt = QgsVectorLayer(f"{gpkg_path}|layername={layer_name}",
+                                  "alt", "ogr")
+            _alt_typ = QgsWkbTypes.displayString(_alt.wkbType())
+            _passt = {0: "Point", 1: "Line", 2: "Polygon"}[ziel_dim] in _alt_typ
+            _alt = None
+            if not _passt:
+                opts.actionOnExistingFile = (
+                    QgsVectorFileWriter.ActionOnExistingFile.CreateOrOverwriteLayer)
+        except Exception:
+            pass
+
+    # Temporaeren In-Memory-Layer als Quelle fuer writeAsVectorFormatV3
+    mem_lyr = QgsVectorLayer(f"{mem_typ}?crs=EPSG:25832", layer_name, "memory")
     mem_lyr.dataProvider().addAttributes(qfields.toList())
     mem_lyr.updateFields()
 
     mem_feats = []
-    for item in features:
-        feat = QgsFeature(mem_lyr.fields())
-        geom = QgsGeometry.fromWkt(item["wkt"])
-        if not geom or geom.isEmpty():
+    verworfen = 0
+    for g, item in geoms:
+        g2 = _auf_zieltyp(g)
+        if g2 is None:
+            verworfen += 1
             continue
-        feat.setGeometry(geom)
+        feat = QgsFeature(mem_lyr.fields())
+        feat.setGeometry(g2)
         feat["quelle"] = cfg["label"]
         props = item.get("props", {})
         for src, _, _ in felder_list:
@@ -1386,7 +1438,20 @@ def _write_to_gpkg(gpkg_path: str, layer_name: str,
                 except: pass
         mem_feats.append(feat)
 
-    mem_lyr.dataProvider().addFeatures(mem_feats)
+    ok_add = mem_lyr.dataProvider().addFeatures(mem_feats)
+    ok_add = ok_add[0] if isinstance(ok_add, tuple) else ok_add
+    if not ok_add:
+        raise RuntimeError(f"{layer_name}: Features passen nicht zum "
+                           f"Geometrietyp {mem_typ}")
+    if verworfen:
+        try:
+            from qgis.core import QgsMessageLog
+            QgsMessageLog.logMessage(
+                f"{layer_name}: {verworfen} Objekt(e) mit abweichendem "
+                f"Geometrietyp nicht übernommen (Layer: {mem_typ})",
+                "BioSt-GIS", 1)
+        except Exception:
+            pass
 
     err, msg, _, _ = QgsVectorFileWriter.writeAsVectorFormatV3(
         mem_lyr, gpkg_path,
