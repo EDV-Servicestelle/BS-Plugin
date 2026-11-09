@@ -826,6 +826,32 @@ class PageSummary(QWizardPage):
 # ════════════════════════════════════════════════════════════════════════════
 # Seite 5 – GeoPackage-Export & QFieldCloud-Upload
 # ════════════════════════════════════════════════════════════════════════════
+def _projekt_dateien(project, dest_dir):
+    """
+    Dateibasierte Datenquellen der Projekt-Layer.
+    Liefert [(absoluter Pfad, liegt_ausserhalb_des_Projektordners)].
+    """
+    from qgis.core import QgsVectorLayer, QgsRasterLayer
+    dest = os.path.normcase(os.path.normpath(os.path.abspath(dest_dir)))
+    ergebnis, gesehen = [], set()
+    for lyr in project.mapLayers().values():
+        if not isinstance(lyr, (QgsVectorLayer, QgsRasterLayer)):
+            continue
+        if lyr.providerType() not in ("ogr", "gdal"):
+            continue
+        pfad = lyr.source().split("|")[0]
+        if not pfad or not os.path.isfile(pfad):
+            continue
+        pfad = os.path.normpath(os.path.abspath(pfad))
+        key = os.path.normcase(pfad)
+        if key in gesehen:
+            continue
+        gesehen.add(key)
+        drin = key.startswith(dest + os.sep)
+        ergebnis.append((pfad, not drin))
+    return ergebnis
+
+
 class PageExportAndUpload(QWizardPage):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -1130,6 +1156,14 @@ class PageExportAndUpload(QWizardPage):
                               f"(je Person zugeordnet), sonst fehlen diese "
                               f"Layer im Paket.")
 
+            # 2c. Grundlagen-WFS und Landnutzung laufen asynchron. Vor dem
+            #     Speichern abwarten, sonst fehlen ihre Layer im Projekt und
+            #     ihre Dateien im QFieldCloud-Upload.
+            if wiz_ref and hasattr(wiz_ref, "grundlagen_abwarten"):
+                if not wiz_ref.grundlagen_abwarten(log=self._log):
+                    self._log("  ⚠ Grundlagendaten nach 5 Minuten noch nicht "
+                              "fertig – sie fehlen ggf. im Upload.")
+
             # 3. Projekt mit lokalen Pfaden speichern
             self._log("Speichere QGIS-Projekt …")
             try:
@@ -1184,6 +1218,16 @@ class PageExportAndUpload(QWizardPage):
                 if ug_gpkg and os.path.isfile(ug_gpkg) and ug_gpkg not in upload_files:
                     upload_files.append(ug_gpkg)
                     self._log(f"  ✓ UG: {os.path.basename(ug_gpkg)}")
+                # Alle weiteren Datendateien der Projekt-Layer mitnehmen
+                # (Grundlagen.gpkg, Landnutzung …). Dateien ausserhalb des
+                # Projektordners kann QField nicht finden -> Warnung.
+                for _f, _ausserhalb in _projekt_dateien(project, dest_dir):
+                    if _ausserhalb:
+                        self._log(f"  ⚠ liegt außerhalb des Projektordners, "
+                                  f"fehlt in QField: {_f}")
+                    elif _f not in upload_files:
+                        upload_files.append(_f)
+                        self._log(f"  ✓ Daten: {os.path.basename(_f)}")
                 self._uploader = QFieldCloudUploader(
                     username      = username,
                     password      = password,
