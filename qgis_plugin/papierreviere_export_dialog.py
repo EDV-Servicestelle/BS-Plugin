@@ -382,16 +382,16 @@ class PapierreviereExportDialog(QDialog):
                 pt = centroid_geom.asPoint()
                 # UTM32 falls Ziel bereits EPSG:25832
                 if dst_crs.authid() == "EPSG:25832":
-                    _set("Utm_east",  round(pt.x(), 1))
-                    _set("Utm_north", round(pt.y(), 1))
+                    _set("Utm_east",  str(round(pt.x(), 1)))
+                    _set("Utm_north", str(round(pt.y(), 1)))
                 else:
                     utm_crs   = QgsCoordinateReferenceSystem("EPSG:25832")
                     utm_xform = QgsCoordinateTransform(dst_crs, utm_crs, proj)
                     utm_geom  = QgsGeometry(centroid_geom)
                     utm_geom.transform(utm_xform)
                     utm_pt    = utm_geom.asPoint()
-                    _set("Utm_east",  round(utm_pt.x(), 1))
-                    _set("Utm_north", round(utm_pt.y(), 1))
+                    _set("Utm_east",  str(round(utm_pt.x(), 1)))
+                    _set("Utm_north", str(round(utm_pt.y(), 1)))
 
             dst_lyr.addFeature(new_feat)
             created += 1

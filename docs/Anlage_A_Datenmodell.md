@@ -10,7 +10,7 @@ Anlage A – Datenmodell „Fundpunkte Tiere“
 | --- | --- | --- | --- | --- | --- | --- |
 | System | fid | INTEGER | ja | **nein** | – | – |
 | System | Kennung | TEXT | ja | nein | uuid() | – |
-| System | Utm_east | REAL | ja | nein | x(@geometry) | – |
+| System | Utm_east | TEXT | ja | nein | x(@geometry) | – |
 | System | Utm_north | TEXT | ja | nein | y(@geometry) | – |
 | System | Aenderungsdatum | DATETIME | ja | nein | now() | – |
 | System | Eingabedatum | DATE | ja | nein | now() | – |
