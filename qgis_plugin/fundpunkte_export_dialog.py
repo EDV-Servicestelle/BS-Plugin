@@ -22,7 +22,7 @@ from qgis.PyQt.QtWidgets import (
 from qgis.PyQt.QtCore import Qt
 from qgis.core import (
     QgsProject, QgsVectorLayer, QgsVectorFileWriter,
-    QgsCoordinateTransformContext, QgsWkbTypes,
+    QgsCoordinateTransformContext, QgsWkbTypes, QgsField,
 )
 
 _PLUGIN_DIR = os.path.dirname(__file__)
@@ -33,11 +33,23 @@ EXPORT_FLAG_FIELD   = "Sensibel"
 EXPORT_FLAG_ALIASES = ("sensibel", "kein_export", "an_lanuk")
 
 
+def _ist_null(val):
+    """True für None und für das NULL-QVariant, das QGIS 3.x bei leeren
+    Feldern liefert (str() davon wäre sonst der Text »NULL«)."""
+    if val is None:
+        return True
+    try:
+        from qgis.PyQt.QtCore import QVariant
+        return isinstance(val, QVariant) and val.isNull()
+    except ImportError:
+        return False
+
+
 def _fmt_val(val):
     """Konvertiert QGIS-Feldwerte in exportierbare Strings.
     Wandelt QDateTime/QDate/QTime in ISO-Strings um.
     """
-    if val is None:
+    if _ist_null(val):
         return ""
     # QDateTime → "2026-04-20 22:00:00"
     try:
@@ -57,12 +69,45 @@ def _fmt_val(val):
     return s
 
 
-class FundpunkteExportDialog(QDialog):
+class _NamenBereinigen(QgsVectorFileWriter.FieldValueConverter):
+    """Schreibt Feldnamen ohne führende/abschließende Leerzeichen und Umbrüche."""
 
+    def fieldDefinition(self, field):
+        neu = QgsField(field)
+        neu.setName(field.name().strip())
+        return neu
+
+    def convert(self, idx, value):
+        return value
+
+    def clone(self):
+        return _NamenBereinigen()
+
+
+class FundpunkteExportDialog(QDialog):
+    """Export-Dialog für Fundpunkte Tiere.
+
+    Andere Fachschalen (z. B. Biotopbäume) leiten davon ab und passen nur die
+    Klassenattribute und Hooks an (_passt_layer, _build_lookup, _rows,
+    _csv_weitere, _xlsx_weitere, _gpkg_weitere).
+    """
+
+    TITEL           = "Fundpunkte Tiere – Export"
+    INFO            = (
+        "Exportiert den Fund-Layer in verschiedene Formate.\n"
+        "Artname_deutsch und Artname_wiss werden aus den Referenzlisten\n"
+        "automatisch aufgelöst falls sie leer sind.\n"
+        "Hinweis: Das Feld »Sensibel« wird nie exportiert; Features mit\n"
+        "aktivem »Sensibel« werden vom Export ausgenommen."
+    )
+    AUFLOESEN_LABEL = "Artname auflösen (deutsch + wiss.)"
+    GPKG_LAYER      = "Fundpunkte"
+    XLSX_BLATT      = "Fundpunkte"
+    DATEI_PREFIX    = "Fundpunkte_Export"
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Fundpunkte Tiere – Export")
+        self.setWindowTitle(self.TITEL)
         self.setMinimumWidth(520)
         self._flag_field = None
         self._build_ui()
@@ -89,13 +134,7 @@ class FundpunkteExportDialog(QDialog):
 
     def _build_ui(self):
         lo = QVBoxLayout(self)
-        lo.addWidget(QLabel(
-            "Exportiert den Fund-Layer in verschiedene Formate.\n"
-            "Artname_deutsch und Artname_wiss werden aus den Referenzlisten\n"
-            "automatisch aufgelöst falls sie leer sind.\n"
-            "Hinweis: Das Feld »Sensibel« wird nie exportiert; Features mit\n"
-            "aktivem »Sensibel« werden vom Export ausgenommen."
-        ))
+        lo.addWidget(QLabel(self.INFO))
 
         # ── Layer ────────────────────────────────────────────────────────────
         form = QFormLayout()
@@ -123,9 +162,11 @@ class FundpunkteExportDialog(QDialog):
         self.geom_check.setChecked(False)
         opt_lo.addRow("", self.geom_check)
 
-        self.art_check = QCheckBox("Artname auflösen (deutsch + wiss.)")
+        self.art_check = QCheckBox(self.AUFLOESEN_LABEL)
         self.art_check.setChecked(True)
         opt_lo.addRow("", self.art_check)
+
+        self._weitere_optionen(opt_lo)
 
         self.filter_check = QCheckBox("Nur selektierte Features")
         self.filter_check.setChecked(False)
@@ -173,10 +214,18 @@ class FundpunkteExportDialog(QDialog):
 
     # ── Hilfsmethoden ────────────────────────────────────────────────────────
 
+    def _weitere_optionen(self, opt_lo):
+        """Hook für zusätzliche Optionen in abgeleiteten Dialogen."""
+
+    @staticmethod
+    def _passt_layer(lyr):
+        """True, wenn der Layer für diesen Export vorgeschlagen wird."""
+        return "fund" in lyr.name().lower()
+
     def _fill_layer_combo(self):
         self.layer_combo.clear()
         for lyr in QgsProject.instance().mapLayers().values():
-            if isinstance(lyr, QgsVectorLayer) and "fund" in lyr.name().lower():
+            if isinstance(lyr, QgsVectorLayer) and self._passt_layer(lyr):
                 self.layer_combo.addItem(lyr.name(), lyr)
         # Fallback alle Vektorlayer
         if self.layer_combo.count() == 0:
@@ -222,7 +271,7 @@ class FundpunkteExportDialog(QDialog):
 
         default = os.path.join(
             os.path.expanduser("~"),
-            f"Fundpunkte_Export_{datetime.now().strftime('%Y%m%d')}.{ext}"
+            f"{self.DATEI_PREFIX}_{datetime.now().strftime('%Y%m%d')}.{ext}"
         )
         path, _ = QFileDialog.getSaveFileName(self, "Exportdatei", default, filt)
         if path:
@@ -246,18 +295,7 @@ class FundpunkteExportDialog(QDialog):
         if not path:
             self._log("⚠ Kein Ausgabepfad angegeben."); self.run_btn.setEnabled(True); return
 
-        # Art-Lookup aufbauen (entityid → (deutsch, wiss))
-        art_lookup = {}
-        if self.art_check.isChecked():
-            for ref in QgsProject.instance().mapLayers().values():
-                if isinstance(ref, QgsVectorLayer) and "arten" == ref.name().lower():
-                    for f in ref.getFeatures():
-                        eid  = str(f.attribute("entityid") or "")
-                        de   = f.attribute("Name_deutsch") or ""
-                        wiss = f.attribute("term")         or ""
-                        if eid:
-                            art_lookup[eid] = (de, wiss)
-                    break
+        art_lookup = self._build_lookup() if self.art_check.isChecked() else {}
 
         flag = self._resolve_flag_field(lyr)
         feats = list(lyr.selectedFeatures() if self.filter_check.isChecked()
@@ -281,6 +319,60 @@ class FundpunkteExportDialog(QDialog):
 
         self.run_btn.setEnabled(True)
 
+    def _build_lookup(self):
+        """Art-Lookup aufbauen (entityid → (deutsch, wiss))."""
+        art_lookup = {}
+        for ref in QgsProject.instance().mapLayers().values():
+            if isinstance(ref, QgsVectorLayer) and "arten" == ref.name().lower():
+                for f in ref.getFeatures():
+                    eid  = str(f.attribute("entityid") or "")
+                    de   = f.attribute("Name_deutsch") or ""
+                    wiss = f.attribute("term")         or ""
+                    if eid:
+                        art_lookup[eid] = (de, wiss)
+                break
+        return art_lookup
+
+    # ── Hooks für zusätzliche Tabellen (z. B. Kindtabellen) ────────────────
+    def _csv_weitere(self, lyr, path, feats, art_lookup):
+        pass
+
+    def _xlsx_weitere(self, wb, lyr, feats, art_lookup):
+        pass
+
+    def _gpkg_weitere(self, lyr, path, feats):
+        pass
+
+    @staticmethod
+    def _xlsx_blatt(ws, header, rows, bar=None):
+        """Schreibt Kopfzeile + Daten in ein Blatt und formatiert es."""
+        from openpyxl.styles import Font, PatternFill, Alignment
+        hdr_fill = PatternFill("solid", fgColor="2E7D32")
+        hdr_font = Font(bold=True, color="FFFFFF")
+        ws.append(header)
+        for cell in ws[1]:
+            cell.fill = hdr_fill
+            cell.font = hdr_font
+            cell.alignment = Alignment(horizontal="center")
+        for i, row in enumerate(rows):
+            ws.append(row)
+            if bar is not None:
+                bar.setValue(i + 1)
+        for col in ws.columns:
+            max_len = max(len(str(cell.value or "")) for cell in col)
+            ws.column_dimensions[col[0].column_letter].width = min(max_len + 4, 40)
+        ws.freeze_panes = "A2"
+
+    @staticmethod
+    def _csv_schreiben(path, header, rows, bar=None):
+        with open(path, "w", newline="", encoding="utf-8-sig") as fh:
+            writer = csv.writer(fh, delimiter=";")
+            writer.writerow(header)
+            for i, row in enumerate(rows):
+                writer.writerow(row)
+                if bar is not None:
+                    bar.setValue(i + 1)
+
     def _rows(self, lyr, feats, art_lookup):
         """Gibt Header + Datenzeilen zurück."""
         fields = lyr.fields()
@@ -290,7 +382,8 @@ class FundpunkteExportDialog(QDialog):
                            if f.name() != flag
                            and (self.field_checks.get(f.name(), None) is None
                                 or self.field_checks[f.name()].isChecked())]
-        header = [f.name() for f in selected_fields]
+        # Feldnamen ohne Zeilenumbrüche (einige Altfelder enden auf "\n")
+        header = [f.name().strip() for f in selected_fields]
         if self.geom_check.isChecked():
             header.append("WKT")
 
@@ -321,20 +414,16 @@ class FundpunkteExportDialog(QDialog):
     def _export_csv(self, lyr, path, feats, total, art_lookup):
         header, rows = self._rows(lyr, feats, art_lookup)
         try:
-            with open(path, "w", newline="", encoding="utf-8-sig") as fh:
-                writer = csv.writer(fh, delimiter=";")
-                writer.writerow(header)
-                for i, row in enumerate(rows):
-                    writer.writerow(row)
-                    self.bar.setValue(i + 1)
+            self._csv_schreiben(path, header, rows, self.bar)
             self._log(f"✓ CSV: {len(rows)} Zeilen → {path}")
         except Exception as e:
             self._log(f"✗ Fehler: {e}")
+            return
+        self._csv_weitere(lyr, path, feats, art_lookup)
 
     def _export_xlsx(self, lyr, path, feats, total, art_lookup):
         try:
             import openpyxl
-            from openpyxl.styles import Font, PatternFill, Alignment
         except ImportError:
             self._log("⚠ openpyxl nicht installiert – Export als CSV. "
                       "openpyxl über Erweiterungen → BioSt-GIS → "
@@ -345,26 +434,9 @@ class FundpunkteExportDialog(QDialog):
         header, rows = self._rows(lyr, feats, art_lookup)
         wb = openpyxl.Workbook()
         ws = wb.active
-        ws.title = "Fundpunkte"
-
-        # Kopfzeile
-        hdr_fill = PatternFill("solid", fgColor="2E7D32")
-        hdr_font = Font(bold=True, color="FFFFFF")
-        ws.append(header)
-        for cell in ws[1]:
-            cell.font  = hdr_fill; cell.fill = hdr_fill; cell.font = hdr_font
-            cell.alignment = Alignment(horizontal="center")
-
-        for i, row in enumerate(rows):
-            ws.append(row)
-            self.bar.setValue(i + 1)
-
-        # Spaltenbreiten
-        for col in ws.columns:
-            max_len = max(len(str(cell.value or "")) for cell in col)
-            ws.column_dimensions[col[0].column_letter].width = min(max_len + 4, 40)
-
-        ws.freeze_panes = "A2"
+        ws.title = self.XLSX_BLATT
+        self._xlsx_blatt(ws, header, rows, self.bar)
+        self._xlsx_weitere(wb, lyr, feats, art_lookup)
         try:
             wb.save(path)
             self._log(f"✓ XLSX: {len(rows)} Zeilen → {path}")
@@ -375,7 +447,7 @@ class FundpunkteExportDialog(QDialog):
         flag = self._resolve_flag_field(lyr)
         options = QgsVectorFileWriter.SaveVectorOptions()
         options.driverName  = "GPKG"
-        options.layerName   = "Fundpunkte"
+        options.layerName   = self.GPKG_LAYER
         options.fileEncoding = "UTF-8"
         options.onlySelectedFeatures = self.filter_check.isChecked()
 
@@ -389,6 +461,12 @@ class FundpunkteExportDialog(QDialog):
                  or self.field_checks[fields[i].name()].isChecked())
         ]
         options.attributes = selected_idx
+        # Feldnamen mit Zeilenumbruch (Altlast im Datenmodell) bereinigt schreiben.
+        # Nicht über attributesExportNames: das verrutscht neben »fid« um eine Spalte.
+        converter = None
+        if any(fields[i].name() != fields[i].name().strip() for i in selected_idx):
+            converter = _NamenBereinigen()
+            options.fieldValueConverter = converter
 
         # Nur Features ohne aktives Steuerfeld schreiben. Der Writer liest den
         # Layer direkt, daher temporär per Subset-String filtern.
@@ -399,7 +477,14 @@ class FundpunkteExportDialog(QDialog):
                 clause = f'"{flag}" IS NULL OR "{flag}" = 0'
                 new_subset = (f'({prev_subset}) AND ({clause})'
                               if prev_subset else clause)
-                lyr.setSubsetString(new_subset)
+                # setSubsetString scheitert im Bearbeitungsmodus – dann würden
+                # sensible Features ungefiltert geschrieben. Lieber abbrechen.
+                if not lyr.setSubsetString(new_subset):
+                    self._log(f"✗ Abbruch: »{lyr.name()}« ist im Bearbeitungsmodus. "
+                              "Bitte Änderungen speichern, die Bearbeitung beenden "
+                              "und erneut exportieren.")
+                    flag = None   # finally: Subset nicht zurücksetzen (unverändert)
+                    return
             err, msg, _, _ = QgsVectorFileWriter.writeAsVectorFormatV3(
                 lyr, path, QgsCoordinateTransformContext(), options
             )
@@ -409,6 +494,7 @@ class FundpunkteExportDialog(QDialog):
 
         if err == QgsVectorFileWriter.WriterError.NoError:
             self._log(f"✓ GPKG: {total} Features → {path}")
+            self._gpkg_weitere(lyr, path, feats)
         else:
             self._log(f"✗ GPKG-Fehler: {msg}")
         self.bar.setValue(total)

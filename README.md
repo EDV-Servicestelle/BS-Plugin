@@ -97,6 +97,7 @@ Alle Punkte liegen im Menü **Erweiterungen → BioSt-GIS**.
 | Eigene Schreibweisen und Artnamen ergänzen | Fundpunkte – Synonyme verwalten … |
 | Fundhäufigkeit über die Zeit darstellen | Fundpunkte – Zeitreihen-Diagramm … |
 | Fundpunkte ausgeben (CSV, XLSX, GeoPackage) | Fundpunkte – Export (CSV/XLSX/GPKG) … |
+| Biotopbäume samt Baumhöhlen ausgeben (CSV, XLSX, GeoPackage) | Biotopbäume – Export (CSV/XLSX/GPKG) … |
 | GISPAD-Daten sichern und übernehmen | GISPAD-Export übernehmen … |
 | Maßnahmentabelle und -karte aus GISPAD-Daten erzeugen | MAKO-Produkte aus GISPAD-Export (Notlösung) … |
 | Schutzgebiete, FFH-Lebensraumtypen, ATKIS und Flurstücke abrufen | NRW Grundlagendaten abrufen … |

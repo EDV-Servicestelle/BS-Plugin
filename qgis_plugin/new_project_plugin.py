@@ -48,6 +48,7 @@ class NewProjectPlugin:
             ("Fundpunkte – Zeitreihen-Diagramm …", self._trend),
             ("Fundpunkte – Papierreviere → Fundpunkte …", self._papierreviere_export),
             ("Fundpunkte – Export (CSV/XLSX/GPKG) …",   self._fundpunkte_export),
+            ("Biotopbäume – Export (CSV/XLSX/GPKG) …",  self._biotopbaum_export),
             ("─────────────────────────",     None),
             ("GISPAD-Export übernehmen …",     self._gispad),
             ("MAKO-Produkte aus GISPAD-Export (Notlösung) …", self._mako),
@@ -112,6 +113,10 @@ class NewProjectPlugin:
     def _fundpunkte_export(self):
         dlg = FundpunkteExportDialog(self.iface.mainWindow())
         dlg.exec()
+
+    def _biotopbaum_export(self):
+        from .biotopbaum_export_dialog import BiotopbaumExportDialog
+        BiotopbaumExportDialog(self.iface.mainWindow()).exec()
 
     def unload(self):
         for act in self._actions:
