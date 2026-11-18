@@ -707,7 +707,7 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
             # Auto: Koordinaten
             if geom and not geom.isEmpty():
                 pt = geom.asPoint()
-                _s(new_feat, tgt_fields, "Utm_east",  round(pt.x(), 2))
+                _s(new_feat, tgt_fields, "Utm_east",  str(round(pt.x(), 2)))
                 _s(new_feat, tgt_fields, "Utm_north", str(round(pt.y(), 2)))
 
             # Auto: Aenderungsdatum + Eingabedatum = Zeitpunkt des Imports.
