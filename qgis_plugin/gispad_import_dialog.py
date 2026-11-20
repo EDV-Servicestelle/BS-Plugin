@@ -451,7 +451,10 @@ class GispadImportDialog(QDialog):
                 self._sage(f"   • {b}")
 
         if self.laden_cb.isChecked():
-            self._lade_in_qgis(self._ziel, geschrieben)
+            # Vollsicherung: auch die Sachtabellen ins Projekt, damit sie mit
+            # dem Projekt gespeichert werden und nicht nur im GeoPackage liegen
+            self._lade_in_qgis(self._ziel, geschrieben,
+                               mit_tabellen=(self._auftrag == "alles"))
 
         QMessageBox.information(
             self, "Fertig",
@@ -500,24 +503,50 @@ class GispadImportDialog(QDialog):
         self._raeume_temp_auf()
         super().reject()
 
-    def _lade_in_qgis(self, gpkg, geschrieben):
+    def _lade_in_qgis(self, gpkg, geschrieben, mit_tabellen=False):
         """
-        Nur die Layer mit Geometrie in die Karte, der Rest als Tabelle.
-        Bei einer Vollsicherung waeren sonst auf einen Schlag 16 Eintraege
-        in der Legende - unuebersichtlich und fuer die meisten ohne Nutzen.
+        Kartenlayer immer; Sachtabellen nur bei der Vollsicherung.
+
+        Alles kommt in eine Gruppe „GISPAD – <Datei>“. Die Sachtabellen
+        (bei einer Vollsicherung rund 16) liegen dort in der Untergruppe
+        „Tabellen“, eingeklappt, damit die Legende übersichtlich bleibt. Als
+        Teil des Projekts werden sie mit dem Projekt gespeichert.
         """
         projekt = QgsProject.instance()
-        geladen = 0
+        wurzel = projekt.layerTreeRoot()
+        gruppe = wurzel.insertGroup(
+            0, f"GISPAD – {os.path.splitext(os.path.basename(gpkg))[0]}")
+        tab_gruppe = None
+        karten = tabellen = 0
         for name in geschrieben:
             lyr = QgsVectorLayer(f"{gpkg}|layername={name}", name, "ogr")
             if not lyr.isValid():
                 self._sage(f"   ⚠ Layer nicht ladbar: {name}")
                 continue
             if lyr.isSpatial():
-                projekt.addMapLayer(lyr)
-                geladen += 1
-        if geladen:
-            self._sage(f"\n{geladen} Kartenlayer in QGIS geladen.")
-        else:
-            self._sage("\nKeine Layer mit Geometrie zum Laden "
-                       "(reine Sachtabellen).")
+                projekt.addMapLayer(lyr, False)
+                gruppe.addLayer(lyr)
+                karten += 1
+            elif mit_tabellen:
+                if tab_gruppe is None:
+                    tab_gruppe = gruppe.addGroup("Tabellen")
+                projekt.addMapLayer(lyr, False)
+                tab_gruppe.addLayer(lyr)
+                tabellen += 1
+        if tab_gruppe is not None:
+            tab_gruppe.setExpanded(False)
+        if not karten and not tabellen:
+            wurzel.removeChildNode(gruppe)
+            self._sage("\nKeine Layer zum Laden (reine Sachtabellen).")
+            return
+        teile = []
+        if karten:
+            teile.append(f"{karten} Kartenlayer")
+        if tabellen:
+            teile.append(f"{tabellen} Tabellen")
+        self._sage(f"\n{' und '.join(teile)} in QGIS geladen "
+                   f"(Gruppe „{gruppe.name()}“).")
+        if tabellen:
+            self._sage("Bitte das QGIS-Projekt speichern, damit die Tabellen "
+                       "dazugehören.")
+        projekt.setDirty(True)

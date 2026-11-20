@@ -85,6 +85,19 @@ class FundpunkteImportDialog(QDialog):
         self._fv_tbl_widgets        = {}
         self._build_ui()
         self._populate_target_layers()
+        self._warne_ohne_aehnlichkeitssuche()
+
+    _OHNE_SKLEARN = (
+        "⚠ Die Ähnlichkeitssuche für Artnamen ist nicht verfügbar, weil das "
+        "Python-Paket scikit-learn fehlt. Arten, die nicht exakt oder über "
+        "Synonyme erkannt werden, bekommen deshalb KEINE Vorschläge.\n"
+        "   Abhilfe: Erweiterungen → BioSt-GIS → „Python-Pakete prüfen …“, "
+        "danach QGIS neu starten.")
+
+    def _warne_ohne_aehnlichkeitssuche(self):
+        """Ohne scikit-learn fallen unscharfe Arten sonst still durch."""
+        if not _SKLEARN_AVAILABLE:
+            self._log(self._OHNE_SKLEARN)
 
     # ── UI ────────────────────────────────────────────────────────────────
     def _build_ui(self):
@@ -844,6 +857,7 @@ class FundpunkteImportDialog(QDialog):
         if self._worker and self._worker.isRunning():
             self._worker.quit(); self._worker.wait()
         self._export_btn.setEnabled(False)
+        self._warne_ohne_aehnlichkeitssuche()
         self._log("Analysiere Artnamen ...")
         self._worker = _ScanWorker(
             src_layer     = self._src_layer,
