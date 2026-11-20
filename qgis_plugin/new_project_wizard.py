@@ -446,7 +446,9 @@ class NewProjectWizard(QWizard):
                 _proj = _QP.instance()
                 _root = _proj.layerTreeRoot()
                 _grp  = _root.findGroup("Grundlagendaten") or _root.addGroup("Grundlagendaten")
-                for key in ABRUF_DIENSTE:
+                # Berechnete Mittelachsen schreibt der Worker zusaetzlich,
+                # sie stehen nicht in ABRUF_DIENSTE
+                for key in [*ABRUF_DIENSTE, "atkis_gewaessermittelachse"]:
                     if key not in DIENSTE:
                         continue
                     lbl = DIENSTE[key]["label"]

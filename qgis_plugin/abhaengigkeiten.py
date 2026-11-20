@@ -99,6 +99,33 @@ def python_exe():
     return sys.executable
 
 
+def pip_aufruf():
+    """
+    Argumente, mit denen python_exe() pip startet - oder None.
+
+    Normalfall: ["-m", "pip"]. Bei QGIS aus dem OSGeo4W-Installer fehlt pip,
+    wenn das Paket python3-pip nicht mit ausgewaehlt wurde ("No module named
+    pip"). Dann wird das mitgelieferte pip-Wheel aus vendor/ direkt
+    ausgefuehrt: Python kann pip aus dem Wheel starten, ohne es zu
+    installieren. In die QGIS-Installation wird dabei nichts geschrieben.
+    """
+    import importlib.util
+    if importlib.util.find_spec("pip") is not None:
+        return ["-m", "pip"]
+    wheels = sorted((Path(__file__).parent / "vendor").glob("pip-*.whl"))
+    if wheels:
+        return [str(wheels[-1] / "pip")]
+    return None
+
+
+PIP_FEHLT = (
+    "In dieser QGIS-Installation fehlt pip (typisch für QGIS aus dem "
+    "OSGeo4W-Installer ohne das Paket „python3-pip“), und das mitgelieferte "
+    "pip wurde nicht gefunden. Abhilfe: im OSGeo4W-Setup unter „Advanced "
+    "Install“ das Paket python3-pip nachinstallieren oder die "
+    "EDV-Servicestelle informieren.")
+
+
 def fehlende(module):
     """
     Liefert die Pakete, deren Import fehlschlaegt.
@@ -176,8 +203,17 @@ class _InstallDialog(QDialog):
         self._proc.finished.connect(self._fertig)
         self._proc.errorOccurred.connect(self._fehler)
 
+        self._pip = pip_aufruf()
+        if self._pip is None:
+            self._schreibe("✗ " + PIP_FEHLT)
+            self._abschluss(False, hinweis=False)
+            return
+        if self._pip[0] != "-m":
+            self._schreibe("Hinweis: pip fehlt in dieser QGIS-Installation – "
+                           "verwende das mit BioSt-GIS mitgelieferte pip.")
+
         self._schreibe("Schritt 1/2: Abhängigkeiten prüfen …")
-        self._starte(["-m", "pip", "install", *pakete,
+        self._starte([*self._pip, "install", *pakete,
                       "--dry-run", "--ignore-installed",
                       "--report", str(self._report),
                       "--constraint", str(self._vorgaben),
@@ -222,7 +258,7 @@ class _InstallDialog(QDialog):
                 return self._abschluss(True)
             self._schritt = 2
             self._schreibe("\nSchritt 2/2: Installiere " + ", ".join(neu))
-            self._starte(["-m", "pip", "install", *neu,
+            self._starte([*self._pip, "install", *neu,
                           "--no-deps", "--target", str(ziel_ordner()),
                           "--upgrade",
                           "--disable-pip-version-check",
@@ -230,7 +266,7 @@ class _InstallDialog(QDialog):
             return
         self._abschluss(code == 0)
 
-    def _abschluss(self, ok):
+    def _abschluss(self, ok, hinweis=True):
         self._bar.setRange(0, 1)
         self._bar.setValue(1)
         self.ok = ok
@@ -238,7 +274,7 @@ class _InstallDialog(QDialog):
             pfad_einbinden()
             self._schreibe("\n✓ Installation abgeschlossen. "
                            "Bitte QGIS einmal neu starten.")
-        else:
+        elif hinweis:
             self._schreibe(
                 "\n✗ Installation fehlgeschlagen. Häufige Ursachen: keine "
                 "Internetverbindung, Proxy/Firewall der Station, oder das "

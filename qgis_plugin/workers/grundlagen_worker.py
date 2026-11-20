@@ -156,13 +156,12 @@ class _GrundlagenWorker(QThread):
                 self.progress.emit(-1,
                     f"  ✓ {n} Features → {dienst_key}")
 
-                # Layer in QGIS laden
-                uri = f"{gpkg_path}|layername={dienst_key}"
-                lyr = QgsVectorLayer(uri, dienst_cfg["label"], "ogr")
-                if lyr.isValid():
-                    QgsProject.instance().addMapLayer(lyr)
-                _ml(f"{dienst_key}: ✓ {n} Features geschrieben, "
-                    f"Layer gültig={lyr.isValid()}")
+                # Kein addMapLayer hier: Der Worker laeuft in einem eigenen
+                # Thread (QgsProject ist nicht thread-sicher), und die Aufrufer
+                # (Wizard, Grundlagen-Dialog) laden die Layer nach "finished"
+                # selbst in ihre Gruppen. Sonst stand jeder Layer doppelt im
+                # Projekt: einmal ungruppiert, einmal in "Grundlagendaten".
+                _ml(f"{dienst_key}: ✓ {n} Features geschrieben")
 
             except Exception as e:
                 import traceback
@@ -190,11 +189,7 @@ class _GrundlagenWorker(QThread):
                 n_cl = _write_to_gpkg(gpkg_path, "atkis_gewaessermittelachse",
                                       cl_feats, cl_cfg, crs, append=False)
                 self.progress.emit(97, f"  + {n_cl} Centerlines → atkis_gewaessermittelachse")
-                cl_lyr = QgsVectorLayer(
-                    f"{gpkg_path}|layername=atkis_gewaessermittelachse",
-                    cl_cfg["label"], "ogr")
-                if cl_lyr.isValid():
-                    QgsProject.instance().addMapLayer(cl_lyr)
+                # Laden uebernehmen die Aufrufer (siehe oben)
         self.progress.emit(100, "")
         self.finished.emit(True,
             f"✓ Grundlagendaten gespeichert → {gpkg_path}")
