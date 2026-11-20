@@ -1787,6 +1787,16 @@ def init(dialog, layer, feature):
           <labelFont style="" italic="0" strikethrough="0" underline="0" bold="0" description="MS Shell Dlg 2,8.3,-1,5,50,0,0,0,0,0"/>
         </labelStyle>
       </attributeEditorField>
+      <attributeEditorField index="17" horizontalStretch="0" name="Artname_deutsch" showLabel="1" verticalStretch="0">
+        <labelStyle overrideLabelFont="0" overrideLabelColor="0" labelColor="">
+          <labelFont style="" italic="0" strikethrough="0" underline="0" bold="0" description="MS Shell Dlg 2,8.3,-1,5,50,0,0,0,0,0"/>
+        </labelStyle>
+      </attributeEditorField>
+      <attributeEditorField index="18" horizontalStretch="0" name="Artname_wiss" showLabel="1" verticalStretch="0">
+        <labelStyle overrideLabelFont="0" overrideLabelColor="0" labelColor="">
+          <labelFont style="" italic="0" strikethrough="0" underline="0" bold="0" description="MS Shell Dlg 2,8.3,-1,5,50,0,0,0,0,0"/>
+        </labelStyle>
+      </attributeEditorField>
       <attributeEditorField index="4" horizontalStretch="0" name="Aenderungsdatum" showLabel="1" verticalStretch="0">
         <labelStyle overrideLabelFont="0" overrideLabelColor="0" labelColor="">
           <labelFont style="" italic="0" strikethrough="0" underline="0" bold="0" description="MS Shell Dlg 2,8.3,-1,5,50,0,0,0,0,0"/>
@@ -1825,6 +1835,8 @@ def init(dialog, layer, feature):
     </attributeEditorContainer>
   </attributeEditorForm>
   <editable>
+    <field editable="0" name="Artname_wiss"/>
+    <field editable="0" name="Artname_deutsch"/>
     <field editable="1" name="Sensibel"/>
     <field editable="0" name="Aenderungsdatum"/>
     <field editable="1" name="Anzahl"/>
