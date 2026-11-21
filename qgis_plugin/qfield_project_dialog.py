@@ -347,6 +347,10 @@ class QFieldProjectDialog(QDialog):
 
         code      = fach["code"]
         gpkg_data = fach.get("gpkg_data", {})
+        # GeoPackages werden in den Zielordner kopiert und nur von dort
+        # geladen - das Projekt darf nie auf den Plugin-Ordner zeigen.
+        self._ziel_ordner = out_folder
+        self._gpkg_kopien = {}
         project   = QgsProject.instance()
         project.clear()
         project.setCrs(QgsCoordinateReferenceSystem("EPSG:25832"))
@@ -457,6 +461,9 @@ class QFieldProjectDialog(QDialog):
         if not os.path.isfile(gpkg_abs):
             self._log(f"  ⚠ GPKG nicht gefunden: {gpkg_abs}")
             return None
+        from .project_finalizer import projektlokale_kopie
+        gpkg_abs = projektlokale_kopie(
+            gpkg_abs, self._ziel_ordner, kopien=self._gpkg_kopien)
         lyr = QgsVectorLayer(f"{gpkg_abs}|layername={layername}", display, "ogr")
         if not lyr.isValid():
             self._log(f"  ⚠ Layer ungültig: {layername}")

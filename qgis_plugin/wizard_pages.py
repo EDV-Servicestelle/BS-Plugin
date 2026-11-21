@@ -1134,6 +1134,11 @@ class PageExportAndUpload(QWizardPage):
                     path_map[src] = dst
                     self._log(f"  ✓ {os.path.basename(src)} → {base}")
             self._log(f"  {len(path_map)} GPKG(s) kopiert.")
+            # Der Projektaufbau lädt die Layer aus genau diesen Kopien und
+            # öffnet keine Datei im Plugin-Ordner (sonst Dateisperre beim
+            # Plugin-Update unter Windows).
+            if wiz_ref is not None:
+                wiz_ref._gpkg_kopien = dict(path_map)
             self.progress.setValue(40)
 
             # 2. Projekt aus Plugin-GPKGs aufbauen (Offline-Modus erzwingen)

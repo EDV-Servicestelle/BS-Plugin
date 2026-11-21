@@ -534,12 +534,17 @@ def _append_fehlend(gpkg_path: str, rows: list):
 
 def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                     artname_mode, progress_cb=None, artname_overrides=None,
-                    field_value_overrides=None):
+                    field_value_overrides=None, bericht=None):
     """
     mapping: Liste von Dicts:
       {"tgt": fund_field, "mode": "src"|"fix"|"auto",
        "src_field": str|None, "fix_value": str|None}
     Gibt (importiert, nicht_aufgeloest, fehler) zurück.
+
+    bericht: optionales dict, das zusätzlich befüllt wird, u. a.
+      "bd_ersetzt": Anzahl Datensätze ohne Beobachtungsdatum, bei denen das
+                    Eingabedatum (= Importdatum) eingesetzt wurde
+      "bd_beispiele": bis zu 10 Datensatznummern der Quelle
     """
     global _ARTEN_LOOKUP_CACHE, _ARTEN_LOOKUP_MODE
     if artname_mode != _ARTEN_LOOKUP_MODE or not _ARTEN_LOOKUP_CACHE:
@@ -610,6 +615,15 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                            if tgt_fields.indexFromName(n) >= 0]
     _date_problems = {}   # Zielfeld -> [Anzahl, {Beispielwerte}]
     _skipped_date  = 0
+    # Fehlt das Beobachtungsdatum in der Quelle ganz, wird das Eingabedatum
+    # (= Importdatum) eingesetzt und der Datensatz in Bemerkung markiert.
+    # Ein vorhandenes, aber unlesbares Datum wird weiterhin NICHT ersetzt.
+    _BD = "Beobachtungsdatum"
+    _bd_vorhanden = tgt_fields.indexFromName(_BD) >= 0
+    _bd_ersetzt   = 0
+    _bd_beispiele = []
+    _BD_MARKE = ("[Beobachtungsdatum fehlte in den Altdaten – "
+                 "Eingabedatum übernommen]")
 
     tgt_layer.startEditing()
     for i, src_feat in enumerate(features):
@@ -717,6 +731,7 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                 _s(new_feat, tgt_fields, _nf, _now_for_field(tgt_fields, _nf))
 
             # Manuelles Mapping aus Dialog-Tabelle
+            _bd_unlesbar = False
             for m in mapping:
                 tgt_f = m["tgt"]
                 # Schutz: automatisch gesetzte Felder (Kennung, Eingabedatum)
@@ -749,6 +764,8 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                         # Datumswert nicht eindeutig lesbar -> merken und melden,
                         # statt still eine NULL zu erzeugen
                         if "date" in _tn and not _is_unset(_raw_val):
+                            if tgt_f == _BD:
+                                _bd_unlesbar = True
                             _slot = _date_problems.setdefault(tgt_f, [0, set()])
                             _slot[0] += 1
                             if len(_slot[1]) < 5:
@@ -759,6 +776,19 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                     else:
                         _s(new_feat, tgt_fields, tgt_f, _conv)
                 # mode == "auto" → bereits oben gesetzt, nichts tun
+
+            # Kein Beobachtungsdatum in der Quelle -> Eingabedatum einsetzen
+            if (_bd_vorhanden and not _bd_unlesbar
+                    and _is_unset(new_feat[_BD])):
+                _s(new_feat, tgt_fields, _BD, _now_for_field(tgt_fields, _BD))
+                if tgt_fields.indexFromName("Bemerkung") >= 0:
+                    _alt = new_feat["Bemerkung"]
+                    _alt = "" if _is_unset(_alt) else str(_alt).strip()
+                    _s(new_feat, tgt_fields, "Bemerkung",
+                       f"{_alt} {_BD_MARKE}".strip())
+                _bd_ersetzt += 1
+                if len(_bd_beispiele) < 10:
+                    _bd_beispiele.append(i + 1)
 
             # Pflicht-Datumsfeld leer? -> Datensatz mit klarer Meldung
             # ueberspringen statt am NOT-NULL-Constraint scheitern zu lassen
@@ -825,6 +855,20 @@ def import_altdaten(src_layer, tgt_layer, mapping, artname_field,
                         "Jahreszahlen und Excel-Datumsserien werden bewusst nicht "
                         "geraten. Bitte in der Quelle auf ein eindeutiges Format "
                         "bringen (z. B. TT.MM.JJJJ).")
+    if _bd_ersetzt and progress_cb:
+        progress_cb(-1,
+            "\n  ⚠⚠⚠ ACHTUNG: " + f"{_bd_ersetzt} Datensatz/Datensätze OHNE "
+            "Beobachtungsdatum.\n"
+            "      Als Beobachtungsdatum wurde das Eingabedatum (heute) "
+            "eingesetzt.\n"
+            f"      Die Punkte sind in „Bemerkung“ markiert: {_BD_MARKE}\n"
+            "      Datensätze der Quelle, z. B.: "
+            + ", ".join(str(n) for n in _bd_beispiele)
+            + (" …" if _bd_ersetzt > len(_bd_beispiele) else ""))
+    if bericht is not None:
+        bericht["bd_ersetzt"] = _bd_ersetzt
+        bericht["bd_beispiele"] = list(_bd_beispiele)
+        bericht["bd_marke"] = _BD_MARKE
     if _skipped_date and progress_cb:
         progress_cb(-1, f"  \u26a0 {_skipped_date} Datensatz/Datensaetze ohne "
                         f"gueltiges Pflichtdatum uebersprungen "

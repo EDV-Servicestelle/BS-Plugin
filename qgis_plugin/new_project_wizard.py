@@ -717,6 +717,44 @@ class NewProjectWizard(QWizard):
         # projektlokaler Layer erzeugt (Quelle: Wizard-Seite, Datei ODER Layer).
 
     # ── Einzelnen GeoPackage-Layer laden ─────────────────────────────────────
+    def _projektlokal(self, gpkg_abs):
+        """
+        Pfad der Kopie im Projektordner (wird bei Bedarf angelegt) oder None,
+        wenn noch kein gültiger Projektordner feststeht.
+
+        Benennung wie auf der Export-Seite und in _localize_project_gpkgs:
+        Datentabellen (geo_layers) mit Projektpräfix, z. B.
+        MeinProjekt_Fundpunkte.gpkg; Referenzlisten unter ihrem Namen.
+        """
+        import re as _re
+        from .project_finalizer import projektlokale_kopie
+        ordner = (self.field("gpkgPath") or self.field("projectFolder") or "").strip()
+        if not ordner or not os.path.isdir(ordner):
+            from .debug_log import log
+            log(f"Kein Projektordner – lade direkt aus dem Plugin: {gpkg_abs}",
+                "WARN", context="Wizard")
+            return None
+        if not hasattr(self, "_gpkg_kopien"):
+            self._gpkg_kopien = {}
+        fach = self.property("_fachschale") or {}
+        daten = {os.path.basename(e.get("gpkg", "")).lower()
+                 for e in (fach.get("gpkg_data") or {}).get("geo_layers", [])
+                 if e.get("gpkg")}
+        name = None
+        basis = os.path.basename(gpkg_abs)
+        if basis.lower() in daten:
+            safe = (_re.sub(r"[^0-9A-Za-z_.\-]+", "_",
+                            self.field("projectName") or "Projekt").strip("_")
+                    or "Projekt")
+            wurzel, endung = os.path.splitext(basis)
+            name = f"{safe}_{wurzel}{endung}"
+        try:
+            return projektlokale_kopie(gpkg_abs, ordner, name, self._gpkg_kopien)
+        except Exception:
+            from .debug_log import log_exc
+            log_exc("Wizard._projektlokal")
+            return None
+
     def _load_gpkg_layer(self, entry: dict) -> QgsVectorLayer | None:
         """
         Lädt einen Layer aus einem GeoPackage, das relativ zum Plugin-Verzeichnis liegt.
@@ -738,7 +776,10 @@ class NewProjectWizard(QWizard):
                 "BioSt-GIS", Qgis.MessageLevel.Warning)
             return None
 
-        uri = f"{gpkg_abs}|layername={layername}"
+        # Nie direkt aus dem Plugin-Ordner laden, sondern aus der Kopie im
+        # Projektordner (siehe project_finalizer.projektlokale_kopie).
+        lokal = self._projektlokal(gpkg_abs)
+        uri = f"{lokal or gpkg_abs}|layername={layername}"
         lyr = QgsVectorLayer(uri, display, "ogr")
         if not lyr.isValid():
             return None
