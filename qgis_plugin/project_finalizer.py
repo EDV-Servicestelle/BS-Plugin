@@ -81,6 +81,35 @@ def export_layers_to_gpkg(
 # Schritt 1b – Quell-GPKGs in Projektordner kopieren
 # ════════════════════════════════════════════════════════════════════════════
 
+def projektlokale_kopie(quelle, ziel_ordner, neuer_name=None, kopien=None):
+    """
+    Kopiert ein GeoPackage aus dem Plugin-Ordner in den Projektordner und
+    liefert den Pfad der Kopie. Layer werden NUR aus dieser Kopie geladen.
+
+    Warum: Oeffnet QGIS eine Datei im Plugin-Ordner, haelt der OGR-
+    Verbindungspool sie offen - auch wenn der Layer spaeter auf eine Kopie
+    umgehaengt wird. Unter Windows kann das Plugin-Update den Ordner dann
+    nicht loeschen, bricht ab und hinterlaesst ein entkerntes Plugin
+    ("Plugin hat sich beim Update selbst deinstalliert", Nov. 2026).
+
+    kopien: {quelle: kopie} dieser Sitzung. Was dort schon steht, wird nicht
+    erneut kopiert - so ueberschreibt ein zweiter Projektaufbau keine Daten,
+    und frische Kopien der Export-Seite werden weiterverwendet.
+    """
+    quelle = os.path.normpath(quelle)
+    if kopien is not None:
+        vorhanden = kopien.get(quelle)
+        if vorhanden and os.path.isfile(vorhanden):
+            return vorhanden
+    ziel = os.path.normpath(
+        os.path.join(ziel_ordner, neuer_name or os.path.basename(quelle)))
+    if ziel != quelle:
+        shutil.copy2(quelle, ziel)
+    if kopien is not None:
+        kopien[quelle] = ziel
+    return ziel
+
+
 def collect_and_copy_geopackages(
     project: "QgsProject",
     dest_dir: str,

@@ -94,6 +94,26 @@ class FundpunkteImportDialog(QDialog):
         "   Abhilfe: Erweiterungen → BioSt-GIS → „Python-Pakete prüfen …“, "
         "danach QGIS neu starten.")
 
+    def _melde_fehlendes_beobachtungsdatum(self, bericht):
+        """Deutliche Meldung, wenn Beobachtungsdaten ersetzt wurden."""
+        n = bericht.get("bd_ersetzt", 0)
+        if not n:
+            return
+        bsp = ", ".join(str(x) for x in bericht.get("bd_beispiele", []))
+        if n > len(bericht.get("bd_beispiele", [])):
+            bsp += " …"
+        QMessageBox.warning(
+            self, "Beobachtungsdatum fehlt",
+            f"<b>{n} Datensatz/Datensätze hatten kein Beobachtungsdatum.</b>"
+            "<br><br>Als Beobachtungsdatum wurde das <b>Eingabedatum "
+            "(heute)</b> eingesetzt. Bitte diese Punkte prüfen und das "
+            "richtige Datum vor der Abgabe an das LANUK nachtragen."
+            f"<br><br>Die betroffenen Punkte sind im Feld „Bemerkung“ "
+            f"markiert:<br><i>{bericht.get('bd_marke', '')}</i>"
+            f"<br><br>Datensätze der Quelle, z. B.: {bsp}"
+            "<br><br>Tipp: In der Attributtabelle nach diesem Text in "
+            "„Bemerkung“ filtern.")
+
     def _warne_ohne_aehnlichkeitssuche(self):
         """Ohne scikit-learn fallen unscharfe Arten sonst still durch."""
         if not _SKLEARN_AVAILABLE:
@@ -1248,14 +1268,17 @@ class FundpunkteImportDialog(QDialog):
             if msg:
                 self._log(msg)
 
+        bericht = {}
         try:
             imported, not_res, errors = import_altdaten(
                 self._src_layer, tgt_layer,
                 mapping, artname_field, mode, prog,
                 artname_overrides=artname_overrides,
-                field_value_overrides=self._read_field_value_overrides())
+                field_value_overrides=self._read_field_value_overrides(),
+                bericht=bericht)
             self.progress.setValue(100)
             self._log(f"\n✓ {imported} Features importiert")
+            self._melde_fehlendes_beobachtungsdatum(bericht)
             if not_res:
                 self._log(
                     f"  ⚠ {not_res} Artnamen nicht aufgeloest "
