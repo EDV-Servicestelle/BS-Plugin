@@ -2,10 +2,12 @@
 ornitho_import_dialog.py – Ornitho.de Basic+ JSON importieren
 ==============================================================
 Liest den ornitho.de-Export im Basic+-Format (JSON) und erstellt
-einen QGIS-Punktlayer mit allen Feldbeobachtungen.
+einen QGIS-Punktlayer mit allen Beobachtungen - Einzelbeobachtungen UND
+Beobachtungen aus Listen (forms). Die Auswertung liegt in core/ornitho.py.
 """
 
 import json
+import os
 from datetime import datetime
 
 from qgis.PyQt.QtWidgets import (
@@ -18,8 +20,13 @@ from qgis.PyQt.QtCore import Qt, QVariant
 from qgis.PyQt.QtGui import QColor
 from qgis.core import (
     QgsProject, QgsVectorLayer, QgsFeature, QgsGeometry,
-    QgsPointXY, QgsFields, QgsField, QgsCoordinateReferenceSystem,
+    QgsPointXY, QgsFields, QgsField, QgsCoordinateReferenceSystem, NULL,
 )
+
+try:
+    from qgis_new_project_plugin.core.ornitho import FELDER, beobachtungen, zeile
+except ImportError:
+    from .core.ornitho import FELDER, beobachtungen, zeile
 
 
 class OrnithoImportDialog(QDialog):
@@ -68,8 +75,11 @@ class OrnithoImportDialog(QDialog):
         yr_lo.addWidget(self.year_cb)
         flt_fl.addRow("Zeitraum (Jahr):", yr_lo)
 
-        self.only_precise = QCheckBox("Nur präzise GPS-Koordinaten (precision=precise)")
-        self.only_precise.setChecked(True)
+        # Standard: AUS. Sonst fallen alle Beobachtungen weg, die nur einem
+        # Ort zugeordnet sind (precision != precise).
+        self.only_precise = QCheckBox(
+            "Nur exakt verortete Beobachtungen (ohne Ortsangaben)")
+        self.only_precise.setChecked(False)
         flt_fl.addRow("", self.only_precise)
 
         lo.addWidget(flt_grp)
@@ -110,25 +120,25 @@ class OrnithoImportDialog(QDialog):
 
     def _load_file(self, path: str):
         try:
-            data = json.load(open(path, encoding="utf-8"))
-            raw  = data.get("data", data).get("sightings", [])
-            self._sightings = raw
-            arten = {}
-            for s in raw:
-                a = s.get("species", {}).get("name", "?")
-                arten[a] = arten.get(a, 0) + 1
-            dates = []
-            for s in raw:
-                iso = s.get("date", {}).get("@ISO8601", "")
-                if iso:
-                    try: dates.append(iso[:10])
-                    except: pass
-            date_info = f"{min(dates)} – {max(dates)}" if dates else "?"
+            with open(path, encoding="utf-8") as f:
+                daten = json.load(f)
+            alle = beobachtungen(daten)
+            self._sightings = alle
+            in_listen = sum(1 for _s, form in alle if form is not None)
+            arten = {(s.get("species", {}) or {}).get("name", "?") for s, _f in alle}
+            dates = sorted(((s.get("date", {}) or {}).get("@ISO8601", "") or "")[:10]
+                           for s, _f in alle
+                           if (s.get("date", {}) or {}).get("@ISO8601"))
+            date_info = f"{dates[0]} – {dates[-1]}" if dates else "?"
             self.info_lbl.setText(
-                f"{len(raw)} Beobachtungen  |  {len(arten)} Arten  |  {date_info}")
+                f"{len(alle)} Beobachtungen ({in_listen} davon aus Listen)  |  "
+                f"{len(arten)} Arten  |  {date_info}")
             self.info_lbl.setStyleSheet("color: #333;")
-            self.import_btn.setEnabled(True)
-            self._log(f"✓ {len(raw)} Beobachtungen geladen aus {path.split('/')[-1]}")
+            self.import_btn.setEnabled(bool(alle))
+            self._log(f"✓ {len(alle)} Beobachtungen geladen aus "
+                      f"{os.path.basename(path)}"
+                      + (f" – davon {in_listen} aus Beobachtungslisten"
+                         if in_listen else ""))
         except Exception as e:
             self._log(f"✗ Ladefehler: {e}")
 
@@ -143,28 +153,10 @@ class OrnithoImportDialog(QDialog):
         y_to         = self.year_to.value()
         only_precise = self.only_precise.isChecked()
 
+        typen = {"str": QVariant.String, "int": QVariant.Int}
         fields = QgsFields()
-        for fname, ftype in [
-            ("ornitho_id",    QVariant.String),
-            ("art",           QVariant.String),
-            ("art_lat",       QVariant.String),
-            ("art_id",        QVariant.Int),
-            ("datum",         QVariant.String),
-            ("jahr",          QVariant.Int),
-            ("anzahl",        QVariant.Int),
-            ("erfassung",     QVariant.String),   # EXACT_VALUE / MINIMUM
-            ("beobachter",    QVariant.String),
-            ("ort",           QVariant.String),
-            ("gemeinde",      QVariant.String),
-            ("atlas_code",    QVariant.String),
-            ("akustisch",     QVariant.Int),       # auditory_contact
-            ("kommentar",     QVariant.String),
-            ("praezision",    QVariant.String),
-            ("quelle",        QVariant.String),    # MOBILE_LIVE_IOS etc.
-            ("guid",          QVariant.String),
-            ("ornitho_url",   QVariant.String),
-        ]:
-            fields.append(QgsField(fname, ftype))
+        for fname, ftyp in FELDER:
+            fields.append(QgsField(fname, typen[ftyp]))
 
         lyr_name = "Ornitho"
         if art_filter:
@@ -174,86 +166,30 @@ class OrnithoImportDialog(QDialog):
         dp.addAttributes(fields.toList())
         lyr.updateFields()
 
-        feats = []; skipped = 0; filtered = 0
+        feats = []
+        gefiltert = ungenau = ohne_koord = 0
+        for s, form in self._sightings:
+            z = zeile(s, form)
 
-        for s in self._sightings:
-            sp  = s.get("species", {})
-            art = sp.get("name", "")
-            lat_name = sp.get("latin_name", "")
-
-            # Artfilter
-            if art_filter:
-                if art_filter not in art.lower() and art_filter not in lat_name.lower():
-                    filtered += 1
-                    continue
-
-            # Zeitfilter
-            iso = s.get("date", {}).get("@ISO8601", "")
-            year = int(iso[:4]) if iso and len(iso) >= 4 else 0
-            if year_filter and year:
-                if not (y_from <= year <= y_to):
-                    filtered += 1
-                    continue
-
-            obs = s.get("observers", [{}])[0] if s.get("observers") else {}
-            place = s.get("place", {})
-
-            # Koordinaten: GPS-Beobachter zuerst, sonst Rasterpunkt
-            try:
-                lat = float(obs.get("coord_lat") or obs.get("gps_lat") or
-                            place.get("coord_lat", 0))
-                lon = float(obs.get("coord_lon") or obs.get("gps_lon") or
-                            place.get("coord_lon", 0))
-            except (ValueError, TypeError):
-                skipped += 1; continue
-            if lat == 0 and lon == 0:
-                skipped += 1; continue
-
-            precision = obs.get("precision", "")
-            if only_precise and precision and precision != "precise":
-                skipped += 1; continue
-
-            # Atlas-Code
-            atlas = obs.get("atlas_code", {})
-            atlas_txt = ""
-            if isinstance(atlas, dict):
-                atlas_txt = atlas.get("#text", atlas.get("@id", ""))
-            elif atlas:
-                atlas_txt = str(atlas)
-
-            # Anzahl
-            try: count = int(obs.get("count", 1) or 1)
-            except: count = 1
-
-            # Erfassungscode
-            est = obs.get("estimation_code", "")
-            est_de = {"EXACT_VALUE": "Exakt", "MINIMUM": "Minimum",
-                      "MAXIMUM": "Maximum", "ESTIMATE": "Schätzung"}.get(est, est)
-
-            # Datum
-            datum_str = iso[:10] if iso else ""
+            if art_filter and (art_filter not in z["art"].lower()
+                               and art_filter not in z["art_lat"].lower()):
+                gefiltert += 1
+                continue
+            if year_filter and z["jahr"] and not (y_from <= z["jahr"] <= y_to):
+                gefiltert += 1
+                continue
+            if only_precise and z["praezision"] and z["praezision"] != "precise":
+                ungenau += 1
+                continue
+            if z["lat"] is None:
+                ohne_koord += 1
+                continue
 
             feat = QgsFeature(lyr.fields())
-            feat.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(lon, lat)))
-            feat["ornitho_id"] = obs.get("id_universal", obs.get("id_sighting", ""))
-            feat["art"]        = art
-            feat["art_lat"]    = lat_name
-            feat["art_id"]     = int(sp.get("@id", 0) or 0)
-            feat["datum"]      = datum_str
-            feat["jahr"]       = year
-            feat["anzahl"]     = count
-            feat["erfassung"]  = est_de
-            feat["beobachter"] = obs.get("name", "")
-            feat["ort"]        = place.get("name", "")
-            feat["gemeinde"]   = place.get("municipality", "")
-            feat["atlas_code"] = atlas_txt
-            feat["akustisch"]  = int(obs.get("auditory_contact", 0) or 0)
-            feat["kommentar"]  = obs.get("comment", "")
-            feat["praezision"] = precision
-            feat["quelle"]     = obs.get("source", "")
-            feat["guid"]       = obs.get("guid", "")
-            oid = obs.get("id_sighting", "")
-            feat["ornitho_url"] = f"https://www.ornitho.de/index.php?m_id=94&showback=1&idt_sighting={oid}" if oid else ""
+            feat.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(z["lon"], z["lat"])))
+            for fname, _t in FELDER:
+                wert = z.get(fname)
+                feat[fname] = NULL if wert is None else wert
             feats.append(feat)
 
         dp.addFeatures(feats)
@@ -268,10 +204,16 @@ class OrnithoImportDialog(QDialog):
             pass
 
         QgsProject.instance().addMapLayer(lyr)
-        self._log(
-            f"✓ Layer '{lyr_name}': {len(feats)} Fundpunkte"
-            + (f", {filtered} gefiltert" if filtered else "")
-            + (f", {skipped} ohne Koordinaten" if skipped else ""))
+        teile = [f"✓ Layer '{lyr_name}': {len(feats)} von "
+                 f"{len(self._sightings)} Beobachtungen übernommen"]
+        if gefiltert:
+            teile.append(f"   {gefiltert} durch Art-/Jahresfilter ausgeblendet")
+        if ungenau:
+            teile.append(f"   {ungenau} nicht exakt verortet (Filter „nur exakt "
+                         f"verortete“ ist aktiv)")
+        if ohne_koord:
+            teile.append(f"   ⚠ {ohne_koord} ohne Koordinaten – nicht übernommen")
+        self._log("\n".join(teile))
 
     def _log(self, msg: str):
         self.log.append(msg)
