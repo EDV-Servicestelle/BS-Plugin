@@ -51,6 +51,8 @@ jobs:
     steps:
       - name: Quellcode holen
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # alle Tags, um die hoechste Version zu bestimmen
 
       - name: Paket bauen
         run: |
@@ -66,7 +68,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           DATEI=$(ls dist/*.zip | head -1)
+          # "Latest" nur fuer die hoechste Versionsnummer - nicht fuer den
+          # zuletzt angelegten Release. Sonst wird bei zwei gleichzeitig
+          # gepushten Tags die aeltere Version "Latest" (Nov. 2026: v3.3.9
+          # statt v3.3.10).
+          NEUESTER=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          if [ "$GITHUB_REF_NAME" = "$NEUESTER" ]; then LATEST=true; else LATEST=false; fi
+          echo "Hoechste Version: $NEUESTER - Latest fuer $GITHUB_REF_NAME: $LATEST"
           gh release create "$GITHUB_REF_NAME" "$DATEI" \
+            --latest="$LATEST" \
             --title "BioSt-GIS $GITHUB_REF_NAME" \
             --notes "$(cat <<'HINWEIS'
           Plugin-Paket für QGIS.
@@ -107,6 +117,8 @@ jobs:
     steps:
       - name: Quellcode holen
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # alle Tags
 
       - name: Paket aus dem Release holen
         # Genau die Datei, die am Release haengt - nicht neu bauen, damit
@@ -115,11 +127,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p dist
-          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            gh release download "$GITHUB_REF_NAME" --pattern '*.zip' --dir dist
-          else
-            gh release download --pattern '*.zip' --dir dist   # juengstes Release
-          fi
+          # Immer die HOECHSTE Version veroeffentlichen, nie einfach den
+          # gerade gepushten Tag: Wird ein aelterer Tag spaeter gepusht (oder
+          # laeuft spaeter), darf er das Repository nicht zurueckdrehen.
+          NEUESTER=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          echo "Veroeffentliche $NEUESTER (Anlass: $GITHUB_REF_NAME)"
+          gh release download "$NEUESTER" --pattern '*.zip' --dir dist
           ls -l dist
 
       - name: Pages vorbereiten
