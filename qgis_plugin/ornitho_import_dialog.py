@@ -1,12 +1,12 @@
 """
-ornitho_import_dialog.py – Ornitho.de Basic+ JSON importieren
+ornitho_import_dialog.py – ornitho.de-Export (JSON oder Excel) importieren
 ==============================================================
 Liest den ornitho.de-Export im Basic+-Format (JSON) und erstellt
 einen QGIS-Punktlayer mit allen Beobachtungen - Einzelbeobachtungen UND
-Beobachtungen aus Listen (forms). Die Auswertung liegt in core/ornitho.py.
+Beobachtungen aus Listen (forms). Alternativ den Excel-Export (.xlsx).
+Die Auswertung liegt in core/ornitho.py.
 """
 
-import json
 import os
 from datetime import datetime
 
@@ -24,9 +24,9 @@ from qgis.core import (
 )
 
 try:
-    from qgis_new_project_plugin.core.ornitho import FELDER, beobachtungen, zeile
+    from qgis_new_project_plugin.core.ornitho import FELDER, lade
 except ImportError:
-    from .core.ornitho import FELDER, beobachtungen, zeile
+    from .core.ornitho import FELDER, lade
 
 
 class OrnithoImportDialog(QDialog):
@@ -34,7 +34,7 @@ class OrnithoImportDialog(QDialog):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Ornitho.de – Basic+ Import")
+        self.setWindowTitle("Ornitho.de – Import")
         self.setMinimumWidth(500)
         self._sightings = []
         self._build_ui()
@@ -45,10 +45,10 @@ class OrnithoImportDialog(QDialog):
         lo = QVBoxLayout(self)
 
         # Datei-Auswahl
-        file_grp = QGroupBox("Exportdatei (JSON, Basic+-Format)")
+        file_grp = QGroupBox("Exportdatei (JSON im Basic+-Format oder Excel)")
         file_lo  = QHBoxLayout(file_grp)
         self.file_edit = QLineEdit()
-        self.file_edit.setPlaceholderText("export_XXXX.json …")
+        self.file_edit.setPlaceholderText("export_XXXX.json oder .xlsx …")
         self.file_edit.setReadOnly(True)
         browse_btn = QPushButton("Durchsuchen …")
         browse_btn.clicked.connect(self._browse)
@@ -111,8 +111,9 @@ class OrnithoImportDialog(QDialog):
 
     def _browse(self):
         path, _ = QFileDialog.getOpenFileName(
-            self, "Ornitho Basic+ JSON öffnen", "",
-            "JSON-Dateien (*.json);;Alle Dateien (*)")
+            self, "ornitho.de-Export öffnen", "",
+            "ornitho-Export (*.json *.xlsx);;JSON (*.json);;Excel (*.xlsx);;"
+            "Alle Dateien (*)")
         if not path:
             return
         self.file_edit.setText(path)
@@ -120,23 +121,20 @@ class OrnithoImportDialog(QDialog):
 
     def _load_file(self, path: str):
         try:
-            with open(path, encoding="utf-8") as f:
-                daten = json.load(f)
-            alle = beobachtungen(daten)
-            self._sightings = alle
-            in_listen = sum(1 for _s, form in alle if form is not None)
-            arten = {(s.get("species", {}) or {}).get("name", "?") for s, _f in alle}
-            dates = sorted(((s.get("date", {}) or {}).get("@ISO8601", "") or "")[:10]
-                           for s, _f in alle
-                           if (s.get("date", {}) or {}).get("@ISO8601"))
+            zeilen = lade(path)
+            self._sightings = zeilen
+            in_listen = sum(1 for z in zeilen if z.get("liste_id"))
+            arten = {z.get("art") or "?" for z in zeilen}
+            dates = sorted(z["datum"] for z in zeilen if z.get("datum"))
             date_info = f"{dates[0]} – {dates[-1]}" if dates else "?"
             self.info_lbl.setText(
-                f"{len(alle)} Beobachtungen ({in_listen} davon aus Listen)  |  "
+                f"{len(zeilen)} Beobachtungen ({in_listen} davon aus Listen)  |  "
                 f"{len(arten)} Arten  |  {date_info}")
             self.info_lbl.setStyleSheet("color: #333;")
-            self.import_btn.setEnabled(bool(alle))
-            self._log(f"✓ {len(alle)} Beobachtungen geladen aus "
-                      f"{os.path.basename(path)}"
+            self.import_btn.setEnabled(bool(zeilen))
+            art = "Excel" if path.lower().endswith((".xlsx", ".xlsm")) else "JSON"
+            self._log(f"✓ {len(zeilen)} Beobachtungen geladen aus "
+                      f"{os.path.basename(path)} ({art})"
                       + (f" – davon {in_listen} aus Beobachtungslisten"
                          if in_listen else ""))
         except Exception as e:
@@ -168,8 +166,7 @@ class OrnithoImportDialog(QDialog):
 
         feats = []
         gefiltert = ungenau = ohne_koord = 0
-        for s, form in self._sightings:
-            z = zeile(s, form)
+        for z in self._sightings:
 
             if art_filter and (art_filter not in z["art"].lower()
                                and art_filter not in z["art_lat"].lower()):
