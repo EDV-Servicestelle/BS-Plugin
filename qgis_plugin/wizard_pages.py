@@ -1166,8 +1166,10 @@ class PageExportAndUpload(QWizardPage):
             #     ihre Dateien im QFieldCloud-Upload.
             if wiz_ref and hasattr(wiz_ref, "grundlagen_abwarten"):
                 if not wiz_ref.grundlagen_abwarten(log=self._log):
-                    self._log("  ⚠ Grundlagendaten nach 5 Minuten noch nicht "
-                              "fertig – sie fehlen ggf. im Upload.")
+                    self._log("  ⚠ Grundlagendaten nach 15 Minuten noch nicht "
+                              "fertig – sie fehlen in diesem Upload. Sie werden "
+                              "nach Abschluss ins Projekt geladen; danach das "
+                              "Projekt speichern und erneut hochladen.")
 
             # 3. Projekt mit lokalen Pfaden speichern
             self._log("Speichere QGIS-Projekt …")
