@@ -365,7 +365,7 @@ class NewProjectWizard(QWizard):
             proj_path = tempfile.mkdtemp(prefix="naturschutz_")
         return os.path.join(proj_path, "Grundlagen.gpkg")
 
-    def grundlagen_abwarten(self, timeout_s=300, log=None):
+    def grundlagen_abwarten(self, timeout_s=900, log=None):
         """
         Wartet, bis die asynchronen Abrufe (Grundlagen-WFS, Landnutzung)
         fertig sind und ihre Layer im Projekt haengen. Noetig vor dem
@@ -389,7 +389,75 @@ class NewProjectWizard(QWizard):
         for _ in range(20):
             QCoreApplication.processEvents()
             time.sleep(0.02)
+        # Nicht allein auf das Signal verlassen: fertige Grundlagen direkt
+        # laden (doppelte Layer verhindert _grundlagen_laden selbst).
+        auftrag = getattr(self, "_grundlagen_auftrag", None)
+        gw = getattr(self, "_grundlagen_worker", None)
+        if auftrag and gw is not None and not gw.isRunning():
+            self._grundlagen_laden(*auftrag)
         return not any(w.isRunning() for w in worker)
+
+    @staticmethod
+    def _meldung(text, stufe="info", dauer=10):
+        """Sichtbare Meldung in der QGIS-Meldungsleiste (statt nur im Protokoll)."""
+        try:
+            from qgis.core import Qgis
+            from qgis.utils import iface
+            lvl = {"info": Qgis.MessageLevel.Info,
+                   "ok": Qgis.MessageLevel.Success,
+                   "warnung": Qgis.MessageLevel.Warning}[stufe]
+            if iface:
+                iface.messageBar().pushMessage("BioSt-GIS", text, lvl, dauer)
+        except Exception:
+            pass
+
+    def _grundlagen_laden(self, gpkg_path, keys):
+        """
+        Laedt die Grundlagen-Layer aus gpkg_path in ihre Gruppen.
+        Idempotent: Layer, deren Quelle schon im Projekt ist, werden nicht
+        noch einmal geladen. Fehler landen im Protokoll statt still zu
+        verschwinden. Gibt die Zahl neu geladener Layer zurueck.
+        """
+        from .core.grundlagen import DIENSTE
+        from qgis.core import QgsProject, QgsVectorLayer, QgsMessageLog, Qgis
+        proj = QgsProject.instance()
+        root = proj.layerTreeRoot()
+        vorhanden = {os.path.normcase(os.path.normpath(l.source().split("|")[0]))
+                     + "|" + l.source().split("layername=")[-1]
+                     for l in proj.mapLayers().values()
+                     if "layername=" in l.source()}
+        geladen = 0
+        for key in [*keys, "atkis_gewaessermittelachse"]:
+            if key not in DIENSTE:
+                continue
+            kennung = (os.path.normcase(os.path.normpath(gpkg_path))
+                       + "|" + key)
+            if kennung in vorhanden:
+                continue
+            try:
+                lyr = QgsVectorLayer(f"{gpkg_path}|layername={key}",
+                                     DIENSTE[key]["label"], "ogr")
+                if not lyr.isValid():
+                    # Mittelachsen gibt es nicht immer - kein Fehler
+                    if key != "atkis_gewaessermittelachse" and os.path.isfile(gpkg_path):
+                        QgsMessageLog.logMessage(
+                            f"Grundlagen: Layer {key} nicht ladbar ({gpkg_path})",
+                            "BioSt-GIS", Qgis.MessageLevel.Warning)
+                    continue
+                if lyr.featureCount() == 0:
+                    continue
+                gname = DIENSTE[key].get("layer_group") or "Grundlagendaten"
+                ziel = root.findGroup(gname) or root.addGroup(gname)
+                proj.addMapLayer(lyr, addToLegend=False)
+                ziel.addLayer(lyr)
+                geladen += 1
+            except Exception as e:
+                QgsMessageLog.logMessage(
+                    f"Grundlagen: {key} nicht geladen: {e}",
+                    "BioSt-GIS", Qgis.MessageLevel.Warning)
+        if geladen:
+            proj.setDirty(True)
+        return geladen
 
     def _trigger_grundlagen_nrw(self, project, root, extent, selected=None):
         """
@@ -417,6 +485,33 @@ class NewProjectWizard(QWizard):
 
         grp = root.findGroup("Grundlagendaten") or root.addGroup("Grundlagendaten")
 
+        # Der Wizard baut das Projekt zweimal (Export-Seite und "OK"). Ist der
+        # Abruf fuer dasselbe Gebiet und dieselben Dienste schon fertig, die
+        # vorhandene Grundlagen.gpkg laden statt alles erneut vom WFS zu holen
+        # (der Abruf kann je nach Datenmenge viele Minuten dauern).
+        schluessel = (os.path.normcase(gpkg_path), tuple(sorted(ABRUF_DIENSTE)),
+                      tuple(round(v, 5) for v in bbox_wgs84))
+        self._grundlagen_auftrag = (gpkg_path, list(ABRUF_DIENSTE))
+        if (getattr(self, "_grundlagen_fertig", None) == schluessel
+                and os.path.isfile(gpkg_path)):
+            n = self._grundlagen_laden(gpkg_path, ABRUF_DIENSTE)
+            from qgis.core import QgsMessageLog as _QML_r
+            _QML_r.logMessage(f"Grundlagen: vorhandene Datei verwendet, "
+                              f"{n} Layer geladen ({gpkg_path})", "BioSt-GIS", 0)
+            return
+        # Laeuft der Abruf fuer genau dieses Gebiet noch (z. B. Export-Seite
+        # hat nicht bis zum Ende gewartet), keinen zweiten starten - sonst
+        # schreiben zwei Worker gleichzeitig in dieselbe Datei. Der laufende
+        # laedt seine Layer bei Abschluss ins aktuelle Projekt.
+        alt = getattr(self, "_grundlagen_worker", None)
+        if (alt is not None and alt.isRunning()
+                and getattr(self, "_grundlagen_laeuft", None) == schluessel):
+            from qgis.core import QgsMessageLog as _QML_w
+            _QML_w.logMessage("Grundlagen: Abruf läuft bereits, kein zweiter Start",
+                              "BioSt-GIS", 0)
+            return
+        self._grundlagen_laeuft = schluessel
+
         # Worker konfigurieren – exakt wie GrundlagenDialog
         aktiv = {k: (k in ABRUF_DIENSTE) for k in DIENSTE}
 
@@ -440,35 +535,18 @@ class NewProjectWizard(QWizard):
 
             def _on_done(ok, msg):
                 if not ok:
+                    self._meldung(f"Grundlagendaten: Abruf fehlgeschlagen – "
+                                  f"{str(msg).splitlines()[0][:150]}",
+                                  "warnung", 0)
                     return
+                self._grundlagen_fertig = schluessel
+                n = self._grundlagen_laden(gpkg_path, ABRUF_DIENSTE)
+                self._meldung(f"Grundlagendaten fertig: {n} Layer geladen.", "ok")
                 from qgis.core import QgsProject as _QP
-                from qgis.utils import iface as _iface
                 _proj = _QP.instance()
-                _root = _proj.layerTreeRoot()
-                _grp  = _root.findGroup("Grundlagendaten") or _root.addGroup("Grundlagendaten")
-                # Berechnete Mittelachsen schreibt der Worker zusaetzlich,
-                # sie stehen nicht in ABRUF_DIENSTE
-                for key in [*ABRUF_DIENSTE, "atkis_gewaessermittelachse"]:
-                    if key not in DIENSTE:
-                        continue
-                    lbl = DIENSTE[key]["label"]
-                    try:
-                        lyr = QgsVectorLayer(
-                            f"{gpkg_path}|layername={key}", lbl, "ogr")
-                        if lyr and lyr.isValid() and lyr.featureCount() > 0:
-                            # Zielgruppe: Verwaltungsgrenzen → "Grenzen",
-                            # sonst "Grundlagendaten"
-                            _gname = DIENSTE[key].get("layer_group") or "Grundlagendaten"
-                            _tgt = (_root.findGroup(_gname)
-                                    or _root.addGroup(_gname))
-                            _proj.addMapLayer(lyr, addToLegend=False)
-                            _tgt.addLayer(lyr)
-                    except Exception:
-                        pass
-                _proj.setDirty(True)
                 if _proj.fileName():
                     try: _proj.write()
-                    except: pass
+                    except Exception: pass
 
             from qgis.core import QgsMessageLog as _QML_p
             def _log_progress(_pct, _txt):
@@ -483,6 +561,9 @@ class NewProjectWizard(QWizard):
                 f"WFS-Worker wird gestartet für: {ABRUF_DIENSTE} "
                 f"(gpkg={gpkg_path})", "BioSt-GIS", 0)
             self._grundlagen_worker.start()   # asynchron!
+            self._meldung("Grundlagendaten werden abgerufen – je nach Gebiet "
+                          "kann das einige Minuten dauern. Die Layer erscheinen "
+                          "danach in der Gruppe „Grundlagendaten“.", "info", 15)
 
         except Exception as _e:
             from qgis.core import QgsMessageLog
